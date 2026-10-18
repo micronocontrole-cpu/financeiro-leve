@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --deep:#0F3D3E; --deep2:#14504F; --mint:#2EC4B6; --mint-ink:#0B6F68; --mint-soft:#E2F5F2;
+  --deep:#0F3D3E; --deep2:#14504F; --teal:#1B7F79; --mint:#2EC4B6; --mint-ink:#0B6F68; --mint-soft:#E2F5F2;
   --bg:#F3F7F6; --paper:#FFFFFF; --ink:#1A2628; --muted:#58686B; --line:#D6E0DF;
   --red:#C0392B; --red-soft:#FBE7E5;
   --display:'Bricolage Grotesque',system-ui,sans-serif; --body:'Figtree',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
@@ -87,6 +87,39 @@ p{max-width:62ch}
 .shot figcaption b{color:var(--ink)}
 .stack{display:grid;gap:28px}
 
+
+/* sheet mockup */
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(15,61,62,.35)}
+.sheet-tabs{display:flex;gap:2px;background:#E6EDEC;padding:8px 8px 0;overflow-x:auto}
+.sheet-tabs button{font:600 15px var(--body);color:#3c4f52;background:transparent;border:0;border-radius:10px 10px 0 0;padding:11px 18px;cursor:pointer;white-space:nowrap}
+.sheet-tabs button[aria-selected="true"]{background:var(--paper);color:var(--deep)}
+.sheet-tabs button:hover{color:var(--deep)}
+.sheet-body{padding:28px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{background:var(--mint-soft);border-bottom:4px solid var(--mint);border-radius:10px;padding:16px 18px}
+.kpi span{display:block;font-size:14px;color:#4b5f62;font-weight:600}
+.kpi b{display:block;white-space:nowrap;font-family:var(--display);font-size:clamp(19px,2.4vw,30px);font-weight:800;color:var(--deep);margin-top:4px;letter-spacing:-.02em}
+.neg{color:var(--red)!important}
+.diag{margin-top:18px;background:#FFF6DA;border-radius:10px;padding:14px 18px;font-weight:600;color:var(--deep)}
+.sheet-note{margin-top:18px;font-size:15.5px;color:var(--muted)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.grid{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums;min-width:640px}
+.grid th{background:var(--teal);color:#fff;font-weight:600;font-size:13.5px;text-align:left;padding:10px 12px;white-space:nowrap}
+.grid td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
+.grid .r{text-align:right}
+.grid tr.hl td{background:#FDF3F2}
+.st{display:inline-block;font-size:13.5px;font-weight:700;padding:3px 10px;border-radius:999px}
+.st.ok{background:#E3F5EC;color:#1E8E5A}.st.bad{background:var(--red-soft);color:var(--red)}
+.dre{min-width:520px}.dre td{white-space:normal}
+.dre tr.main td{background:var(--deep);color:#fff;font-weight:700}
+.dre tr.main.bad td:nth-child(2),.dre tr.main.bad td:nth-child(3){color:#FFB4AB}
+.pe{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.pe div{background:var(--mint-soft);border-radius:10px;padding:14px 18px}
+.pe span{display:block;font-size:14px;font-weight:600;color:#4b5f62}.pe b{font-family:var(--display);font-size:26px;font-weight:800;color:var(--deep)}
+.mini{width:100%;height:100%;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center;background:var(--bg)}
+.mini div{background:#fff;border-bottom:3px solid var(--mint);border-radius:8px;padding:10px}
+.mini span{display:block;font-size:12px;color:var(--muted);font-weight:600}.mini b{font-family:var(--display);font-size:19px;color:var(--deep)}
+
 /* what's inside */
 .inside{background:var(--paper);padding:100px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .inside h2{margin-bottom:44px}
@@ -153,6 +186,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 footer a{color:#CDE9E5}
 
 @media (max-width:920px){
+  .kpis{grid-template-columns:1fr 1fr;gap:10px}
+  .kpi{padding:12px 14px}
+  .sheet-body{padding:18px}
   .hero .wrap,.offer .wrap,.shots,.fitgrid{grid-template-columns:1fr}
   .hero .wrap{padding-top:48px;padding-bottom:72px;gap:44px}
   .q{grid-template-columns:1fr;gap:12px}
@@ -240,13 +276,74 @@ footer a{color:#CDE9E5}
   <div class="wrap">
     <div class="head">
       <h2>Por dentro da planilha</h2>
-      <p class="fine">Imagens da versão de exemplo que vem no kit, preenchida com um mês de um restaurante fictício.</p>
+      <p class="fine">Números da versão de exemplo que vem no kit: um mês de um restaurante fictício. Clique nas abas.</p>
     </div>
-    <div class="shots">
-      <figure class="shot"><img src="img/painel.webp" alt="Painel do mês com vendas, lucro, sobra de caixa, alertas e gráficos" loading="lazy" width="987" height="1196"><figcaption><b>Painel do mês.</b> Vendas, lucro, sobra de caixa, cartões a receber e contas vencidas, com diagnóstico automático.</figcaption></figure>
-      <div class="stack">
-        <figure class="shot"><img src="img/vendas.webp" alt="Conciliação de vendas dia a dia com status" loading="lazy" width="1400" height="855"><figcaption><b>Vendas do dia.</b> Confere sistema, formas de pagamento, maquininha e Pix no extrato.</figcaption></figure>
-        <figure class="shot"><img src="img/resultado.webp" alt="Resultado do mês com DRE, indicadores e ponto de equilíbrio" loading="lazy" width="992" height="937"><figcaption><b>Resultado do mês.</b> Lucro real, CMV, custo com pessoal e ponto de equilíbrio.</figcaption></figure>
+    <div class="sheet">
+      <div class="sheet-tabs" role="tablist" aria-label="Abas da planilha">
+        <button role="tab" aria-selected="true" aria-controls="p-painel" id="t-painel">Painel</button>
+        <button role="tab" aria-selected="false" aria-controls="p-caixa" id="t-caixa" tabindex="-1">Caixa Diário</button>
+        <button role="tab" aria-selected="false" aria-controls="p-cartoes" id="t-cartoes" tabindex="-1">Cartões</button>
+        <button role="tab" aria-selected="false" aria-controls="p-resultado" id="t-resultado" tabindex="-1">Resultado do Mês</button>
+      </div>
+
+      <div class="sheet-body" role="tabpanel" id="p-painel" aria-labelledby="t-painel">
+        <div class="kpis">
+          <div class="kpi"><span>Vendas do mês</span><b>R$ 128.960</b></div>
+          <div class="kpi"><span>Lucro líquido</span><b>R$ 5.546</b></div>
+          <div class="kpi"><span>Sobra de caixa</span><b class="neg">−R$ 7.154</b></div>
+          <div class="kpi"><span>Ticket médio</span><b>R$ 67,52</b></div>
+          <div class="kpi"><span>Diferença de caixa</span><b class="neg">−R$ 32,50</b></div>
+          <div class="kpi"><span>Cartões a receber</span><b>R$ 285</b></div>
+          <div class="kpi"><span>Imposto estimado</span><b>R$ 11.832</b></div>
+          <div class="kpi"><span>CMV do mês</span><b class="neg">40,3%</b></div>
+        </div>
+        <div class="diag">Deu lucro, mas o CMV passou da meta: revise compras, preços de fornecedor, porções e desperdício.</div>
+        <p class="sheet-note">O painel junta tudo em uma tela e escreve o diagnóstico do mês sozinho.</p>
+      </div>
+
+      <div class="sheet-body" role="tabpanel" id="p-caixa" aria-labelledby="t-caixa" hidden>
+        <div class="tbl-wrap"><table class="grid">
+          <thead><tr><th>Data</th><th>Responsável</th><th class="r">Fundo</th><th class="r">Vendas dinheiro</th><th class="r">Sangria</th><th class="r">Despesas</th><th class="r">Esperado</th><th class="r">Contado</th><th class="r">Diferença</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>12/09 sáb</td><td>Bruno</td><td class="r">200,00</td><td class="r">536,03</td><td class="r">300,00</td><td class="r">48,90</td><td class="r">387,13</td><td class="r">387,13</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
+            <tr><td>13/09 dom</td><td>Ana</td><td class="r">200,00</td><td class="r">428,05</td><td class="r">300,00</td><td class="r">120,00</td><td class="r">208,05</td><td class="r">208,05</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
+            <tr class="hl"><td>15/09 ter</td><td>Ana</td><td class="r">200,00</td><td class="r">235,07</td><td class="r">–</td><td class="r">48,90</td><td class="r">386,17</td><td class="r">348,67</td><td class="r neg">−37,50</td><td><span class="st bad">▼ Falta</span></td></tr>
+            <tr><td>16/09 qua</td><td>Bruno</td><td class="r">200,00</td><td class="r">247,98</td><td class="r">–</td><td class="r">120,00</td><td class="r">327,98</td><td class="r">327,98</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
+            <tr><td>17/09 qui</td><td>Ana</td><td class="r">200,00</td><td class="r">251,08</td><td class="r">–</td><td class="r">48,90</td><td class="r">402,18</td><td class="r">402,18</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="sheet-note">Você lança o fundo de troco e o valor contado. A planilha calcula o esperado e marca a falta no mesmo dia.</p>
+      </div>
+
+      <div class="sheet-body" role="tabpanel" id="p-cartoes" aria-labelledby="t-cartoes" hidden>
+        <div class="tbl-wrap"><table class="grid">
+          <thead><tr><th>Venda</th><th>Bandeira</th><th>Modalidade</th><th class="r">Bruto</th><th class="r">Taxa</th><th class="r">Líquido esperado</th><th>Previsão</th><th class="r">Caiu no banco</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>01/09</td><td>Visa</td><td>Débito</td><td class="r">315,62</td><td class="r">1,37%</td><td class="r">311,30</td><td>02/09</td><td class="r">311,30</td><td><span class="st ok">✔ Conciliado</span></td></tr>
+            <tr><td>01/09</td><td>Visa</td><td>Crédito à vista</td><td class="r">468,09</td><td class="r">3,15%</td><td class="r">453,35</td><td>01/10</td><td class="r">453,35</td><td><span class="st ok">✔ Conciliado</span></td></tr>
+            <tr class="hl"><td>03/09</td><td>Elo</td><td>Débito</td><td class="r">136,93</td><td class="r">1,47%</td><td class="r">134,92</td><td>04/09</td><td class="r">–</td><td><span class="st bad">⏰ Atrasado</span></td></tr>
+            <tr class="hl"><td>08/09</td><td>Visa</td><td>Crédito à vista</td><td class="r">383,31</td><td class="r">3,15%</td><td class="r">371,24</td><td>08/10</td><td class="r neg">358,84</td><td><span class="st bad">▼ Recebeu a menos</span></td></tr>
+            <tr class="hl"><td>12/09</td><td>Pluxee</td><td>Voucher</td><td class="r">156,06</td><td class="r">3,60%</td><td class="r">150,44</td><td>27/09</td><td class="r">–</td><td><span class="st bad">⏰ Atrasado</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="sheet-note">Cadastre as taxas do seu contrato uma vez. A planilha diz quanto e quando deve cair, e aponta o que veio errado.</p>
+      </div>
+
+      <div class="sheet-body" role="tabpanel" id="p-resultado" aria-labelledby="t-resultado" hidden>
+        <div class="tbl-wrap"><table class="grid dre">
+          <tbody>
+            <tr class="main"><td>Receita bruta de vendas</td><td class="r">R$ 128.960,25</td><td class="r">100%</td></tr>
+            <tr><td>(−) Impostos (DAS) e taxas de cartão</td><td class="r">−R$ 13.868,45</td><td class="r">10,8%</td></tr>
+            <tr><td>(−) Mercadorias (CMV)</td><td class="r">−R$ 51.960,50</td><td class="r neg">40,3%</td></tr>
+            <tr><td>(−) Pessoal</td><td class="r">−R$ 33.910,00</td><td class="r">26,3%</td></tr>
+            <tr><td>(−) Ocupação, administrativas, comerciais e outras</td><td class="r">−R$ 23.675,21</td><td class="r">18,4%</td></tr>
+            <tr class="main"><td>Lucro líquido do mês</td><td class="r">R$ 5.546,09</td><td class="r">4,3%</td></tr>
+            <tr><td>(−) Retiradas, investimentos e dívidas</td><td class="r">−R$ 12.700,00</td><td class="r">9,8%</td></tr>
+            <tr class="main bad"><td>Sobra (ou falta) de caixa</td><td class="r">−R$ 7.153,91</td><td class="r">−5,5%</td></tr>
+          </tbody>
+        </table></div>
+        <div class="pe"><div><span>Ponto de equilíbrio</span><b>R$ 117.631</b></div><div><span>Vender no mínimo por dia</span><b>R$ 4.524</b></div></div>
+        <p class="sheet-note">O resultado se monta sozinho a partir do que você lançou e separa o lucro da sobra de caixa.</p>
       </div>
     </div>
   </div>
@@ -257,7 +354,7 @@ footer a{color:#CDE9E5}
     <h2>O que você recebe</h2>
     <div class="items">
       <div class="item">
-        <div class="thumb"><img src="img/cartoes.webp" alt="Aba de conciliação de cartões" loading="lazy"></div>
+        <div class="thumb"><div class="mini" aria-hidden="true"><div><span>Vendas</span><b>128.960</b></div><div><span>Lucro</span><b>5.546</b></div><div><span>Falta no caixa</span><b style="color:#C0392B">−32,50</b></div><div><span>CMV</span><b>40,3%</b></div><div><span>A receber</span><b>285</b></div><div><span>Imposto</span><b>11.832</b></div></div></div>
         <h3>Planilha Mestre</h3>
         <p>Caixa, vendas, cartões, contas a pagar, cotação, impostos, resultado e painel. Em branco e com exemplo preenchido.</p>
       </div>
@@ -374,6 +471,11 @@ footer a{color:#CDE9E5}
   if (CHECKOUT_URL) {
     document.querySelectorAll(".js-checkout").forEach(a => { a.href = CHECKOUT_URL; a.rel = "noopener"; });
   }
+
+  // abas da planilha
+  const tabs=[...document.querySelectorAll('.sheet-tabs [role=tab]')];
+  function sel(t){tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});}
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];sel(n);n.focus();}});});
 </script>
 </body>
 </html>
