@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ponto de equilíbrio e lucro do restaurante: calculadora grátis</title>
+<meta name="description" content="Descubra quanto o seu restaurante ou comércio precisa vender por mês e por dia para pagar todas as contas, e quanto sobra de lucro com o faturamento atual.">
+<link rel="canonical" href="https://micronocontrole.com/ferramentas/lucro-e-ponto-de-equilibrio/">
+<meta property="og:title" content="Ponto de equilíbrio e lucro do restaurante: calculadora grátis"><meta property="og:description" content="Descubra quanto o seu restaurante ou comércio precisa vender por mês e por dia para pagar todas as contas, e quanto sobra de lucro com o faturamento atual.">
+<meta property="og:url" content="https://micronocontrole.com/ferramentas/lucro-e-ponto-de-equilibrio/"><meta property="og:type" content="website">
+<meta property="og:image" content="https://micronocontrole.com/img/og.png"><meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head><body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><div class="wrap">
+ <a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+ <nav class="menu" aria-label="Principal">
+  <a href="../../#ferramentas">Ferramentas</a><a href="../../#sabedoria">Sabedoria</a>
+  <a class="btn btn-menta" href="../../kit/">Ver o kit</a>
+ </nav></div></header>
+
+<main id="conteudo">
+<section class="f-topo"><div class="wrap">
+ <p class="trilha"><a href="../../">Início</a> / <a href="../../#ferramentas">Ferramentas grátis</a></p>
+ <h1>Quanto você precisa vender por dia para pagar as contas</h1><p>Informe o faturamento, os custos que acompanham cada venda e as despesas fixas. A calculadora mostra o lucro do mês, o ponto de equilíbrio e a meta de vendas por dia.</p></div></section>
+<div class="wrap">
+ <div class="f-grade">
+  <form class="painel" id="f" onsubmit="return false"><h2>Seu mês</h2><p class='dica'>Use médias dos últimos três meses para um retrato mais fiel.</p><div class='campos'><div class="campo cheio"><label for="fat">Faturamento do mês</label>
+<div class="entrada"><span>R$</span><input id="fat" name="fat" type="text" inputmode="decimal" value="120.000,00" autocomplete="off"></div></div><div class="campo"><label for="cmv">Custo das mercadorias (CMV)<span class="ajuda">Ingredientes, bebidas e produtos vendidos</span></label>
+<div class="entrada"><input id="cmv" name="cmv" type="text" inputmode="decimal" value="35" autocomplete="off"><span style="padding:0 14px 0 0">% das vendas</span></div></div><div class="campo"><label for="imp">Imposto sobre vendas<span class="ajuda">Use a calculadora do Simples</span></label>
+<div class="entrada"><input id="imp" name="imp" type="text" inputmode="decimal" value="8,83" autocomplete="off"><span style="padding:0 14px 0 0">%</span></div></div><div class="campo"><label for="taxas">Taxas de cartão e apps</label>
+<div class="entrada"><input id="taxas" name="taxas" type="text" inputmode="decimal" value="2,5" autocomplete="off"><span style="padding:0 14px 0 0">%</span></div></div><div class="campo"><label for="outros">Outros custos por venda<span class="ajuda">Embalagens, comissões</span></label>
+<div class="entrada"><input id="outros" name="outros" type="text" inputmode="decimal" value="2" autocomplete="off"><span style="padding:0 14px 0 0">%</span></div></div><div class="campo"><label for="aluguel">Aluguel e ocupação<span class="ajuda">Aluguel, condomínio, IPTU, luz, água, gás</span></label>
+<div class="entrada"><span>R$</span><input id="aluguel" name="aluguel" type="text" inputmode="decimal" value="12.000,00" autocomplete="off"></div></div><div class="campo"><label for="pessoal">Folha e encargos</label>
+<div class="entrada"><span>R$</span><input id="pessoal" name="pessoal" type="text" inputmode="decimal" value="33.000,00" autocomplete="off"></div></div><div class="campo"><label for="fixas">Outras despesas fixas<span class="ajuda">Contador, sistemas, manutenção, marketing</span></label>
+<div class="entrada"><span>R$</span><input id="fixas" name="fixas" type="text" inputmode="decimal" value="10.000,00" autocomplete="off"></div></div><div class="campo"><label for="ret">Retirada dos sócios<span class="ajuda">Pró-labore e retiradas</span></label>
+<div class="entrada"><span>R$</span><input id="ret" name="ret" type="text" inputmode="decimal" value="8.000,00" autocomplete="off"></div></div><div class="campo"><label for="dias">Dias abertos no mês</label>
+<div class="entrada"><input id="dias" name="dias" type="text" inputmode="decimal" value="26" autocomplete="off"><span style="padding:0 14px 0 0">dias</span></div></div></div></form>
+  <div class="resultado" data-tilt-area><div class="cupom-3d" data-tilt="7" style="width:100%"><div class="cupom"><div class="cab">RESULTADO DO MÊS</div><hr>
+<div class="l"><span>Vendas</span><span id="p_fat"></span></div>
+<div class="l"><span>− Custos por venda</span><span id="p_var"></span></div>
+<div class="l"><b>Margem de contribuição</b><b id="p_mc"></b></div>
+<div class="l"><span>− Despesas fixas</span><span id="p_fix"></span></div>
+<div class="l"><b>Lucro operacional</b><b id="p_luc"></b></div>
+<div class="l"><span>− Retirada sócios</span><span id="p_ret"></span></div>
+<div class="l" id="p_sobra_l"><span id="p_sobra_t">SOBRA</span><span id="p_sobra"></span></div><hr>
+<div class="l"><span>Ponto de equilíbrio</span><span id="p_pe"></span></div>
+<div class="l"><span>Com retirada</span><span id="p_pe2"></span></div></div></div>
+<div style="text-align:center"><div style="color:var(--muted);font-size:15px">Meta de vendas por dia</div><div class="grande" id="p_dia"></div></div></div>
+ </div>
+ <article class="texto"><h2>Como a conta é feita</h2>
+<div class="formula">margem de contribuição = 1 − (CMV + imposto + taxas + outros custos por venda)<br>ponto de equilíbrio = despesas fixas ÷ margem de contribuição<br>meta por dia = (despesas fixas + retirada) ÷ margem ÷ dias abertos</div>
+<p>A margem de contribuição é o que sobra de cada R$ 100 vendidos depois dos custos que só existem porque houve venda. É essa sobra que paga aluguel, equipe e o resto. Se ela é pequena, o negócio precisa vender muito para fechar a conta.</p>
+<h2>Lucro não é caixa</h2>
+<p>Um mês pode dar lucro e o dinheiro ainda assim sumir: retirada dos sócios, compra de equipamento e parcela de empréstimo saem do caixa, mas não são despesa do mês. Por isso a calculadora mostra o lucro e, separado, o que sobra depois da retirada.</p>
+  <h2>Perguntas frequentes</h2><details><summary>Qual é um bom CMV para restaurante?</summary><p>Uma faixa comum é de 28% a 35% das vendas, mas varia com o tipo de cozinha e de serviço. O importante é acompanhar todo mês e investigar quando sobe.</p></details>
+<details><summary>Retirada dos sócios entra no ponto de equilíbrio?</summary><p>No ponto de equilíbrio puro, não. Mas, se o negócio precisa sustentar quem trabalha nele, use também o ponto de equilíbrio com retirada: é a meta real.</p></details>
+<details><summary>Como reduzir o ponto de equilíbrio?</summary><p>Aumentando a margem (preço, desperdício, compras melhores, taxas menores) ou cortando despesas fixas. Pequenas melhoras na margem reduzem bastante a meta de vendas.</p></details>
+ </article>
+ <div class="cta-kit"><div><strong>Quer fazer essa conta todo dia, sem esforço?</strong>
+<p>O Kit Micro no Controle junta caixa, maquininha, contas a pagar, impostos e lucro do mês numa planilha pronta, com guia e checklists. R$ 67, pagamento único.</p></div>
+<a class="btn btn-menta" href="../../kit/">Ver o que vem no kit</a></div>
+</div></main>
+
+<footer class="rodape"><div class="wrap">
+ <div><a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+  <p style="margin-top:14px;max-width:36ch">Ferramentas e materiais práticos para o financeiro de restaurantes, comércio e MEI.</p></div>
+ <div><h4>Ferramentas grátis</h4>
+  <a href="../../ferramentas/taxa-da-maquininha/">Taxa da maquininha</a>
+  <a href="../../ferramentas/fechamento-de-caixa/">Fechamento de caixa</a>
+  <a href="../../ferramentas/das-mei/">DAS do MEI 2026</a>
+  <a href="../../ferramentas/imposto-simples-nacional/">Imposto do Simples Nacional</a>
+  <a href="../../ferramentas/lucro-e-ponto-de-equilibrio/">Lucro e ponto de equilíbrio</a></div>
+ <div><h4>Micro no Controle</h4>
+  <a href="../../kit/">Kit Micro no Controle</a>
+  <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a>
+  <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></div>
+ <p class="fino">As ferramentas fazem estimativas com as regras de 2026 e rodam no seu navegador: nada do que você digita é enviado. Para decisões fiscais, confirme com o seu contador. © 2026 Micro no Controle.</p>
+</div></footer>
+<script src="../../assets/site.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qual é um bom CMV para restaurante?", "acceptedAnswer": {"@type": "Answer", "text": "Uma faixa comum é de 28% a 35% das vendas, mas varia com o tipo de cozinha e de serviço. O importante é acompanhar todo mês e investigar quando sobe."}}, {"@type": "Question", "name": "Retirada dos sócios entra no ponto de equilíbrio?", "acceptedAnswer": {"@type": "Answer", "text": "No ponto de equilíbrio puro, não. Mas, se o negócio precisa sustentar quem trabalha nele, use também o ponto de equilíbrio com retirada: é a meta real."}}, {"@type": "Question", "name": "Como reduzir o ponto de equilíbrio?", "acceptedAnswer": {"@type": "Answer", "text": "Aumentando a margem (preço, desperdício, compras melhores, taxas menores) ou cortando despesas fixas. Pequenas melhoras na margem reduzem bastante a meta de vendas."}}]}</script><script>
+const $=id=>document.getElementById(id);
+MNC.ao($('f'),c=>{
+ const v=(c.cmv+c.imp+c.taxas+c.outros)/100, m=1-v, fix=c.aluguel+c.pessoal+c.fixas;
+ const mc=c.fat*m, luc=mc-fix, sobra=luc-c.ret, pe=m>0?fix/m:Infinity, pe2=m>0?(fix+c.ret)/m:Infinity;
+ $('p_fat').textContent=MNC.num(c.fat); $('p_var').textContent=MNC.num(c.fat*v); $('p_mc').textContent=MNC.num(mc)+' ('+MNC.pct(m,1)+')';
+ $('p_fix').textContent=MNC.num(fix); $('p_luc').textContent=MNC.num(luc); $('p_ret').textContent=MNC.num(c.ret);
+ $('p_sobra').textContent=(sobra<0?'−':'')+MNC.num(Math.abs(sobra)); $('p_sobra_t').textContent=sobra<0?'FALTA DE CAIXA':'SOBRA';
+ $('p_sobra_l').className='l '+(sobra<0?'falta':'sobra');
+ $('p_pe').textContent=isFinite(pe)?MNC.num(pe,0):'—'; $('p_pe2').textContent=isFinite(pe2)?MNC.num(pe2,0):'—';
+ $('p_dia').textContent=isFinite(pe2)&&c.dias?MNC.brl(pe2/c.dias):'—';
+});
+</script>
+</body></html>

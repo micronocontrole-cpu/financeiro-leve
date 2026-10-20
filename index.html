@@ -1,483 +1,124 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kit Micro no Controle — controle financeiro para restaurantes e comércio</title>
-<meta name="description" content="Planilha, guia, checklists e contratos para conferir caixa, vendas e cartões, separar o imposto certo e saber o lucro real do seu restaurante, bar ou comércio.">
-<meta property="og:title" content="Kit Micro no Controle">
-<meta property="og:description" content="O caixa fechou? A maquininha pagou certo? Quanto disso é lucro? Controle financeiro pronto para restaurantes e comércio.">
-<meta property="og:image" content="https://micronocontrole.com/img/og.png">
-<meta property="og:url" content="https://micronocontrole.com/">
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micro no Controle — ferramentas grátis para o financeiro do seu negócio</title>
+<meta name="description" content="Confira caixa, maquininha, DAS do MEI, imposto do Simples e ponto de equilíbrio em minutos. Ferramentas grátis para restaurantes, comércio e MEI.">
 <link rel="canonical" href="https://micronocontrole.com/">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#0F3D3E">
+<meta property="og:title" content="Micro no Controle — ferramentas grátis para o financeiro do seu negócio"><meta property="og:description" content="Confira caixa, maquininha, DAS do MEI, imposto do Simples e ponto de equilíbrio em minutos. Ferramentas grátis para restaurantes, comércio e MEI.">
+<meta property="og:url" content="https://micronocontrole.com/"><meta property="og:type" content="website">
+<meta property="og:image" content="https://micronocontrole.com/img/og.png"><meta name="theme-color" content="#0F3D3E">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --deep:#0F3D3E; --deep2:#14504F; --teal:#1B7F79; --mint:#2EC4B6; --mint-ink:#0B6F68; --mint-soft:#E2F5F2;
-  --bg:#F3F7F6; --paper:#FFFFFF; --ink:#1A2628; --muted:#58686B; --line:#D6E0DF;
-  --red:#C0392B; --red-soft:#FBE7E5;
-  --display:'Bricolage Grotesque',system-ui,sans-serif; --body:'Figtree',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
-  --wrap:1120px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
-a{color:inherit}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.02em;font-weight:800}
-h2{font-size:clamp(30px,4.2vw,46px);max-width:20ch}
-p{max-width:62ch}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--mint);color:#06302E;font-family:var(--display);font-weight:700;font-size:19px;padding:17px 30px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s ease,background .15s ease}
-.btn:hover{background:#45d3c6;transform:translateY(-1px)}
-.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #F5B942;outline-offset:3px}
-.fine{font-size:14.5px;color:var(--muted)}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head><body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><div class="wrap">
+ <a class="logo" href="./"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+ <nav class="menu" aria-label="Principal">
+  <a href="#ferramentas">Ferramentas</a><a href="#sabedoria">Sabedoria</a>
+  <a class="btn btn-menta" href="kit/">Ver o kit</a>
+ </nav></div></header>
 
-/* top bar */
-.bar{position:sticky;top:0;z-index:20;background:rgba(15,61,62,.96);backdrop-filter:blur(6px)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-family:var(--display);font-weight:700;font-size:19px}
-.logo svg{flex:none}
-.bar .btn{font-size:15px;padding:10px 18px}
-
-/* hero */
-.hero{background:var(--deep);color:#EAF6F4;overflow:hidden;position:relative}
-.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;padding-top:72px;padding-bottom:96px}
-.hero h1{font-size:clamp(40px,5.6vw,68px);color:#fff}
-.hero h1 span{display:block}
-.hero h1 span+span{color:#BFEDE7}
-.hero .lead{font-size:20px;color:#BFDAD6;margin:26px 0 34px}
-.hero .meta{margin-top:18px;color:#9CC4BF;font-size:15px}
-.hero .meta b{color:#fff;font-weight:600}
-
-/* receipt */
-.slot{position:relative;padding-top:18px}
-.slot::before{content:"";position:absolute;top:0;left:-14px;right:-14px;height:22px;border-radius:12px;background:#0A2B2C;box-shadow:inset 0 3px 6px rgba(0,0,0,.45)}
-.receipt{position:relative;z-index:1;background:var(--paper);color:#1d2526;font-family:var(--mono);font-size:14.5px;line-height:1.55;padding:26px 26px 34px;margin:0 6px;
-  --zz:radial-gradient(circle at 8px 0,transparent 8px,var(--paper) 8.5px);
-  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat, radial-gradient(circle at 50% 100%,transparent 6px,#000 6.5px) bottom/16px 11px repeat-x;
-          mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat, radial-gradient(circle at 50% 100%,transparent 6px,#000 6.5px) bottom/16px 11px repeat-x;
-  transform-origin:top;animation:print 1.6s cubic-bezier(.3,.7,.3,1) .3s both}
-@keyframes print{from{clip-path:inset(0 0 100% 0);transform:translateY(-14px)}to{clip-path:inset(0 0 0 0);transform:none}}
-.receipt .c{text-align:center}
-.receipt hr{border:0;border-top:1.5px dashed #9aa5a6;margin:12px 0}
-.receipt .row{display:flex;justify-content:space-between;gap:12px}
-.receipt .tot{font-weight:600}
-.receipt .diff{margin-top:6px;background:var(--red-soft);color:var(--red);font-weight:600;padding:8px 10px;display:flex;justify-content:space-between}
-.receipt .note{margin-top:14px;font-size:12.5px;color:#6b7778;text-align:center}
-
-/* questions */
-.qs{padding:110px 0 40px}
-.qs h2{margin-bottom:48px}
-.q{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:34px 0;border-top:1.5px solid var(--line)}
-.q:last-child{border-bottom:1.5px solid var(--line)}
-.q h3{font-size:clamp(24px,2.6vw,32px);font-weight:700}
-.q p{color:#34474A}
-.q .where{display:inline-block;margin-top:12px;font-size:14.5px;font-weight:600;color:var(--mint-ink);background:var(--mint-soft);padding:4px 12px;border-radius:999px}
-
-/* screens */
-.screens{padding:90px 0}
-.screens .head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:40px}
-.shots{display:grid;grid-template-columns:1fr 1.25fr;gap:28px;align-items:start}
-.shot{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0}
-.shot figcaption{font-size:15px;color:var(--muted);padding:12px 4px 2px}
-.shot figcaption b{color:var(--ink)}
-.stack{display:grid;gap:28px}
-
-
-/* sheet mockup */
-.sheet{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(15,61,62,.35)}
-.sheet-tabs{display:flex;gap:2px;background:#E6EDEC;padding:8px 8px 0;overflow-x:auto}
-.sheet-tabs button{font:600 15px var(--body);color:#3c4f52;background:transparent;border:0;border-radius:10px 10px 0 0;padding:11px 18px;cursor:pointer;white-space:nowrap}
-.sheet-tabs button[aria-selected="true"]{background:var(--paper);color:var(--deep)}
-.sheet-tabs button:hover{color:var(--deep)}
-.sheet-body{padding:28px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.kpi{background:var(--mint-soft);border-bottom:4px solid var(--mint);border-radius:10px;padding:16px 18px}
-.kpi span{display:block;font-size:14px;color:#4b5f62;font-weight:600}
-.kpi b{display:block;white-space:nowrap;font-family:var(--display);font-size:clamp(19px,2.4vw,30px);font-weight:800;color:var(--deep);margin-top:4px;letter-spacing:-.02em}
-.neg{color:var(--red)!important}
-.diag{margin-top:18px;background:#FFF6DA;border-radius:10px;padding:14px 18px;font-weight:600;color:var(--deep)}
-.sheet-note{margin-top:18px;font-size:15.5px;color:var(--muted)}
-.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
-.grid{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums;min-width:640px}
-.grid th{background:var(--teal);color:#fff;font-weight:600;font-size:13.5px;text-align:left;padding:10px 12px;white-space:nowrap}
-.grid td{padding:10px 12px;border-top:1px solid var(--line);white-space:nowrap}
-.grid .r{text-align:right}
-.grid tr.hl td{background:#FDF3F2}
-.st{display:inline-block;font-size:13.5px;font-weight:700;padding:3px 10px;border-radius:999px}
-.st.ok{background:#E3F5EC;color:#1E8E5A}.st.bad{background:var(--red-soft);color:var(--red)}
-.dre{min-width:520px}.dre td{white-space:normal}
-.dre tr.main td{background:var(--deep);color:#fff;font-weight:700}
-.dre tr.main.bad td:nth-child(2),.dre tr.main.bad td:nth-child(3){color:#FFB4AB}
-.pe{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-.pe div{background:var(--mint-soft);border-radius:10px;padding:14px 18px}
-.pe span{display:block;font-size:14px;font-weight:600;color:#4b5f62}.pe b{font-family:var(--display);font-size:26px;font-weight:800;color:var(--deep)}
-.mini{width:100%;height:100%;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center;background:var(--bg)}
-.mini div{background:#fff;border-bottom:3px solid var(--mint);border-radius:8px;padding:10px}
-.mini span{display:block;font-size:12px;color:var(--muted);font-weight:600}.mini b{font-family:var(--display);font-size:19px;color:var(--deep)}
-
-/* what's inside */
-.inside{background:var(--paper);padding:100px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.inside h2{margin-bottom:44px}
-.items{display:grid;grid-template-columns:repeat(4,1fr);gap:34px}
-.item .thumb{aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.item .thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
-.item h3{font-size:21px;font-weight:700;margin-bottom:6px}
-.item p{font-size:16px;color:#3c4f52}
-.docs{width:100%;height:100%;padding:18px;display:grid;gap:10px;align-content:center}
-.docs div{background:#fff;border:1px solid var(--line);border-left:5px solid var(--mint);border-radius:6px;padding:10px 12px;font-size:14px;font-weight:600}
-
-/* routine */
-.routine{padding:100px 0}
-.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;counter-reset:s}
-.steps li{padding:0 30px 0 0;position:relative}
-.steps li+li{padding-left:30px;border-left:1.5px solid var(--line)}
-.steps .t{font-family:var(--display);font-weight:800;font-size:44px;color:var(--mint-ink);line-height:1}
-.steps .w{font-family:var(--display);font-weight:700;font-size:22px;margin:6px 0 10px}
-.steps p{font-size:16.5px;color:#34474A}
-
-/* fit */
-.fit{padding:20px 0 100px}
-.fitgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
-.fitbox{border-radius:16px;padding:32px}
-.fitbox.yes{background:var(--mint-soft)}
-.fitbox.no{background:var(--paper);border:1px solid var(--line)}
-.fitbox h3{font-size:22px;font-weight:700;margin-bottom:14px}
-.fitbox ul{list-style:none;display:grid;gap:10px}
-.fitbox li{padding-left:28px;position:relative;font-size:17px}
-.fitbox.yes li::before{content:"✓";position:absolute;left:0;color:var(--mint-ink);font-weight:700}
-.fitbox.no li::before{content:"✕";position:absolute;left:2px;color:var(--muted)}
-
-/* offer */
-.offer{background:var(--deep);color:#EAF6F4;padding:100px 0}
-.offer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.offer h2{color:#fff}
-.offer .intro{color:#BFDAD6;margin-top:18px}
-.ticket{background:var(--paper);color:var(--ink);border-radius:18px;padding:36px}
-.ticket ul{list-style:none;display:grid;gap:10px;margin:0 0 26px}
-.ticket li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dashed var(--line);padding-bottom:10px;font-size:16.5px}
-.ticket li span:last-child{color:var(--muted);white-space:nowrap}
-.price{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
-.price .v{font-family:var(--display);font-weight:800;font-size:64px;letter-spacing:-.03em;line-height:1}
-.price .v small{font-size:28px;margin-right:4px}
-.ticket .btn{width:100%;justify-content:center;margin-top:20px}
-.guarantee{display:flex;gap:14px;align-items:flex-start;margin-top:22px;font-size:15px;color:#34474A}
-.guarantee svg{flex:none;margin-top:2px}
-
-/* faq */
-.faq{padding:100px 0}
-.faq h2{margin-bottom:36px}
-details{border-top:1.5px solid var(--line);padding:22px 0}
-details:last-of-type{border-bottom:1.5px solid var(--line)}
-summary{cursor:pointer;list-style:none;font-family:var(--display);font-weight:700;font-size:21px;display:flex;justify-content:space-between;gap:20px}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-weight:500;font-size:28px;line-height:1;color:var(--mint-ink);transition:transform .2s}
-details[open] summary::after{transform:rotate(45deg)}
-details p{margin-top:12px;color:#34474A}
-.last{text-align:center;padding:0 0 110px}
-.last h2{margin:0 auto 26px;max-width:22ch}
-
-footer{background:#0A2B2C;color:#8FB3AE;font-size:14.5px;padding:40px 0}
-footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
-footer a{color:#CDE9E5}
-
-@media (max-width:920px){
-  .kpis{grid-template-columns:1fr 1fr;gap:10px}
-  .kpi{padding:12px 14px}
-  .sheet-body{padding:18px}
-  .hero .wrap,.offer .wrap,.shots,.fitgrid{grid-template-columns:1fr}
-  .hero .wrap{padding-top:48px;padding-bottom:72px;gap:44px}
-  .q{grid-template-columns:1fr;gap:12px}
-  .items{grid-template-columns:1fr 1fr}
-  .steps{grid-template-columns:1fr;gap:28px}
-  .steps li,.steps li+li{padding:0 0 0 0;border:0}
-  .steps li+li{border-top:1.5px solid var(--line);padding-top:28px}
-  .screens .head{display:block}
-}
-@media (max-width:560px){
-  body{font-size:17px}
-  .wrap{padding:0 16px}
-  .items{grid-template-columns:1fr}
-  .item .thumb{aspect-ratio:4/3}
-  .bar .btn{display:none}
-  .receipt{font-size:13px;padding:22px 18px 30px}
-  .ticket{padding:26px 20px}
-  .qs,.screens,.inside,.routine,.offer,.faq{padding-top:72px;padding-bottom:72px}
-}
-@media (prefers-reduced-motion:reduce){.receipt{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
-</style>
-</head>
-<body>
-
-<header class="bar">
-  <div class="wrap">
-    <a class="logo" href="#topo" aria-label="Micro no Controle, início">
-      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10.5" fill="none" stroke="#2EC4B6" stroke-width="3"/><circle cx="13" cy="13" r="4" fill="#2EC4B6"/></svg>
-      Micro no Controle
-    </a>
-    <a class="btn js-checkout" href="https://pay.hotmart.com/K108084778Q">Comprar o kit</a>
+<main id="conteudo">
+<section class="heroi" data-tilt-area><div class="wrap">
+ <div>
+  <h1>Confira o caixa, a maquininha e o imposto em minutos.</h1>
+  <p class="lead">Ferramentas grátis para restaurantes, comércio e MEI. Você digita os números, a conta sai pronta. Sem cadastro.</p>
+  <div class="acoes"><a class="btn btn-menta" href="#ferramentas">Usar as ferramentas</a><a class="btn btn-linha" href="kit/">Conhecer o kit</a></div>
+  <p class="nota">Feito por quem confere caixa e maquininha de restaurante todo mês.</p>
+ </div>
+ <div class="palco">
+  <div class="cupom-3d" data-tilt="9" data-imprime><div class="cupom" style="font-size:17px">
+   <div class="cab">FECHAMENTO DE CAIXA</div><div class="sub">terça, 21:40 · caixa 1</div><hr>
+   <div class="l"><span>Fundo de troco</span><span>200,00</span></div>
+   <div class="l"><span>+ Vendas dinheiro</span><span>1.250,00</span></div>
+   <div class="l"><span>− Sangria</span><span>800,00</span></div>
+   <div class="l"><span>− Despesa no caixa</span><span>60,00</span></div><hr>
+   <div class="l"><b>ESPERADO</b><b>590,00</b></div>
+   <div class="l"><span>Contado</span><span>552,50</span></div>
+   <div class="falta l"><span>FALTA</span><span>−37,50</span></div></div>
+   <div class="carimbo">achado hoje</div>
   </div>
-</header>
+ </div>
+</div></section>
 
-<main id="topo">
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <h1><span>O caixa fechou?</span><span>A maquininha pagou certo?</span><span>Quanto disso é lucro?</span></h1>
-      <p class="lead">O Kit Micro no Controle responde essas três perguntas todo dia, em 10 minutos. Planilha pronta, guia, checklists e contratos para restaurantes, bares, lanchonetes e comércio.</p>
-      <a class="btn js-checkout" href="https://pay.hotmart.com/K108084778Q">Quero o kit por R$ 67</a>
-      <p class="meta"><b>Acesso imediato</b> por download &nbsp;/&nbsp; <b>7 dias</b> de garantia &nbsp;/&nbsp; Excel ou Google Sheets</p>
-    </div>
-    <div class="slot" aria-label="Exemplo de fechamento de caixa feito pela planilha">
-      <div class="receipt" role="img" aria-label="Fechamento de caixa: saldo esperado 590 reais, contado 552 reais e 50 centavos, falta de 37 reais e 50 centavos">
-        <div class="c">FECHAMENTO DE CAIXA<br>TER 15/09 · TURNO NOITE</div>
-        <hr>
-        <div class="row"><span>Fundo de troco</span><span>200,00</span></div>
-        <div class="row"><span>+ Vendas dinheiro</span><span>1.250,00</span></div>
-        <div class="row"><span>− Sangria cofre</span><span>800,00</span></div>
-        <div class="row"><span>− Gelo (pago no caixa)</span><span>60,00</span></div>
-        <hr>
-        <div class="row tot"><span>SALDO ESPERADO</span><span>590,00</span></div>
-        <div class="row"><span>Contado na gaveta</span><span>552,50</span></div>
-        <div class="diff"><span>DIFERENÇA ▼ FALTA</span><span>−37,50</span></div>
-        <div class="note">A planilha avisa no mesmo dia.<br>Não no fim do mês.</div>
-      </div>
-    </div>
+<section class="secao" id="ferramentas"><div class="wrap">
+ <h2>Ferramentas grátis para as contas do dia a dia</h2>
+ <p class="intro">Cada uma responde uma pergunta que todo dono de negócio faz. Funcionam no navegador e nada do que você digita sai do seu computador.</p>
+ <div class="balcao">
+  <a class="peca larga" href="ferramentas/taxa-da-maquininha/" data-tilt-area>
+   <div class="obj"><div class="o-maq" data-tilt="14"><div class="tela">Crédito à vista<b>R$ 968,50</b>deveria cair</div>
+    <div class="teclas"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div></div>
+   <h3>A maquininha te pagou certo?</h3>
+   <p>Com a taxa do seu contrato, veja quanto deveria cair de cada venda. Cole o extrato e descubra quais vieram a menos.</p>
+   <span class="ir">Conferir a maquininha</span></a>
+  <a class="peca larga" href="ferramentas/fechamento-de-caixa/" data-tilt-area>
+   <div class="obj"><div class="cupom-3d o-cupom" data-tilt="14"><div class="cupom"><div class="cab">CAIXA</div><hr>
+    <div class="l"><span>Esperado</span><span>590,00</span></div><div class="l"><span>Contado</span><span>552,50</span></div>
+    <div class="falta l"><span>FALTA</span><span>−37,50</span></div></div></div></div>
+   <h3>O caixa fechou?</h3>
+   <p>Fundo de troco, vendas em dinheiro, sangrias e despesas. Em 30 segundos você sabe se faltou ou sobrou.</p>
+   <span class="ir">Fazer o fechamento</span></a>
+  <a class="peca" href="ferramentas/das-mei/" data-tilt-area>
+   <div class="obj"><div class="o-guia" data-tilt="14"><div class="t">DAS · MEI</div>competência 10/2026<div class="v">R$ 82,05</div><div class="barras"></div></div></div>
+   <h3>DAS do MEI 2026</h3>
+   <p>O valor da sua guia e quanto ainda dá para faturar sem estourar o limite de R$ 81 mil.</p>
+   <span class="ir">Ver meu DAS</span></a>
+  <a class="peca" href="ferramentas/imposto-simples-nacional/" data-tilt-area>
+   <div class="obj"><div class="o-calc" data-tilt="14"><div class="visor">8,83%</div>
+    <div class="tec"><span></span><span></span><span></span><span class="op"></span><span></span><span></span><span></span><span class="op"></span><span></span><span></span><span></span><span class="op"></span><span></span><span></span><span></span><span class="op"></span></div></div></div>
+   <h3>Imposto do Simples Nacional</h3>
+   <p>A alíquota que você paga de verdade e quanto separar a cada R$ 100 vendidos.</p>
+   <span class="ir">Calcular o imposto</span></a>
+  <a class="peca" href="ferramentas/lucro-e-ponto-de-equilibrio/" data-tilt-area>
+   <div class="obj"><div class="o-graf" data-tilt="14"><em>ponto de equilíbrio</em><span class="c" style="height:38%"></span><span class="c" style="height:52%"></span><span style="height:74%"></span><span style="height:88%"></span><span style="height:66%"></span></div></div>
+   <h3>Lucro e ponto de equilíbrio</h3>
+   <p>Quanto o negócio precisa vender por dia para pagar as contas e o que sobra no fim do mês.</p>
+   <span class="ir">Calcular minha meta</span></a>
+ </div>
+</div></section>
+
+<section class="wrap" data-tilt-area>
+ <div class="kit">
+  <img src="img/capa-kit.webp" alt="Capa do Kit Micro no Controle" width="460" height="460" data-tilt="8" loading="lazy">
+  <div>
+   <h2>Para fazer essas contas todo mês, sem esforço</h2>
+   <ul><li>Planilha Mestre: caixa, vendas, cartões, contas a pagar, impostos e lucro do mês</li>
+    <li>Guia do método com exemplos em números</li><li>Checklists para imprimir e deixar no balcão</li>
+    <li>Modelos de cotação, ordem de compra e contratos em Word</li></ul>
+   <p class="preco"><b>R$ 67</b>pagamento único, com 7 dias de garantia</p>
+   <a class="btn btn-menta" href="kit/">Ver o que vem no kit</a>
   </div>
+ </div>
 </section>
 
-<section class="qs">
-  <div class="wrap">
-    <h2>As perguntas que o dono faz e ninguém responde com número</h2>
-    <div class="q">
-      <h3>“Vendi bem. Por que não sobrou dinheiro?”</h3>
-      <div><p>Porque lucro e caixa não são a mesma coisa. Retirada, parcela de empréstimo e equipamento novo saem da conta, mas não aparecem como despesa. O kit separa o lucro do mês da sobra de caixa e mostra a diferença em uma tela.</p><span class="where">Aba Resultado do Mês</span></div>
-    </div>
-    <div class="q">
-      <h3>“A maquininha me pagou o que devia?”</h3>
-      <div><p>Você cadastra as taxas do seu contrato uma vez. A planilha calcula quanto deveria cair em cada venda e quando, e aponta o que caiu a menos ou atrasou. Inclui as regras de 2026 dos vales-refeição: taxa máxima de 3,6% e repasse em até 15 dias.</p><span class="where">Aba Cartões</span></div>
-    </div>
-    <div class="q">
-      <h3>“Quanto eu separo para o imposto?”</h3>
-      <div><p>O DAS do Simples muda conforme o faturamento dos últimos 12 meses. O kit calcula a alíquota efetiva e diz quanto guardar por dia de venda, para o dia 20 não virar susto. Para quem é MEI, acompanha o limite anual de R$ 81 mil.</p><span class="where">Aba Impostos</span></div>
-    </div>
-    <div class="q">
-      <h3>“Quanto preciso vender para não ter prejuízo?”</h3>
-      <div><p>Com as despesas lançadas, a planilha calcula o ponto de equilíbrio do mês e a meta mínima por dia. É o número para colar na parede do caixa.</p><span class="where">Aba Resultado do Mês</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="screens">
-  <div class="wrap">
-    <div class="head">
-      <h2>Por dentro da planilha</h2>
-      <p class="fine">Números da versão de exemplo que vem no kit: um mês de um restaurante fictício. Clique nas abas.</p>
-    </div>
-    <div class="sheet">
-      <div class="sheet-tabs" role="tablist" aria-label="Abas da planilha">
-        <button role="tab" aria-selected="true" aria-controls="p-painel" id="t-painel">Painel</button>
-        <button role="tab" aria-selected="false" aria-controls="p-caixa" id="t-caixa" tabindex="-1">Caixa Diário</button>
-        <button role="tab" aria-selected="false" aria-controls="p-cartoes" id="t-cartoes" tabindex="-1">Cartões</button>
-        <button role="tab" aria-selected="false" aria-controls="p-resultado" id="t-resultado" tabindex="-1">Resultado do Mês</button>
-      </div>
-
-      <div class="sheet-body" role="tabpanel" id="p-painel" aria-labelledby="t-painel">
-        <div class="kpis">
-          <div class="kpi"><span>Vendas do mês</span><b>R$ 128.960</b></div>
-          <div class="kpi"><span>Lucro líquido</span><b>R$ 5.546</b></div>
-          <div class="kpi"><span>Sobra de caixa</span><b class="neg">−R$ 7.154</b></div>
-          <div class="kpi"><span>Ticket médio</span><b>R$ 67,52</b></div>
-          <div class="kpi"><span>Diferença de caixa</span><b class="neg">−R$ 32,50</b></div>
-          <div class="kpi"><span>Cartões a receber</span><b>R$ 285</b></div>
-          <div class="kpi"><span>Imposto estimado</span><b>R$ 11.832</b></div>
-          <div class="kpi"><span>CMV do mês</span><b class="neg">40,3%</b></div>
-        </div>
-        <div class="diag">Deu lucro, mas o CMV passou da meta: revise compras, preços de fornecedor, porções e desperdício.</div>
-        <p class="sheet-note">O painel junta tudo em uma tela e escreve o diagnóstico do mês sozinho.</p>
-      </div>
-
-      <div class="sheet-body" role="tabpanel" id="p-caixa" aria-labelledby="t-caixa" hidden>
-        <div class="tbl-wrap"><table class="grid">
-          <thead><tr><th>Data</th><th>Responsável</th><th class="r">Fundo</th><th class="r">Vendas dinheiro</th><th class="r">Sangria</th><th class="r">Despesas</th><th class="r">Esperado</th><th class="r">Contado</th><th class="r">Diferença</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>12/09 sáb</td><td>Bruno</td><td class="r">200,00</td><td class="r">536,03</td><td class="r">300,00</td><td class="r">48,90</td><td class="r">387,13</td><td class="r">387,13</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
-            <tr><td>13/09 dom</td><td>Ana</td><td class="r">200,00</td><td class="r">428,05</td><td class="r">300,00</td><td class="r">120,00</td><td class="r">208,05</td><td class="r">208,05</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
-            <tr class="hl"><td>15/09 ter</td><td>Ana</td><td class="r">200,00</td><td class="r">235,07</td><td class="r">–</td><td class="r">48,90</td><td class="r">386,17</td><td class="r">348,67</td><td class="r neg">−37,50</td><td><span class="st bad">▼ Falta</span></td></tr>
-            <tr><td>16/09 qua</td><td>Bruno</td><td class="r">200,00</td><td class="r">247,98</td><td class="r">–</td><td class="r">120,00</td><td class="r">327,98</td><td class="r">327,98</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
-            <tr><td>17/09 qui</td><td>Ana</td><td class="r">200,00</td><td class="r">251,08</td><td class="r">–</td><td class="r">48,90</td><td class="r">402,18</td><td class="r">402,18</td><td class="r">–</td><td><span class="st ok">✔ OK</span></td></tr>
-          </tbody>
-        </table></div>
-        <p class="sheet-note">Você lança o fundo de troco e o valor contado. A planilha calcula o esperado e marca a falta no mesmo dia.</p>
-      </div>
-
-      <div class="sheet-body" role="tabpanel" id="p-cartoes" aria-labelledby="t-cartoes" hidden>
-        <div class="tbl-wrap"><table class="grid">
-          <thead><tr><th>Venda</th><th>Bandeira</th><th>Modalidade</th><th class="r">Bruto</th><th class="r">Taxa</th><th class="r">Líquido esperado</th><th>Previsão</th><th class="r">Caiu no banco</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>01/09</td><td>Visa</td><td>Débito</td><td class="r">315,62</td><td class="r">1,37%</td><td class="r">311,30</td><td>02/09</td><td class="r">311,30</td><td><span class="st ok">✔ Conciliado</span></td></tr>
-            <tr><td>01/09</td><td>Visa</td><td>Crédito à vista</td><td class="r">468,09</td><td class="r">3,15%</td><td class="r">453,35</td><td>01/10</td><td class="r">453,35</td><td><span class="st ok">✔ Conciliado</span></td></tr>
-            <tr class="hl"><td>03/09</td><td>Elo</td><td>Débito</td><td class="r">136,93</td><td class="r">1,47%</td><td class="r">134,92</td><td>04/09</td><td class="r">–</td><td><span class="st bad">⏰ Atrasado</span></td></tr>
-            <tr class="hl"><td>08/09</td><td>Visa</td><td>Crédito à vista</td><td class="r">383,31</td><td class="r">3,15%</td><td class="r">371,24</td><td>08/10</td><td class="r neg">358,84</td><td><span class="st bad">▼ Recebeu a menos</span></td></tr>
-            <tr class="hl"><td>12/09</td><td>Pluxee</td><td>Voucher</td><td class="r">156,06</td><td class="r">3,60%</td><td class="r">150,44</td><td>27/09</td><td class="r">–</td><td><span class="st bad">⏰ Atrasado</span></td></tr>
-          </tbody>
-        </table></div>
-        <p class="sheet-note">Cadastre as taxas do seu contrato uma vez. A planilha diz quanto e quando deve cair, e aponta o que veio errado.</p>
-      </div>
-
-      <div class="sheet-body" role="tabpanel" id="p-resultado" aria-labelledby="t-resultado" hidden>
-        <div class="tbl-wrap"><table class="grid dre">
-          <tbody>
-            <tr class="main"><td>Receita bruta de vendas</td><td class="r">R$ 128.960,25</td><td class="r">100%</td></tr>
-            <tr><td>(−) Impostos (DAS) e taxas de cartão</td><td class="r">−R$ 13.868,45</td><td class="r">10,8%</td></tr>
-            <tr><td>(−) Mercadorias (CMV)</td><td class="r">−R$ 51.960,50</td><td class="r neg">40,3%</td></tr>
-            <tr><td>(−) Pessoal</td><td class="r">−R$ 33.910,00</td><td class="r">26,3%</td></tr>
-            <tr><td>(−) Ocupação, administrativas, comerciais e outras</td><td class="r">−R$ 23.675,21</td><td class="r">18,4%</td></tr>
-            <tr class="main"><td>Lucro líquido do mês</td><td class="r">R$ 5.546,09</td><td class="r">4,3%</td></tr>
-            <tr><td>(−) Retiradas, investimentos e dívidas</td><td class="r">−R$ 12.700,00</td><td class="r">9,8%</td></tr>
-            <tr class="main bad"><td>Sobra (ou falta) de caixa</td><td class="r">−R$ 7.153,91</td><td class="r">−5,5%</td></tr>
-          </tbody>
-        </table></div>
-        <div class="pe"><div><span>Ponto de equilíbrio</span><b>R$ 117.631</b></div><div><span>Vender no mínimo por dia</span><b>R$ 4.524</b></div></div>
-        <p class="sheet-note">O resultado se monta sozinho a partir do que você lançou e separa o lucro da sobra de caixa.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="inside">
-  <div class="wrap">
-    <h2>O que você recebe</h2>
-    <div class="items">
-      <div class="item">
-        <div class="thumb"><div class="mini" aria-hidden="true"><div><span>Vendas</span><b>128.960</b></div><div><span>Lucro</span><b>5.546</b></div><div><span>Falta no caixa</span><b style="color:#C0392B">−32,50</b></div><div><span>CMV</span><b>40,3%</b></div><div><span>A receber</span><b>285</b></div><div><span>Imposto</span><b>11.832</b></div></div></div>
-        <h3>Planilha Mestre</h3>
-        <p>Caixa, vendas, cartões, contas a pagar, cotação, impostos, resultado e painel. Em branco e com exemplo preenchido.</p>
-      </div>
-      <div class="item">
-        <div class="thumb"><img src="img/guia-capa.webp" alt="Capa do Guia do Método Micro no Controle" loading="lazy"></div>
-        <h3>Guia do Método</h3>
-        <p>13 páginas com o passo a passo e exemplos em números: caixa, cartões, CMV, Simples, MEI e contabilidade.</p>
-      </div>
-      <div class="item">
-        <div class="thumb"><img src="img/checklist.webp" alt="Checklist de abertura e fechamento de caixa" loading="lazy"></div>
-        <h3>Checklists para imprimir</h3>
-        <p>Abertura e fechamento de caixa com assinatura, compras e recebimento, rotina semanal e entrega ao contador.</p>
-      </div>
-      <div class="item">
-        <div class="thumb"><div class="docs"><div>Pedido de Cotação</div><div>Ordem de Compra</div><div>Contrato de Fornecimento</div><div>Contrato de Prestação de Serviços</div></div></div>
-        <h3>Modelos em Word</h3>
-        <p>Quatro modelos editáveis para comprar melhor e formalizar fornecedores e prestadores.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="routine">
-  <div class="wrap">
-    <h2>A rotina que cabe no seu dia</h2>
-    <ol class="steps">
-      <li><div class="t">10 min</div><div class="w">Todo dia, no fechamento</div><p>Lance o relatório do sistema, conte a gaveta e registre as vendas da maquininha. A planilha mostra na hora se algo não bateu.</p></li>
-      <li><div class="t">20 min</div><div class="w">Uma vez por semana</div><p>Confira o que caiu dos cartões e do Pix, programe as contas dos próximos 7 dias e cote os itens de maior giro.</p></li>
-      <li><div class="t">30 min</div><div class="w">Uma vez por mês</div><p>Veja o imposto estimado e o resultado do mês. Envie ao contador o que pede o checklist e escolha uma ação para o mês seguinte.</p></li>
-    </ol>
-  </div>
-</section>
-
-<section class="fit">
-  <div class="wrap">
-    <h2>É para o seu negócio?</h2>
-    <div class="fitgrid">
-      <div class="fitbox yes">
-        <h3>Feito para</h3>
-        <ul>
-          <li>Restaurantes, bares, lanchonetes, padarias e cafés</li>
-          <li>Comércio com caixa e maquininha</li>
-          <li>Empresas do Simples Nacional e MEI</li>
-          <li>Donos que querem parar de decidir no escuro</li>
-        </ul>
-      </div>
-      <div class="fitbox no">
-        <h3>Não é</h3>
-        <ul>
-          <li>Um sistema que se conecta ao seu banco ou PDV: você lança os números</li>
-          <li>Um substituto do contador ou do advogado</li>
-          <li>Ideal para empresas no Lucro Real ou Presumido (o cálculo de imposto cobre Simples e MEI)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="offer" id="oferta">
-  <div class="wrap">
-    <div>
-      <h2>Tudo pronto para começar hoje</h2>
-      <p class="intro">Você paga uma vez, baixa na hora e usa todo mês. Em 30 dias de rotina você vai saber mais sobre o seu negócio do que em anos olhando só o extrato.</p>
-    </div>
-    <div class="ticket">
-      <ul>
-        <li><span>Planilha Mestre (branco + exemplo)</span><span>Excel / Sheets</span></li>
-        <li><span>Guia do Método</span><span>PDF, 13 págs.</span></li>
-        <li><span>Checklists para imprimir</span><span>PDF</span></li>
-        <li><span>4 modelos de compras e contratos</span><span>Word</span></li>
-      </ul>
-      <div class="price"><span class="v"><small>R$</small>67</span><span class="fine">pagamento único</span></div>
-      <a class="btn js-checkout" href="https://pay.hotmart.com/K108084778Q">Quero o kit por R$ 67</a>
-      <div class="guarantee">
-        <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 4 5.5v6.2c0 5.4 3.8 10.4 9 12.3 5.2-1.9 9-6.9 9-12.3V5.5L13 2Z" fill="#E2F5F2" stroke="#0B6F68" stroke-width="1.8"/><path d="m8.5 13 3 3 6-6.5" fill="none" stroke="#0B6F68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span><b>Garantia de 7 dias.</b> Se não for para você, peça o reembolso pela Hotmart dentro do prazo e recebe o valor de volta.</span>
-      </div>
-      <p class="fine" style="margin-top:14px">Pagamento processado com segurança pela Hotmart.</p>
-    </div>
-  </div>
-</section>
-
-<section class="faq">
-  <div class="wrap">
-    <h2>Perguntas frequentes</h2>
-    <details><summary>Como eu recebo o kit?</summary><p>Logo depois da confirmação do pagamento, a Hotmart envia por e-mail o acesso para baixar o arquivo .zip com todos os materiais.</p></details>
-    <details><summary>Funciona no Google Sheets?</summary><p>Sim. A planilha foi feita no Excel e pode ser importada no Google Sheets (Arquivo › Importar). Os cálculos funcionam nos dois.</p></details>
-    <details><summary>Preciso entender de contabilidade?</summary><p>Não. Você preenche as células amarelas com números que já tem: relatório do sistema, contagem da gaveta, notas e taxas da maquininha. O resto a planilha calcula, e o guia explica cada conta com exemplos.</p></details>
-    <details><summary>Serve para MEI?</summary><p>Serve. A aba de impostos tem uma seção para MEI que acompanha o limite de faturamento do ano e mostra o valor do DAS-MEI de 2026.</p></details>
-    <details><summary>O cálculo de imposto é oficial?</summary><p>É uma estimativa para você se planejar e separar o dinheiro certo. O valor oficial é sempre o apurado pelo seu contador no PGDAS-D.</p></details>
-    <details><summary>Dá para usar no celular?</summary><p>Para lançar o dia a dia, o Google Sheets no celular funciona. Para ver o painel e o resultado do mês, o computador é mais confortável.</p></details>
-    <details><summary>Tenho duas lojas. Como faço?</summary><p>Use um arquivo por loja e por mês. Assim cada unidade tem o próprio caixa, resultado e ponto de equilíbrio.</p></details>
-  </div>
-</section>
-
-<section class="last">
-  <div class="wrap">
-    <h2>Feche o próximo caixa sabendo exatamente onde está cada real</h2>
-    <a class="btn js-checkout" href="https://pay.hotmart.com/K108084778Q">Quero o kit por R$ 67</a>
-  </div>
-</section>
+<section class="secao" id="sabedoria"><div class="wrap sabedoria">
+ <div><h2>Sabedoria para o caixa</h2>
+  <p class="intro">Princípios antigos que continuam certos para quem empreende. Toda semana, um provérbio e uma prática para o financeiro do seu negócio.</p>
+  <p class="intro" style="margin-top:20px"><a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Acompanhe a série no Instagram</a></p></div>
+ <figure class="pergaminho">
+  <blockquote>Procure conhecer bem o estado das suas ovelhas e cuide dos seus rebanhos.</blockquote>
+  <cite>Provérbios 27:23</cite>
+  <p class="pratica">No balcão, o rebanho é o caixa. Olhe os números toda semana: vendas, taxas da maquininha, compras e o que sobrou. Quem conhece o próprio caixa decide melhor.</p>
+ </figure>
+</div></section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Micro no Controle. Ferramenta de gestão: não substitui contador nem advogado.</span>
-    <span>Compra e entrega pela Hotmart.</span>
-  </div>
-</footer>
-
-<script>
-  // Link do checkout da Hotmart: troque aqui se mudar a oferta.
-  const CHECKOUT_URL = "https://pay.hotmart.com/K108084778Q";
-  if (CHECKOUT_URL) {
-    document.querySelectorAll(".js-checkout").forEach(a => { a.href = CHECKOUT_URL; a.rel = "noopener"; });
-  }
-
-  // abas da planilha
-  const tabs=[...document.querySelectorAll('.sheet-tabs [role=tab]')];
-  function sel(t){tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});}
-  tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];sel(n);n.focus();}});});
-</script>
-</body>
-</html>
+<footer class="rodape"><div class="wrap">
+ <div><a class="logo" href="./"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+  <p style="margin-top:14px;max-width:36ch">Ferramentas e materiais práticos para o financeiro de restaurantes, comércio e MEI.</p></div>
+ <div><h4>Ferramentas grátis</h4>
+  <a href="ferramentas/taxa-da-maquininha/">Taxa da maquininha</a>
+  <a href="ferramentas/fechamento-de-caixa/">Fechamento de caixa</a>
+  <a href="ferramentas/das-mei/">DAS do MEI 2026</a>
+  <a href="ferramentas/imposto-simples-nacional/">Imposto do Simples Nacional</a>
+  <a href="ferramentas/lucro-e-ponto-de-equilibrio/">Lucro e ponto de equilíbrio</a></div>
+ <div><h4>Micro no Controle</h4>
+  <a href="kit/">Kit Micro no Controle</a>
+  <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a>
+  <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></div>
+ <p class="fino">As ferramentas fazem estimativas com as regras de 2026 e rodam no seu navegador: nada do que você digita é enviado. Para decisões fiscais, confirme com o seu contador. © 2026 Micro no Controle.</p>
+</div></footer>
+<script src="assets/site.js"></script>
+</body></html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taxa da maquininha: calcule quanto deveria cair de cada venda</title>
+<meta name="description" content="Informe a taxa do seu contrato e o valor da venda no cartão, Pix ou voucher. Veja o líquido esperado, a taxa que você realmente pagou e quanto veio a menos.">
+<link rel="canonical" href="https://micronocontrole.com/ferramentas/taxa-da-maquininha/">
+<meta property="og:title" content="Taxa da maquininha: calcule quanto deveria cair de cada venda"><meta property="og:description" content="Informe a taxa do seu contrato e o valor da venda no cartão, Pix ou voucher. Veja o líquido esperado, a taxa que você realmente pagou e quanto veio a menos.">
+<meta property="og:url" content="https://micronocontrole.com/ferramentas/taxa-da-maquininha/"><meta property="og:type" content="website">
+<meta property="og:image" content="https://micronocontrole.com/img/og.png"><meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head><body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><div class="wrap">
+ <a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+ <nav class="menu" aria-label="Principal">
+  <a href="../../#ferramentas">Ferramentas</a><a href="../../#sabedoria">Sabedoria</a>
+  <a class="btn btn-menta" href="../../kit/">Ver o kit</a>
+ </nav></div></header>
+
+<main id="conteudo">
+<section class="f-topo"><div class="wrap">
+ <p class="trilha"><a href="../../">Início</a> / <a href="../../#ferramentas">Ferramentas grátis</a></p>
+ <h1>A maquininha te pagou certo? Confira venda por venda</h1><p>Com a taxa do seu contrato, a calculadora mostra quanto deveria cair na conta. Cole várias vendas do extrato e veja de uma vez quais vieram a menos.</p></div></section>
+<div class="wrap">
+ <div class="f-grade">
+  <form class="painel" id="f" onsubmit="return false"><div class="abas" role="tablist"><button type="button" role="tab" aria-selected="true" data-aba="uma">Uma venda</button><button type="button" role="tab" aria-selected="false" data-aba="varias">Várias vendas do extrato</button></div>
+<div id="aba_uma"><div class="campos"><div class="campo"><label for="modal">Modalidade</label>
+<div class="entrada"><select id="modal" name="modal"><option value="debito" selected>Débito</option><option value="credito">Crédito à vista</option><option value="parcelado">Crédito parcelado</option><option value="pix">Pix na maquininha</option><option value="voucher">Vale-refeição / alimentação</option></select><span style="padding:0 14px 0 0">▾</span></div></div><div class="campo"><label for="taxa">Taxa do seu contrato<span class="ajuda">Está no contrato ou no app da maquininha</span></label>
+<div class="entrada"><input id="taxa" name="taxa" type="text" inputmode="decimal" value="1,37" autocomplete="off"><span style="padding:0 14px 0 0">%</span></div></div><div class="campo"><label for="bruto">Valor da venda</label>
+<div class="entrada"><span>R$</span><input id="bruto" name="bruto" type="text" inputmode="decimal" value="1.000,00" autocomplete="off"></div></div><div class="campo"><label for="caiu">Valor que caiu na conta<span class="ajuda">Deixe em branco se ainda não caiu</span></label>
+<div class="entrada"><span>R$</span><input id="caiu" name="caiu" type="text" inputmode="decimal" value="986,30" autocomplete="off"></div></div></div></div>
+<div id="aba_varias" hidden><div class="campos"><div class="campo cheio"><label for="taxa2">Taxa do contrato para estas vendas</label>
+<div class="entrada"><input id="taxa2" name="taxa2" type="text" inputmode="decimal" value="3,15" autocomplete="off"><span style="padding:0 14px 0 0">%</span></div></div><div class="campo cheio"><label for="lista">Cole as vendas: valor bruto e valor recebido em cada linha
+<span class="ajuda">Copie as duas colunas do extrato (Excel ou app) e cole aqui. Separador: tab, ponto e vírgula ou espaço.</span></label>
+<textarea id="lista" class="colar" spellcheck="false">1.000,00	968,50
+468,09	453,35
+383,31	358,84
+250,00	242,13
+1.200,00	1.162,20</textarea></div></div></div></form>
+  <div class="resultado" data-tilt-area><div id="res_uma" class="o-maq" data-tilt="9" style="width:min(300px,90%);height:auto;padding:22px 20px 26px">
+ <div class="tela" style="height:auto;padding:14px 16px"><span id="m_mod">Débito</span><b id="m_liq">R$ 0,00</b><span style="font-weight:400">deveria cair</span></div>
+ <div style="color:#d6e7e4;font:500 14px/1.7 var(--mono);margin-top:16px">
+  <div style="display:flex;justify-content:space-between"><span>Venda</span><span id="m_bruto"></span></div>
+  <div style="display:flex;justify-content:space-between"><span>Taxa contrato</span><span id="m_taxa"></span></div>
+  <div style="display:flex;justify-content:space-between"><span>Caiu</span><span id="m_caiu"></span></div>
+  <div style="display:flex;justify-content:space-between"><span>Taxa real</span><span id="m_real"></span></div></div>
+ <div class="teclas" style="margin-top:16px"><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+<p id="m_msg" style="text-align:center;max-width:34ch;font-weight:600"></p>
+<div id="res_varias" hidden style="width:100%"><div class="painel" style="padding:22px"><div class="tabela-rola"><table class="lista"><thead><tr><th>Venda</th><th>Esperado</th><th>Recebido</th><th>Diferença</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p id="v_msg" style="margin-top:14px;font-weight:600"></p></div></div></div>
+ </div>
+ <article class="texto"><h2>Como a conta é feita</h2>
+<div class="formula">líquido esperado = valor da venda × (1 − taxa do contrato)<br>taxa real = 1 − (valor que caiu ÷ valor da venda)</div>
+<p>Se a taxa real ficou acima da taxa do contrato, a maquininha cobrou mais do que o combinado. Pode ser antecipação automática, tarifa extra, aluguel descontado da venda ou erro de cadastro.</p>
+<h2>Onde está o dinheiro que some</h2>
+<ul><li><strong>Antecipação ligada sem você saber:</strong> o crédito cai antes, mas com desconto maior.</li>
+<li><strong>Taxa de bandeira diferente:</strong> Elo, Amex e vouchers costumam ter taxa própria.</li>
+<li><strong>Vale-refeição:</strong> desde fevereiro de 2026 a taxa máxima cobrada do estabelecimento é 3,6% e o repasse deve sair em até 15 dias (Decreto 12.712/2025). Se está pagando mais, questione.</li>
+<li><strong>Venda que não caiu:</strong> confira também a data prevista. Venda atrasada é dinheiro parado.</li></ul>
+  <h2>Perguntas frequentes</h2><details><summary>Onde encontro a taxa do meu contrato?</summary><p>No contrato de adesão, no app ou no portal da maquininha, normalmente em Taxas ou Plano. Se não encontrar, peça por escrito ao gerente ou ao suporte.</p></details>
+<details><summary>Por que o crédito parcelado tem taxa maior?</summary><p>Porque a maquininha adianta para você um dinheiro que o cliente vai pagar em parcelas. Em muitos planos a taxa sobe a cada parcela.</p></details>
+<details><summary>Qual a taxa máxima do vale-refeição?</summary><p>Pelo Decreto 12.712/2025, em vigor desde 10 de fevereiro de 2026, a taxa cobrada do estabelecimento no vale-refeição e alimentação é de no máximo 3,6%, com repasse em até 15 dias.</p></details>
+ </article>
+ <div class="cta-kit"><div><strong>Quer fazer essa conta todo dia, sem esforço?</strong>
+<p>O Kit Micro no Controle junta caixa, maquininha, contas a pagar, impostos e lucro do mês numa planilha pronta, com guia e checklists. R$ 67, pagamento único.</p></div>
+<a class="btn btn-menta" href="../../kit/">Ver o que vem no kit</a></div>
+</div></main>
+
+<footer class="rodape"><div class="wrap">
+ <div><a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+  <p style="margin-top:14px;max-width:36ch">Ferramentas e materiais práticos para o financeiro de restaurantes, comércio e MEI.</p></div>
+ <div><h4>Ferramentas grátis</h4>
+  <a href="../../ferramentas/taxa-da-maquininha/">Taxa da maquininha</a>
+  <a href="../../ferramentas/fechamento-de-caixa/">Fechamento de caixa</a>
+  <a href="../../ferramentas/das-mei/">DAS do MEI 2026</a>
+  <a href="../../ferramentas/imposto-simples-nacional/">Imposto do Simples Nacional</a>
+  <a href="../../ferramentas/lucro-e-ponto-de-equilibrio/">Lucro e ponto de equilíbrio</a></div>
+ <div><h4>Micro no Controle</h4>
+  <a href="../../kit/">Kit Micro no Controle</a>
+  <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a>
+  <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></div>
+ <p class="fino">As ferramentas fazem estimativas com as regras de 2026 e rodam no seu navegador: nada do que você digita é enviado. Para decisões fiscais, confirme com o seu contador. © 2026 Micro no Controle.</p>
+</div></footer>
+<script src="../../assets/site.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Onde encontro a taxa do meu contrato?", "acceptedAnswer": {"@type": "Answer", "text": "No contrato de adesão, no app ou no portal da maquininha, normalmente em Taxas ou Plano. Se não encontrar, peça por escrito ao gerente ou ao suporte."}}, {"@type": "Question", "name": "Por que o crédito parcelado tem taxa maior?", "acceptedAnswer": {"@type": "Answer", "text": "Porque a maquininha adianta para você um dinheiro que o cliente vai pagar em parcelas. Em muitos planos a taxa sobe a cada parcela."}}, {"@type": "Question", "name": "Qual a taxa máxima do vale-refeição?", "acceptedAnswer": {"@type": "Answer", "text": "Pelo Decreto 12.712/2025, em vigor desde 10 de fevereiro de 2026, a taxa cobrada do estabelecimento no vale-refeição e alimentação é de no máximo 3,6%, com repasse em até 15 dias."}}]}</script><script>
+const $=id=>document.getElementById(id);
+const nomes={debito:'Débito',credito:'Crédito à vista',parcelado:'Crédito parcelado',pix:'Pix na maquininha',voucher:'Vale-refeição'};
+document.querySelectorAll('.abas button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.abas button').forEach(x=>x.setAttribute('aria-selected',x===b));
+ const v=b.dataset.aba==='varias'; $('aba_uma').hidden=v; $('aba_varias').hidden=!v; $('res_uma').hidden=v; $('m_msg').hidden=v; $('res_varias').hidden=!v; calc();}));
+function calc(){
+ const c=MNC.campos($('f')), t=c.taxa/100, liq=c.bruto*(1-t);
+ $('m_mod').textContent=nomes[c.modal]; $('m_liq').textContent=MNC.brl(liq); $('m_bruto').textContent=MNC.num(c.bruto); $('m_taxa').textContent=MNC.num(c.taxa)+'%';
+ const temCaiu=$('caiu').value.trim()!=='';
+ $('m_caiu').textContent=temCaiu?MNC.num(c.caiu):'—'; $('m_real').textContent=temCaiu&&c.bruto?MNC.pct(1-c.caiu/c.bruto):'—';
+ const dif=+(c.caiu-liq).toFixed(2), m=$('m_msg');
+ if(!temCaiu){m.className='';m.textContent='Quando o valor cair, compare com o número da tela.';}
+ else if(dif< -0.01){m.className='selo-ruim';m.textContent='Veio '+MNC.brl(-dif)+' a menos do que o contrato.';}
+ else if(dif>0.01){m.className='selo-ok';m.textContent='Caiu '+MNC.brl(dif)+' a mais. Confira se a taxa do contrato está certa.';}
+ else {m.className='selo-ok';m.textContent='Pagou certo, de acordo com o contrato.';}
+ // várias
+ const t2=MNC.ler($('taxa2').value)/100; let tb='',tot=0,n=0,ruins=0;
+ $('lista').value.split(/\n/).forEach(linha=>{const p=linha.trim().split(/\t|;|\s{1,}/).filter(Boolean); if(p.length<2)return;
+  const b=MNC.ler(p[0]),r=MNC.ler(p[1]); if(!b)return; const e=b*(1-t2), d=+(r-e).toFixed(2); n++; if(d<-0.01){ruins++;tot+=d;}
+  tb+='<tr'+(d<-0.01?' class="ruim"':'')+'><td>'+MNC.num(b)+'</td><td>'+MNC.num(e)+'</td><td>'+MNC.num(r)+'</td><td>'+(d>0?'+':'')+MNC.num(d)+'</td></tr>';});
+ $('tb').innerHTML=tb||'<tr><td colspan="4">Cole as vendas ao lado para conferir.</td></tr>';
+ $('v_msg').className=ruins?'selo-ruim':'selo-ok';
+ $('v_msg').textContent=!n?'':ruins?ruins+' de '+n+' vendas vieram a menos. Total: '+MNC.brl(-tot)+'.':'Todas as '+n+' vendas bateram com o contrato.';
+}
+$('f').addEventListener('input',calc);$('f').addEventListener('change',calc);calc();
+</script>
+</body></html>

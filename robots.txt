@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /social/
+Sitemap: https://micronocontrole.com/sitemap.xml

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora do Simples Nacional 2026: alíquota efetiva e valor do DAS</title>
+<meta name="description" content="Calcule a alíquota efetiva do Simples Nacional (Anexos I, II e III) a partir do faturamento dos últimos 12 meses e veja quanto separar de imposto a cada R$ 100 vendidos.">
+<link rel="canonical" href="https://micronocontrole.com/ferramentas/imposto-simples-nacional/">
+<meta property="og:title" content="Calculadora do Simples Nacional 2026: alíquota efetiva e valor do DAS"><meta property="og:description" content="Calcule a alíquota efetiva do Simples Nacional (Anexos I, II e III) a partir do faturamento dos últimos 12 meses e veja quanto separar de imposto a cada R$ 100 vendidos.">
+<meta property="og:url" content="https://micronocontrole.com/ferramentas/imposto-simples-nacional/"><meta property="og:type" content="website">
+<meta property="og:image" content="https://micronocontrole.com/img/og.png"><meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head><body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><div class="wrap">
+ <a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+ <nav class="menu" aria-label="Principal">
+  <a href="../../#ferramentas">Ferramentas</a><a href="../../#sabedoria">Sabedoria</a>
+  <a class="btn btn-menta" href="../../kit/">Ver o kit</a>
+ </nav></div></header>
+
+<main id="conteudo">
+<section class="f-topo"><div class="wrap">
+ <p class="trilha"><a href="../../">Início</a> / <a href="../../#ferramentas">Ferramentas grátis</a></p>
+ <h1>Quanto separar de imposto no Simples Nacional</h1><p>A alíquota da tabela não é a que você paga. Informe o faturamento dos últimos 12 meses e o do mês: a calculadora mostra a alíquota efetiva e o valor estimado do DAS.</p></div></section>
+<div class="wrap">
+ <div class="f-grade">
+  <form class="painel" id="f" onsubmit="return false"><h2>Seu faturamento</h2><p class='dica'>Restaurantes, bares, lanchonetes e comércio costumam ficar no Anexo I. Confirme com o seu contador.</p><div class='campos'><div class="campo cheio"><label for="anexo">Anexo</label>
+<div class="entrada"><select id="anexo" name="anexo"><option value="I" selected>Anexo I — comércio (inclui restaurantes)</option><option value="II">Anexo II — indústria</option><option value="III">Anexo III — serviços</option></select><span style="padding:0 14px 0 0">▾</span></div></div><div class="campo"><label for="rbt">Faturamento dos últimos 12 meses<span class="ajuda">Receita bruta acumulada (RBT12)</span></label>
+<div class="entrada"><span>R$</span><input id="rbt" name="rbt" type="text" inputmode="decimal" value="1.200.000,00" autocomplete="off"></div></div><div class="campo"><label for="mes">Faturamento do mês</label>
+<div class="entrada"><span>R$</span><input id="mes" name="mes" type="text" inputmode="decimal" value="100.000,00" autocomplete="off"></div></div></div></form>
+  <div class="resultado" data-tilt-area><div class="o-calc" data-tilt="9" style="width:min(300px,90%);height:auto;padding:22px">
+ <div class="visor" id="s_ef" style="height:64px;line-height:64px;font-size:30px">0,00%</div>
+ <div style="font:500 13px/1.8 var(--mono);color:#34494b;margin-top:14px">
+  <div style="display:flex;justify-content:space-between"><span>Faixa</span><span id="s_fx"></span></div>
+  <div style="display:flex;justify-content:space-between"><span>Alíquota da tabela</span><span id="s_nom"></span></div>
+  <div style="display:flex;justify-content:space-between"><span>Parcela a deduzir</span><span id="s_pd"></span></div>
+  <div style="display:flex;justify-content:space-between;font-weight:600;color:var(--tinta)"><span>DAS estimado</span><span id="s_das"></span></div></div>
+ <div class="tec" style="margin-top:14px"><span></span><span></span><span></span><span class="op"></span><span></span><span></span><span></span><span class="op"></span></div></div>
+<p style="text-align:center;font-size:19px;max-width:30ch" id="s_msg"></p></div>
+ </div>
+ <article class="texto"><h2>Como a alíquota efetiva é calculada</h2>
+<div class="formula">alíquota efetiva = (faturamento 12 meses × alíquota da faixa − parcela a deduzir) ÷ faturamento 12 meses<br>DAS do mês ≈ faturamento do mês × alíquota efetiva</div>
+<p>As tabelas dos Anexos I, II e III seguem a Lei Complementar 123/2006, com a redação da LC 155/2016, e continuam valendo em 2026. Exemplo: um restaurante no Anexo I com R$ 1,2 milhão nos últimos 12 meses fica na 4ª faixa (10,7%, parcela a deduzir de R$ 22.500). A alíquota efetiva é de 8,83%: a cada R$ 100 vendidos, R$ 8,83 são do imposto.</p>
+<h2>Cuidados</h2>
+<ul><li>Empresa com menos de 12 meses usa a média proporcional, e o cálculo é diferente.</li>
+<li>Acima de R$ 3,6 milhões, ICMS e ISS passam a ser pagos por fora do Simples.</li>
+<li>Serviços do Anexo V e o Fator R não estão nesta calculadora.</li>
+<li>Em 2026 o Simples segue fora da CBS e do IBS da reforma tributária. As mudanças para o Simples começam em 2027.</li></ul>
+  <h2>Perguntas frequentes</h2><details><summary>Qual a diferença entre alíquota nominal e efetiva?</summary><p>A nominal é a da tabela, para a faixa de faturamento. A efetiva é a que você paga de fato, depois de descontar a parcela a deduzir. Ela é sempre menor ou igual à nominal.</p></details>
+<details><summary>Restaurante é Anexo I ou III?</summary><p>Restaurantes, bares e lanchonetes normalmente são tributados no Anexo I, como comércio. Confirme com o seu contador, porque depende do CNAE e do tipo de atividade.</p></details>
+<details><summary>A reforma tributária muda o Simples em 2026?</summary><p>Não. Em 2026 as empresas do Simples ficam fora da cobrança de teste da CBS e do IBS. As mudanças para o Simples começam a partir de 2027.</p></details>
+ </article>
+ <div class="cta-kit"><div><strong>Quer fazer essa conta todo dia, sem esforço?</strong>
+<p>O Kit Micro no Controle junta caixa, maquininha, contas a pagar, impostos e lucro do mês numa planilha pronta, com guia e checklists. R$ 67, pagamento único.</p></div>
+<a class="btn btn-menta" href="../../kit/">Ver o que vem no kit</a></div>
+</div></main>
+
+<footer class="rodape"><div class="wrap">
+ <div><a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+  <p style="margin-top:14px;max-width:36ch">Ferramentas e materiais práticos para o financeiro de restaurantes, comércio e MEI.</p></div>
+ <div><h4>Ferramentas grátis</h4>
+  <a href="../../ferramentas/taxa-da-maquininha/">Taxa da maquininha</a>
+  <a href="../../ferramentas/fechamento-de-caixa/">Fechamento de caixa</a>
+  <a href="../../ferramentas/das-mei/">DAS do MEI 2026</a>
+  <a href="../../ferramentas/imposto-simples-nacional/">Imposto do Simples Nacional</a>
+  <a href="../../ferramentas/lucro-e-ponto-de-equilibrio/">Lucro e ponto de equilíbrio</a></div>
+ <div><h4>Micro no Controle</h4>
+  <a href="../../kit/">Kit Micro no Controle</a>
+  <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a>
+  <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></div>
+ <p class="fino">As ferramentas fazem estimativas com as regras de 2026 e rodam no seu navegador: nada do que você digita é enviado. Para decisões fiscais, confirme com o seu contador. © 2026 Micro no Controle.</p>
+</div></footer>
+<script src="../../assets/site.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qual a diferença entre alíquota nominal e efetiva?", "acceptedAnswer": {"@type": "Answer", "text": "A nominal é a da tabela, para a faixa de faturamento. A efetiva é a que você paga de fato, depois de descontar a parcela a deduzir. Ela é sempre menor ou igual à nominal."}}, {"@type": "Question", "name": "Restaurante é Anexo I ou III?", "acceptedAnswer": {"@type": "Answer", "text": "Restaurantes, bares e lanchonetes normalmente são tributados no Anexo I, como comércio. Confirme com o seu contador, porque depende do CNAE e do tipo de atividade."}}, {"@type": "Question", "name": "A reforma tributária muda o Simples em 2026?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Em 2026 as empresas do Simples ficam fora da cobrança de teste da CBS e do IBS. As mudanças para o Simples começam a partir de 2027."}}]}</script><script>
+const $=id=>document.getElementById(id);
+const T={I:[[.04,0],[.073,5940],[.095,13860],[.107,22500],[.143,87300],[.19,378000]],
+ II:[[.045,0],[.078,5940],[.10,13860],[.112,22500],[.147,85500],[.30,720000]],
+ III:[[.06,0],[.112,9360],[.135,17640],[.16,35640],[.21,125640],[.33,648000]]};
+const LIM=[180000,360000,720000,1800000,3600000,4800000];
+MNC.ao($('f'),c=>{
+ const r=c.rbt; let f=LIM.findIndex(l=>r<=l); const acima=f<0; if(acima)f=5;
+ const [al,pd]=T[c.anexo][f]; const ef=r>0?Math.max(0,(r*al-pd)/r):al;
+ $('s_ef').textContent=MNC.num(ef*100)+'%'; $('s_fx').textContent=(f+1)+'ª'; $('s_nom').textContent=MNC.num(al*100)+'%';
+ $('s_pd').textContent=MNC.num(pd,0); $('s_das').textContent=MNC.brl(c.mes*ef);
+ $('s_msg').innerHTML=acima?'<span class="selo-ruim">Acima de R$ 4,8 milhões a empresa sai do Simples.</span>':
+  'A cada <strong>R$ 100</strong> vendidos, separe <strong>'+MNC.brl(ef*100)+'</strong> para o imposto.';
+});
+</script>
+</body></html>

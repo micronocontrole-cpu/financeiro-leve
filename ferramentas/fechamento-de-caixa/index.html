@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de fechamento de caixa — quanto deveria ter na gaveta</title>
+<meta name="description" content="Some fundo de troco e vendas em dinheiro, tire sangrias e despesas e descubra na hora se o caixa fechou, faltou ou sobrou.">
+<link rel="canonical" href="https://micronocontrole.com/ferramentas/fechamento-de-caixa/">
+<meta property="og:title" content="Calculadora de fechamento de caixa — quanto deveria ter na gaveta"><meta property="og:description" content="Some fundo de troco e vendas em dinheiro, tire sangrias e despesas e descubra na hora se o caixa fechou, faltou ou sobrou.">
+<meta property="og:url" content="https://micronocontrole.com/ferramentas/fechamento-de-caixa/"><meta property="og:type" content="website">
+<meta property="og:image" content="https://micronocontrole.com/img/og.png"><meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head><body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo"><div class="wrap">
+ <a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+ <nav class="menu" aria-label="Principal">
+  <a href="../../#ferramentas">Ferramentas</a><a href="../../#sabedoria">Sabedoria</a>
+  <a class="btn btn-menta" href="../../kit/">Ver o kit</a>
+ </nav></div></header>
+
+<main id="conteudo">
+<section class="f-topo"><div class="wrap">
+ <p class="trilha"><a href="../../">Início</a> / <a href="../../#ferramentas">Ferramentas grátis</a></p>
+ <h1>O caixa fechou? Faça a conta do fechamento em 30 segundos</h1><p>Digite o que entrou e saiu em dinheiro hoje e o valor que você contou na gaveta. A calculadora mostra o que deveria estar lá e a diferença.</p></div></section>
+<div class="wrap">
+ <div class="f-grade">
+  <form class="painel" id="f" onsubmit="return false"><h2>Movimento do dia</h2><p class='dica'>Use só o que passou em dinheiro. Cartão e Pix ficam de fora desta conta.</p><div class='campos'><div class="campo"><label for="fundo">Fundo de troco<span class="ajuda">Dinheiro que ficou na gaveta para abrir o dia</span></label>
+<div class="entrada"><span>R$</span><input id="fundo" name="fundo" type="text" inputmode="decimal" value="200,00" autocomplete="off"></div></div><div class="campo"><label for="vendas">Vendas em dinheiro</label>
+<div class="entrada"><span>R$</span><input id="vendas" name="vendas" type="text" inputmode="decimal" value="1.250,00" autocomplete="off"></div></div><div class="campo"><label for="outros">Outras entradas em dinheiro<span class="ajuda">Ex.: reforço de troco, pagamento de fiado</span></label>
+<div class="entrada"><span>R$</span><input id="outros" name="outros" type="text" inputmode="decimal" value="0,00" autocomplete="off"></div></div><div class="campo"><label for="sangria">Sangrias<span class="ajuda">Dinheiro retirado para o cofre ou banco</span></label>
+<div class="entrada"><span>R$</span><input id="sangria" name="sangria" type="text" inputmode="decimal" value="800,00" autocomplete="off"></div></div><div class="campo"><label for="despesas">Despesas pagas com o caixa<span class="ajuda">Ex.: gás, entregador, compra rápida</span></label>
+<div class="entrada"><span>R$</span><input id="despesas" name="despesas" type="text" inputmode="decimal" value="60,00" autocomplete="off"></div></div><div class="campo"><label for="contado">Valor contado na gaveta</label>
+<div class="entrada"><span>R$</span><input id="contado" name="contado" type="text" inputmode="decimal" value="552,50" autocomplete="off"></div></div><div class="campo"><label for="dias">Dias abertos no mês<span class="ajuda">Para projetar a diferença no mês</span></label>
+<div class="entrada"><input id="dias" name="dias" type="text" inputmode="decimal" value="26" autocomplete="off"><span style="padding:0 14px 0 0">dias</span></div></div></div></form>
+  <div class="resultado" data-tilt-area><div class="cupom-3d" data-tilt="7" style="width:100%"><div class="cupom"><div class="cab">FECHAMENTO DE CAIXA</div><div class="sub" id="hoje"></div><hr>
+<div class="l"><span>Fundo de troco</span><span id="r_fundo"></span></div>
+<div class="l"><span>+ Vendas dinheiro</span><span id="r_vendas"></span></div>
+<div class="l"><span>+ Outras entradas</span><span id="r_outros"></span></div>
+<div class="l"><span>− Sangrias</span><span id="r_sangria"></span></div>
+<div class="l"><span>− Despesas</span><span id="r_desp"></span></div><hr>
+<div class="l"><b>ESPERADO</b><b id="r_esp"></b></div>
+<div class="l"><span>Contado</span><span id="r_cont"></span></div>
+<div class="l" id="r_dif"><span id="r_dif_t"></span><span id="r_dif_v"></span></div></div></div>
+<p id="r_mes" style="text-align:center;max-width:36ch"></p></div>
+ </div>
+ <article class="texto"><h2>Como a conta é feita</h2>
+<div class="formula">esperado = fundo + vendas em dinheiro + outras entradas − sangrias − despesas<br>diferença = contado − esperado</div>
+<p>Se a diferença for negativa, faltou dinheiro. Se for positiva, sobrou, o que também merece atenção: sobra costuma ser troco errado ou venda lançada a menos.</p>
+<h2>Por que conferir todo dia</h2>
+<p>Uma falta de R$ 30 descoberta no mesmo dia tem dono: você sabe quem estava no caixa e o que aconteceu. Descoberta no fim do mês, vira só um buraco no resultado. Quem confere todo dia também desestimula o erro, porque a equipe sabe que alguém está olhando.</p>
+<ul><li>Conte o caixa com duas pessoas e anote quem conferiu.</li><li>Registre toda sangria com hora e valor.</li><li>Guarde o comprovante de cada despesa paga com dinheiro do caixa.</li></ul>
+  <h2>Perguntas frequentes</h2><details><summary>Pix e cartão entram no fechamento de caixa?</summary><p>Não nesta conta. O fechamento da gaveta confere só o dinheiro físico. Pix e cartão são conferidos com o extrato do banco e da maquininha, que é outra conta.</p></details>
+<details><summary>O que é fundo de troco?</summary><p>É o dinheiro que fica na gaveta no começo do dia para dar troco. Ele entra na conta no início e deve ficar separado no fim, para abrir o dia seguinte.</p></details>
+<details><summary>Qual diferença é aceitável?</summary><p>O ideal é zero. Muitos negócios aceitam até alguns reais por arredondamento de troco, mas qualquer falta que se repete precisa ser investigada.</p></details>
+ </article>
+ <div class="cta-kit"><div><strong>Quer fazer essa conta todo dia, sem esforço?</strong>
+<p>O Kit Micro no Controle junta caixa, maquininha, contas a pagar, impostos e lucro do mês numa planilha pronta, com guia e checklists. R$ 67, pagamento único.</p></div>
+<a class="btn btn-menta" href="../../kit/">Ver o que vem no kit</a></div>
+</div></main>
+
+<footer class="rodape"><div class="wrap">
+ <div><a class="logo" href="../../"><i></i><span>Micro no Controle<small>soluções com sabedoria</small></span></a>
+  <p style="margin-top:14px;max-width:36ch">Ferramentas e materiais práticos para o financeiro de restaurantes, comércio e MEI.</p></div>
+ <div><h4>Ferramentas grátis</h4>
+  <a href="../../ferramentas/taxa-da-maquininha/">Taxa da maquininha</a>
+  <a href="../../ferramentas/fechamento-de-caixa/">Fechamento de caixa</a>
+  <a href="../../ferramentas/das-mei/">DAS do MEI 2026</a>
+  <a href="../../ferramentas/imposto-simples-nacional/">Imposto do Simples Nacional</a>
+  <a href="../../ferramentas/lucro-e-ponto-de-equilibrio/">Lucro e ponto de equilíbrio</a></div>
+ <div><h4>Micro no Controle</h4>
+  <a href="../../kit/">Kit Micro no Controle</a>
+  <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a>
+  <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></div>
+ <p class="fino">As ferramentas fazem estimativas com as regras de 2026 e rodam no seu navegador: nada do que você digita é enviado. Para decisões fiscais, confirme com o seu contador. © 2026 Micro no Controle.</p>
+</div></footer>
+<script src="../../assets/site.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Pix e cartão entram no fechamento de caixa?", "acceptedAnswer": {"@type": "Answer", "text": "Não nesta conta. O fechamento da gaveta confere só o dinheiro físico. Pix e cartão são conferidos com o extrato do banco e da maquininha, que é outra conta."}}, {"@type": "Question", "name": "O que é fundo de troco?", "acceptedAnswer": {"@type": "Answer", "text": "É o dinheiro que fica na gaveta no começo do dia para dar troco. Ele entra na conta no início e deve ficar separado no fim, para abrir o dia seguinte."}}, {"@type": "Question", "name": "Qual diferença é aceitável?", "acceptedAnswer": {"@type": "Answer", "text": "O ideal é zero. Muitos negócios aceitam até alguns reais por arredondamento de troco, mas qualquer falta que se repete precisa ser investigada."}}]}</script><script>
+const $=id=>document.getElementById(id);
+$('hoje').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
+MNC.ao(document.getElementById('f'),c=>{
+ const esp=c.fundo+c.vendas+c.outros-c.sangria-c.despesas, dif=+(c.contado-esp).toFixed(2);
+ $('r_fundo').textContent=MNC.num(c.fundo);$('r_vendas').textContent=MNC.num(c.vendas);$('r_outros').textContent=MNC.num(c.outros);
+ $('r_sangria').textContent=MNC.num(c.sangria);$('r_desp').textContent=MNC.num(c.despesas);$('r_esp').textContent=MNC.num(esp);$('r_cont').textContent=MNC.num(c.contado);
+ const box=$('r_dif'); box.className='l '+(dif<0?'falta':dif>0?'sobra':'certo');
+ $('r_dif_t').textContent=dif<0?'FALTA':dif>0?'SOBRA':'FECHOU CERTO'; $('r_dif_v').textContent=dif===0?'0,00':(dif>0?'+':'−')+MNC.num(Math.abs(dif));
+ const d=c.dias||26;
+ $('r_mes').innerHTML=dif===0?'Caixa batido. É isso que se quer todo dia.':
+  (dif<0?'Se essa falta se repetir, são <strong>'+MNC.brl(Math.abs(dif)*d)+'</strong> a menos em '+d+' dias.':'Sobra também é sinal de erro: troco ou venda lançada errada. Em '+d+' dias, '+MNC.brl(dif*d)+'.');
+});
+</script>
+</body></html>
