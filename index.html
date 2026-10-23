@@ -239,6 +239,7 @@ footer a{color:#CDE9E5}
 }
 @media (prefers-reduced-motion:reduce){.receipt{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
 </style>
+<script src="assets/pixel.js"></script>
 </head>
 <body>
 
@@ -582,7 +583,7 @@ footer a{color:#CDE9E5}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Micro no Controle · soluções com sabedoria. Ferramenta de gestão: não substitui contador nem advogado.</span>
+    <span>© 2026 Micro no Controle · soluções com sabedoria. Ferramenta de gestão: não substitui contador nem advogado. Usamos o pixel da Meta para medir visitas e anúncios.</span>
     <span><a href="planilha-gratis/">Kit Lite grátis</a> · <a href="#ferramentas">Ferramentas</a> · <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a> · <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></span>
   </div>
 </footer>
@@ -608,7 +609,7 @@ footer a{color:#CDE9E5}
       var msg=!nome?'Digite seu nome.':!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)?'Confira o e-mail.':!tipo?'Escolha o tipo de negócio.':'';
       if(msg){erro.textContent=msg;erro.style.display='block';return;}
       var d=new URLSearchParams(); d.append(E.nome,nome); d.append(E.email,email); d.append(E.whatsapp,zap); d.append(E.tipo,tipo);
-      var pronto=function(){f.hidden=true;var ok=document.getElementById('isca-ok');ok.hidden=false;ok.scrollIntoView({behavior:'smooth',block:'center'});try{document.getElementById('isca-link').click();}catch(e){}};
+      var pronto=function(){try{fbq('track','Lead',{content_name:'Kit Lite grátis'});}catch(e){}f.hidden=true;var ok=document.getElementById('isca-ok');ok.hidden=false;ok.scrollIntoView({behavior:'smooth',block:'center'});try{document.getElementById('isca-link').click();}catch(e){}};
       try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto);}catch(e){pronto();}
     });
   })();

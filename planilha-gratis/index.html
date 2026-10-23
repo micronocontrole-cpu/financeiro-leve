@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <style>#form-isca .campos{display:grid;grid-template-columns:minmax(0,1fr)!important}#form-isca .entrada{min-width:0}#form-isca .entrada input,#form-isca .entrada select{width:100%;min-width:0}@media(max-width:520px){#form-isca,#isca-ok{padding:22px}}</style>
+<script src="../assets/pixel.js"></script>
 </head><body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo"><div class="wrap">
@@ -107,7 +108,7 @@
   <a href="../#oferta">Pacote Completo</a>
   <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a>
   <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></div>
- <p class="fino">A planilha faz estimativas para controle interno. Para decisões fiscais, confirme com o seu contador. © 2026 Micro no Controle.</p>
+ <p class="fino">A planilha faz estimativas para controle interno. Para decisões fiscais, confirme com o seu contador. © 2026 Micro no Controle. Usamos o pixel da Meta para medir visitas e anúncios; ele não recebe o que você digita nas ferramentas.</p>
 </div></footer>
 <script src="../assets/site.js"></script>
 <script>
@@ -120,7 +121,7 @@
   var msg=!nome?'Digite seu nome.':!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)?'Confira o e-mail.':!tipo?'Escolha o tipo de negócio.':'';
   if(msg){erro.textContent=msg;erro.style.display='block';return;}
   var d=new URLSearchParams(); d.append(E.nome,nome); d.append(E.email,email); d.append(E.whatsapp,zap); d.append(E.tipo,tipo);
-  var pronto=function(){f.hidden=true;var ok=document.getElementById('isca-ok');ok.hidden=false;ok.scrollIntoView({behavior:'smooth',block:'center'});
+  var pronto=function(){try{fbq('track','Lead',{content_name:'Kit Lite grátis'});}catch(e){}f.hidden=true;var ok=document.getElementById('isca-ok');ok.hidden=false;ok.scrollIntoView({behavior:'smooth',block:'center'});
    try{document.getElementById('isca-link').click();}catch(e){}};
   try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto);}catch(e){pronto();}
  });
