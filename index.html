@@ -241,6 +241,7 @@ footer a{color:#CDE9E5}
 @media (prefers-reduced-motion:reduce){.receipt{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
 </style>
 <script src="assets/pixel.js"></script>
+<script src="assets/origem.js"></script>
 </head>
 <body>
 
@@ -602,14 +603,14 @@ footer a{color:#CDE9E5}
   tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];sel(n);n.focus();}});});
   // formulário do Kit Lite (Google Forms)
   (function(){
-    var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse", E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015"};
+    var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse", E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015",origem:"entry.1160383430"};
     var f=document.getElementById('form-isca'), erro=document.getElementById('i-erro');
     f.addEventListener('submit',function(ev){
       ev.preventDefault(); erro.style.display='none';
       var nome=f.nome.value.trim(), email=f.email.value.trim(), zap=f.whatsapp.value.trim(), tipo=f.tipo.value;
       var msg=!nome?'Digite seu nome.':!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)?'Confira o e-mail.':!tipo?'Escolha o tipo de negócio.':'';
       if(msg){erro.textContent=msg;erro.style.display='block';return;}
-      var d=new URLSearchParams(); d.append(E.nome,nome); d.append(E.email,email); d.append(E.whatsapp,zap); d.append(E.tipo,tipo);
+      var d=new URLSearchParams(); d.append(E.nome,nome); d.append(E.email,email); d.append(E.whatsapp,zap); d.append(E.tipo,tipo); try{d.append(E.origem, window.MNC_ORIGEM?MNC_ORIGEM():'desconhecida');}catch(e){}
       var pronto=function(){try{fbq('track','Lead',{content_name:'Kit Lite grátis'});}catch(e){}f.hidden=true;var ok=document.getElementById('isca-ok');ok.hidden=false;ok.scrollIntoView({behavior:'smooth',block:'center'});try{document.getElementById('isca-link').click();}catch(e){}};
       try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto);}catch(e){pronto();}
     });
