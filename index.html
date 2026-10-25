@@ -565,7 +565,7 @@ footer a{color:#CDE9E5}
         <label for="i-tipo">Tipo de negócio</label><select id="i-tipo" name="tipo" required><option value="">Escolha</option><option>Restaurante</option><option>Bar ou lanchonete</option><option>Padaria ou café</option><option>Comércio ou loja</option><option>MEI de serviços</option><option>Outro</option></select>
         <p class="ferr" id="i-erro" role="alert"></p>
         <button class="btn" type="submit">Quero o Kit Lite grátis</button>
-        <p class="fine" style="margin-top:10px">Usamos seu contato só para enviar materiais da Micro no Controle. Nada de spam.</p>
+        <p class="fine" style="margin-top:10px">Você vai receber por e-mail o kit e algumas dicas e ofertas da Micro no Controle. Para sair, é só clicar no link no fim de qualquer e-mail.</p>
       </form>
       <div class="fform" id="isca-ok" hidden style="text-align:center">
         <h3>Pronto! Seu Kit Lite está aqui</h3>
@@ -651,6 +651,8 @@ footer a{color:#CDE9E5}
       if(msg){erro.textContent=msg;erro.style.display='block';return;}
       var d=new URLSearchParams(); d.append(E.nome,nome); d.append(E.email,email); d.append(E.whatsapp,zap); d.append(E.tipo,tipo); try{d.append(E.origem, window.MNC_ORIGEM?MNC_ORIGEM():'desconhecida');}catch(e){}
       var pronto=function(){try{fbq('track','Lead',{content_name:'Kit Lite grátis'});}catch(e){}f.hidden=true;var ok=document.getElementById('isca-ok');ok.hidden=false;ok.scrollIntoView({behavior:'smooth',block:'center'});try{document.getElementById('isca-link').click();}catch(e){}};
+      // também envia para o MailerLite (sequência de e-mails do Kit Lite)
+      try{var m=new URLSearchParams();m.append('fields[email]',email);m.append('fields[name]',nome);m.append('ml-submit','1');m.append('anticsrf','true');fetch('https://assets.mailerlite.com/jsonp/2741459/forms/202329636930062083/subscribe',{method:'POST',mode:'no-cors',body:m});}catch(e){}
       try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto);}catch(e){pronto();}
     });
   })();
