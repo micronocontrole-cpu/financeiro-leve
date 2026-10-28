@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoria grátis da maquininha — Micro no Controle</title>
+<meta name="description" content="Suba o extrato da sua maquininha e descubra em 1 minuto se te cobraram taxa acima do combinado. Grátis, e o arquivo não sai do seu computador.">
+<meta property="og:title" content="Sua maquininha está te cobrando a mais? Descubra em 1 minuto">
+<meta property="og:description" content="Auditoria grátis das taxas do cartão. Funciona com o extrato da Cielo, Stone, Rede, PagSeguro, Getnet e outras.">
+<meta property="og:image" content="https://micronocontrole.com/img/og.png">
+<link rel="canonical" href="https://micronocontrole.com/auditoria-maquininha/">
+<meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--deep:#0F3D3E;--teal:#1B7F79;--mint:#2EC4B6;--mint-ink:#0B6F68;--mint-soft:#E2F5F2;--bg:#F3F7F6;--paper:#fff;--ink:#1A2628;--muted:#58686B;--line:#D6E0DF;--yellow:#F5B942;--red:#B4332A;--red-soft:#FBE7E5;--green:#1E7D50;--green-soft:#E3F5EC;
+--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:var(--display);line-height:1.12;letter-spacing:-.02em;font-weight:800}
+a{color:inherit}
+.bar{background:var(--deep)}.bar .wrap{max-width:1080px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-family:var(--display);font-weight:700;font-size:19px}
+.bar a.l{color:#CDE9E5;font-weight:600;font-size:15px;text-decoration:none}
+.hero{background:var(--deep);color:#EAF6F4;padding:44px 0 70px;text-align:center}
+.hero h1{font-size:clamp(30px,5.2vw,50px);color:#fff;max-width:20ch;margin:0 auto}
+.hero h1 em{font-style:normal;color:var(--mint)}
+.hero p{color:#BFDAD6;margin:16px auto 0;max-width:54ch}
+.pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.pills span{background:rgba(255,255,255,.08);border:1px solid rgba(46,196,182,.3);border-radius:999px;padding:6px 14px;font-size:14.5px;color:#CDE9E5}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:28px;margin:0 auto 22px;box-shadow:0 22px 50px -30px rgba(15,61,62,.45);position:relative}
+.card.first{margin-top:-40px}
+.step{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.step b{width:32px;height:32px;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;font-family:var(--display);flex:none}
+.step h2{font-size:23px}
+.drop{display:block;position:relative;border:2.5px dashed #9CC9C2;border-radius:16px;padding:30px 18px;text-align:center;background:#FAFDFC;cursor:pointer;transition:background .15s,border-color .15s}
+.drop:hover,.drop.on{background:var(--mint-soft);border-color:var(--mint)}
+.drop strong{display:block;font-family:var(--display);font-size:20px}
+.drop span{color:var(--muted);font-size:15px}
+.drop input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--mint);color:#06302E;font-family:var(--display);font-weight:700;font-size:18px;padding:14px 24px;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
+.btn:hover{background:#45d3c6}
+.btn.ghost{background:transparent;border:2px solid #9CC9C2;color:var(--deep);font-size:16px;padding:10px 18px}
+.btn.ghost:hover{background:var(--mint-soft)}
+.btn.dark{background:var(--deep);color:#fff}.btn.dark:hover{background:#14504F}
+.btn.wide{width:100%}
+.btn:focus-visible,.drop:focus-within,a:focus-visible,summary:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+summary{cursor:pointer;font-weight:700;color:var(--mint-ink)}
+details ul{margin:10px 0 0 20px;font-size:15.5px;color:#34474A}details li{margin:4px 0}
+.note{font-size:14px;color:var(--muted);margin-top:12px}
+.err{background:var(--red-soft);border-left:5px solid var(--red);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:15.5px}
+.ok{background:var(--green-soft);border-left:5px solid var(--green);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:15.5px}
+.warn{background:#FFF6DA;border-left:5px solid #E3A21A;border-radius:10px;padding:12px 14px;margin-top:12px;font-size:15px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:10px}
+.cols label{font-size:13.5px;font-weight:700;color:var(--muted);display:block}
+select,input[type=text],input[type=email],input[type=tel]{width:100%;font:500 16px var(--body);padding:11px 12px;border:1.5px solid #C9D9D5;border-radius:10px;background:#FBFDFC;color:var(--ink)}
+select:focus,input:focus{outline:none;border-color:var(--mint);box-shadow:0 0 0 4px rgba(46,196,182,.18)}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px}
+.tbl th{text-align:left;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line);padding:8px 8px}
+.tbl td{border-bottom:1px solid #E6EDEC;padding:9px 8px;vertical-align:middle}
+.tbl .n{text-align:right;font-family:var(--mono);font-size:14.5px;white-space:nowrap}
+.tbl input{width:96px;text-align:right;font-family:var(--mono);padding:8px 10px}
+.tbl tr.bad td{background:#FFF7F6}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.big{background:var(--deep);color:#EAF6F4;border-radius:18px;padding:24px;text-align:center}
+.big small{display:block;color:#BFDAD6;font-size:15px;font-weight:600}
+.big strong{display:block;font-family:var(--display);font-size:clamp(40px,8vw,64px);color:#fff;line-height:1.05;margin:6px 0}
+.big strong.zero{color:var(--mint)}
+.big p{color:#CDE9E5;font-size:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.kpi span{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.kpi b{font-family:var(--mono);font-size:19px}
+h3.sec{font-size:21px;margin-top:24px}
+.lead{background:var(--mint-soft);border-radius:18px;padding:22px;margin-top:22px}
+.lead h3{font-size:23px}
+.lead p{font-size:16px;color:#34474A;margin:6px 0 12px}
+.lead .g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lead label{font-size:14px;font-weight:700;display:block;margin-bottom:4px}
+.fine{font-size:13px;color:var(--muted);margin-top:10px}
+.printhead{display:none}
+[hidden]{display:none!important}
+footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40px}
+@media (max-width:600px){.card{padding:20px}.lead .g{grid-template-columns:1fr}.tbl{font-size:14px}.tbl input{width:80px}}
+@media print{
+  body{background:#fff;font-size:12px}
+  .bar,.hero,#passo1,#passo2,#passo3,.lead,.noprint,footer,details{display:none!important}
+  .card{box-shadow:none;border:0;padding:0;margin:0}
+  .printhead{display:block;border-bottom:2px solid #0F3D3E;padding-bottom:8px;margin-bottom:12px}
+  .big{background:#fff;color:#000;border:2px solid #0F3D3E}
+  .big strong{color:#B4332A}.big small,.big p{color:#333}
+  .tbl{font-size:11px}.tbl tr{page-break-inside:avoid}
+}
+</style>
+<script src="../assets/pixel.js"></script>
+<script src="../assets/origem.js"></script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="logo" href="/"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10.5" fill="none" stroke="#2EC4B6" stroke-width="3"/><circle cx="13" cy="13" r="4" fill="#2EC4B6"/></svg>Micro no Controle</a>
+  <a class="l" href="/diagnostico/">Diagnóstico grátis</a>
+</div></header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Sua maquininha está te <em>cobrando a mais</em>?</h1>
+    <p>Suba o extrato de vendas do cartão e veja em 1 minuto se alguma venda foi cobrada com taxa acima do combinado, e quanto isso dá por ano.</p>
+    <div class="pills"><span>Grátis</span><span>O arquivo não sai do seu computador</span><span>Cielo, Stone, Rede, PagSeguro, Getnet e outras</span></div>
+  </div>
+</section>
+
+<main class="wrap">
+  <!-- PASSO 1 -->
+  <section class="card first" id="passo1">
+    <div class="step"><b>1</b><h2>Suba o extrato de vendas</h2></div>
+    <label class="drop" id="drop">
+      <input type="file" id="arquivo" accept=".csv,.txt,.xlsx,.xls">
+      <strong>Clique para escolher o arquivo</strong>
+      <span>ou arraste aqui · Excel (.xlsx) ou CSV</span>
+    </label>
+    <div class="row">
+      <button class="btn ghost" type="button" id="usarExemplo">Testar com um extrato de exemplo</button>
+      <a class="btn ghost" id="baixarExemplo" href="#" download="extrato-exemplo-micro-no-controle.csv">Baixar o exemplo (.csv)</a>
+    </div>
+    <div id="msg1"></div>
+    <details>
+      <summary>Como baixar o extrato da minha maquininha?</summary>
+      <ul>
+        <li>Entre no site ou app da sua maquininha (o portal do lojista).</li>
+        <li>Procure por <b>Vendas</b>, <b>Extrato de vendas</b> ou <b>Relatórios</b>.</li>
+        <li>Escolha o período (de preferência 1 mês inteiro) e exporte em <b>Excel</b> ou <b>CSV</b>.</li>
+        <li>O arquivo precisa ter, pelo menos, o <b>valor bruto</b> de cada venda e a <b>taxa</b> ou o <b>valor líquido</b>.</li>
+        <li>Extrato em PDF ainda não funciona aqui. Se só tiver PDF, peça a planilha ao atendimento da maquininha.</li>
+      </ul>
+    </details>
+    <p class="note">Tudo é calculado aqui no seu navegador. O extrato não é enviado para nenhum servidor, nem para nós.</p>
+  </section>
+
+  <!-- PASSO 2 -->
+  <section class="card" id="passo2" hidden>
+    <div class="step"><b>2</b><h2>Confira as colunas</h2></div>
+    <p style="font-size:15.5px;color:#34474A">Encontramos <b id="qtdLidas">0</b> vendas. Veja se cada informação está na coluna certa. Se algo estiver errado, é só trocar.</p>
+    <div class="cols" id="cols"></div>
+    <div id="msg2"></div>
+  </section>
+
+  <!-- PASSO 3 -->
+  <section class="card" id="passo3" hidden>
+    <div class="step"><b>3</b><h2>Qual é a taxa do seu contrato?</h2></div>
+    <p style="font-size:15.5px;color:#34474A">Ao lado está a taxa que a maquininha <b>cobrou de verdade</b>. Se você sabe a taxa combinada, coloque. Se não souber, deixe em branco: usamos a <b>menor taxa que se repete no seu extrato</b> como referência.</p>
+    <div class="scroll"><table class="tbl" id="tabTaxas"><thead><tr><th>Modalidade</th><th class="n">Vendas</th><th class="n">Taxa cobrada (média)</th><th class="n">Taxa do contrato</th></tr></thead><tbody></tbody></table></div>
+    <div id="avisos"></div>
+    <button class="btn wide" type="button" id="auditar" style="margin-top:18px">Fazer a auditoria</button>
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="card" id="resultado" hidden aria-live="polite">
+    <div class="printhead"><h2>Relatório de auditoria das taxas do cartão</h2><p id="phData"></p></div>
+    <div class="big">
+      <small>Cobrado acima da taxa de referência</small>
+      <strong id="rTotal">R$ 0,00</strong>
+      <p id="rSub"></p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><span>Vendas analisadas</span><b id="kQtd">0</b></div>
+      <div class="kpi"><span>Valor vendido</span><b id="kBruto">R$ 0</b></div>
+      <div class="kpi"><span>Total pago em taxas</span><b id="kTaxas">R$ 0</b></div>
+      <div class="kpi"><span>Sua taxa média</span><b id="kMedia">0%</b></div>
+    </div>
+    <h3 class="sec">Por modalidade</h3>
+    <div class="scroll"><table class="tbl" id="tabMod"><thead><tr><th>Modalidade</th><th class="n">Vendas</th><th class="n">Referência</th><th class="n">Média cobrada</th><th class="n">Vendas acima</th><th class="n">Cobrado a mais</th></tr></thead><tbody></tbody></table></div>
+    <div id="blocoVendas">
+      <h3 class="sec">Vendas cobradas acima da referência</h3>
+      <p class="note" id="notaVendas"></p>
+      <div class="scroll"><table class="tbl" id="tabVendas"><thead><tr><th>Data</th><th>Bandeira</th><th>Modalidade</th><th class="n">Valor</th><th class="n">Taxa cobrada</th><th class="n">Referência</th><th class="n">A mais</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div id="proximos"></div>
+    <div class="row noprint">
+      <button class="btn dark" type="button" id="imprimir">Salvar relatório em PDF</button>
+      <button class="btn ghost" type="button" id="refazer">Auditar outro extrato</button>
+    </div>
+    <p class="fine">Esta auditoria compara o que foi cobrado com a taxa de referência informada. Ela não substitui o seu contrato nem o seu contador. Para pedir a correção, fale com a sua maquininha com este relatório em mãos.</p>
+
+    <form class="lead" id="lead" novalidate>
+      <h3>Quer que a gente confira isso todo mês para você?</h3>
+      <p>Estamos montando o <b>monitoramento automático</b>: você manda o extrato e recebe o aviso quando a maquininha cobrar a mais. Deixe seu contato para entrar na lista de espera e receber o Kit Lite grátis agora.</p>
+      <div class="g">
+        <div><label for="f-nome">Seu nome</label><input type="text" id="f-nome" autocomplete="name" required></div>
+        <div><label for="f-email">Seu e-mail</label><input type="email" id="f-email" inputmode="email" autocomplete="email" required></div>
+        <div><label for="f-zap">WhatsApp (opcional)</label><input type="tel" id="f-zap" inputmode="tel" autocomplete="tel"></div>
+        <div><label for="f-tipo">Tipo de negócio</label><select id="f-tipo" required><option value="">Escolha</option><option>Restaurante</option><option>Bar ou lanchonete</option><option>Padaria ou café</option><option>Salão ou barbearia</option><option>Loja de roupas</option><option>Comércio ou loja</option><option>Serviços</option><option>Outro</option></select></div>
+      </div>
+      <div id="msgLead"></div>
+      <button class="btn wide" type="submit" style="margin-top:14px">Quero o monitoramento + o Kit Lite</button>
+      <p class="fine">Você vai receber por e-mail o Kit Lite e algumas dicas e ofertas da Micro no Controle. Para sair, é só clicar no link no fim de qualquer e-mail. Os dados do extrato não são enviados. Veja a <a href="/privacidade/">Política de Privacidade</a>.</p>
+    </form>
+    <div id="obrigado" class="ok" hidden>
+      <b>Pronto, você está na lista!</b> O Kit Lite já está a caminho do seu e-mail.
+      <div class="row"><a class="btn" href="../planilha-gratis/arquivo/kit-lite-gratis-micro-no-controle.zip" download>Baixar o Kit Lite agora (.zip)</a></div>
+    </div>
+  </section>
+</main>
+<footer>© 2026 Micro no Controle · soluções com sabedoria · <a href="/">micronocontrole.com</a> · Usamos o pixel da Meta para medir visitas e anúncios. · <a href="/privacidade/">Política de Privacidade</a></footer>
+
+<script src="motor.js"></script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var CAMPOS=[['data','Data da venda'],['bandeira','Bandeira'],['modalidade','Forma de pagamento'],['parcelas','Parcelas'],['bruto','Valor bruto (obrigatório)'],['liquido','Valor líquido'],['taxa','Valor da taxa'],['taxaPct','Taxa em %'],['antecipacao','Desconto de antecipação'],['status','Status']];
+  var estado={linhas:null,det:null,mapa:null,vendas:null,aud:null};
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function brl(n){return 'R$ '+Motor.fmtBR(n||0)}
+  function pct(n){return n==null||isNaN(n)?'—':n.toFixed(2).replace('.',',')+'%'}
+  function dt(d){return d?('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear():'—'}
+  function msg(el,cls,html){$(el).innerHTML=html?'<div class="'+cls+'">'+html+'</div>':''}
+  function evento(nome,dados){try{fbq('trackCustom',nome,dados||{})}catch(e){}}
+
+  // Exemplo para baixar
+  try{
+    var blob=new Blob(['﻿'+Motor.linhasParaCSV(Motor.exemplo())],{type:'text/csv;charset=utf-8'});
+    $('baixarExemplo').href=URL.createObjectURL(blob);
+  }catch(e){$('baixarExemplo').hidden=true}
+
+  // --- leitura do arquivo ---
+  function carregarXLSX(){
+    return new Promise(function(ok,erro){
+      if(window.XLSX) return ok();
+      var s=document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=function(){ok()};s.onerror=function(){erro(new Error('xlsx'))};
+      document.head.appendChild(s);
+    });
+  }
+  function decodificar(buf){
+    var t=new TextDecoder('utf-8').decode(buf);
+    if(t.indexOf('�')>=0){try{t=new TextDecoder('windows-1252').decode(buf)}catch(e){}}
+    return t;
+  }
+  function lerArquivo(f){
+    msg('msg1');
+    if(!f) return;
+    var nome=f.name.toLowerCase();
+    if(/\.pdf$/.test(nome)){msg('msg1','err','Extrato em PDF ainda não funciona aqui. Exporte em <b>Excel</b> ou <b>CSV</b> no portal da sua maquininha.');return}
+    if(f.size>15*1024*1024){msg('msg1','err','Arquivo muito grande. Exporte um período menor (1 mês).');return}
+    var r=new FileReader();
+    r.onerror=function(){msg('msg1','err','Não consegui abrir esse arquivo. Tente exportar de novo.')};
+    r.onload=function(){
+      var buf=r.result;
+      if(/\.(xlsx|xls)$/.test(nome)){
+        msg('msg1','ok','Lendo a planilha…');
+        carregarXLSX().then(function(){
+          var wb=XLSX.read(buf,{type:'array',cellDates:true});
+          var escolhida=null;
+          wb.SheetNames.forEach(function(n){
+            if(escolhida) return;
+            var linhas=XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,raw:true,defval:''});
+            var d=Motor.detectar(linhas);
+            if(d.ok) escolhida={linhas:linhas,det:d};
+          });
+          if(!escolhida){var l0=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:true,defval:''});escolhida={linhas:l0,det:Motor.detectar(l0)}}
+          iniciar(escolhida.linhas,escolhida.det,f.name);
+        }).catch(function(){msg('msg1','err','Não consegui ler o Excel (verifique a internet). Se puder, exporte em <b>CSV</b>.')});
+      } else {
+        var linhas=Motor.lerCSV(decodificar(buf));
+        iniciar(linhas,Motor.detectar(linhas),f.name);
+      }
+    };
+    r.readAsArrayBuffer(f);
+  }
+
+  function iniciar(linhas,det,nome){
+    if(!det||det.mapa==null){msg('msg1','err','Esse arquivo não parece um extrato de vendas.');return}
+    estado.linhas=linhas;estado.det=det;estado.mapa=JSON.parse(JSON.stringify(det.mapa));
+    if(!det.ok){
+      msg('msg1','err','Não achei as colunas de <b>valor bruto</b> e de <b>taxa</b> (ou <b>valor líquido</b>). Confira no passo 2 e escolha as colunas certas.');
+    } else {
+      msg('msg1','ok','Arquivo <b>'+esc(nome)+'</b> carregado.');
+    }
+    montarColunas();
+    processar();
+    evento('AuditoriaArquivo',{ok:!!det.ok});
+  }
+
+  function montarColunas(){
+    var cab=estado.det.cabecalho||[], h='';
+    CAMPOS.forEach(function(c){
+      var ops='<option value="-1">— não tem —</option>';
+      cab.forEach(function(x,i){if(String(x).trim()) ops+='<option value="'+i+'"'+(estado.mapa[c[0]]===i?' selected':'')+'>'+esc(x)+'</option>'});
+      h+='<div><label for="c-'+c[0]+'">'+c[1]+'</label><select id="c-'+c[0]+'" data-c="'+c[0]+'">'+ops+'</select></div>';
+    });
+    $('cols').innerHTML=h;
+    Array.prototype.forEach.call($('cols').querySelectorAll('select'),function(s){
+      s.addEventListener('change',function(){estado.mapa[s.getAttribute('data-c')]=+s.value;processar()});
+    });
+    $('passo2').hidden=false;
+  }
+
+  function processar(){
+    msg('msg2');
+    var m=estado.mapa;
+    if(m.bruto<0||(m.taxa<0&&m.liquido<0&&m.taxaPct<0)){
+      msg('msg2','err','Escolha a coluna do <b>valor bruto</b> e pelo menos uma destas: <b>valor da taxa</b>, <b>valor líquido</b> ou <b>taxa em %</b>.');
+      $('passo3').hidden=true;$('resultado').hidden=true;return;
+    }
+    var r=Motor.vendas(estado.linhas,estado.det,m);
+    estado.vendas=r.vendas;
+    $('qtdLidas').textContent=r.vendas.length;
+    if(!r.vendas.length){msg('msg2','err','Não consegui ler nenhuma venda com essas colunas. Confira se o valor bruto está na coluna certa.');$('passo3').hidden=true;return}
+    var avisos=[];
+    if(r.ignoradas) avisos.push(r.ignoradas+' linha(s) ignorada(s) (canceladas, estornadas, totais ou sem valor).');
+    if(m.data<0) avisos.push('Sem a coluna de data, não dá para calcular a projeção de 12 meses.');
+    if(r.temAntecipacao) avisos.push('O desconto de antecipação foi separado: a auditoria olha só a taxa da venda (MDR).');
+    else if(m.taxa<0&&m.liquido>=0) avisos.push('A taxa foi calculada pelo valor líquido. Se você antecipa recebíveis, o custo da antecipação pode estar junto.');
+    if(avisos.length) msg('msg2','warn',avisos.join('<br>'));
+    montarTaxas();
+  }
+
+  function montarTaxas(){
+    var grupos=Motor.resumo(estado.vendas), h='', av=[];
+    grupos.forEach(function(g){
+      if(g.mod==='outro') return;
+      h+='<tr><td>'+esc(g.nome)+'</td><td class="n">'+g.qtd+'</td><td class="n">'+pct(g.media)+'</td><td class="n"><input type="text" inputmode="decimal" data-mod="'+g.mod+'" placeholder="'+(g.padrao!=null?g.padrao.toFixed(2).replace('.',','):'')+'" aria-label="Taxa do contrato para '+esc(g.nome)+'"></td></tr>';
+      if(g.variacao) av.push('<b>'+esc(g.nome)+'</b>: você foi cobrado com taxas diferentes ('+g.frequentes.map(pct).join(', ')+'). Isso costuma acontecer quando acaba uma taxa promocional ou a maquininha muda a taxa sem avisar.');
+    });
+    $('tabTaxas').querySelector('tbody').innerHTML=h;
+    $('avisos').innerHTML=av.length?'<div class="warn">'+av.join('<br>')+'</div>':'';
+    $('passo3').hidden=false;
+  }
+
+  function auditar(){
+    var contratos={};
+    Array.prototype.forEach.call($('tabTaxas').querySelectorAll('input[data-mod]'),function(i){
+      var v=Motor.numero(i.value);
+      if(!isNaN(v)&&v>=0&&v<30) contratos[i.getAttribute('data-mod')]=v;
+    });
+    var a=Motor.auditar(estado.vendas,contratos,0.05);
+    estado.aud=a;
+    $('rTotal').textContent=brl(a.totalAcima);
+    $('rTotal').className=a.totalAcima>0?'':'zero';
+    var per=a.inicio?(' entre '+dt(a.inicio)+' e '+dt(a.fim)):'';
+    $('rSub').innerHTML=a.totalAcima>0
+      ? a.acima.length+' venda(s) cobrada(s) acima'+per+'.'+(a.anualAcima?' No ritmo deste extrato, isso dá cerca de <b>'+brl(a.anualAcima)+' por ano</b>.':'')
+      : 'Nenhuma venda foi cobrada acima da referência'+per+'. Boa notícia!';
+    $('kQtd').textContent=a.qtd;$('kBruto').textContent=brl(a.bruto);$('kTaxas').textContent=brl(a.desconto);$('kMedia').textContent=pct(a.taxaMedia);
+    var h='';
+    a.grupos.forEach(function(g){
+      if(g.mod==='outro') return;
+      h+='<tr'+(g.acimaQtd?' class="bad"':'')+'><td>'+esc(g.nome)+'</td><td class="n">'+g.qtd+'</td><td class="n">'+pct(g.ref)+(g.fonte==='contrato'?'':' *')+'</td><td class="n">'+pct(g.media)+'</td><td class="n">'+g.acimaQtd+'</td><td class="n">'+brl(g.acimaValor)+'</td></tr>';
+    });
+    $('tabMod').querySelector('tbody').innerHTML=h+'<tr><td colspan="6" class="note">* sem taxa de contrato informada: referência = menor taxa que se repete no seu extrato.</td></tr>';
+    var lim=a.acima.slice(0,60),hv='';
+    lim.forEach(function(x){var v=x.venda;hv+='<tr><td>'+dt(v.data)+'</td><td>'+esc(v.bandeira)+'</td><td>'+esc(Motor.MODS[v.mod])+'</td><td class="n">'+brl(v.bruto)+'</td><td class="n">'+pct(v.taxa)+'</td><td class="n">'+pct(x.ref)+'</td><td class="n"><b>'+brl(x.dif)+'</b></td></tr>'});
+    $('tabVendas').querySelector('tbody').innerHTML=hv;
+    $('blocoVendas').hidden=!a.acima.length;
+    $('notaVendas').textContent=a.acima.length>60?'Mostrando as 60 maiores de '+a.acima.length+' vendas.':'Em ordem da maior diferença para a menor.';
+    var prox=a.totalAcima>0
+      ? '<div class="warn"><b>O que fazer agora:</b> salve este relatório em PDF, confira a taxa no seu contrato ou no app da maquininha e peça a correção no atendimento. Pergunte também se a sua taxa promocional acabou e se dá para renegociar.</div>'
+      : '<div class="ok"><b>Dica:</b> sua taxa média é '+pct(a.taxaMedia)+'. Mesmo sem cobrança errada, vale comparar com outras maquininhas e pedir uma taxa menor na renovação.</div>';
+    $('proximos').innerHTML=prox;
+    $('phData').textContent='Gerado em '+dt(new Date())+' · micronocontrole.com/auditoria-maquininha';
+    $('resultado').hidden=false;
+    $('resultado').scrollIntoView({behavior:'smooth',block:'start'});
+    evento('AuditoriaFeita',{achado:a.totalAcima,vendas:a.qtd});
+  }
+
+  // --- eventos ---
+  $('arquivo').addEventListener('change',function(e){lerArquivo(e.target.files[0])});
+  var drop=$('drop');
+  ['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('on')})});
+  ['dragleave','drop'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove('on')})});
+  drop.addEventListener('drop',function(e){if(e.dataTransfer.files[0])lerArquivo(e.dataTransfer.files[0])});
+  $('usarExemplo').addEventListener('click',function(){var l=Motor.exemplo();iniciar(l,Motor.detectar(l),'extrato de exemplo (fictício)')});
+  $('auditar').addEventListener('click',auditar);
+  $('imprimir').addEventListener('click',function(){window.print()});
+  $('refazer').addEventListener('click',function(){
+    $('arquivo').value='';['passo2','passo3','resultado'].forEach(function(id){$(id).hidden=true});msg('msg1');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  // --- captura (mesmo destino do site: Google Form + MailerLite) ---
+  var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse",E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015",origem:"entry.1160383430"};
+  $('lead').addEventListener('submit',function(e){
+    e.preventDefault();
+    var nome=$('f-nome').value.trim(),email=$('f-email').value.trim(),zap=$('f-zap').value.trim(),tipo=$('f-tipo').value;
+    if(!nome||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!tipo){msg('msgLead','err','Preencha nome, um e-mail válido e o tipo de negócio.');return}
+    msg('msgLead');
+    var a=estado.aud||{};
+    var origem='auditoria-maquininha | achado '+brl(a.totalAcima||0)+' | taxa media '+pct(a.taxaMedia)+' | vendido '+brl(a.bruto||0);
+    try{var o=window.MNC_ORIGEM&&window.MNC_ORIGEM();if(o)origem+=' | '+o}catch(x){}
+    var d=new FormData();d.append(E.nome,nome);d.append(E.email,email);d.append(E.whatsapp,zap);d.append(E.tipo,tipo);d.append(E.origem,origem);
+    try{var m=new URLSearchParams();m.append('fields[email]',email);m.append('fields[name]',nome);m.append('ml-submit','1');m.append('anticsrf','true');fetch('https://assets.mailerlite.com/jsonp/2741459/forms/202329636930062083/subscribe',{method:'POST',mode:'no-cors',body:m})}catch(x){}
+    var pronto=function(){try{fbq('track','Lead',{content_name:'Auditoria da maquininha',value:0,currency:'BRL'})}catch(x){}$('lead').hidden=true;$('obrigado').hidden=false};
+    try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto)}catch(x){pronto()}
+  });
+})();
+</script>
+</body>
+</html>
