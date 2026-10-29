@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página não encontrada — Micro no Controle</title>
+<meta name="robots" content="noindex">
+<script>
+  // Endereço digitado em MAIÚSCULAS (ex.: /APP) ou sem a barra final: leva para o endereço certo
+  (function () {
+    var p = location.pathname, baixo = p.toLowerCase();
+    if (baixo !== p) { location.replace(baixo + location.search + location.hash); return; }
+  })();
+</script>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#F3F7F6;color:#1A2628;display:grid;place-items:center;min-height:100vh;text-align:center;padding:20px}
+h1{font-size:28px;margin:0 0 8px}p{color:#5A6A6D}
+a{display:inline-block;margin:8px 6px 0;padding:12px 18px;border-radius:12px;background:#0F3D3E;color:#fff;text-decoration:none;font-weight:700}
+a.claro{background:#E3F6F3;color:#0F3D3E}
+</style>
+</head>
+<body>
+<div>
+<h1>Ops, essa página não existe.</h1>
+<p>Confira o endereço ou vá direto para o que você procura:</p>
+<a href="/app/">Abrir o app</a><a class="claro" href="/">Ir para o site</a>
+</div>
+</body>
+</html>
