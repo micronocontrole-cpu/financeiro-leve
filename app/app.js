@@ -326,7 +326,9 @@
   function onboarding(passo) {
     var app = $('#app'), html = '<div class="onb"><div class="passos">' + [0, 1, 2, 3].map(function (i) { return '<i class="' + (i <= passo ? 'on' : '') + '"></i>'; }).join('') + '</div>';
     if (passo === 0) {
-      html += '<h1>Seu negócio no controle, pelo celular.</h1><p class="muted">Caixa, fiado, cobrança por Pix no WhatsApp e o limite do MEI. Seus dados ficam só neste aparelho.</p>' +
+      html += '<h1>Seu negócio no controle, pelo celular.</h1><p class="muted">Grátis e sem cadastro. Seus dados ficam só neste aparelho.</p>' +
+        '<div class="card" style="margin-top:14px;padding:12px 14px"><p class="peq" style="line-height:1.7">📒 Cobre fiado com <b>Pix no WhatsApp</b> em 10 segundos<br>💰 Lance vendas e despesas em 3 toques<br>💳 Descubra se a <b>maquininha</b> ou o iFood te cobram a mais<br>🏛️ Acompanhe o <b>limite do MEI</b>, o DAS e o relatório mensal</p></div>' +
+        '<button class="btn claro cheio" style="margin-top:12px" id="obExemplo">👀 Ver um exemplo preenchido antes</button>' +
         '<label class="campo"><span>Nome do seu negócio</span><input class="inp" id="obNome" autocomplete="organization" placeholder="Ex.: Salão da Ana" value="' + esc(E.neg.nome) + '"></label>' +
         '<p style="font-weight:600;font-size:14.5px;margin-top:18px">Com o que você trabalha?</p><div class="setores">' +
         Object.keys(SETORES).map(function (k) { var s = SETORES[k]; return '<button data-set="' + k + '" class="' + (E.neg.setor === k ? 'on' : '') + '"><span class="i">' + s.i + '</span>' + s.nome + '</button>'; }).join('') + '</div>' +
@@ -356,6 +358,7 @@
     window.scrollTo(0, 0);
 
     if (passo === 0) {
+      $('#obExemplo').onclick = carregarExemplo;
       $$('[data-set]').forEach(function (b) { b.onclick = function () { E.neg.setor = b.dataset.set; $$('[data-set]').forEach(function (x) { x.classList.toggle('on', x === b); }); }; });
       $$('[data-mei]').forEach(function (b) { b.onclick = function () { E.neg.mei = b.dataset.mei === '1'; $$('[data-mei]').forEach(function (x) { x.classList.toggle('on', x === b); }); }; });
       $('#obSeg').onclick = function () {
@@ -391,6 +394,29 @@
       $('#obFim').onclick = terminarOnboarding;
     }
   }
+  // Exemplo preenchido (dados fictícios) para a pessoa ver o app funcionando antes de começar
+  function carregarExemplo() {
+    var x = novoEstado(), h = hoje();
+    x.neg.nome = 'Salão da Ana (exemplo)'; x.neg.dono = 'Ana'; x.neg.setor = 'beleza'; x.neg.mei = true;
+    x.neg.pix = { tipo: 'email', chave: 'exemplo@micronocontrole.com', nome: 'Salao da Ana', cidade: 'Brasilia' };
+    var c1 = { id: uid(), nome: 'Maria Souza', fone: '', criado: h }, c2 = { id: uid(), nome: 'João Lima', fone: '', criado: h }, c3 = { id: uid(), nome: 'Carla Dias', fone: '', criado: h };
+    x.cli = [c1, c2, c3];
+    var diaMes = new Date().getDate();
+    function dd(n) { return somaDias(h, Math.max(n, -(diaMes - 1))); }  // mantém o exemplo dentro do mês atual
+    function v(d, val, forma, desc, cli, venc) { x.mov.push({ id: uid(), data: dd(d), tipo: 'venda', valor: val, forma: forma, nat: 'servico', nf: false, cli: cli || null, venc: venc || '', desc: desc, cat: '' }); }
+    v(-9, 120, 'pix', 'Escova e hidratação'); v(-8, 45, 'dinheiro', 'Manicure'); v(-7, 80, 'fiado', 'Coloração', c1.id, somaDias(h, -2));
+    v(-6, 150, 'credito', 'Mechas'); v(-5, 60, 'pix', 'Corte'); v(-4, 45, 'fiado', 'Manicure e pedicure', c2.id, somaDias(h, 6));
+    v(-3, 95, 'debito', 'Escova'); v(-2, 70, 'pix', 'Sobrancelha e buço'); v(-1, 130, 'pix', 'Progressiva (sinal + resto)'); v(0, 55, 'dinheiro', 'Corte');
+    x.mov.push({ id: uid(), data: dd(-6), tipo: 'despesa', valor: 180, forma: '', cat: 'mercadoria', desc: 'Tintas e produtos', nf: false });
+    x.mov.push({ id: uid(), data: dd(-3), tipo: 'despesa', valor: 90, forma: '', cat: 'contas', desc: 'Luz do salão', nf: false });
+    x.mov.push({ id: uid(), data: dd(-2), tipo: 'retirada', valor: 150, forma: '', desc: 'Mercado de casa', nf: false });
+    x.ag.push({ id: uid(), data: somaDias(h, 1), hora: '14:00', cliNome: 'Carla Dias', fone: '', cli: c3.id, serv: 'Escova', valor: 100, sinal: 30, sinalPago: false, status: 'marcado', lembrado: false });
+    x.das[ymSoma(ymDe(h), -1)] = h;
+    x.cfg.onboard = true; x.cfg.demo = true; x.cfg.ultimoBackup = h;
+    E = x; salvar(); track('AppExemplo'); location.hash = '#/inicio'; rotear();
+  }
+  function sairDoExemplo() { E = novoEstado(); salvar(); location.hash = ''; rotear(); }
+
   function terminarOnboarding() { E.cfg.onboard = true; salvar(); track('AppAtivado', { setor: E.neg.setor }); location.hash = '#/inicio'; rotear(); }
 
   /* ================= cobrança ================= */
@@ -560,6 +586,7 @@
 
     var ult = E.mov.slice().sort(function (a, b) { return a.data < b.data ? 1 : a.data > b.data ? -1 : 0; }).slice(0, 6);
     var html = topo(E.neg.nome || 'Micro no Controle', 'Hoje, ' + DIAS[new Date().getDay()] + ' ' + dm(hoje())) + '<main>' +
+      (E.cfg.demo ? '<div class="alerta am" style="margin:0 0 12px"><span class="ic">👀</span><span class="tx"><b>Você está vendo um exemplo</b><span>Mexa à vontade: toque em "Quem deve" e cobre a Maria. Os dados são fictícios.</span></span></div><button class="btn cheio" style="margin-bottom:14px" id="iSairEx">Começar o meu do zero</button>' : '') +
       '<div class="card hero"><div class="lbl">Vendas em ' + mesNome(ym) + '</div><div class="big">' + brl(t.vendas) + '</div>' +
       '<div class="kpis"><div><b>' + brl(t.despesas) + '</b><span>Despesas</span></div><div><b>' + brl(t.vendas - t.despesas) + '</b><span>Sobrou</span></div><div><b>' + brl(t.retiradas) + '</b><span>Pra casa</span></div></div>' +
       '<p style="margin-top:12px;font-size:14px;color:#BFE3DE">Hoje: <b style="color:#fff">' + brl(t.hoje) + '</b> em vendas' + (totDev ? ' · Na rua (fiado): <b style="color:#fff">' + brl(totDev) + '</b>' : '') + '</p></div>' +
@@ -569,6 +596,7 @@
       (E.mov.length > 6 ? '<a class="btn linha cheio" style="margin-top:10px" href="#/lancamentos">Ver todos</a>' : '') +
       '<p class="rodape">Seus dados ficam só neste celular · <a href="#/backup">backup</a></p></main>';
     return { html: html, montar: function (el) {
+      if ($('#iSairEx', el)) $('#iSairEx', el).onclick = sairDoExemplo;
       $('#iVenda', el).onclick = function () { abrirLancar({ tipo: 'venda' }); };
       $('#iDesp', el).onclick = function () { abrirLancar({ tipo: 'despesa' }); };
       ligarMov(el);
