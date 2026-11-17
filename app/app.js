@@ -65,6 +65,8 @@
       neg: { nome: '', dono: '', setor: '', atividade: '', mei: true, cnpj: '', abertura: '', limite: '', pix: { tipo: '', chave: '', nome: '', cidade: '' },
         taxas: { debito: '', credito_vista: '', credito_2a6: '', credito_7a12: '' }, ifood: { plano: 'basico', comissao: '', taxaPag: '' }, usaIfood: false },
       mov: [], cli: [], ag: [], orc: [], conf: [], das: {},
+      contas: [], caixa: { saldo: '', data: '', das: '', contarVendas: true },
+      extrato: { trans: [], regras: {} }, estoque: { prod: [], mov: [], cont: [] },
       cfg: { onboard: false, ultimoBackup: null, criado: hoje(), orcNum: 0 }
     };
   }
@@ -584,6 +586,7 @@
     if ((E.neg.usaIfood || E.neg.setor === 'alimentacao') && !confMes('ifood')) alertas.push({ c: 'mt', i: '🛵', b: 'O iFood te cobrou certo?', s: 'Suba o relatório e o app confere pedido a pedido.', h: '#/ifood' });
     else if (/roupas|beleza|alimentacao/.test(E.neg.setor) && !confMes('maquininha')) alertas.push({ c: 'mt', i: '💳', b: 'A maquininha cobrou a taxa certa?', s: 'Confira o extrato do mês em 1 minuto.', h: '#/maquininha' });
 
+    try { if (window.MNCX && MNCX.alertas) MNCX.alertas(alertas); } catch (e) {}
     var ult = E.mov.slice().sort(function (a, b) { return a.data < b.data ? 1 : a.data > b.data ? -1 : 0; }).slice(0, 6);
     var html = topo(E.neg.nome || 'Micro no Controle', 'Hoje, ' + DIAS[new Date().getDay()] + ' ' + dm(hoje())) + '<main>' +
       (E.cfg.demo ? '<div class="alerta am" style="margin:0 0 12px"><span class="ic">👀</span><span class="tx"><b>Você está vendo um exemplo</b><span>Mexa à vontade: toque em "Quem deve" e cobre a Maria. Os dados são fictícios.</span></span></div><button class="btn cheio" style="margin-bottom:14px" id="iSairEx">Começar o meu do zero</button>' : '') +
@@ -1227,8 +1230,18 @@
   };
 
   /* ================= início ================= */
-  abrirDB().then(lerEstado).then(function (x) {
-    E = completar(x);
+  // Núcleo compartilhado com os módulos da plataforma (plataforma.js)
+  window.MNCK = {
+    E: function () { return E; }, salvar: salvar, ROTAS: ROTAS, rotear: rotear, ir: ir, topo: topo,
+    abrirFolha: abrirFolha, fecharFolha: fecharFolha, confirmar: confirmar, toast: toast, copiar: copiar,
+    esc: esc, brl: brl, num: num, arred: arred, uid: uid, hoje: hoje, iso: iso, deISO: deISO, somaDias: somaDias,
+    dm: dm, dma: dma, diaRel: diaRel, ymDe: ymDe, ymSoma: ymSoma, mesNome: mesNome, MESES: MESES, DIAS: DIAS,
+    CATS: CATS, FORMAS: FORMAS, natPadrao: natPadrao, devedores: devedores, saldoCliente: saldoCliente, cliente: cliente,
+    totaisMes: totaisMes, abrirLancar: abrirLancar, carregarXLSX: carregarXLSX, track: track, linkWa: linkWa, desenharBarra: desenharBarra
+  };
+  var domPronto = new Promise(function (ok) { if (document.readyState !== 'loading') ok(); else document.addEventListener('DOMContentLoaded', ok); });
+  Promise.all([abrirDB().then(lerEstado), domPronto]).then(function (r) {
+    E = completar(r[0]);
     rotear();
   });
   if ('serviceWorker' in navigator && location.protocol === 'https:') {

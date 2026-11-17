@@ -73,6 +73,17 @@ p{max-width:62ch}
 .appgrid figcaption{margin-top:14px;font-size:16px;line-height:1.5;text-align:left}
 .honest{max-width:760px;margin:34px auto 26px;background:#fff;border:1px solid #D6E0DF;border-radius:14px;padding:16px 18px;font-size:15.5px}
 .appsec .btn{display:table;margin:0 auto}
+.plat{padding:56px 0 10px}
+.plat h2{font-family:var(--display);font-size:clamp(28px,3.6vw,40px);color:var(--deep);line-height:1.1}
+.plat .sub{color:var(--muted);margin-top:10px;max-width:62ch}
+.plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.plat-grid div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px}
+.plat-grid b{display:block;font-family:var(--display);font-size:18px;color:var(--deep);margin-top:6px}
+.plat-grid span{font-size:15px;color:#34474A;display:block;margin-top:4px}
+.plat-grid i{font-style:normal;font-size:24px}
+.plat-grid .novo b::after{content:"novo";margin-left:8px;font:700 11px var(--body,inherit);letter-spacing:.06em;text-transform:uppercase;color:#0B6F68;background:#E2F5F2;border-radius:999px;padding:2px 8px;vertical-align:middle}
+@media (max-width:820px){.plat-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.plat-grid{grid-template-columns:1fr}}
 .resolve-band{background:var(--deep);color:#EAF6F4;padding:56px 0}
 .resolve-band .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center}
 .resolve-band .kick{display:inline-block;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#9BE6DD;background:rgba(46,196,182,.16);padding:5px 12px;border-radius:999px;margin-bottom:14px}
@@ -325,6 +336,25 @@ footer a{color:#CDE9E5}
       <p><b>Sendo claro:</b> o app não mexe no seu dinheiro (o Pix cai direto na sua conta), não se conecta ao seu banco e não substitui o contador. Seus dados ficam só no seu celular, por isso ele te lembra de fazer backup. Imagens com dados fictícios.</p>
     </div>
     <a class="btn" href="app/">Abrir o app grátis</a>
+  </div>
+</section>
+
+<section class="plat" id="plataforma">
+  <div class="wrap">
+    <h2>Tudo o que o seu negócio precisa, num lugar só.</h2>
+    <p class="sub">Grátis, pelo celular, sem cadastro. Seus dados e seus arquivos ficam só no seu aparelho.</p>
+    <div class="plat-grid">
+      <div><i>📒</i><b>Fiado e cobrança no Pix</b><span>Quem deve, quanto e desde quando. Cobra no WhatsApp com QR Code.</span></div>
+      <div><i>💰</i><b>Caixa do dia</b><span>Vendas, despesas e o que foi pra casa, em 3 toques.</span></div>
+      <div class="novo"><i>🗓️</i><b>Contas a pagar</b><span>Vencimentos, contas fixas e aviso antes de atrasar.</span></div>
+      <div class="novo"><i>🔮</i><b>Vai faltar dinheiro?</b><span>Mostra o dia do aperto antes de ele chegar, e o que fazer.</span></div>
+      <div class="novo"><i>🏦</i><b>Extrato do banco</b><span>Separa o pessoal do negócio e acha venda esquecida e Pix que não caiu.</span></div>
+      <div><i>💳</i><b>Maquininha e iFood</b><span>Confere venda por venda se a taxa cobrada é a combinada.</span></div>
+      <div class="novo"><i>📦</i><b>Estoque e contagem</b><span>Custo médio, margem, produto acabando e o que faltou na contagem.</span></div>
+      <div class="novo"><i>↩️</i><b>Devolução de nota</b><span>Lê o XML da NF-e e calcula a devolução item por item.</span></div>
+      <div><i>🏛️</i><b>MEI sem susto</b><span>Limite do ano, DAS e relatório mensal das receitas prontos.</span></div>
+    </div>
+    <p style="margin-top:22px"><a class="btn" href="app/">Abrir o app grátis</a></p>
   </div>
 </section>
 
