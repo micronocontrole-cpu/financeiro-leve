@@ -680,6 +680,336 @@
   /* =====================================================================
      6. BIBLIOTECA, MENU DA PLATAFORMA E ALERTAS DO INÍCIO
      ===================================================================== */
+  /* =====================================================================
+     7. RELATÓRIO DA CONFERÊNCIA (maquininha × vendas do app × banco × taxa)
+     Quem acha a diferença é a conta, com regras fixas (não é "palpite" da IA).
+     Cada achado sai pronto: o que aconteceu, possíveis causas, o que fazer e,
+     quando faz sentido, a mensagem para mandar à maquininha.
+     ===================================================================== */
+  var ADQ = /\b(stone|cielo|rede|getnet|pagseguro|pag seguro|pagbank|sumup|infinitepay|infinite pay|mercado ?pago|ton|safrapay|vero|sipag|sicredi|cabal|granito|banrisul vero)\b/;
+  var NOME_G = { debito: 'débito', credito: 'crédito', pix: 'Pix na maquininha', voucher: 'vale-refeição' };
+  function grupoMod(m) { return m === 'debito' || m === 'pre_pago' ? 'debito' : m === 'pix' ? 'pix' : m === 'voucher' ? 'voucher' : 'credito'; }
+  function distDias(a, b) { return Math.abs(Math.round((deISO(a) - deISO(b)) / 864e5)); }
+  function hhmm(v) {
+    if (v instanceof Date && !isNaN(v) && (v.getHours() || v.getMinutes())) return ('0' + v.getHours()).slice(-2) + ':' + ('0' + v.getMinutes()).slice(-2);
+    if (typeof v === 'number' && v > 0 && v < 1) { var m = Math.round(v * 1440); return ('0' + Math.floor(m / 60)).slice(-2) + ':' + ('0' + m % 60).slice(-2); }
+    if (typeof v === 'number' && v > 20000) { var f = v % 1; return f ? hhmm(f) : ''; }
+    var x = String(v == null ? '' : v).match(/(\d{1,2}):(\d{2})/);
+    return x ? ('0' + x[1]).slice(-2) + ':' + x[2] : '';
+  }
+  // Colunas que o leitor da maquininha não usa, mas a conferência precisa
+  function colunasExtras(cab) {
+    var m = { aut: -1, hora: -1, pag: -1 };
+    cab.map(normal).forEach(function (h, j) {
+      if (m.pag < 0 && /(previs|data (do |de |da )?(pagamento|credito|recebimento|liquidacao|vencimento)|pago em|recebido em|data pagto)/.test(h)) m.pag = j;
+      else if (m.hora < 0 && /^(hora|horario)/.test(h)) m.hora = j;
+      else if (m.aut < 0 && /(nsu|autoriz|cod(igo)? (da )?(venda|transacao)|id (da )?transacao|^tid$|^doc)/.test(h)) m.aut = j;
+    });
+    return m;
+  }
+  function lerMaquininha(rows, det) {
+    var v = Motor.vendas(rows, det), x = colunasExtras(det.cabecalho), mp = det.mapa;
+    var lista = v.vendas.filter(function (s) { return s.data; }).map(function (s) {
+      var L = rows[s.linha - 1] || [];
+      s.dia = iso(s.data);
+      s.hora = x.hora >= 0 ? hhmm(L[x.hora]) : hhmm(L[mp.data]);
+      s.aut = x.aut >= 0 ? String(L[x.aut] == null ? '' : L[x.aut]).trim() : '';
+      var pg = x.pag >= 0 ? Motor.data(L[x.pag]) : null; s.pag = pg ? iso(pg) : null;
+      var lq = mp.liquido >= 0 ? Math.abs(Motor.numero(L[mp.liquido])) : NaN;
+      s.liq = arred(isNaN(lq) ? s.bruto - s.desconto : lq);
+      s.g = grupoMod(s.mod);
+      s.info = (s.hora ? s.hora + ' · ' : '') + (s.bandeira !== '—' ? s.bandeira + ' ' : '') + NOME_G[s.g] + (s.aut ? ' · NSU/aut. ' + s.aut : '');
+      return s;
+    });
+    return { vendas: lista, temPag: x.pag >= 0 };
+  }
+  function soma(l, f) { return arred(l.reduce(function (s, x) { return s + (f ? f(x) : x.valor); }, 0)); }
+  function subconjunto(cands, alvo, max) {
+    cands = cands.slice().sort(function (a, b) { return b.bruto - a.bruto; }).slice(0, 40);
+    var n = cands.length, i, j, k;
+    for (i = 0; i < n; i++) if (Math.abs(cands[i].bruto - alvo) <= 0.05) return [cands[i]];
+    if (max < 2) return null;
+    for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) if (Math.abs(cands[i].bruto + cands[j].bruto - alvo) <= 0.05) return [cands[i], cands[j]];
+    if (max < 3) return null;
+    for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) for (k = j + 1; k < n; k++) if (Math.abs(cands[i].bruto + cands[j].bruto + cands[k].bruto - alvo) <= 0.05) return [cands[i], cands[j], cands[k]];
+    return null;
+  }
+
+  // Vendas do app no cartão × vendas da maquininha, dia a dia
+  function compararVendas(vm, movs, ini, fim) {
+    var TOL = 0.05, J = 3, G = {}, ach = [], dias = {};
+    function cel(d, g) { var k = d + '|' + g; return G[k] || (G[k] = { d: d, g: g, app: 0, maq: 0, vendas: [], movs: [] }); }
+    vm.forEach(function (s) { if (s.g === 'debito' || s.g === 'credito') { var c = cel(s.dia, s.g); c.maq += s.bruto; c.vendas.push(s); } });
+    movs.forEach(function (m) { var c = cel(m.data, m.forma); c.app += m.valor; c.movs.push(m); });
+    var L = Object.keys(G).map(function (k) { var c = G[k]; c.res = arred(c.app - c.maq); return c; })
+      .filter(function (c) { return c.d >= ini && c.d <= fim; }).sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+    var diasOk = 0, diasTot = {};
+    L.forEach(function (c) { diasTot[c.d] = 1; });
+    function outroDia(lista, rot) {
+      lista.forEach(function (a) {
+        if (Math.abs(a.res) <= TOL) return;
+        var melhor = null;
+        lista.forEach(function (b) {
+          if (b === a || Math.abs(b.res) <= TOL) return;
+          var x = distDias(a.d, b.d); if (x && x <= J && Math.abs(a.res + b.res) <= TOL && (!melhor || x < melhor.x)) melhor = { b: b, x: x };
+        });
+        if (!melhor) return;
+        var pos = a.res > 0 ? a : melhor.b, neg = a.res > 0 ? melhor.b : a;
+        ach.push({ tipo: 'outroDia', valor: pos.res, d: neg.d, d2: pos.d, g: rot || NOME_G[pos.g] });
+        a.res = 0; melhor.b.res = 0;
+      });
+    }
+    ['debito', 'credito'].forEach(function (g) { outroDia(L.filter(function (c) { return c.g === g; })); });
+    L.forEach(function (c) { (dias[c.d] = dias[c.d] || { d: c.d })[c.g] = c; });
+    Object.keys(dias).forEach(function (d) {
+      var x = dias[d];
+      if (x.debito && x.credito && Math.abs(x.debito.res) > TOL && Math.abs(x.debito.res + x.credito.res) <= TOL) {
+        ach.push({ tipo: 'trocado', valor: Math.abs(x.debito.res), d: d, comoApp: x.debito.res > 0 ? 'débito' : 'crédito', comoMaq: x.debito.res > 0 ? 'crédito' : 'débito' });
+        x.debito.res = 0; x.credito.res = 0;
+      }
+    });
+    var N = Object.keys(dias).sort().map(function (d) {
+      var x = dias[d], cs = [x.debito, x.credito].filter(Boolean);
+      return { d: d, res: arred(cs.reduce(function (s, c) { return s + c.res; }, 0)), vendas: [].concat.apply([], cs.map(function (c) { return c.vendas; })), movs: [].concat.apply([], cs.map(function (c) { return c.movs; })) };
+    });
+    outroDia(N, 'cartão');
+    var sobras = [];
+    N.forEach(function (n) {
+      if (Math.abs(n.res) <= TOL) { diasOk++; return; }
+      if (n.res > 0) {
+        var iguais = n.movs.filter(function (m) { return Math.abs(m.valor - n.res) <= TOL; });
+        var dup = iguais.length && n.movs.filter(function (m) { return Math.abs(m.valor - iguais[0].valor) <= 0.01; }).length > 1;
+        sobras.push({ tipo: 'soApp', valor: n.res, d: n.d, movs: iguais, dup: dup });
+      } else {
+        var comb = subconjunto(n.vendas, -n.res, 3);
+        sobras.push({ tipo: 'soMaq', valor: -n.res, d: n.d, vendas: comb, maiores: comb ? null : n.vendas.slice().sort(function (a, b) { return b.bruto - a.bruto; }).slice(0, 3) });
+      }
+    });
+    // pareamento aproximado: provável venda de outro dia lançada com valor um pouco diferente
+    sobras.forEach(function (a) {
+      if (a.tipo !== 'soApp' || a.valor < 20) return;
+      sobras.forEach(function (b) {
+        if (b.tipo !== 'soMaq' || b.prov || a.prov) return;
+        var x = distDias(a.d, b.d);
+        if (x <= J && Math.abs(a.valor - b.valor) <= 0.06 * Math.max(a.valor, b.valor)) { a.prov = b; b.prov = a; }
+      });
+    });
+    return { ach: ach.concat(sobras), dias: Object.keys(diasTot).length, diasOk: diasOk };
+  }
+
+  // O que a maquininha disse que ia pagar × o que caiu no banco, por dia de pagamento
+  function compararBanco(vm, trans) {
+    var cred = trans.filter(function (t) { return t.valor > 0 && ADQ.test(normal(t.desc)); });
+    if (!cred.length || !trans.length) return null;
+    var datas = trans.map(function (t) { return t.data; }).sort(), bi = datas[0], bf = datas[datas.length - 1];
+    var esp = {}, rec = {}, det = {};
+    vm.forEach(function (s) { if (s.pag && s.pag >= bi && s.pag <= bf) { esp[s.pag] = (esp[s.pag] || 0) + s.liq; } });
+    var pags = Object.keys(esp).sort(); if (!pags.length) return null;
+    var pi = pags[0], pf = pags[pags.length - 1];
+    cred.forEach(function (t) { if (t.data >= pi && t.data <= somaDias(pf, 3)) { rec[t.data] = (rec[t.data] || 0) + t.valor; (det[t.data] = det[t.data] || []).push(t); } });
+    var D = {}; Object.keys(esp).concat(Object.keys(rec)).forEach(function (d) { D[d] = { d: d, esp: arred(esp[d] || 0), rec: arred(rec[d] || 0) }; });
+    var L = Object.keys(D).sort().map(function (d) { var x = D[d]; x.res = arred(x.rec - x.esp); return x; });
+    // pagamento que caiu no dia útil seguinte (fim de semana e feriado)
+    L.forEach(function (a) {
+      if (a.res >= -0.05) return;
+      L.forEach(function (b) { if (a.res < -0.05 && b.res > 0.05 && b.d > a.d && distDias(a.d, b.d) <= 4 && Math.abs(a.res + b.res) <= 0.05) { a.res = 0; b.res = 0; } });
+    });
+    var falta = L.filter(function (x) { return x.res < -0.05; }), sobra = L.filter(function (x) { return x.res > 0.05; });
+    return { pi: pi, pf: pf, esperado: soma(L, function (x) { return x.esp; }), recebido: soma(L, function (x) { return x.rec; }), falta: falta, sobra: sobra, totalFalta: -soma(falta, function (x) { return x.res; }), totalSobra: soma(sobra, function (x) { return x.res; }) };
+  }
+
+  // Taxa cobrada × combinada, com detecção de "taxa promocional que acabou"
+  function analisarTaxa(vm, contratos) {
+    var a = Motor.auditar(vm, contratos), por = {};
+    a.acima.forEach(function (x) { (por[x.venda.mod] = por[x.venda.mod] || []).push(x); });
+    var grupos = Object.keys(por).map(function (mod) {
+      var l = por[mod], g = a.grupos.filter(function (y) { return y.mod === mod; })[0];
+      var desde = l.map(function (x) { return iso(x.venda.data); }).sort()[0];
+      var todasDepois = vm.filter(function (s) { return s.mod === mod && s.dia >= desde; });
+      var mudou = todasDepois.length >= 3 && l.length >= todasDepois.length * 0.9 && vm.some(function (s) { return s.mod === mod && s.dia < desde; });
+      var taxas = l.map(function (x) { return x.venda.taxa; }).sort(function (p, q) { return p - q; });
+      return { mod: mod, nome: Motor.MODS[mod], qtd: l.length, valor: arred(l.reduce(function (s, x) { return s + x.dif; }, 0)), ref: g.ref, fonte: g.fonte, cobrada: taxas[Math.floor(taxas.length / 2)], desde: desde, mudou: mudou, lista: l };
+    }).sort(function (p, q) { return q.valor - p.valor; });
+    return { a: a, grupos: grupos };
+  }
+
+  function pctBR(n) { return (+n).toFixed(2).replace('.', ',') + '%'; }
+  function montarRelatorio(dados) {
+    var vm = dados.vendas, ini = vm.reduce(function (m, s) { return !m || s.dia < m ? s.dia : m; }, null), fim = vm.reduce(function (m, s) { return !m || s.dia > m ? s.dia : m; }, null);
+    var nome = dados.negocio || 'meu negócio', itens = [], ok = [], avisos = [];
+    var cartao = vm.filter(function (s) { return s.g === 'debito' || s.g === 'credito'; });
+    // 1) taxa
+    var tx = analisarTaxa(vm, dados.contratos);
+    tx.grupos.forEach(function (g) {
+      var lista = g.lista.slice().sort(function (p, q) { return p.venda.dia < q.venda.dia ? -1 : 1; });
+      var msg = 'Olá! Sou cliente (' + nome + '). Conferindo meu extrato de vendas de ' + dm(ini) + ' a ' + dm(fim) + ', encontrei ' + g.qtd + ' vendas no ' + g.nome.toLowerCase() + ' cobradas a ' + pctBR(g.cobrada) + ', mas a minha taxa ' + (g.fonte === 'contrato' ? 'combinada' : 'de sempre') + ' é ' + pctBR(g.ref) + '. A diferença soma ' + brl(g.valor) + '.\n\nPeço, por favor, a correção da taxa e o estorno da diferença.\n\nVendas:\n' +
+        lista.slice(0, 25).map(function (x) { return '- ' + dm(x.venda.dia) + (x.venda.hora ? ' ' + x.venda.hora : '') + ': ' + brl(x.venda.bruto) + ' a ' + pctBR(x.venda.taxa) + (x.venda.aut ? ' (NSU/aut. ' + x.venda.aut + ')' : ''); }).join('\n') + (lista.length > 25 ? '\n- e mais ' + (lista.length - 25) + ' vendas' : '') + '\n\nObrigado!';
+      itens.push({ tipo: 'taxa', grav: 2, valor: g.valor, titulo: 'Taxa do ' + g.nome.toLowerCase() + ' acima do ' + (g.fonte === 'contrato' ? 'combinado' : 'normal'),
+        texto: g.mudou ? 'A partir de <b>' + dm(g.desde) + '</b>, as vendas no ' + g.nome.toLowerCase() + ' passaram a ser cobradas a <b>' + pctBR(g.cobrada) + '</b>. ' + (g.fonte === 'contrato' ? 'A sua taxa combinada é' : 'Antes, a taxa era') + ' <b>' + pctBR(g.ref) + '</b>. Foram ' + g.qtd + ' vendas e <b>' + brl(g.valor) + '</b> a mais.'
+          : g.qtd + ' vendas no ' + g.nome.toLowerCase() + ' foram cobradas acima de <b>' + pctBR(g.ref) + '</b> (' + (g.fonte === 'contrato' ? 'sua taxa combinada' : 'a taxa mais comum do seu extrato') + '). A maioria a <b>' + pctBR(g.cobrada) + '</b>. Diferença: <b>' + brl(g.valor) + '</b>.',
+        causas: g.mudou ? ['A taxa promocional do contrato acabou (é o motivo mais comum).', 'A maquininha mudou o plano sem avisar.'] : ['Vendas com outra bandeira ou outro tipo de cartão (empresarial, internacional).', 'Antecipação cobrada junto na taxa.', 'Erro de cadastro da maquininha.'],
+        fazer: g.fonte === 'contrato' ? 'Mande a mensagem abaixo para a central da maquininha (chat ou WhatsApp oficial) e peça o estorno. Guarde o número do protocolo.' : 'Confira no contrato qual é a sua taxa. Se for a menor, mande a mensagem abaixo e peça o estorno; se a promoção acabou, negocie ou compare com outras maquininhas.',
+        msg: msg, detalhe: lista.slice(0, 40).map(function (x) { return [dm(x.venda.dia) + ' ' + x.venda.hora, esc(x.venda.bandeira), brl(x.venda.bruto) + ' a ' + pctBR(x.venda.taxa), brl(x.dif)]; }) });
+    });
+    if (!tx.grupos.length && vm.length) ok.push('Taxas: todas as ' + vm.length + ' vendas dentro da taxa ' + (Object.keys(dados.contratos || {}).length ? 'combinada' : 'de sempre') + ' (média ' + pctBR(tx.a.taxaMedia) + ').');
+    if (!Object.keys(dados.contratos || {}).length) avisos.push('Coloque as taxas do seu contrato em Ajustes. Sem elas, o app compara com a taxa mais comum do próprio extrato e pode não perceber uma taxa errada desde o começo.');
+
+    // 2) vendas do app × maquininha
+    var movs = dados.movs.filter(function (m) { return m.tipo === 'venda' && (m.forma === 'debito' || m.forma === 'credito') && m.data >= ini && m.data <= fim; });
+    var semVendasApp = !movs.length && cartao.length;
+    if (cartao.length && movs.length) {
+      var cv = compararVendas(cartao, movs, ini, fim);
+      cv.ach.forEach(function (a) {
+        if (a.tipo === 'outroDia') itens.push({ tipo: a.tipo, grav: 0, valor: a.valor, titulo: 'Venda lançada no dia errado', texto: brl(a.valor) + ' no ' + a.g + ' passaram na maquininha em <b>' + dm(a.d) + '</b>, mas foram lançados no app em <b>' + dm(a.d2) + '</b>. Não falta dinheiro; só a data está diferente.', causas: ['Venda feita depois da meia-noite ou lançada no dia seguinte.'], fazer: 'Se quiser o relatório do mês exato, corrija a data em Lançamentos.' });
+        else if (a.tipo === 'trocado') itens.push({ tipo: a.tipo, grav: 0, valor: a.valor, titulo: 'Débito e crédito trocados', texto: 'Em <b>' + dm(a.d) + '</b>, ' + brl(a.valor) + ' foram lançados no app como <b>' + a.comoApp + '</b>, mas passaram na maquininha como <b>' + a.comoMaq + '</b>. O total do dia bate.', causas: ['Escolha errada na hora de lançar ou de passar o cartão.'], fazer: 'Só ajuste se quiser saber certinho quanto paga de taxa em cada tipo. A taxa do crédito é maior.' });
+        else if (a.tipo === 'soMaq') itens.push({ tipo: a.tipo, grav: 1, valor: a.valor, d: a.d, vendas: a.vendas, titulo: 'Passou na maquininha e não está no app', texto: 'Em <b>' + dm(a.d) + '</b>, a maquininha registrou <b>' + brl(a.valor) + '</b> a mais do que você lançou.' + (a.vendas ? ' É ' + (a.vendas.length > 1 ? 'a soma destas vendas' : 'esta venda') + ': ' + a.vendas.map(function (s) { return '<b>' + brl(s.bruto) + '</b> (' + esc(s.info) + ')'; }).join(', ') + '.' : (a.maiores && a.maiores.length ? ' Maiores vendas do dia: ' + a.maiores.map(function (s) { return brl(s.bruto) + ' (' + esc(s.info) + ')'; }).join(', ') + '.' : '')) + (a.prov ? ' <i>Pode ser a venda de ' + brl(a.prov.valor) + ' lançada no app em ' + dm(a.prov.d) + '.</i>' : ''), causas: ['Venda esquecida no app.', 'Venda lançada como dinheiro ou Pix, mas passou no cartão.'], fazer: 'Confira e, se a venda for sua, lance no app. Vendas esquecidas deixam o lucro e o limite do MEI errados.', lancar: a.vendas ? a.vendas.map(function (s) { return { data: s.dia, valor: s.bruto, forma: s.g, desc: 'Venda ' + NOME_G[s.g] + (s.hora ? ' ' + s.hora : '') + ' (conferência)' }; }) : [{ data: a.d, valor: a.valor, forma: 'credito', desc: 'Vendas no cartão (conferência)' }] });
+        else if (a.tipo === 'soApp') itens.push({ tipo: a.tipo, grav: 2, valor: a.valor, d: a.d, movs: a.movs, titulo: a.dup ? 'Venda lançada duas vezes' : 'Lançado como cartão, mas não passou na maquininha', texto: 'Em <b>' + dm(a.d) + '</b>, você lançou <b>' + brl(a.valor) + '</b> no cartão a mais do que a maquininha registrou.' + (a.movs.length ? ' Lançamento: ' + a.movs.slice(0, 2).map(function (m) { return brl(m.valor) + (m.desc ? ' "' + esc(m.desc) + '"' : ''); }).join(', ') + '.' : '') + (a.prov ? ' <i>Pode ser a venda de ' + brl(a.prov.valor) + ' que passou na maquininha em ' + dm(a.prov.d) + '.</i>' : ''), causas: a.dup ? ['A mesma venda lançada duas vezes.'] : ['A venda foi paga em dinheiro ou Pix e marcada como cartão.', 'Passou em outra maquininha (de outra empresa ou de um sócio).', 'A venda foi negada ou cancelada na máquina e o cliente não pagou de outro jeito.'], fazer: a.dup ? 'Apague a repetida em Lançamentos.' : 'Pergunte a quem vendeu. Se o cliente não pagou, é dinheiro a cobrar; se foi outra forma de pagamento, corrija o lançamento.' });
+      });
+      if (cv.diasOk) ok.push('Vendas no cartão: o total do app bate com a maquininha em ' + cv.diasOk + ' de ' + Object.keys(cartao.reduce(function (o, s) { o[s.dia] = 1; return o; }, {})).length + ' dias (contando os que só mudaram de dia ou de tipo).');
+    }
+
+    // 3) banco
+    var bc = null;
+    if (!dados.temPag) avisos.push('O seu arquivo não tem a data de pagamento das vendas, então não deu para conferir o que caiu no banco. Na maquininha, baixe o relatório de "recebimentos" ou "pagamentos" (ele traz essa data).');
+    else if (!dados.trans.length) avisos.push('Importe o extrato do banco em "Extrato do banco" para o app conferir se o dinheiro da maquininha caiu certinho.');
+    else {
+      bc = compararBanco(vm, dados.trans);
+      if (!bc) avisos.push('Não achei no extrato do banco os créditos da maquininha nas datas de pagamento deste relatório. Confira se o extrato é do mesmo período e da conta onde a maquininha deposita.');
+      else {
+        if (bc.falta.length) {
+          var msgB = 'Olá! Sou cliente (' + nome + '). Conferindo os pagamentos de ' + dm(bc.pi) + ' a ' + dm(bc.pf) + ', estes dias caíram com valor menor do que o previsto no meu extrato de vendas:\n\n' +
+            bc.falta.map(function (x) { return '- ' + dm(x.d) + ': previsto ' + brl(x.esp) + ', caiu ' + brl(x.rec) + ' (diferença ' + brl(-x.res) + ')'; }).join('\n') + '\n\nPodem me enviar o detalhamento dos descontos desses dias (aluguel, antecipação, cancelamento ou contestação)?\n\nObrigado!';
+          itens.push({ tipo: 'banco', grav: 2, valor: bc.totalFalta, titulo: 'Caiu menos no banco do que a maquininha prometeu', texto: 'Em ' + bc.falta.length + (bc.falta.length > 1 ? ' dias' : ' dia') + ', o valor que entrou na conta foi menor que o líquido previsto: ' + bc.falta.slice(0, 4).map(function (x) { return '<b>' + dm(x.d) + '</b>: previsto ' + brl(x.esp) + ', caiu ' + brl(x.rec); }).join('; ') + '. Total: <b>' + brl(bc.totalFalta) + '</b>.', causas: ['Aluguel ou mensalidade da maquininha descontado do repasse.', 'Venda cancelada ou contestada pelo cliente (chargeback).', 'Parte do dinheiro foi para outra conta ou ficou na conta da maquininha.'], fazer: 'Abra o app da maquininha, veja o detalhe do pagamento desse dia e, se não entender o desconto, mande a mensagem abaixo.', msg: msgB });
+        } else ok.push('Banco: tudo o que a maquininha prometeu pagar entre ' + dm(bc.pi) + ' e ' + dm(bc.pf) + ' caiu na conta (' + brl(bc.recebido) + ').');
+        if (bc.totalSobra > 0.05) itens.push({ tipo: 'bancoMais', grav: 0, valor: bc.totalSobra, titulo: 'Entrou mais do que o previsto', texto: 'Caíram ' + brl(bc.totalSobra) + ' da maquininha além do previsto neste relatório. Normalmente são vendas de antes de ' + dm(ini) + ' (o crédito demora 30 dias) e não é problema.', causas: ['Pagamento de vendas do mês anterior.'], fazer: 'Nada a fazer. Para conferir também essas, suba o relatório do mês anterior.' });
+      }
+    }
+    var sev = itens.filter(function (x) { return x.grav > 0; });
+    itens.sort(function (p, q) { return q.grav - p.grav || q.valor - p.valor; });
+    return { ini: ini, fim: fim, qtd: vm.length, bruto: soma(vm, function (s) { return s.bruto; }), taxas: soma(vm, function (s) { return s.desconto; }), taxaMedia: tx.a.taxaMedia,
+      itens: itens, ok: ok, avisos: avisos, semVendasApp: semVendasApp, emJogo: soma(sev, function (x) { return x.valor; }), aRecuperar: soma(itens.filter(function (x) { return x.tipo === 'taxa' || x.tipo === 'banco'; }), function (x) { return x.valor; }) };
+  }
+
+  // Exemplo fictício: maquininha + vendas do app + extrato, com erros plantados
+  function exemploConferencia() {
+    var seed = 11; function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    var h = hoje(), base = somaDias(h, -34), linhas = [['Relatório de vendas (dados fictícios)'], [], ['Data da venda', 'Hora', 'Bandeira', 'Forma de pagamento', 'Parcelas', 'Valor bruto', 'Taxa', 'Valor líquido', 'Data prevista de pagamento', 'NSU', 'Status']];
+    var bands = ['Visa', 'Mastercard', 'Elo', 'Visa', 'Mastercard'], nsu = 50210, movs = [], porDia = {}, liqPag = {};
+    function util(d) { var x = deISO(d).getDay(); return x === 6 ? somaDias(d, 2) : x === 0 ? somaDias(d, 1) : d; }
+    for (var i = 0; i < 26; i++) {
+      var d = somaDias(base, i), n = 3 + Math.floor(rnd() * 4);
+      for (var k = 0; k < n; k++) {
+        var deb = rnd() < 0.55, taxa = deb ? (i >= 15 ? 1.99 : 1.37) : 3.15;
+        var v = Math.round((15 + rnd() * (deb ? 120 : 260)) * 100) / 100;
+        if (i === 8 && k === 0) v = 87.5;
+        if (i === 11 && k === 0) { v = 45; deb = false; taxa = 3.15; }
+        var t = Math.round(v * taxa) / 100, lq = Math.round((v - t) * 100) / 100, hr = ('0' + (9 + Math.floor(rnd() * 11))).slice(-2) + ':' + ('0' + Math.floor(rnd() * 60)).slice(-2);
+        var pg = util(somaDias(d, 1));
+        linhas.push([dma(d), hr, bands[Math.floor(rnd() * bands.length)], deb ? 'Débito' : 'Crédito à vista', '1', Motor.fmtBR(v), Motor.fmtBR(t), Motor.fmtBR(lq), dma(pg), String(nsu++), 'Aprovada']);
+        liqPag[pg] = (liqPag[pg] || 0) + lq;
+        var dLanc = i === 4 && deb ? somaDias(d, 1) : d, forma = deb ? 'debito' : 'credito';
+        if (i === 13 && !deb && k < 2) forma = 'debito';
+        if (i === 11 && k === 0) movs.push({ id: uid(), tipo: 'venda', data: d, forma: 'credito', valor: 45, desc: 'Mesa 4' });
+        else if (!(i === 8 && k === 0)) { var key = dLanc + '|' + forma; porDia[key] = (porDia[key] || 0) + v; }
+      }
+    }
+    Object.keys(porDia).forEach(function (k) { var p = k.split('|'); movs.push({ id: uid(), tipo: 'venda', data: p[0], forma: p[1], valor: arred(porDia[k]), desc: 'Vendas no ' + (p[1] === 'debito' ? 'débito' : 'crédito') }); });
+    movs.push({ id: uid(), tipo: 'venda', data: somaDias(base, 11), forma: 'credito', valor: 45, desc: 'Mesa 4' });
+    var trans = [], pags = Object.keys(liqPag).sort();
+    pags.forEach(function (p, j) { trans.push({ id: uid(), data: p, desc: 'CIELO S.A. - CRED VENDAS', valor: arred(liqPag[p] - (j === 6 ? 89.9 : 0)) }); });
+    trans.push({ id: uid(), data: somaDias(base, 3), desc: 'Pix enviado - DISTRIBUIDORA EXEMPLO', valor: -230 });
+    return { rows: linhas, movs: movs, trans: trans, contratos: { debito: 1.37, credito_vista: 3.15 } };
+  }
+
+  function htmlRelatorio(r, exemplo) {
+    var cor = { 2: 'vm', 1: 'am', 0: '' }, rot = { 2: 'Prioridade', 1: 'Conferir', 0: 'Só para saber' };
+    var topoR = '<div class="card hero" style="margin-top:16px">' + (exemplo ? '<span class="tag am">exemplo fictício</span>' : '') +
+      '<div class="lbl" style="margin-top:6px">Conferência de ' + dm(r.ini) + ' a ' + dm(r.fim) + '</div>' +
+      (r.emJogo > 0 ? '<div class="big">' + brl(r.emJogo) + '</div><p style="font-size:14px;color:#BFE3DE">em diferenças para conferir' + (r.aRecuperar > 0 ? '. Destes, <b style="color:#fff">' + brl(r.aRecuperar) + '</b> são cobranças da maquininha para questionar' : '') + '.</p>' : '<div class="big">Tudo batendo ✓</div>') +
+      '<div class="kpis"><div><b>' + brl(r.bruto) + '</b><span>Vendido na maquininha</span></div><div><b>' + brl(r.taxas) + '</b><span>Taxas (' + pctBR(r.taxaMedia) + ')</span></div><div><b>' + r.itens.filter(function (x) { return x.grav > 0; }).length + '</b><span>Pontos a ver</span></div></div></div>';
+    var semApp = r.semVendasApp ? '<div class="alerta am"><span class="ic">📲</span><span class="tx"><b>Você não lança as vendas do cartão no app</b><span>Traga as vendas da maquininha para o app (um lançamento por dia e tipo). Aí o seu lucro, o limite do MEI e a conferência ficam completos.</span></span></div><button class="btn claro cheio peq" id="cfTrazer">Trazer as vendas da maquininha para o app</button>' : '';
+    var achados = r.itens.map(function (x, i) {
+      return '<div class="card ach" style="margin-top:12px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><span><span class="tag ' + cor[x.grav] + '">' + rot[x.grav] + '</span><b style="display:block;margin-top:6px;font-size:16px">' + x.titulo + '</b></span><b style="white-space:nowrap;font-size:16px">' + brl(x.valor) + '</b></div>' +
+        '<p style="margin-top:8px;font-size:14.5px">' + x.texto + '</p>' +
+        '<p class="peq" style="margin-top:8px"><b>Possíveis causas:</b> ' + x.causas.join(' ') + '</p>' +
+        '<p class="peq" style="margin-top:6px"><b>O que fazer:</b> ' + x.fazer + '</p>' +
+        (x.detalhe ? '<details class="como"><summary>Ver as vendas (' + x.detalhe.length + ')</summary><table class="t">' + x.detalhe.map(function (l) { return '<tr><td>' + l[0] + ' · ' + l[1] + '<br><span class="muted peq">' + l[2] + '</span></td><td class="n">' + l[3] + '</td></tr>'; }).join('') + '</table></details>' : '') +
+        (x.msg ? '<details class="como"><summary>Ver a mensagem pronta</summary><pre style="white-space:pre-wrap;font-family:inherit;font-size:13.5px;margin-top:8px">' + esc(x.msg) + '</pre></details>' : '') +
+        '<div class="linhaBtns">' + (x.msg ? '<button class="btn claro peq" data-msg="' + i + '">Copiar mensagem</button>' : '') + (x.lancar ? '<button class="btn claro peq" data-lanc="' + i + '">Lançar no app</button>' : '') + '</div></div>';
+    }).join('');
+    return topoR + semApp +
+      (r.itens.length ? '<h2>O que encontramos</h2>' + achados : '') +
+      (r.ok.length ? '<h2>O que está certo</h2><div class="lista">' + r.ok.map(function (t) { return '<div class="item"><span class="av" style="background:var(--green-soft)">✓</span><span class="meio"><span style="color:var(--ink)">' + t + '</span></span></div>'; }).join('') + '</div>' : '') +
+      (r.avisos.length ? '<h2>Para a conferência ficar completa</h2>' + r.avisos.map(function (t) { return '<div class="dica">' + t + '</div>'; }).join('') : '') +
+      '<div class="linhaBtns" style="margin-top:16px"><button class="btn linha peq" id="cfImp">Imprimir ou salvar PDF</button><button class="btn linha peq" id="cfWa">Mandar resumo no WhatsApp</button></div>' +
+      '<p class="peq muted" style="margin-top:12px">A conferência compara os arquivos com regras fixas e aponta diferenças de dinheiro. Ela não é contabilidade nem cálculo de imposto. Na dúvida, confirme com a maquininha ou com o seu contador.</p>';
+  }
+  function textoResumo(r, nome) {
+    return 'Conferência ' + (nome ? '- ' + nome + ' ' : '') + '(' + dm(r.ini) + ' a ' + dm(r.fim) + ')\n' +
+      'Vendido na maquininha: ' + brl(r.bruto) + ' | Taxas: ' + brl(r.taxas) + ' (' + pctBR(r.taxaMedia) + ')\n\n' +
+      (r.itens.length ? r.itens.map(function (x) { return '- ' + x.titulo + ': ' + brl(x.valor) + '\n  ' + x.texto.replace(/<[^>]+>/g, ''); }).join('\n') : 'Tudo batendo.') +
+      (r.ok.length ? '\n\nCerto:\n' + r.ok.map(function (t) { return '- ' + t; }).join('\n') : '') + '\n\nFeito com o Micro no Controle';
+  }
+  function impressaoRelatorio(r, nome) {
+    return '<h3>Relatório da conferência' + (nome ? ' · ' + esc(nome) : '') + '<br>' + dma(r.ini) + ' a ' + dma(r.fim) + '</h3>' +
+      '<table><tr><td>Vendido na maquininha</td><td class="n">' + brl(r.bruto) + '</td></tr><tr><td>Taxas pagas (' + pctBR(r.taxaMedia) + ')</td><td class="n">' + brl(r.taxas) + '</td></tr><tr><td>Diferenças para conferir</td><td class="n">' + brl(r.emJogo) + '</td></tr></table>' +
+      r.itens.map(function (x) { return '<p style="margin-top:14px"><b>' + x.titulo + ' · ' + brl(x.valor) + '</b><br>' + x.texto + '<br><i>Possíveis causas:</i> ' + x.causas.join(' ') + '<br><i>O que fazer:</i> ' + x.fazer + '</p>'; }).join('') +
+      (r.ok.length ? '<p style="margin-top:14px"><b>O que está certo</b><br>' + r.ok.join('<br>') + '</p>' : '') +
+      '<p style="margin-top:18px;font-size:11px">Micro no Controle · conferência por regras fixas; não é contabilidade nem cálculo de imposto.</p>';
+  }
+
+  R.conferencia = function () {
+    var tx = E().neg.taxas || {};
+    var html = topo('Relatório da conferência', 'Maquininha, vendas e banco: onde está a diferença', '#/mais') + '<main>' +
+      '<p class="muted">Suba o relatório de vendas da maquininha. O app confere com as vendas que você lançou, com o extrato do banco e com a sua taxa, e entrega um relatório pronto: o que aconteceu, por quê e o que fazer.</p>' +
+      '<label class="drop"><input type="file" id="cfArq" accept=".csv,.txt,.xlsx,.xls"><b>📂 Escolher o relatório da maquininha</b><span class="muted peq">Excel (XLSX) ou CSV · o arquivo não sai do seu celular</span></label>' +
+      '<button class="btn linha cheio" style="margin-top:10px" id="cfEx">Ver um relatório de exemplo</button>' +
+      '<details class="como"><summary>O que o app confere</summary><ul><li><b>Taxa:</b> se cobraram acima do combinado (e desde quando).</li><li><b>Vendas:</b> o que passou na maquininha e não está no app, o que foi lançado e não passou, venda repetida, dia ou tipo trocado.</li><li><b>Banco:</b> se o que a maquininha prometeu pagar caiu na conta (precisa do extrato importado em "Extrato do banco").</li></ul></details>' +
+      '<div id="cfRes"></div></main>';
+    return { html: html, montar: function (el) {
+      var atual = null;
+      function rodar(rows, det, ex) {
+        var lm = lerMaquininha(rows, det);
+        if (!lm.vendas.length) throw new Error('Não achei vendas com data nesse arquivo.');
+        var contratos = {};
+        if (ex) contratos = ex.contratos; else Object.keys(tx).forEach(function (k) { var n = num(tx[k]); if (n > 0) contratos[k] = n; });
+        var dados = { vendas: lm.vendas, temPag: lm.temPag, contratos: contratos, movs: ex ? ex.movs : E().mov, trans: ex ? ex.trans : E().extrato.trans.filter(function (t) { return !t.ex; }), negocio: E().neg.nome };
+        var r = montarRelatorio(dados); atual = { r: r, lm: lm, ex: !!ex };
+        if (!ex) { E().conf.push({ id: uid(), tipo: 'conferencia', data: hoje(), achado: r.emJogo, periodo: dm(r.ini) + ' a ' + dm(r.fim), qtd: r.qtd }); salvar(); }
+        track('RelatorioConferencia', { achados: r.itens.length, ex: !!ex });
+        var c = $('#cfRes', el); c.innerHTML = htmlRelatorio(r, !!ex); ligar(c); c.scrollIntoView({ behavior: 'smooth' });
+      }
+      function ligar(c) {
+        var r = atual.r;
+        $$('[data-msg]', c).forEach(function (b) { b.onclick = function () { copiar(r.itens[+b.dataset.msg].msg, 'Mensagem copiada. Cole no chat da maquininha.'); }; });
+        $$('[data-lanc]', c).forEach(function (b) { b.onclick = function () {
+          if (atual.ex) { toast('No exemplo, nada é lançado. Com o seu arquivo, a venda entra no app.'); return; }
+          r.itens[+b.dataset.lanc].lancar.forEach(function (v) { E().mov.push({ id: uid(), data: v.data, tipo: 'venda', valor: v.valor, forma: v.forma, nat: K.natPadrao(), nf: false, cli: null, venc: '', desc: v.desc, cat: '' }); });
+          salvar(); b.disabled = true; b.textContent = 'Lançado ✓'; toast('Venda lançada no app ✓');
+        }; });
+        if ($('#cfTrazer', c)) $('#cfTrazer', c).onclick = function () {
+          if (atual.ex) { toast('No exemplo, nada é lançado.'); return; }
+          var t = {}; atual.lm.vendas.forEach(function (s) { if (s.g === 'debito' || s.g === 'credito') { var k = s.dia + '|' + s.g; t[k] = (t[k] || 0) + s.bruto; } });
+          Object.keys(t).forEach(function (k) { var p = k.split('|'); E().mov.push({ id: uid(), data: p[0], tipo: 'venda', valor: arred(t[k]), forma: p[1], nat: K.natPadrao(), nf: false, cli: null, venc: '', desc: 'Vendas no ' + NOME_G[p[1]] + ' (maquininha)', cat: '' }); });
+          salvar(); toast(Object.keys(t).length + ' lançamentos criados ✓'); $('#cfTrazer', c).disabled = true;
+        };
+        $('#cfImp', c).onclick = function () { imprimir(impressaoRelatorio(r, E().neg.nome)); };
+        $('#cfWa', c).onclick = function () { window.open(K.linkWa('', textoResumo(r, E().neg.nome)), '_blank'); };
+      }
+      function erro(err) { $('#cfRes', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Confira se é o relatório de <b>vendas</b> (com valor bruto e taxa ou valor líquido). Se continuar, mande o arquivo (sem dados sensíveis) para micronocontrole@gmail.com que a gente ajusta o leitor.</div>'; }
+      $('#cfEx', el).onclick = function () { var ex = exemploConferencia(); try { rodar(ex.rows, Motor.detectar(ex.rows), ex); } catch (e) { erro(e); } };
+      $('#cfArq', el).onchange = function (e) {
+        var file = e.target.files[0]; if (!file) return;
+        $('#cfRes', el).innerHTML = '<p class="muted" style="margin-top:14px">Conferindo…</p>';
+        lerPlanilha(file).then(function (abas) {
+          for (var i = 0; i < abas.length; i++) { var d = Motor.detectar(abas[i]); if (d.ok) return rodar(abas[i], d, null); }
+          throw new Error('Não reconheci as colunas desse arquivo.');
+        }).catch(erro);
+        e.target.value = '';
+      };
+    } };
+  };
+
   R.biblioteca = function () {
     var it = function (h, i, t, s, ext) { return '<a class="item" href="' + h + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + ' style="text-decoration:none;color:inherit"><span class="av" style="background:#fff;border:1px solid var(--line)">' + i + '</span><span class="meio"><b>' + t + '</b><span>' + s + '</span></span><span>›</span></a>'; };
     var html = topo('Biblioteca', 'Materiais e ferramentas grátis', '#/mais') + '<main>' +
@@ -702,7 +1032,7 @@
     var g = [
       ['Vender e receber', [['#/fiado', '📒', 'Quem me deve', 'Fiado e cobrança no Pix'], ['#/agenda', '📅', 'Agenda', 'Horários, lembrete e sinal'], ['#/orcamentos', '📝', 'Orçamentos', 'Bonito no WhatsApp, com sinal'], ['#/calculadora', '🧮', 'Quanto cobrar', 'Preço certo no cartão e no iFood']]],
       ['Pagar e planejar', [['#/contas', '🗓️', 'Contas a pagar', 'Vencimentos e contas fixas'], ['#/caixa', '🔮', 'Vai faltar dinheiro?', 'O dia do aperto, antes de chegar']]],
-      ['Banco e conferências', [['#/extrato', '🏦', 'Extrato do banco', 'Separe pessoal × negócio e confira'], ['#/maquininha', '💳', 'Conferir maquininha', 'Acha taxa cobrada a mais'], ['#/ifood', '🛵', 'Conferir iFood', 'Comissão, taxas e mensalidade']]],
+      ['Banco e conferências', [['#/conferencia', '📑', 'Relatório da conferência', 'Onde está a diferença e o que fazer'], ['#/extrato', '🏦', 'Extrato do banco', 'Separe pessoal × negócio e confira'], ['#/maquininha', '💳', 'Conferir maquininha', 'Acha taxa cobrada a mais'], ['#/ifood', '🛵', 'Conferir iFood', 'Comissão, taxas e mensalidade']]],
       ['Mercadoria e notas', [['#/estoque', '📦', 'Estoque', 'Produtos, custo e margem'], ['#/contagem', '🔢', 'Contagem', 'Conte e veja o que faltou'], ['#/devolucao', '↩️', 'Devolução de nota', 'Calcule a partir do XML']]],
       ['MEI e relatórios', [['#/mei', '🏛️', 'MEI: limite e DAS', 'Limite, DAS e relatório mensal'], ['#/lancamentos', '📋', 'Lançamentos', 'Tudo do mês, para editar']]],
       ['Ajuda', [['#/biblioteca', '📚', 'Biblioteca', 'Planilhas e calculadoras grátis'], ['/resolve/?src=app', '🤝', 'Fazemos por você', 'A gente organiza seu financeiro'], ['#/backup', '💾', 'Backup', 'Salve no WhatsApp ou Drive'], ['#/ajustes', '⚙️', 'Ajustes', 'Negócio, Pix, taxas'], ['#/sobre', '💬', 'Ajuda e privacidade', 'Como o app cuida dos seus dados']]]
@@ -723,5 +1053,5 @@
     var es = E().estoque.prod.filter(function (p) { return p.min > 0 && p.qtd <= p.min; });
     if (es.length) al.push({ c: 'am', i: '📦', b: es.length + (es.length > 1 ? ' produtos acabando' : ' produto acabando'), s: es.slice(0, 3).map(function (p) { return p.nome; }).join(', '), h: '#/estoque' });
   };
-  window.MNCX._testes = { chaveDesc: chaveDesc, detectarExtrato: detectarExtrato, linhasExtrato: linhasExtrato, lerOFX: lerOFX, lerNFe: lerNFe, calcDevolucao: calcDevolucao, cfopDevolucao: cfopDevolucao, projetar: projetar, conciliar: conciliar, sugerir: sugerir };
+  window.MNCX._testes = { chaveDesc: chaveDesc, detectarExtrato: detectarExtrato, linhasExtrato: linhasExtrato, lerOFX: lerOFX, lerNFe: lerNFe, calcDevolucao: calcDevolucao, cfopDevolucao: cfopDevolucao, projetar: projetar, conciliar: conciliar, sugerir: sugerir, lerMaquininha: lerMaquininha, montarRelatorio: montarRelatorio, exemploConferencia: exemploConferencia, compararVendas: compararVendas, compararBanco: compararBanco };
 })();
