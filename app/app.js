@@ -924,6 +924,7 @@
       ['#/mei', '🏛️', 'MEI: limite e DAS', 'Limite, DAS e relatório mensal'],
       ['#/lancamentos', '📋', 'Lançamentos', 'Tudo do mês, para editar'],
       ['#/backup', '💾', 'Backup', 'Salve no WhatsApp ou Drive'],
+      ['/resolve/?src=app', '🤝', 'Fazemos por você', 'Sem tempo? A gente organiza seu financeiro'],
       ['#/ajustes', '⚙️', 'Ajustes', 'Negócio, Pix, taxas'],
       ['#/sobre', '💬', 'Ajuda e privacidade', 'Como o app cuida dos seus dados']
     ];
