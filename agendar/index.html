@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marcar horário</title>
+<meta name="description" content="Escolha o serviço e um horário livre. Sem cadastro e sem instalar nada.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0F3D3E;--deep2:#164f50;--mint:#2EC4B6;--mint-soft:#E3F6F3;--bg:#F3F7F6;--paper:#fff;--ink:#1A2628;--muted:#5A6A6D;
+  --line:#D9E3E2;--yellow:#F5B942;--yellow-soft:#FFF4DC;--red:#C8443A;--red-soft:#FCE9E7;--green:#1E8C5A;--green-soft:#E3F4EA;--wa:#1FA855;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;-webkit-font-smoothing:antialiased;min-height:100vh}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+header{background:linear-gradient(160deg,var(--deep),var(--deep2));color:#fff;padding:22px 16px 26px}
+header .k{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#BFE3DE}
+header h1{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-.02em;margin-top:4px}
+header p{color:#D8EFEC;font-size:15px;margin-top:6px}
+main{max-width:560px;margin:0 auto;padding:6px 16px 60px}
+h2{font-family:var(--display);font-size:20px;font-weight:700;margin:22px 0 10px}
+h2 .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--deep);color:#fff;font-size:14px;margin-right:8px;vertical-align:2px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.serv{display:flex;flex-direction:column;gap:8px}
+.serv button{display:flex;justify-content:space-between;gap:12px;align-items:center;text-align:left;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;min-height:56px}
+.serv button b{font-size:16.5px}
+.serv button span{font-size:14px;color:var(--muted);white-space:nowrap}
+.serv button.on{border-color:var(--deep);background:var(--mint-soft)}
+.dias{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.dias::-webkit-scrollbar{display:none}
+.dias button{flex:none;width:64px;padding:8px 0;border:1.5px solid var(--line);border-radius:14px;background:var(--paper);text-align:center}
+.dias button small{display:block;font-size:12.5px;color:var(--muted);text-transform:capitalize}
+.dias button b{display:block;font-size:20px;font-family:var(--display)}
+.dias button.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.dias button.on small{color:#BFE3DE}
+.dias button:disabled{opacity:.4}
+.horas{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.horas button{min-height:46px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);font-weight:700;font-size:16px}
+.horas button.on{background:var(--deep);border-color:var(--deep);color:#fff}
+label{display:block;margin-top:12px}
+label span{display:block;font-size:14.5px;font-weight:600;margin-bottom:6px}
+.inp{width:100%;min-height:50px;border:1.5px solid var(--line);border-radius:13px;padding:10px 14px;background:#fff;font-size:17px}
+textarea.inp{min-height:70px;resize:vertical}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:14px;font-weight:700;font-size:17px;background:var(--deep);color:#fff;text-decoration:none;margin-top:16px}
+.btn.mint{background:var(--mint);color:var(--deep)}
+.btn.wa{background:var(--wa)}
+.btn.linha{background:#fff;color:var(--deep);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.6}
+.muted{color:var(--muted)}
+.peq{font-size:14px}
+.vazio{color:var(--muted);text-align:center;padding:18px 8px}
+.aviso{background:var(--yellow-soft);border:1px solid #F2DCA5;border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15px}
+.erro{background:var(--red-soft);border:1px solid #F1C8C3}
+.ok{background:var(--green-soft);border:1px solid #BFE3CD}
+.sug{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sug button{min-height:42px;padding:0 14px;border-radius:999px;border:1.5px solid var(--deep);background:#fff;font-weight:700}
+.status{border-radius:var(--r);padding:16px;margin-top:14px}
+.status b{display:block;font-size:18px}
+.rod{text-align:center;font-size:13px;color:var(--muted);margin-top:30px}
+.rod a{color:var(--muted)}
+.esq{background:linear-gradient(90deg,#e8eeed,#f5f8f7,#e8eeed);background-size:200% 100%;animation:esq 1.2s infinite;border-radius:12px;height:46px}
+@keyframes esq{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.esq{animation:none}}
+</style>
+</head>
+<body>
+<header><div class="k">Marcar horário</div><h1 id="nome">Carregando…</h1><p>Escolha o serviço e um horário livre. Sem cadastro.</p></header>
+<main id="app"><div class="esq" style="margin-top:20px"></div></main>
+<script src="../app/nuvem.js"></script>
+<script>
+(function () {
+  'use strict';
+  var N = window.MNCNuvem, app = document.getElementById('app');
+  var slug = (new URLSearchParams(location.search).get('n') || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  var S = { pag: null, serv: null, dia: null, hora: null, livres: [] }, sb = null;
+  var DS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function brl(n) { return 'R$ ' + (+n).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function dur(m) { return m >= 60 ? Math.floor(m / 60) + 'h' + (m % 60 ? ('0' + m % 60).slice(-2) : '') : m + ' min'; }
+  function hojeSP() { return N.local(new Date()).data; }
+  function somaDias(d, n) { var x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); }
+  function dow(d) { return new Date(d + 'T12:00:00Z').getUTCDay(); }
+  function nomeDia(d) { var h = hojeSP(); if (d === h) return 'hoje'; if (d === somaDias(h, 1)) return 'amanhã'; return ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'][dow(d)] + ', ' + d.slice(8) + '/' + d.slice(5, 7); }
+  function guardados() { try { return JSON.parse(localStorage.getItem('mnc-pedidos') || '[]'); } catch (e) { return []; } }
+  function guardar(l) { try { localStorage.setItem('mnc-pedidos', JSON.stringify(l.slice(-10))); } catch (e) {} }
+  function erro(msg) { app.innerHTML = '<div class="aviso erro" style="margin-top:20px">' + msg + '</div>'; }
+
+  if (!slug) { document.getElementById('nome').textContent = 'Link incompleto'; erro('Esse link está incompleto. Peça o link certo para quem te mandou.'); return; }
+
+  function rpc(fn, args) { return sb.rpc(fn, args).then(function (r) { if (r.error) throw r.error; return r.data; }); }
+
+  function render() {
+    var p = S.pag, h = hojeSP(), dias = [];
+    for (var i = 0; i <= Math.min(p.dias_a_frente, 30); i++) { var d = somaDias(h, i); if (p.dias_semana.indexOf(dow(d)) >= 0) dias.push(d); }
+    var meus = guardados().filter(function (x) { return x.slug === slug; });
+    app.innerHTML = '<div id="meus"></div>' +
+      '<h2><span class="n">1</span>Serviço</h2><div class="serv">' + (p.servicos.length ? p.servicos.map(function (s) {
+        return '<button data-s="' + s.id + '" class="' + (S.serv && S.serv.id === s.id ? 'on' : '') + '"><b>' + esc(s.nome) + '</b><span>' + dur(s.minutos) + (s.preco ? ' · ' + brl(s.preco) : '') + '</span></button>';
+      }).join('') : '<div class="vazio">Nenhum serviço disponível agora.</div>') + '</div>' +
+      (S.serv ? '<h2><span class="n">2</span>Dia</h2><div class="dias">' + dias.map(function (d) {
+        return '<button data-d="' + d + '" class="' + (S.dia === d ? 'on' : '') + '"><small>' + (d === h ? 'hoje' : DS[dow(d)]) + '</small><b>' + d.slice(8) + '</b><small>' + ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'][+d.slice(5, 7) - 1] + '</small></button>';
+      }).join('') + '</div>' : '') +
+      (S.dia ? '<h2><span class="n">3</span>Horário · <span style="font-weight:600;text-transform:none">' + nomeDia(S.dia) + '</span></h2><div id="horas"><div class="horas"><div class="esq"></div><div class="esq"></div><div class="esq"></div><div class="esq"></div></div></div>' : '') +
+      (S.hora ? '<h2><span class="n">4</span>Seus dados</h2><div class="card"><p style="font-weight:700">' + esc(S.serv.nome) + ' · ' + nomeDia(S.dia) + ' às ' + N.local(S.hora).hora + '</p>' +
+        '<label><span>Seu nome</span><input class="inp" id="fNome" autocomplete="name" maxlength="80"></label>' +
+        '<label><span>Seu WhatsApp</span><input class="inp" id="fFone" inputmode="tel" autocomplete="tel" placeholder="(61) 99999-9999" maxlength="20"></label>' +
+        '<label><span>Recado (opcional)</span><textarea class="inp" id="fObs" maxlength="300"></textarea></label>' +
+        '<button class="btn" id="fOk">' + (p.aceitar_auto ? 'Marcar horário' : 'Pedir horário') + '</button>' +
+        '<p class="muted peq" style="margin-top:10px">Seu nome e WhatsApp vão só para ' + esc(p.nome) + ', para confirmar o horário. <a href="../privacidade/" style="color:inherit">Privacidade</a></p><div id="fMsg"></div></div>' : '') +
+      '<p class="rod">Agenda online feita com o <a href="../?src=agendar">Micro no Controle</a></p>';
+    app.querySelectorAll('[data-s]').forEach(function (b) { b.onclick = function () { S.serv = p.servicos.filter(function (s) { return s.id === b.dataset.s; })[0]; S.hora = null; render(); rolar(S.dia ? '#horas' : '.dias'); }; });
+    app.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { S.dia = b.dataset.d; S.hora = null; render(); rolar('#horas'); }; });
+    if (S.dia) horas();
+    if (S.hora) { document.getElementById('fOk').onclick = pedir; rolar('#fNome'); var g = guardados()[guardados().length - 1]; if (g && g.nome) { document.getElementById('fNome').value = g.nome; document.getElementById('fFone').value = g.fone || ''; } }
+    if (meus.length) mostrarMeus(meus);
+    var dd = app.querySelector('.dias button.on'); if (dd && dd.scrollIntoView) dd.scrollIntoView({ inline: 'center', block: 'nearest' });
+  }
+  function rolar(sel) { setTimeout(function () { var e = app.querySelector(sel); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60); }
+  function desenharHoras() {
+    var box = document.getElementById('horas'); if (!box) return;
+    box.innerHTML = S.livres.length ? '<div class="horas">' + S.livres.map(function (x) { return '<button data-h="' + x.toISOString() + '" class="' + (S.hora && +S.hora === +x ? 'on' : '') + '">' + N.local(x).hora + '</button>'; }).join('') + '</div>'
+      : '<div class="vazio">Sem horário livre nesse dia. Tente outro dia.</div>';
+    box.querySelectorAll('[data-h]').forEach(function (b) { b.onclick = function () { S.hora = new Date(b.dataset.h); render(); }; });
+  }
+  function horas(forcar) {
+    var alvo = S.dia, chave = S.dia + '|' + S.serv.id;
+    if (!forcar && S.chave === chave) { desenharHoras(); return; }
+    rpc('horarios_livres', { p_slug: slug, p_dia: S.dia, p_servico: S.serv.id }).then(function (l) {
+      if (alvo !== S.dia) return;
+      S.livres = (l || []).map(function (x) { return new Date(x); }); S.chave = chave;
+      desenharHoras();
+    }).catch(function () { var box = document.getElementById('horas'); if (box) box.innerHTML = '<div class="aviso erro">Não deu para ver os horários. Confira a internet e toque no dia de novo.</div>'; });
+  }
+  function pedir() {
+    var nome = document.getElementById('fNome').value.trim(), fone = document.getElementById('fFone').value, obs = document.getElementById('fObs').value, msg = document.getElementById('fMsg'), b = this;
+    if (nome.length < 2) { msg.innerHTML = '<div class="aviso erro">Escreva seu nome.</div>'; return; }
+    var dig = fone.replace(/\D/g, ''); if (dig.length < 10 || dig.length > 13) { msg.innerHTML = '<div class="aviso erro">Confira o WhatsApp com DDD.</div>'; return; }
+    b.disabled = true; b.textContent = 'Enviando…';
+    rpc('pedir_horario', { p_slug: slug, p_servico: S.serv.id, p_inicio: S.hora.toISOString(), p_nome: nome, p_fone: fone, p_obs: obs }).then(function (r) {
+      b.disabled = false; b.textContent = S.pag.aceitar_auto ? 'Marcar horário' : 'Pedir horário';
+      if (r.ok) {
+        var l = guardados(); l.push({ id: r.id, token: r.token, slug: slug, nome: nome, fone: fone }); guardar(l);
+        S.hora = null; S.dia = null; S.chave = null; if (S.pag.servicos.length !== 1) S.serv = null; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); return;
+      }
+      if (r.motivo === 'ocupado') {
+        S.chave = null;
+        msg.innerHTML = '<div class="aviso">Esse horário acabou de ser pego. ' + (r.sugestoes && r.sugestoes.length ? 'Tem estes livres:</div><div class="sug">' + r.sugestoes.map(function (x) { return '<button data-x="' + x + '">' + nomeDia(N.local(x).data) + ' ' + N.local(x).hora + '</button>'; }).join('') + '</div>' : 'Escolha outro dia.</div>');
+        msg.querySelectorAll('[data-x]').forEach(function (bt) { bt.onclick = function () { var nn = document.getElementById('fNome').value, ff = document.getElementById('fFone').value, oo = document.getElementById('fObs').value; S.hora = new Date(bt.dataset.x); S.dia = N.local(S.hora).data; render(); document.getElementById('fNome').value = nn; document.getElementById('fFone').value = ff; document.getElementById('fObs').value = oo; }; });
+        return;
+      }
+      msg.innerHTML = '<div class="aviso erro">' + ({ limite: 'Você já tem 3 pedidos esperando resposta. Aguarde a resposta antes de pedir outro.', nome: 'Confira seu nome.', fone: 'Confira o WhatsApp com DDD.', servico: 'Esse serviço não está mais disponível.', pagina: 'Essa agenda está pausada no momento.' }[r.motivo] || 'Não deu certo. Tente de novo.') + '</div>';
+    }).catch(function () { b.disabled = false; b.textContent = 'Tentar de novo'; msg.innerHTML = '<div class="aviso erro">Sem conexão. Confira a internet e tente de novo.</div>'; });
+  }
+  var TXT = {
+    pendente: ['⏳ Pedido enviado', 'Aguardando ' + '{n}' + ' confirmar. Esta página atualiza sozinha.', 'aviso'],
+    confirmado: ['✅ Horário confirmado', 'Te esperamos!', 'ok'],
+    recusado: ['Pedido não aceito', 'Esse horário não deu. Escolha outro abaixo.', 'erro'],
+    expirado: ['Sem resposta a tempo', 'O pedido venceu. Escolha outro horário ou chame no WhatsApp.', 'erro'],
+    cancelado: ['Cancelado', '', 'erro'], atendido: ['Atendido', 'Obrigado!', 'ok'], faltou: ['Não compareceu', '', 'erro']
+  };
+  var timer = null;
+  function mostrarMeus(meus) {
+    var box = document.getElementById('meus'); if (!box) return;
+    Promise.all(meus.slice(-3).map(function (m) { return rpc('status_pedido', { p_id: m.id, p_token: m.token }).then(function (s) { return { m: m, s: s }; }, function () { return { m: m, s: null }; }); })).then(function (rs) {
+      rs = rs.filter(function (x) { return x.s && new Date(x.s.inicio) > Date.now() - 3 * 36e5; });
+      if (!document.getElementById('meus')) return;
+      box.innerHTML = rs.map(function (x) {
+        var t = TXT[x.s.status] || [x.s.status, '', 'aviso'], l = N.local(x.s.inicio);
+        return '<div class="status ' + t[2] + '"><b>' + t[0] + '</b><span>' + esc(x.s.servico || '') + ' · ' + nomeDia(l.data) + ' às ' + l.hora + '</span><p class="peq muted" style="margin-top:4px">' + esc(t[1].replace('{n}', x.s.negocio)) + '</p>' +
+          (x.s.whatsapp ? '<a class="btn wa" style="margin-top:10px" target="_blank" rel="noopener" href="https://wa.me/' + (x.s.whatsapp.length <= 11 ? '55' : '') + x.s.whatsapp + '?text=' + encodeURIComponent('Olá! Sobre meu horário de ' + nomeDia(l.data) + ' às ' + l.hora + ':') + '">Falar no WhatsApp</a>' : '') +
+          ((x.s.status === 'pendente' || x.s.status === 'confirmado') ? '<button class="btn linha" data-c="' + x.m.id + '" style="margin-top:8px">Cancelar este horário</button>' : '') + '</div>';
+      }).join('');
+      box.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () {
+        if (!confirm('Cancelar este horário?')) return;
+        var m = meus.filter(function (x) { return x.id === b.dataset.c; })[0];
+        rpc('cancelar_pedido', { p_id: m.id, p_token: m.token }).then(function () { mostrarMeus(meus); });
+      }; });
+      clearTimeout(timer);
+      if (rs.some(function (x) { return x.s.status === 'pendente'; })) timer = setTimeout(function () { mostrarMeus(meus); }, 15000);
+    });
+  }
+
+  N.carregar(true).then(function (c) { sb = c; return rpc('pagina_publica', { p_slug: slug }); }).then(function (p) {
+    if (!p) { document.getElementById('nome').textContent = 'Agenda não encontrada'; erro('Não achamos essa agenda. Confira o link com quem te mandou.'); return; }
+    S.pag = p; document.getElementById('nome').textContent = p.nome; document.title = 'Marcar horário · ' + p.nome;
+    if (p.servicos.length === 1) S.serv = p.servicos[0];
+    render();
+  }).catch(function () { document.getElementById('nome').textContent = 'Sem conexão'; erro('Não conseguimos carregar a agenda. Confira a internet e <a href="">tente de novo</a>.'); });
+})();
+</script>
+</body>
+</html>

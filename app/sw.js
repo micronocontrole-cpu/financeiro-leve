@@ -1,7 +1,7 @@
 /* Service worker do app Micro no Controle: funciona sem internet.
    Rede primeiro (para pegar atualizações), cópia guardada quando estiver offline. */
-var CACHE = 'mnc-app-v5';
-var ARQUIVOS = ['./', './index.html', './app.js', './plataforma.js', './pix.js', './ifood.js', './vendor/qrcode.js', '../auditoria-maquininha/motor.js', './manifest.webmanifest', './icone-192.png', './icone-512.png', '../img/favicon.svg'];
+var CACHE = 'mnc-app-v6';
+var ARQUIVOS = ['./', './index.html', './app.js', './plataforma.js', './nuvem.js', './agendaonline.js', './pix.js', './ifood.js', './vendor/qrcode.js', '../auditoria-maquininha/motor.js', './manifest.webmanifest', './icone-192.png', './icone-512.png', '../img/favicon.svg'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ARQUIVOS); }).then(function () { return self.skipWaiting(); }));
@@ -24,4 +24,12 @@ self.addEventListener('fetch', function (e) {
       return caches.match(req, { ignoreSearch: true }).then(function (r) { return r || (req.mode === 'navigate' ? caches.match('./index.html') : undefined); });
     })
   );
+});
+// Toque no aviso de pedido de horário: abre o app na tela do link
+self.addEventListener('notificationclick', function (e) {
+  e.notification.close();
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (cs) {
+    for (var i = 0; i < cs.length; i++) { if ('focus' in cs[i]) { cs[i].navigate && cs[i].navigate('./#/agendaonline'); return cs[i].focus(); } }
+    return self.clients.openWindow('./#/agendaonline');
+  }));
 });
