@@ -594,6 +594,7 @@
       '<div class="kpis"><div><b>' + brl(t.despesas) + '</b><span>Despesas</span></div><div><b>' + brl(t.vendas - t.despesas) + '</b><span>Sobrou</span></div><div><b>' + brl(t.retiradas) + '</b><span>Pra casa</span></div></div>' +
       '<p style="margin-top:12px;font-size:14px;color:#BFE3DE">Hoje: <b style="color:#fff">' + brl(t.hoje) + '</b> em vendas' + (totDev ? ' · Na rua (fiado): <b style="color:#fff">' + brl(totDev) + '</b>' : '') + '</p></div>' +
       '<div class="linhaBtns"><button class="btn mint" id="iVenda">+ Venda</button><button class="btn claro" id="iDesp">+ Despesa</button></div>' +
+      '<button class="btn linha cheio" id="iFalar" style="margin-top:10px">🎤 Falar ou escrever o que aconteceu</button>' +
       alertas.slice(0, 5).map(function (a) { return '<a class="alerta ' + a.c + '" href="' + a.h + '" style="text-decoration:none;color:inherit"><span class="ic">' + a.i + '</span><span class="tx"><b>' + esc(a.b) + '</b><span>' + esc(a.s) + '</span></span><span>›</span></a>'; }).join('') +
       '<h2>Últimos lançamentos</h2>' + listaMov(ult, 'Nada lançado ainda. Toque em <b>+</b> para lançar sua primeira venda.') +
       (E.mov.length > 6 ? '<a class="btn linha cheio" style="margin-top:10px" href="#/lancamentos">Ver todos</a>' : '') +
@@ -602,6 +603,7 @@
       if ($('#iSairEx', el)) $('#iSairEx', el).onclick = sairDoExemplo;
       $('#iVenda', el).onclick = function () { abrirLancar({ tipo: 'venda' }); };
       $('#iDesp', el).onclick = function () { abrirLancar({ tipo: 'despesa' }); };
+      var bf = $('#iFalar', el); if (window.MNCX && MNCX.falar) bf.onclick = function () { MNCX.falar.abrir(); }; else bf.remove();
       ligarMov(el);
     } };
   };
