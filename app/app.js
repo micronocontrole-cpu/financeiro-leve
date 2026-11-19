@@ -723,6 +723,7 @@
     var html = topo('Agenda', 'Seus horários e lembretes') + '<main>' +
       '<button class="btn mint cheio" id="agNovo">+ Marcar horário</button>' +
       '<a class="item" href="#/agendaonline" style="margin-top:10px;border:1px solid var(--line);border-radius:14px;background:var(--paper);text-decoration:none;color:inherit"><span class="av">🔗</span><span class="meio"><b>Link para o cliente marcar sozinho</b><span>' + (E.nuvem && E.nuvem.pend ? E.nuvem.pend + ' pedido(s) esperando você' : 'Ele escolhe um horário livre e você aceita') + '</span></span><span>›</span></a>' +
+      (window.MNCX && MNCX.atraso && MNCX.atraso.quantos() ? '<button class="btn linha cheio" style="margin-top:10px" id="agAtraso">⏰ Estou atrasado · avisar os próximos</button>' : '') +
       (pend.length ? '<h2>Ficou em aberto</h2>' + pend.map(cartao).join('') : '') +
       (futuros.length ? Object.keys(grupos).map(function (d) { return '<h2 style="text-transform:capitalize">' + diaRel(d) + '</h2>' + grupos[d].map(cartao).join(''); }).join('') :
         '<div class="lista" style="margin-top:14px"><div class="vazio"><span class="ic">📅</span>Nenhum horário marcado.<br>Marque e mande o lembrete no WhatsApp com 1 toque — menos gente falta.</div></div>') +
@@ -730,6 +731,7 @@
       '</main>';
     return { html: html, montar: function (el) {
       $('#agNovo', el).onclick = function () { abrirHorario(); };
+      var bat = $('#agAtraso', el); if (bat) bat.onclick = function () { MNCX.atraso.abrir(); };
       function ach(id) { return E.ag.filter(function (x) { return x.id === id; })[0]; }
       $$('[data-lem]', el).forEach(function (b) { b.onclick = function () {
         var a = ach(b.dataset.lem);

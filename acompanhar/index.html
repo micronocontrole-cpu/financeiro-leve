@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Acompanhe seu pedido</title>
+<meta name="description" content="Veja em que etapa está o seu pedido ou serviço.">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0F3D3E">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0F3D3E;--deep2:#164f50;--mint:#2EC4B6;--mint-soft:#E3F6F3;--bg:#F3F7F6;--paper:#fff;--ink:#1A2628;--muted:#5A6A6D;
+  --line:#D9E3E2;--yellow-soft:#FFF4DC;--green:#1E8C5A;--wa:#1FA855;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;-webkit-font-smoothing:antialiased;min-height:100vh}
+header{background:linear-gradient(160deg,var(--deep),var(--deep2));color:#fff;padding:22px 16px 28px}
+header .k{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#BFE3DE}
+header h1{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.1;letter-spacing:-.02em;margin-top:4px;text-wrap:balance}
+header p{color:#D8EFEC;font-size:15px;margin-top:6px}
+main{max-width:520px;margin:-14px auto 0;padding:0 16px 60px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+.agora{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.15;color:var(--deep);margin-top:2px}
+.rot{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+ol{list-style:none;margin-top:18px}
+li{position:relative;padding:0 0 22px 40px;color:var(--muted)}
+li:last-child{padding-bottom:0}
+li::before{content:"";position:absolute;left:11px;top:24px;bottom:-2px;width:2px;background:var(--line)}
+li:last-child::before{display:none}
+li i{position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:var(--paper);display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:800}
+li.feito{color:var(--ink)} li.feito i{background:var(--green);border-color:var(--green);color:#fff} li.feito::before{background:var(--green)}
+li.atual{color:var(--ink);font-weight:700} li.atual i{border-color:var(--mint);background:var(--mint-soft);box-shadow:0 0 0 4px rgba(46,196,182,.18)}
+li.atual i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--mint)}
+.info{display:grid;gap:10px;margin-top:14px}
+.info div{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.info b{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.recado{background:var(--yellow-soft);border-color:#F2DCA5!important}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:14px;font-weight:700;font-size:17px;background:var(--wa);color:#fff;text-decoration:none;margin-top:16px}
+.peq{font-size:13.5px;color:var(--muted);text-align:center;margin-top:14px}
+.vazio{text-align:center;padding:30px 8px;color:var(--muted)}
+footer{text-align:center;font-size:13px;color:var(--muted);padding:0 16px 30px}
+footer a{color:var(--deep);font-weight:600}
+</style>
+</head>
+<body>
+<header><div class="k">Acompanhe</div><h1 id="titulo">Carregando…</h1><p id="neg"></p></header>
+<main id="m"><div class="card"><p class="vazio">Buscando a etapa…</p></div></main>
+<footer>Feito com o <a href="https://micronocontrole.com/app/?src=acompanhar">Micro no Controle</a>, o app grátis do pequeno negócio.</footer>
+<script src="../app/nuvem.js"></script>
+<script>
+(function () {
+  'use strict';
+  var N = window.MNCNuvem, sb = null;
+  var token = (new URLSearchParams(location.search).get('t') || '').replace(/[^a-f0-9]/gi, '').slice(0, 40);
+  function $(s) { return document.querySelector(s); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function quando(iso) {
+    var d = new Date(iso), l = N.local(d), hoje = N.local(new Date()).data, am = N.local(new Date(Date.now() + 864e5)).data;
+    var p = l.data.split('-');
+    return (l.data === hoje ? 'hoje' : l.data === am ? 'amanhã' : p[2] + '/' + p[1]) + ' às ' + l.hora;
+  }
+  function ha(iso) {
+    var m = Math.round((Date.now() - new Date(iso)) / 6e4);
+    return m < 1 ? 'agora há pouco' : m < 60 ? 'há ' + m + ' min' : m < 1440 ? 'há ' + Math.round(m / 60) + ' h' : 'em ' + quando(iso);
+  }
+  function erro(t) { $('#titulo').textContent = 'Link não encontrado'; $('#neg').textContent = ''; $('#m').innerHTML = '<div class="card"><p class="vazio">' + esc(t) + '</p></div>'; }
+  var ultimo = '';
+  function mostrar(a) {
+    if (!a) { erro('Este link não existe mais ou já expirou. Fale com quem te mandou.'); return; }
+    var chave = a.etapa + '|' + a.atualizado + '|' + a.encerrado; if (chave === ultimo) return; ultimo = chave;
+    var fim = a.etapa === a.etapas.length - 1;
+    document.title = a.etapas[a.etapa] + ' · ' + a.negocio;
+    $('#titulo').textContent = a.titulo; $('#neg').textContent = a.negocio + (a.cliente ? ' · para ' + a.cliente : '');
+    var wa = String(a.whatsapp || '').replace(/\D/g, ''); if (wa && wa.length <= 11) wa = '55' + wa;
+    $('#m').innerHTML = '<div class="card"><p class="rot">' + (fim ? 'Concluído' : 'Agora') + '</p><p class="agora">' + esc(a.etapas[a.etapa]) + (fim ? ' ✅' : '') + '</p>' +
+      '<ol>' + a.etapas.map(function (e, i) { var c = i < a.etapa || (fim && i === a.etapa) ? 'feito' : i === a.etapa ? 'atual' : ''; return '<li class="' + c + '"><i>' + (c === 'feito' ? '✓' : '') + '</i>' + esc(e) + '</li>'; }).join('') + '</ol></div>' +
+      '<div class="info">' + (a.previsao && !fim ? '<div><b>Previsão</b>' + esc(quando(a.previsao)) + '</div>' : '') +
+      (a.recado ? '<div class="recado"><b>Recado</b>' + esc(a.recado) + '</div>' : '') + '</div>' +
+      (wa ? '<a class="btn" target="_blank" rel="noopener" href="https://wa.me/' + wa + '?text=' + encodeURIComponent('Oi! Sobre "' + a.titulo + '"…') + '">Falar com ' + esc(a.negocio) + '</a>' : '') +
+      '<p class="peq">Atualizado ' + esc(ha(a.atualizado)) + (fim ? '' : ' · esta página se atualiza sozinha') + '</p>';
+  }
+  function buscar() {
+    return sb.rpc('ver_acompanhamento', { p_token: token }).then(function (r) { if (r.error) throw r.error; mostrar(r.data); });
+  }
+  if (token.length < 12) { erro('Link incompleto. Peça o link de novo para quem te mandou.'); return; }
+  N.carregar(true).then(function (c) { sb = c; return buscar(); }).then(function () {
+    setInterval(function () { if (!document.hidden) buscar().catch(function () {}); }, 30000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) buscar().catch(function () {}); });
+  }).catch(function () { erro('Sem internet para buscar agora. Tente de novo em instantes.'); });
+})();
+</script>
+</body>
+</html>

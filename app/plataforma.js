@@ -1030,7 +1030,7 @@
 
   R.mais = function () {
     var g = [
-      ['Vender e receber', [['#/agendaonline', '🔗', 'Link de agendamento', 'Cliente marca sozinho, você aceita'], ['#/fiado', '📒', 'Quem me deve', 'Fiado e cobrança no Pix'], ['#/agenda', '📅', 'Agenda', 'Horários, lembrete e sinal'], ['#/orcamentos', '📝', 'Orçamentos', 'Bonito no WhatsApp, com sinal'], ['#/calculadora', '🧮', 'Quanto cobrar', 'Preço certo no cartão e no iFood']]],
+      ['Vender e receber', [['#/agendaonline', '🔗', 'Link de agendamento', 'Cliente marca sozinho, você aceita'], ['#/acompanhar', '📍', 'Acompanhe seu pedido', 'Cliente vê cada etapa pelo link'], ['#/fiado', '📒', 'Quem me deve', 'Fiado e cobrança no Pix'], ['#/agenda', '📅', 'Agenda', 'Horários, lembrete e sinal'], ['#/orcamentos', '📝', 'Orçamentos', 'Bonito no WhatsApp, com sinal'], ['#/calculadora', '🧮', 'Quanto cobrar', 'Preço certo no cartão e no iFood']]],
       ['Pagar e planejar', [['#/contas', '🗓️', 'Contas a pagar', 'Vencimentos e contas fixas'], ['#/caixa', '🔮', 'Vai faltar dinheiro?', 'O dia do aperto, antes de chegar']]],
       ['Banco e conferências', [['#/conferencia', '📑', 'Relatório da conferência', 'Onde está a diferença e o que fazer'], ['#/extrato', '🏦', 'Extrato do banco', 'Separe pessoal × negócio e confira'], ['#/maquininha', '💳', 'Conferir maquininha', 'Acha taxa cobrada a mais'], ['#/ifood', '🛵', 'Conferir iFood', 'Comissão, taxas e mensalidade']]],
       ['Mercadoria e notas', [['#/estoque', '📦', 'Estoque', 'Produtos, custo e margem'], ['#/contagem', '🔢', 'Contagem', 'Conte e veja o que faltou'], ['#/devolucao', '↩️', 'Devolução de nota', 'Calcule a partir do XML']]],
