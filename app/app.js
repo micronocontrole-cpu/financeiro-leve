@@ -947,7 +947,7 @@
     if (window.XLSX) return Promise.resolve();
     if (xlsxCarregando) return xlsxCarregando;
     xlsxCarregando = new Promise(function (ok, erro) {
-      var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      var s = document.createElement('script'); s.src = '/app/vendor/xlsx-0.18.5.full.min.js';
       s.onload = function () { ok(); }; s.onerror = function () { xlsxCarregando = null; erro(new Error('Sem internet para abrir Excel. Tente de novo ou exporte em CSV.')); };
       document.head.appendChild(s);
     });
