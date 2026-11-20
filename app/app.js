@@ -1226,11 +1226,12 @@
 
   ROTAS.sobre = function () {
     var html = topo('Ajuda e privacidade', '', '#/mais') + '<main><div class="card">' +
-      '<h2 style="margin-top:0">Seus dados são seus</h2><p>Tudo o que você lança fica guardado <b>só neste aparelho</b>. Não temos servidor com os seus dados, não vemos suas vendas e nem seus clientes. Os extratos que você confere são lidos no próprio celular e não são enviados para ninguém.</p>' +
+      '<h2 style="margin-top:0">Seus dados são seus</h2><p>Vendas, despesas, clientes, fiado e agenda ficam guardados <b>só neste aparelho</b>. Não vemos suas vendas nem seus clientes. Os extratos e relatórios que você abre são lidos aqui mesmo, sem sair do celular.</p>' +
+      '<p style="margin-top:10px">Só o <b>link de agendamento</b> e o <b>Acompanhe seu pedido</b> usam nosso servidor, e só quando você ativa: eles guardam o necessário para o cliente marcar o horário ou ver a etapa do pedido. Cada negócio só acessa os próprios dados.</p>' +
       '<p style="margin-top:10px">O app não mexe no seu dinheiro: o Pix vai direto para a sua conta.</p>' +
       '<h2>Como instalar na tela inicial</h2><p><b>Android (Chrome):</b> menu ⋮ › "Adicionar à tela inicial" ou "Instalar app".<br><b>iPhone (Safari):</b> botão compartilhar › "Adicionar à Tela de Início".</p>' +
       '<h2>Dúvidas ou ideias</h2><p>Escreva para <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a>.</p>' +
-      '<p class="peq muted" style="margin-top:14px">O app ajuda a organizar e conferir, mas não é contador nem consultoria financeira. <a href="/privacidade/">Política de privacidade</a>.</p></div></main>';
+      '<p class="peq muted" style="margin-top:14px">O app ajuda a organizar e conferir, mas não é contador nem consultoria financeira. <a href="/privacidade/">Política de privacidade</a> · <a href="/termos/">Termos de uso</a>.</p></div></main>';
     return { html: html };
   };
 

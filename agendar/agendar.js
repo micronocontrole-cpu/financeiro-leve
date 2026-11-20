@@ -78,7 +78,7 @@
         msg.querySelectorAll('[data-x]').forEach(function (bt) { bt.onclick = function () { var nn = document.getElementById('fNome').value, ff = document.getElementById('fFone').value, oo = document.getElementById('fObs').value; S.hora = new Date(bt.dataset.x); S.dia = N.local(S.hora).data; render(); document.getElementById('fNome').value = nn; document.getElementById('fFone').value = ff; document.getElementById('fObs').value = oo; }; });
         return;
       }
-      msg.innerHTML = '<div class="aviso erro">' + ({ limite: 'Você já tem 3 pedidos esperando resposta. Aguarde a resposta antes de pedir outro.', nome: 'Confira seu nome.', fone: 'Confira o WhatsApp com DDD.', servico: 'Esse serviço não está mais disponível.', pagina: 'Essa agenda está pausada no momento.' }[r.motivo] || 'Não deu certo. Tente de novo.') + '</div>';
+      msg.innerHTML = '<div class="aviso erro">' + ({ limite: 'Você já tem 3 pedidos esperando resposta. Aguarde a resposta antes de pedir outro.', nome: 'Confira seu nome.', fone: 'Confira o WhatsApp com DDD.', servico: 'Esse serviço não está mais disponível.', pagina: 'Essa agenda está pausada no momento.', cheio: 'A agenda está com muitos pedidos esperando resposta. Tente mais tarde ou chame o negócio no WhatsApp.' }[r.motivo] || 'Não deu certo. Tente de novo.') + '</div>';
     }).catch(function () { b.disabled = false; b.textContent = 'Tentar de novo'; msg.innerHTML = '<div class="aviso erro">Sem conexão. Confira a internet e tente de novo.</div>'; });
   }
   var TXT = {

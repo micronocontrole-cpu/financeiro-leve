@@ -25,7 +25,7 @@ begin
   -- limite contra robô: no máximo 20 pedidos esperando resposta no mesmo negócio
   if (select count(*) from public.horarios where negocio = n.id and status = 'pendente' and origem = 'link'
         and (expira_em is null or expira_em > now())) >= 20 then
-    return json_build_object('ok', false, 'motivo', 'limite');
+    return json_build_object('ok', false, 'motivo', 'cheio');
   end if;
   v_dia := (p_inicio at time zone n.fuso)::date;
   if not exists (select 1 from public._livres(n.id, v_dia, s.minutos) x where x = p_inicio) then
