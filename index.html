@@ -4,154 +4,227 @@
 <meta charset="utf-8">
 <meta name="facebook-domain-verification" content="hbf7gikba3ljwcjkx2ag8lca0qt2fk" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Micro no Controle — o contador cuida do governo, a gente cuida do seu caixa</title>
-<meta name="description" content="Para MEI e pequeno negócio: conferimos sua maquininha, o iFood e o banco, achamos o dinheiro que ficou para trás e entregamos um relatório simples todo mês. Conferência grátis.">
+<title>Micro no Controle — ache o dinheiro que fica para trás no seu caixa</title>
+<meta name="description" content="Para MEI e pequeno negócio: conferimos maquininha, iFood e banco, achamos o dinheiro que ficou para trás e entregamos um relatório simples todo mês. Agenda, fiado, contas a pagar e promoções com os seus números. Conferência grátis.">
 <meta property="og:title" content="Micro no Controle — o dinheiro que ficou para trás, achado todo mês">
 <meta property="og:description" content="Conferência de maquininha, iFood e banco, contas a pagar, agenda e promoções feitas com os números do seu negócio. Comece grátis.">
 <meta property="og:image" content="https://micronocontrole.com/img/og.png">
 <meta property="og:url" content="https://micronocontrole.com/">
 <link rel="canonical" href="https://micronocontrole.com/">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0F3D3E">
+<meta name="theme-color" content="#0E3B3C">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --deep:#0F3D3E; --deep2:#14504F; --teal:#1B7F79; --mint:#2EC4B6; --mint-ink:#0B6F68; --mint-soft:#E2F5F2;
-  --bg:#F3F7F6; --paper:#FFFFFF; --ink:#1A2628; --muted:#58686B; --line:#D6E0DF;
-  --red:#C0392B; --red-soft:#FBE7E5; --sun:#F5B942;
+  --deep:#0E3B3C; --deep2:#134E4D; --mint:#22C3A6; --mint-ink:#0A6B5E; --mint-soft:#DDF5EF;
+  --sol:#FFCF3A; --sol-soft:#FFF4CC; --sol-ink:#6B4E00;
+  --tomate:#E5482F; --tomate-soft:#FDE6E1;
+  --bg:#F2F7F6; --paper:#FFFFFF; --ink:#152224; --muted:#526568; --line:#D3DFDD;
   --display:'Bricolage Grotesque',system-ui,sans-serif; --body:'Figtree',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
-  --wrap:1120px;
+  --wrap:1140px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block;height:auto}
 a{color:inherit}
+button{font:inherit;color:inherit}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
-h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.02em;font-weight:800}
-h2{font-size:clamp(28px,4vw,44px);max-width:22ch}
+h1,h2,h3{font-family:var(--display);line-height:1.06;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(30px,4.4vw,48px);max-width:20ch}
 p{max-width:62ch}
 section{scroll-margin-top:70px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--mint);color:#06302E;font-family:var(--display);font-weight:700;font-size:18px;padding:16px 28px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:background .15s,transform .15s}
-.btn:hover{background:#45d3c6;transform:translateY(-1px)}
-.btn.ghost{background:transparent;color:#EAF6F4;box-shadow:inset 0 0 0 2px rgba(191,237,231,.5)}
-.btn.ghost:hover{background:rgba(255,255,255,.08)}
-.btn:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.sec{padding:88px 0}
+.sub{color:var(--muted);margin-top:14px;font-size:19px}
 .fine{font-size:14.5px;color:var(--muted)}
-.kick{display:inline-block;font-weight:700;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mint-ink);background:var(--mint-soft);padding:5px 12px;border-radius:999px;margin-bottom:14px}
-.sec{padding:84px 0}
-.sec .sub{color:var(--muted);margin-top:12px;font-size:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--sol);color:#2A1F00;font-family:var(--display);font-weight:800;font-size:18px;padding:17px 28px;border-radius:14px;text-decoration:none;border:0;cursor:pointer;box-shadow:0 4px 0 #C99A00;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 #C99A00}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #C99A00}
+.btn.verde{background:var(--mint);color:#04332C;box-shadow:0 4px 0 #11806C}
+.btn.verde:hover{box-shadow:0 6px 0 #11806C}
+.btn.linha{background:transparent;color:#EAF6F4;box-shadow:inset 0 0 0 2px rgba(221,245,239,.55)}
+.btn.linha:hover{background:rgba(255,255,255,.08);transform:none}
+.btn.escuro{background:var(--deep);color:#fff;box-shadow:0 4px 0 #061E1F}
+:focus-visible{outline:3px solid var(--sol);outline-offset:3px}
+.btn.linha:focus-visible{outline-color:#fff}
 
 /* barra */
-.bar{position:sticky;top:0;z-index:20;background:rgba(15,61,62,.97);backdrop-filter:blur(6px)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
-.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-family:var(--display);font-weight:700;font-size:19px;white-space:nowrap}
+.bar{position:sticky;top:0;z-index:30;background:rgba(14,59,60,.97);backdrop-filter:blur(6px)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;white-space:nowrap}
 .nav{display:flex;align-items:center;gap:22px}
 .nav a.l{color:#CDE9E5;text-decoration:none;font-weight:600;font-size:15.5px}.nav a.l:hover{color:#fff}
-.bar .btn{font-size:15px;padding:10px 18px}
-@media (max-width:860px){.nav a.l{display:none}}
-.bar .btn{white-space:nowrap}
-@media (max-width:420px){.logo{font-size:17px}.bar .btn{font-size:14px;padding:9px 14px}}
+.bar .btn{font-size:15px;padding:10px 16px;box-shadow:0 3px 0 #C99A00;white-space:nowrap}
+@media (max-width:900px){.nav a.l{display:none}}
+@media (max-width:420px){.logo{font-size:17px}.bar .btn{font-size:14px;padding:9px 12px}}
 
 /* hero */
-.hero{background:var(--deep);color:#EAF6F4;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-top:72px;padding-bottom:92px}
-.hero .kick{color:#9BE6DD;background:rgba(46,196,182,.16)}
-.hero h1{font-size:clamp(34px,4.8vw,58px);color:#fff}
-.hero h1 span{display:block}
-.hero h1 span+span{color:#BFEDE7}
-.hero .lead{font-size:20px;color:#BFDAD6;margin:24px 0 32px}
-.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
-.hero .meta{margin-top:20px;color:#9CC4BF;font-size:15px}
-.hero .meta b{color:#fff;font-weight:600}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:48px;padding-bottom:64px}}
+.hero{background:var(--deep);color:#EAF6F4;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-180px;top:-140px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(34,195,166,.28),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center;padding-top:64px;padding-bottom:88px}
+.hero .wrap>*{min-width:0}
+.selo{display:inline-flex;align-items:center;gap:8px;background:rgba(255,207,58,.14);color:var(--sol);font-weight:700;font-size:15px;padding:6px 14px;border-radius:999px;margin-bottom:18px}
+.hero h1{font-size:clamp(38px,5.6vw,68px);color:#fff}
+.giro{display:block;margin-top:14px;font-family:var(--display);font-weight:700;font-size:clamp(20px,2.4vw,27px);color:#9BE6D6;min-height:1.3em}
+.giro b{color:var(--sol);font-weight:800;display:inline-block;animation:entra .5s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero .lead{font-size:20px;color:#C3DEDA;margin:22px 0 30px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:14px}
+.garantias{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:24px;color:#A8CFCA;font-size:15px;list-style:none}
+.garantias li::before{content:"✓ ";color:var(--mint);font-weight:800}
+@media (max-width:920px){.hero .wrap{grid-template-columns:1fr;gap:44px;padding-top:44px;padding-bottom:64px}}
 
 /* recibo */
-.slot{position:relative;padding-top:18px;max-width:430px;margin-left:auto;width:100%}
-.slot::before{content:"";position:absolute;top:0;left:-14px;right:-14px;height:22px;border-radius:12px;background:#0A2B2C;box-shadow:inset 0 3px 6px rgba(0,0,0,.45)}
-.receipt{position:relative;z-index:1;background:var(--paper);color:#1d2526;font-family:var(--mono);font-size:14px;line-height:1.55;padding:24px 24px 32px;margin:0 6px;
+.slot{position:relative;padding-top:18px;max-width:420px;margin-left:auto;width:100%}
+.slot::before{content:"";position:absolute;top:0;left:-14px;right:-14px;height:22px;border-radius:12px;background:#072627;box-shadow:inset 0 3px 6px rgba(0,0,0,.45)}
+.receipt{position:relative;z-index:1;background:var(--paper);color:#1d2526;font-family:var(--mono);font-size:14px;line-height:1.55;padding:24px 22px 32px;margin:0 6px;
   -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat, radial-gradient(circle at 50% 100%,transparent 6px,#000 6.5px) bottom/16px 11px repeat-x;
           mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat, radial-gradient(circle at 50% 100%,transparent 6px,#000 6.5px) bottom/16px 11px repeat-x;
   animation:print 1.6s cubic-bezier(.3,.7,.3,1) .3s both}
 @keyframes print{from{clip-path:inset(0 0 100% 0);transform:translateY(-14px)}to{clip-path:inset(0 0 0 0);transform:none}}
-@media (prefers-reduced-motion:reduce){.receipt{animation:none}}
 .receipt .c{text-align:center}
 .receipt hr{border:0;border-top:1.5px dashed #9aa5a6;margin:12px 0}
 .receipt .row{display:flex;justify-content:space-between;gap:12px}
-.receipt .neg{color:var(--red)}
-.receipt .tot{margin-top:6px;background:var(--red-soft);color:var(--red);font-weight:600;padding:9px 10px;display:flex;justify-content:space-between}
+.receipt .neg{color:var(--tomate)}
+.receipt .tot{margin-top:6px;background:var(--tomate-soft);color:#B5301B;font-weight:600;padding:9px 10px;display:flex;justify-content:space-between}
 .receipt .note{margin-top:14px;font-size:12px;color:#6b7778;text-align:center}
-@media (max-width:900px){.slot{margin:0 auto}}
+.carimbo{position:absolute;z-index:2;right:-8px;bottom:-34px;transform:rotate(-8deg);background:var(--sol);color:#2A1F00;font-family:var(--display);font-weight:800;font-size:17px;line-height:1.15;padding:12px 16px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.3);max-width:200px;text-align:center}
+@media (max-width:920px){.slot{margin:0 auto}.carimbo{right:0}}
 
-/* dores */
-.dores{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px}
-.card h3{font-size:22px;color:var(--deep);margin-bottom:8px}
-.card p{font-size:16.5px;color:#34474A}
-.card .ico{font-size:28px;margin-bottom:10px;display:block}
-@media (max-width:860px){.dores{grid-template-columns:1fr}}
+/* faixa de confiança */
+.faixa{background:var(--sol);color:#2A1F00}
+.faixa .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-top:16px;padding-bottom:16px;font-weight:700;font-size:16px}
+.faixa span{display:flex;align-items:center;gap:8px}
 
-/* funções */
-.funcs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
-.funcs .card h3{font-size:19px}
-.tag{display:inline-block;font:700 11.5px var(--body);letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:3px 9px;margin-top:12px}
-.tag.free{background:var(--mint-soft);color:var(--mint-ink)}
-.tag.pro{background:#FFF1D6;color:#8A5A00}
-@media (max-width:900px){.funcs{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.funcs{grid-template-columns:1fr}}
+/* calculadora */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px;align-items:stretch}
+.calc>*{min-width:0}
+.calc .caixa{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px}
+.calc label{display:block;font-weight:700;font-size:17px;margin-bottom:10px}
+.calc output{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,40px);color:var(--deep);margin-bottom:6px}
+.calc input[type=range]{width:100%;accent-color:var(--mint-ink);height:32px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:15px;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.result{background:var(--tomate);color:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;justify-content:center}
+.result .grande{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,64px);line-height:1;margin:6px 0 10px}
+.result p{color:#FFE3DC;font-size:17px}
+.result .btn{margin-top:20px;align-self:flex-start}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+
+/* cards que giram */
+.giram{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+.vira{perspective:1100px;min-height:250px;border:0;background:none;padding:0;text-align:left;cursor:pointer;display:block;width:100%}
+.vira .in{display:block;position:relative;width:100%;height:100%;min-height:250px;transition:transform .6s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+.vira.virado .in{transform:rotateY(180deg)}
+@media (hover:hover){.vira:hover .in{transform:rotateY(180deg)}}
+.face{position:absolute;inset:0;border-radius:22px;padding:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column}
+.frente{background:var(--paper);border:2px solid var(--line)}
+.frente .ico{font-size:34px;line-height:1}
+.face .t{display:block;font-family:var(--display);font-weight:800;line-height:1.08;letter-spacing:-.02em}
+.face .p,.face .dor{display:block}
+.frente .t{font-size:25px;color:var(--deep);margin-top:16px}
+.frente .dor{font-size:16px;color:var(--muted);margin-top:8px}
+.frente .toque{margin-top:auto;font-weight:700;font-size:14.5px;color:var(--mint-ink)}
+.verso{background:var(--deep);color:#EAF6F4;transform:rotateY(180deg)}
+.verso .t{font-size:21px;color:#fff}
+.verso .p{font-size:16px;color:#C3DEDA;margin-top:8px}
+.verso .tag{margin-top:auto;align-self:flex-start}
+.tag{display:inline-block;font-weight:800;font-size:13px;border-radius:8px;padding:4px 10px}
+.tag.free{background:var(--mint);color:#04332C}
+.tag.pro{background:var(--sol);color:#2A1F00}
+.tag.top{background:#fff;color:var(--deep)}
+.mais-func{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
+.mais-func span{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:15px;font-weight:600;color:#2E4245}
+@media (max-width:900px){.giram{grid-template-columns:1fr 1fr}}
+@media (max-width:580px){.giram{grid-template-columns:1fr}.vira,.vira .in{min-height:220px}}
+@media (prefers-reduced-motion:reduce){.receipt,.giro b{animation:none}.vira .in{transition:none}}
 
 /* exemplo */
 .ex{background:var(--deep);color:#EAF6F4}
 .ex h2{color:#fff}
-.ex .sub{color:#BFDAD6}
-.ex-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;margin-top:40px;align-items:start}
+.ex .sub{color:#C3DEDA}
+.ex-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:30px;margin-top:40px;align-items:start}
+.ex-grid>*{min-width:0}
 .ex figure{margin:0}
 .ex figure img{border-radius:14px;box-shadow:0 24px 50px rgba(0,0,0,.35)}
-.ex figcaption{margin-top:12px;font-size:15.5px;color:#BFDAD6}
+.ex figcaption{margin-top:12px;font-size:15.5px;color:#C3DEDA}
 .ex .duo{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
 .vs{margin-top:22px;display:grid;gap:12px}
-.vs div{border-radius:14px;padding:14px 16px;font-size:15.5px}
-.vs .gen{background:rgba(255,255,255,.06);color:#BFDAD6}
-.vs .nos{background:rgba(46,196,182,.14);border:1px solid rgba(46,196,182,.45);color:#EAF6F4}
-.vs b{display:block;font-family:var(--display);font-size:15px;margin-bottom:4px;color:#fff}
+.vs div{border-radius:16px;padding:16px 18px;font-size:16px}
+.vs .gen{background:rgba(255,255,255,.06);color:#B5CFCB}
+.vs .nos{background:var(--sol);color:#2A1F00}
+.vs b{display:block;font-family:var(--display);font-size:16px;margin-bottom:4px}
 @media (max-width:900px){.ex-grid{grid-template-columns:1fr}}
 
 /* passos */
-.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px;counter-reset:p}
-.passos .card{position:relative;padding-top:56px}
-.passos .card::before{counter-increment:p;content:counter(p);position:absolute;top:18px;left:24px;width:30px;height:30px;border-radius:50%;background:var(--deep);color:#fff;font:700 16px/30px var(--display);text-align:center}
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px;list-style:none;counter-reset:p}
+.passos li{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:26px;position:relative;counter-increment:p}
+.passos li::before{content:counter(p);display:block;width:40px;height:40px;border-radius:12px;background:var(--mint);color:#04332C;font:800 20px/40px var(--display);text-align:center;margin-bottom:16px}
+.passos h3{font-size:22px;color:var(--deep);margin-bottom:8px}
+.passos p{font-size:16.5px;color:#34474A}
 @media (max-width:860px){.passos{grid-template-columns:1fr}}
 
+/* comparação */
+.tab-wrap{margin-top:36px;overflow-x:auto;border-radius:22px;border:1px solid var(--line);background:var(--paper)}
+table.cmp{width:100%;border-collapse:collapse;min-width:680px;font-size:16px}
+.cmp th,.cmp td{padding:14px 16px;text-align:center;border-bottom:1px solid var(--line)}
+.cmp th:first-child,.cmp td:first-child{text-align:left;font-weight:600}
+.cmp thead th{font-family:var(--display);font-size:17px;color:var(--deep);background:#F7FBFA}
+.cmp .nos{background:var(--mint-soft)}
+.cmp thead .nos{background:var(--deep);color:#fff}
+.cmp tr:last-child td{border-bottom:0}
+.sim{color:var(--mint-ink);font-weight:800}.nao{color:#A0AEB0}
+
 /* planos */
-.planos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:38px;align-items:stretch}
-.plano{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px 20px;display:flex;flex-direction:column}
-.plano.top{border:2px solid var(--mint);box-shadow:0 18px 40px rgba(15,61,62,.12);position:relative}
-.plano.top::before{content:"mais escolhido";position:absolute;top:-13px;left:20px;background:var(--mint);color:#06302E;font:700 12px var(--body);text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:999px}
-.plano h3{font-size:21px;color:var(--deep)}
-.plano .para{font-size:14.5px;color:var(--muted);margin-top:4px;min-height:44px}
-.plano .preco{font-family:var(--display);font-weight:800;font-size:36px;color:var(--ink);margin:14px 0 2px;line-height:1}
+.toggle{display:inline-flex;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px;margin-top:24px}
+.toggle button{border:0;background:none;padding:10px 18px;border-radius:10px;font-weight:700;font-size:16px;cursor:pointer}
+.toggle button[aria-pressed=true]{background:var(--deep);color:#fff}
+.toggle small{color:var(--mint-ink);font-weight:800}
+.toggle button[aria-pressed=true] small{color:var(--sol)}
+.planos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px;align-items:stretch}
+.plano{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:26px 22px;display:flex;flex-direction:column;position:relative}
+.plano.top{background:var(--deep);color:#EAF6F4;border:0;box-shadow:0 24px 48px rgba(14,59,60,.28);transform:translateY(-10px)}
+.plano .fita{position:absolute;top:-14px;left:22px;background:var(--sol);color:#2A1F00;font-weight:800;font-size:13.5px;padding:5px 12px;border-radius:8px}
+.plano h3{font-size:23px;color:var(--deep)}
+.plano.top h3{color:#fff}
+.plano .para{font-size:15px;color:var(--muted);margin-top:4px;min-height:46px}
+.plano.top .para{color:#B5CFCB}
+.plano .preco{font-family:var(--display);font-weight:800;font-size:clamp(30px,2.7vw,40px);margin:16px 0 0;line-height:1;white-space:nowrap}
 .plano .preco small{font-size:15px;font-weight:600;color:var(--muted)}
-.plano ul{list-style:none;margin:16px 0 20px;display:grid;gap:8px;font-size:15.5px;flex:1}
-.plano li{padding-left:22px;position:relative}
+.plano.top .preco small{color:#B5CFCB}
+.plano .eq{font-size:14px;color:var(--mint-ink);font-weight:700;min-height:22px;margin-top:6px}
+.plano.top .eq{color:var(--sol)}
+.plano ul{list-style:none;margin:16px 0 22px;display:grid;gap:9px;font-size:15.5px;flex:1;align-content:start}
+.plano li{padding-left:24px;position:relative}
 .plano li::before{content:"✓";position:absolute;left:0;color:var(--mint-ink);font-weight:800}
-.plano .btn{width:100%;font-size:16px;padding:13px 16px}
-.plano .btn.out{background:transparent;color:var(--deep);box-shadow:inset 0 0 0 2px var(--deep)}
-.fundador{margin-top:26px;background:#FFF7E6;border:1px solid #F3D9A4;border-radius:16px;padding:16px 18px;font-size:16px}
-@media (max-width:1000px){.planos{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.planos{grid-template-columns:1fr}}
+.plano.top li::before{color:var(--mint)}
+.plano .btn{width:100%;font-size:16.5px;padding:14px 16px}
+.pagto{margin-top:30px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:18px 20px}
+.pagto .cad{font-size:30px}
+.pagto p{font-size:16px}
+.fundador{margin-top:14px;background:var(--sol-soft);border:1px solid #F1DC8F;border-radius:20px;padding:18px 20px;font-size:16.5px}
+@media (max-width:1040px){.planos{grid-template-columns:1fr 1fr}.plano.top{transform:none}}
+@media (max-width:580px){.planos{grid-template-columns:1fr}}
 
 /* para quem */
-.quem{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
-@media (max-width:860px){.quem{grid-template-columns:1fr}}
+.quem{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.quem div{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px}
+.quem .ico{font-size:32px}
+.quem h3{font-size:21px;color:var(--deep);margin:10px 0 6px}
+.quem p{font-size:15.5px;color:#34474A}
+@media (max-width:960px){.quem{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.quem{grid-template-columns:1fr}}
 
 /* faq */
-.faq{margin-top:30px;display:grid;gap:10px;max-width:820px}
-.faq details{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.faq summary{cursor:pointer;font-weight:700;font-size:17.5px;list-style:none;display:flex;justify-content:space-between;gap:12px}
-.faq summary::after{content:"+";font-weight:800;color:var(--mint-ink)}
+.faq{margin-top:30px;display:grid;gap:10px;max-width:840px}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px 20px}
+.faq summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:800;color:var(--mint-ink);font-size:22px;line-height:1}
 .faq details[open] summary::after{content:"–"}
 .faq p{margin-top:10px;font-size:16.5px;color:#34474A}
 
@@ -160,28 +233,39 @@ section{scroll-margin-top:70px}
 .conf .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
 .conf .wrap>*{min-width:0}
 .conf h2{color:#fff}
-.conf .sub{color:#BFDAD6}
-.conf ul{list-style:none;margin-top:20px;display:grid;gap:8px;color:#DDF1EE}
+.conf .sub{color:#C3DEDA}
+.conf ul{list-style:none;margin-top:22px;display:grid;gap:10px;color:#DDF1EE;font-size:17px}
 .conf li::before{content:"✓ ";color:var(--mint);font-weight:800}
-form.f{background:var(--paper);color:var(--ink);border-radius:22px;padding:26px;display:grid;gap:14px}
+form.f{background:var(--paper);color:var(--ink);border-radius:24px;padding:26px;display:grid;gap:14px}
 form.f label{display:grid;gap:6px;font-weight:600;font-size:15.5px}
-form.f input,form.f select{width:100%;min-width:0;font:inherit;font-size:17px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+form.f input,form.f select{width:100%;min-width:0;font:inherit;font-size:17px;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
 form.f .btn{width:100%}
-.erro{display:none;background:var(--red-soft);color:var(--red);border-radius:10px;padding:10px 12px;font-size:15px}
-.ok{background:var(--mint-soft);color:var(--deep);border-radius:22px;padding:26px}
-.ok h3{font-size:24px;margin-bottom:8px}
+.plano-escolhido{display:none;background:var(--sol-soft);border-radius:12px;padding:10px 12px;font-size:15.5px;font-weight:600}
+.erro{display:none;background:var(--tomate-soft);color:#B5301B;border-radius:10px;padding:10px 12px;font-size:15px}
+.ok{background:var(--mint-soft);color:var(--deep);border-radius:24px;padding:26px}
+.ok h3{font-size:26px;margin-bottom:8px}
 @media (max-width:900px){.conf .wrap{grid-template-columns:1fr}}
 
 /* grátis */
 .gratis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
-.gratis a{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;text-decoration:none;display:block}
+.gratis a{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;text-decoration:none;display:block;transition:border-color .15s}
 .gratis a:hover{border-color:var(--mint)}
-.gratis b{display:block;font-family:var(--display);color:var(--deep);font-size:17px}
+.gratis b{display:block;font-family:var(--display);color:var(--deep);font-size:17.5px}
 .gratis span{font-size:14.5px;color:var(--muted)}
 @media (max-width:900px){.gratis{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.gratis{grid-template-columns:1fr}}
 
-footer{background:#0A2B2C;color:#9CC4BF;padding:34px 0;font-size:14.5px}
+/* barra fixa no celular */
+.fixa{display:none}
+@media (max-width:700px){
+  .fixa{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(14,59,60,.97);padding:10px 16px calc(10px + env(safe-area-inset-bottom));gap:10px;align-items:center;transform:translateY(110%);transition:transform .25s}
+  .fixa.mostra{transform:none}
+  .fixa span{color:#DDF1EE;font-size:14px;font-weight:600;line-height:1.25;flex:1}
+  .fixa .btn{font-size:15px;padding:11px 14px;box-shadow:0 3px 0 #C99A00;white-space:nowrap}
+  body{padding-bottom:72px}
+}
+
+footer{background:#082829;color:#9CC4BF;padding:34px 0;font-size:14.5px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
 footer a{color:#CDE9E5}
 </style>
@@ -193,11 +277,11 @@ footer a{color:#CDE9E5}
 <header class="bar">
   <div class="wrap">
     <a class="logo" href="/" aria-label="Micro no Controle, início">
-      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10.5" fill="none" stroke="#2EC4B6" stroke-width="3"/><circle cx="13" cy="13" r="4" fill="#2EC4B6"/></svg>
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10.5" fill="none" stroke="#22C3A6" stroke-width="3"/><circle cx="13" cy="13" r="4" fill="#FFCF3A"/></svg>
       Micro no Controle
     </a>
     <nav class="nav" aria-label="Principal">
-      <a class="l" href="#como">Como funciona</a>
+      <a class="l" href="#funcoes">O que faz</a>
       <a class="l" href="#planos">Planos</a>
       <a class="l" href="#gratis">Ferramentas grátis</a>
       <a class="l" href="app/">App</a>
@@ -210,14 +294,15 @@ footer a{color:#CDE9E5}
 <section class="hero">
   <div class="wrap">
     <div>
-      <span class="kick">Para MEI e pequeno negócio</span>
-      <h1><span>O contador cuida do governo.</span><span>A gente cuida do seu caixa.</span></h1>
-      <p class="lead">Todo mês, o Micro no Controle confere sua maquininha, o iFood e o banco, acha o dinheiro que ficou para trás e te entrega um relatório simples com o que fazer. E ainda prepara promoções e respostas do Google feitas com os números do seu negócio.</p>
+      <span class="selo">Para MEI e pequeno negócio</span>
+      <h1>Tem dinheiro do seu negócio ficando para trás. A gente acha.</h1>
+      <span class="giro" aria-live="off">Todo mês: <b id="giro">repasse da maquininha que não caiu</b></span>
+      <p class="lead">Conferimos a maquininha, o iFood e o banco, mostramos quanto ficou para trás e como cobrar cada centavo. E ainda criamos promoções e respostas do Google com os números do seu negócio.</p>
       <div class="ctas">
-        <a class="btn" href="#conferencia">Quero a conferência grátis</a>
-        <a class="btn ghost" href="app/">Abrir o app grátis</a>
+        <a class="btn" href="#conferencia" data-cta="hero">Quero a conferência grátis</a>
+        <a class="btn linha" href="app/">Usar o app grátis</a>
       </div>
-      <p class="meta"><b>Grátis para começar.</b> Sem cartão. Nunca pedimos senha de banco.</p>
+      <ul class="garantias"><li>Sem cartão</li><li>Nunca pedimos senha</li><li>Relatório em até 2 dias úteis</li></ul>
     </div>
     <div class="slot" aria-label="Exemplo de conferência do mês">
       <div class="receipt">
@@ -233,40 +318,97 @@ footer a{color:#CDE9E5}
         <div class="tot"><span>Ficou para trás</span><span>R$ 2.132,67</span></div>
         <div class="note">Exemplo com dados fictícios, gerado pelo nosso fechamento automático.</div>
       </div>
+      <div class="carimbo">Isso paga 71 meses do plano Essencial</div>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<div class="faixa">
   <div class="wrap">
-    <span class="kick">O que tira o sono do dono</span>
-    <h2>Três problemas que o caderno e o WhatsApp não resolvem</h2>
-    <div class="dores">
-      <div class="card"><span class="ico" aria-hidden="true">💸</span><h3>Dinheiro que some</h3><p>Repasse da maquininha que não caiu, taxa que subiu sem aviso, iFood pagando a menos, fiado esquecido. Ninguém confere, e o dinheiro fica para trás.</p></div>
-      <div class="card"><span class="ico" aria-hidden="true">📅</span><h3>Cliente que some</h3><p>Falta sem avisar, agenda no papel, mensagem sem resposta, avaliação ruim no Google sem retorno. Cada cliente perdido é dinheiro que não volta.</p></div>
-      <div class="card"><span class="ico" aria-hidden="true">🧾</span><h3>Medo do governo</h3><p>Estourar o limite do MEI, esquecer o DAS, não saber quanto separar de imposto. A gente avisa antes, e você confirma com o seu contador.</p></div>
+    <span>🔒 Nunca pedimos senha de banco</span>
+    <span>📱 App grátis, sem cadastro</span>
+    <span>↩️ 7 dias para desistir</span>
+    <span>💳 Pagamento pela Hotmart</span>
+  </div>
+</div>
+
+<section class="sec" id="quanto">
+  <div class="wrap">
+    <h2>Quanto pode estar ficando para trás no seu caixa?</h2>
+    <p class="sub">Arraste e veja. No exemplo acima, foram 4,6% das vendas do mês.</p>
+    <div class="calc">
+      <div class="caixa">
+        <label for="vendas">Quanto você vende por mês no cartão, Pix e iFood?</label>
+        <output id="vendasTxt" for="vendas">R$ 15.000</output>
+        <input type="range" id="vendas" min="2000" max="100000" step="1000" value="15000">
+        <p class="fine" style="margin-top:16px">Quanto fica para trás, em média?</p>
+        <div class="chips" role="group" aria-label="Porcentagem que fica para trás">
+          <button type="button" data-p="1" aria-pressed="false">1%</button>
+          <button type="button" data-p="2" aria-pressed="true">2%</button>
+          <button type="button" data-p="4.6" aria-pressed="false">4,6% (o exemplo)</button>
+        </div>
+      </div>
+      <div class="result" aria-live="polite">
+        <span style="font-weight:700">Isso pode ser</span>
+        <div class="grande" id="porMes">R$ 300 por mês</div>
+        <p id="porAno">R$ 3.600 por ano. O plano Essencial custa R$ 29,99 por mês.</p>
+        <a class="btn" href="#conferencia" data-cta="calculadora">Descobrir o meu valor grátis</a>
+      </div>
     </div>
+    <p class="fine" style="margin-top:14px">Conta simples, só para ter uma ideia. O valor de verdade sai da conferência com os seus arquivos.</p>
   </div>
 </section>
 
-<section class="sec" style="padding-top:20px" id="funcoes">
+<section class="sec" id="funcoes" style="padding-top:12px">
   <div class="wrap">
-    <span class="kick">O que o Micro faz</span>
-    <h2>Tudo o que o pequeno negócio precisa, sem planilha complicada</h2>
-    <div class="funcs">
-      <div class="card"><h3>Conferência do mês</h3><p>Maquininha, iFood e banco conferidos. Você recebe o que ficou para trás e como cobrar cada um.</p><span class="tag pro">Essencial</span></div>
-      <div class="card"><h3>Contas a pagar</h3><p>Vencimentos num lugar só e o aviso de "vai faltar dinheiro?" antes de faltar.</p><span class="tag free">Grátis no app</span></div>
-      <div class="card"><h3>Fiado com Pix</h3><p>Quem deve, quanto e desde quando. Cobrança por Pix no WhatsApp com um toque.</p><span class="tag free">Grátis no app</span></div>
-      <div class="card"><h3>Agenda e link para marcar</h3><p>O cliente marca sozinho pelo link, você aceita ou recusa. Sem horário duplo.</p><span class="tag free">Grátis no app</span></div>
-      <div class="card"><h3>Promoções com os seus números</h3><p>A arte e o texto da promoção nascem das suas vendas: o dia fraco, o mais vendido, o preço certo.</p><span class="tag pro">Divulgação</span></div>
-      <div class="card"><h3>Google em dia</h3><p>Respostas às avaliações, postagens do mês e a descrição do perfil prontas para copiar e publicar.</p><span class="tag pro">Divulgação</span></div>
+    <h2>Toque em cada pergunta e veja como o Micro resolve</h2>
+    <p class="sub">As perguntas que todo dono faz. As respostas ficam dentro do app e do relatório do mês.</p>
+    <div class="giram">
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">💳</span><span class="t">Caiu tudo da maquininha?</span><span class="dor">Repasse atrasado ou que nunca caiu passa batido no meio de centenas de vendas.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Conferência de repasses</span><span class="p">Cada venda é comparada com o que caiu no banco. O que faltar vem com data, valor e o texto pronto para cobrar.</span><span class="tag pro">Essencial</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">📉</span><span class="t">A taxa é a do contrato?</span><span class="dor">A maquininha muda a taxa e ninguém avisa. Meio por cento vira centenas de reais no ano.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Auditoria da taxa</span><span class="p">Suba o extrato e veja na hora se cobraram acima do combinado, venda por venda.</span><span class="tag free">Grátis</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">🛵</span><span class="t">O iFood pagou certo?</span><span class="dor">Comissão, taxa de entrega, mensalidade, cancelamento. O repasse quase nunca bate de primeira.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Conferência do iFood</span><span class="p">Pedido por pedido, mostramos o que foi descontado e o que veio a menos, com o caminho para contestar.</span><span class="tag pro">Essencial</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">📒</span><span class="t">Quem está me devendo?</span><span class="dor">Fiado no caderno some. E cobrar cara a cara é chato.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Fiado com Pix</span><span class="p">Quem deve, quanto e desde quando. Um toque manda a cobrança educada no WhatsApp com o Pix copia e cola.</span><span class="tag free">Grátis no app</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">🗓️</span><span class="t">Vai faltar dinheiro?</span><span class="dor">O boleto vence, o caixa está baixo e a surpresa chega no pior dia.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Contas a pagar e previsão</span><span class="p">Vencimentos num lugar só e o aviso do dia do aperto antes de ele chegar.</span><span class="tag free">Grátis no app</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">💈</span><span class="t">Cliente faltou de novo?</span><span class="dor">Horário vazio é dinheiro que não volta. E a agenda no papel não lembra ninguém.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Agenda com link</span><span class="p">O cliente marca sozinho pelo link, recebe lembrete e pode pagar o sinal no Pix. Você só aceita.</span><span class="tag free">Grátis no app</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">🏛️</span><span class="t">Vou estourar o MEI?</span><span class="dor">Passar do limite sem perceber vira imposto atrasado e dor de cabeça.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Limite do MEI e DAS</span><span class="p">Quanto falta para o limite, o valor do DAS e o aviso antes de vencer. Você confirma com o seu contador.</span><span class="tag free">Grátis no app</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">🍔</span><span class="t">Promoção que vende de verdade?</span><span class="dor">"20% em tudo na terça" é chute. E desconto no dia errado só tira lucro.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Artes e cardápio com os seus números</span><span class="p">Olhamos o dia fraco e o mais vendido e entregamos a arte, o texto e o cardápio prontos para postar.</span><span class="tag pro">Divulgação</span></span>
+      </span></button>
+      <button class="vira" type="button" aria-pressed="false"><span class="in">
+        <span class="face frente"><span class="ico" aria-hidden="true">⭐</span><span class="t">E as avaliações no Google?</span><span class="dor">Avaliação sem resposta afasta cliente novo. E perfil parado some da busca.</span><span class="toque">Toque para ver</span></span>
+        <span class="face verso"><span class="t">Google em dia</span><span class="p">Respostas às avaliações e postagens do mês prontas. Nada é publicado sem você aprovar.</span><span class="tag pro">Divulgação</span></span>
+      </span></button>
+    </div>
+    <div class="mais-func" aria-label="Também no app">
+      <span>📝 Orçamento bonito no WhatsApp</span><span>📍 Acompanhe seu pedido por link</span><span>🏦 Extrato: pessoal × negócio</span><span>📦 Estoque e margem</span><span>🔢 Contagem de estoque</span><span>↩️ Devolução de nota pelo XML</span><span>🧮 Quanto cobrar no cartão e no iFood</span><span>📚 Planilhas atualizadas</span><span>💾 Backup no WhatsApp ou Drive</span>
     </div>
   </div>
 </section>
 
 <section class="sec ex" id="exemplo">
   <div class="wrap">
-    <span class="kick" style="color:#9BE6DD;background:rgba(46,196,182,.16)">Veja um exemplo</span>
     <h2>Não é conselho genérico. É o seu caixa.</h2>
     <p class="sub">Qualquer IA escreve "promoção de terça, 20% em tudo". O Micro no Controle olha as suas vendas primeiro.</p>
     <div class="ex-grid">
@@ -290,75 +432,99 @@ footer a{color:#CDE9E5}
 
 <section class="sec" id="como">
   <div class="wrap">
-    <span class="kick">Como funciona</span>
     <h2>Você gasta 15 minutos por mês. O resto é com a gente.</h2>
-    <div class="passos">
-      <div class="card"><h3>Você manda 3 arquivos</h3><p>As vendas da maquininha, o relatório do iFood e o extrato do banco. A gente ensina a baixar pelo celular. Nada de senha.</p></div>
-      <div class="card"><h3>Recebe o relatório</h3><p>Em até 2 dias úteis: quanto sobrou, o que ficou para trás e o passo a passo para cobrar cada valor.</p></div>
-      <div class="card"><h3>Todo mês, de novo</h3><p>No plano, o fechamento vira rotina, com alertas de conta a vencer, limite do MEI e DAS.</p></div>
+    <ol class="passos">
+      <li><h3>Manda 3 arquivos</h3><p>As vendas da maquininha, o relatório do iFood e o extrato do banco. A gente ensina a baixar pelo celular. Nada de senha.</p></li>
+      <li><h3>Recebe o relatório</h3><p>Em até 2 dias úteis: quanto sobrou, o que ficou para trás e o passo a passo para cobrar cada valor.</p></li>
+      <li><h3>Todo mês, de novo</h3><p>No plano, o fechamento vira rotina, com alertas de conta a vencer, limite do MEI e DAS.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:12px">
+  <div class="wrap">
+    <h2>Por que não só uma planilha, uma IA ou o contador?</h2>
+    <p class="sub">Cada um tem o seu papel. O Micro cuida da parte que ninguém confere.</p>
+    <div class="tab-wrap">
+      <table class="cmp">
+        <thead><tr><th scope="col">O que você precisa</th><th scope="col">Caderno ou planilha</th><th scope="col">IA genérica</th><th scope="col">Contador</th><th scope="col" class="nos">Micro no Controle</th></tr></thead>
+        <tbody>
+          <tr><td>Conferir maquininha e iFood todo mês</td><td class="nao">Se você tiver tempo</td><td class="nao">Não</td><td class="nao">Em geral, não</td><td class="nos sim">Sim, automático</td></tr>
+          <tr><td>Achar o dinheiro que ficou para trás</td><td class="nao">Difícil</td><td class="nao">Não</td><td class="nao">Raramente</td><td class="nos sim">Sim, com como cobrar</td></tr>
+          <tr><td>Promoção feita com as suas vendas</td><td class="nao">Não</td><td class="nao">Genérica</td><td class="nao">Não</td><td class="nos sim">Sim</td></tr>
+          <tr><td>Agenda, fiado e contas num lugar só</td><td class="nao">Espalhado</td><td class="nao">Não</td><td class="nao">Não</td><td class="nos sim">Sim, no app</td></tr>
+          <tr><td>Impostos oficiais e declarações</td><td class="nao">Não</td><td class="nao">Não</td><td class="sim">Sim</td><td class="nos nao">Não: isso é do contador</td></tr>
+          <tr><td>Quanto custa</td><td>Seu tempo</td><td>Seu tempo</td><td>Varia</td><td class="nos"><b>A partir de R$ 0</b></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<section class="sec" id="planos" style="padding-top:20px">
+<section class="sec" id="planos" style="padding-top:12px">
   <div class="wrap">
-    <span class="kick">Planos</span>
     <h2>Comece grátis. Pague só quando valer a pena.</h2>
     <p class="sub">O preço acompanha o tamanho do negócio. Cancele quando quiser.</p>
+    <div class="toggle" role="group" aria-label="Forma de pagamento">
+      <button type="button" data-ciclo="mes" aria-pressed="true">Mensal</button>
+      <button type="button" data-ciclo="ano" aria-pressed="false">Anual <small>2 meses grátis</small></button>
+    </div>
     <div class="planos">
       <div class="plano">
         <h3>Grátis</h3><p class="para">Para organizar o dia a dia</p>
-        <div class="preco">R$ 0</div>
-        <ul><li>App no celular, sem cadastro</li><li>Vendas, despesas e fiado com Pix</li><li>Contas a pagar</li><li>Agenda e link para marcar</li><li>Conferência manual da maquininha</li></ul>
-        <a class="btn out" href="app/">Abrir o app</a>
+        <div class="preco">R$ 0</div><div class="eq"></div>
+        <ul><li>App no celular, sem cadastro</li><li>Vendas, despesas e fiado com Pix</li><li>Contas a pagar e previsão</li><li>Agenda com link para marcar</li><li>Auditoria manual da maquininha</li><li>Calculadoras e planilhas grátis</li></ul>
+        <a class="btn escuro" href="app/">Abrir o app</a>
       </div>
-      <div class="plano">
+      <div class="plano" data-p="essencial">
         <h3>Essencial</h3><p class="para">Para o MEI que quer o caixa conferido</p>
-        <div class="preco">R$ 29,99 <small>/mês</small></div>
-        <ul><li>Tudo do Grátis</li><li>Fechamento automático do mês com relatório</li><li>Dinheiro que ficou para trás, com como cobrar</li><li>Alertas de vencimento, limite do MEI e DAS</li><li>Backup na nuvem</li><li>Acervo de planilhas atualizadas</li></ul>
-        <a class="btn out" href="#conferencia" data-plano="Essencial">Quero ser fundador</a>
+        <div class="preco" data-mes="R$ 29,99" data-ano="R$ 299,90">R$ 29,99 <small>/mês</small></div><div class="eq" data-ano="Sai por R$ 24,99 por mês"></div>
+        <ul><li>Tudo do Grátis</li><li>Fechamento automático do mês com relatório</li><li>Dinheiro que ficou para trás, com como cobrar</li><li>Conferência de maquininha, iFood e banco</li><li>Alertas de vencimento, limite do MEI e DAS</li><li>Backup na nuvem e acervo de planilhas</li></ul>
+        <a class="btn escuro" href="#conferencia" data-plano="Essencial">Quero o Essencial</a>
       </div>
-      <div class="plano top">
+      <div class="plano top" data-p="divulgacao">
+        <span class="fita">Mais completo</span>
         <h3>Divulgação</h3><p class="para">Para vender mais com os seus números</p>
-        <div class="preco">R$ 49,90 <small>/mês</small></div>
-        <ul><li>Tudo do Essencial</li><li>Artes de promoção feitas com as suas vendas</li><li>Cardápio pronto para imprimir e postar</li><li>Google em dia: respostas e postagens do mês</li></ul>
-        <a class="btn" href="#conferencia" data-plano="Divulgação">Quero ser fundador</a>
+        <div class="preco" data-mes="R$ 49,90" data-ano="R$ 499">R$ 49,90 <small>/mês</small></div><div class="eq" data-ano="Sai por R$ 41,58 por mês"></div>
+        <ul><li>Tudo do Essencial</li><li>Artes de promoção feitas com as suas vendas</li><li>Cardápio pronto para imprimir e postar</li><li>Respostas às avaliações do Google</li><li>Postagens do mês para o Google e o Instagram</li></ul>
+        <a class="btn" href="#conferencia" data-plano="Divulgação">Quero o Divulgação</a>
       </div>
-      <div class="plano">
-        <h3>Com acompanhamento</h3><p class="para">Para micro empresas que faturam acima de R$ 20 mil por mês</p>
-        <div class="preco">R$ 99 <small>/mês</small></div>
+      <div class="plano" data-p="acompanhamento">
+        <h3>Com acompanhamento</h3><p class="para">Para quem fatura acima de R$ 20 mil por mês</p>
+        <div class="preco" data-mes="R$ 99" data-ano="R$ 990">R$ 99 <small>/mês</small></div><div class="eq" data-ano="Sai por R$ 82,50 por mês"></div>
         <ul><li>Tudo do Divulgação</li><li>Relatório revisado por uma pessoa</li><li>Atendimento pelo WhatsApp</li><li>Ajuda para cobrar maquininha e iFood</li><li>Vagas limitadas</li></ul>
-        <a class="btn out" href="#conferencia" data-plano="Com acompanhamento">Quero uma vaga</a>
+        <a class="btn escuro" href="#conferencia" data-plano="Com acompanhamento">Quero uma vaga</a>
       </div>
     </div>
-    <p class="fundador"><b>Preço de fundador:</b> os planos pagos abrem em dezembro. Os 50 primeiros ficam com esse preço para sempre. No plano anual, você paga 10 meses e leva 12.</p>
+    <div class="pagto"><span class="cad" aria-hidden="true">🛡️</span><p><b>Pagamento seguro pela Hotmart</b>, no Pix, cartão ou boleto. Não vemos nem guardamos os dados do seu cartão. Desistiu em até 7 dias? Devolvemos tudo.</p></div>
+    <p class="fundador"><b>Preço de fundador:</b> os planos pagos abrem em dezembro. Os 50 primeiros ficam com esse preço enquanto continuarem assinando. Garanta a sua vaga pedindo a conferência grátis.</p>
   </div>
 </section>
 
-<section class="sec" style="padding-top:20px">
+<section class="sec" style="padding-top:12px">
   <div class="wrap">
-    <span class="kick">Para quem é</span>
-    <h2>Feito para quem atende o dia inteiro e não tem tempo para planilha</h2>
+    <h2>Feito para quem atende o dia inteiro</h2>
     <div class="quem">
-      <div class="card"><h3>Comida</h3><p>Lanchonete, marmitaria, hamburgueria, delivery de bairro. Maquininha e iFood conferidos, cardápio e promoções prontos.</p></div>
-      <div class="card"><h3>Beleza</h3><p>Salão, barbearia, manicure. Agenda com link, lembrete e menos falta. Avaliações respondidas no Google.</p></div>
-      <div class="card"><h3>Outros MEIs</h3><p>Quem vende no cartão e no Pix e quer saber, de verdade, quanto sobrou no fim do mês.</p></div>
+      <div><span class="ico" aria-hidden="true">🍔</span><h3>Comida</h3><p>Lanchonete, marmitaria, hamburgueria, delivery. Maquininha e iFood conferidos, cardápio e promoções prontos.</p></div>
+      <div><span class="ico" aria-hidden="true">💅</span><h3>Beleza</h3><p>Salão, barbearia, manicure. Agenda com link, lembrete, sinal no Pix e avaliações respondidas.</p></div>
+      <div><span class="ico" aria-hidden="true">🛍️</span><h3>Comércio</h3><p>Loja e mercadinho. Estoque, margem, fiado e a conferência das vendas no cartão.</p></div>
+      <div><span class="ico" aria-hidden="true">🔧</span><h3>Serviços</h3><p>Quem faz orçamento e vende no Pix e quer saber, de verdade, quanto sobrou no mês.</p></div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="duvidas" style="padding-top:20px">
+<section class="sec" id="duvidas" style="padding-top:12px">
   <div class="wrap">
-    <span class="kick">Dúvidas</span>
     <h2>Perguntas que todo dono faz</h2>
     <div class="faq">
       <details><summary>Vocês substituem o meu contador?</summary><p>Não. O contador cuida do governo: impostos oficiais, declarações e folha. A gente cuida do caixa do dia a dia: o que entrou, o que ficou para trás e o que vence. Os valores de imposto que mostramos são estimativas: confirme sempre com o seu contador.</p></details>
       <details><summary>Preciso passar a senha do banco?</summary><p>Nunca. Você baixa os arquivos no celular e manda para a gente. Não pedimos senha de banco, de maquininha nem do iFood.</p></details>
-      <details><summary>Meus dados ficam seguros?</summary><p>Usamos seus dados só para o seu relatório, seguindo a LGPD. Não vendemos nem compartilhamos com ninguém. Se você cancelar, apagamos os arquivos. Detalhes na <a href="privacidade/">política de privacidade</a>.</p></details>
+      <details><summary>Como eu pago?</summary><p>Pela Hotmart, no Pix, cartão ou boleto, todo mês ou uma vez por ano. A Hotmart é uma das maiores plataformas de pagamento digital do Brasil, e a gente não vê os dados do seu cartão.</p></details>
+      <details><summary>Posso cancelar quando quiser?</summary><p>Sim, sem multa. O plano continua até o fim do período pago. E se desistir nos primeiros 7 dias, devolvemos o valor.</p></details>
       <details><summary>E se a conferência não achar nada?</summary><p>Ótimo: seu caixa está em dia. A primeira conferência é grátis e você não precisa assinar nada.</p></details>
-      <details><summary>Posso cancelar quando quiser?</summary><p>Sim, sem multa. E se desistir nos primeiros 7 dias, devolvemos o valor.</p></details>
+      <details><summary>Meus dados ficam seguros?</summary><p>Usamos seus dados só para o seu relatório, seguindo a LGPD. Não vendemos nem compartilhamos com ninguém. Se você cancelar, apagamos os arquivos. Detalhes na <a href="privacidade/">política de privacidade</a>.</p></details>
       <details><summary>Vocês usam inteligência artificial?</summary><p>Sim, para classificar despesas e escrever textos e promoções. As contas de dinheiro são feitas por regras fixas e conferidas, e nada é publicado ou enviado sem a sua aprovação.</p></details>
-      <details><summary>Vocês emitem nota fiscal?</summary><p>Ainda não. Em regra, o MEI não precisa emitir nota para consumidor pessoa física, só para empresas. Confirme com o seu contador.</p></details>
+      <details><summary>Vocês emitem nota fiscal por mim?</summary><p>Ainda não. Em regra, o MEI não precisa emitir nota para consumidor pessoa física, só para empresas. Confirme com o seu contador.</p></details>
     </div>
   </div>
 </section>
@@ -366,13 +532,14 @@ footer a{color:#CDE9E5}
 <section class="sec conf" id="conferencia">
   <div class="wrap">
     <div>
-      <span class="kick" style="color:#9BE6DD;background:rgba(46,196,182,.16)">Grátis</span>
-      <h2>Peça a conferência grátis do último mês</h2>
-      <p class="sub">Deixe seu contato. A gente te chama com o passo a passo para baixar os 3 arquivos e te devolve o relatório em até 2 dias úteis.</p>
-      <ul><li>Sem cartão e sem compromisso</li><li>Nunca pedimos senha</li><li>Se não acharmos nada, você não paga nada</li></ul>
+      <span class="selo">Grátis, sem compromisso</span>
+      <h2>Descubra quanto ficou para trás no último mês</h2>
+      <p class="sub">Deixe seu contato. A gente te chama no WhatsApp com o passo a passo para baixar os 3 arquivos e devolve o relatório em até 2 dias úteis.</p>
+      <ul><li>Sem cartão e sem compromisso</li><li>Nunca pedimos senha</li><li>Você garante o preço de fundador</li></ul>
     </div>
     <div>
       <form class="f" id="form-conf" novalidate>
+        <div class="plano-escolhido" id="planoEscolhido"></div>
         <label>Seu nome<input name="nome" autocomplete="name" required></label>
         <label>WhatsApp com DDD<input name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="(61) 9 0000-0000" required></label>
         <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
@@ -388,7 +555,7 @@ footer a{color:#CDE9E5}
       </form>
       <div class="ok" id="ok" hidden>
         <h3>Recebido!</h3>
-        <p>Vamos te chamar em até 1 dia útil com o passo a passo para baixar os arquivos. Enquanto isso, você já pode usar o <a href="app/">app grátis</a>.</p>
+        <p>Vamos te chamar no WhatsApp em até 1 dia útil com o passo a passo. Enquanto isso, você já pode usar o <a href="app/">app grátis</a>.</p>
       </div>
     </div>
   </div>
@@ -396,7 +563,6 @@ footer a{color:#CDE9E5}
 
 <section class="sec" id="gratis">
   <div class="wrap">
-    <span class="kick">Ferramentas grátis</span>
     <h2>Resolva agora, sem cadastro</h2>
     <div class="gratis">
       <a href="auditoria-maquininha/"><b>Auditoria da maquininha</b><span>Suba o extrato e veja se a taxa bate com o contrato</span></a>
@@ -413,20 +579,83 @@ footer a{color:#CDE9E5}
 </section>
 </main>
 
+<div class="fixa" id="fixa"><span>Descubra quanto ficou para trás no seu caixa</span><a class="btn" href="#conferencia" data-cta="barra">Conferência grátis</a></div>
+
 <footer>
   <div class="wrap">
-    <span>© 2026 Micro no Controle · Ferramenta de gestão: não substitui contador nem advogado. Usamos o pixel da Meta para medir visitas e anúncios.</span>
-    <span><a href="privacidade/">Privacidade</a> · <a href="afiliados/">Seja afiliado</a> · <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a> · <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a></span>
+    <span>© 2026 Micro no Controle. Ferramenta de gestão: não substitui contador nem advogado. Usamos o pixel da Meta para medir visitas e anúncios.</span>
+    <span><a href="privacidade/">Privacidade</a> · <a href="termos/">Termos</a> · <a href="afiliados/">Seja afiliado</a> · <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a> · <a href="mailto:contato@micronocontrole.com">contato@micronocontrole.com</a></span>
   </div>
 </footer>
 
 <script>
 (function(){
+  /* Links de assinatura na Hotmart. Quando estiverem prontos, cole aqui e os botões dos planos passam a abrir o pagamento. */
+  var HOTMART={
+    essencial:{mes:'',ano:''},
+    divulgacao:{mes:'',ano:''},
+    acompanhamento:{mes:'',ano:''}
+  };
+  var reduz=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function brl(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR');}
+  function track(nome,dados){try{fbq('trackCustom',nome,dados||{});}catch(e){}}
+
+  /* frase que gira no topo */
+  var frases=['repasse da maquininha que não caiu','taxa acima do contrato','iFood pagando a menos','fiado esquecido no caderno','cliente que faltou sem avisar','boleto que vence amanhã'];
+  var g=document.getElementById('giro'),i=0;
+  if(g&&!reduz){setInterval(function(){i=(i+1)%frases.length;var b=document.createElement('b');b.id='giro';b.textContent=frases[i];g.replaceWith(b);g=b;},2600);}
+
+  /* calculadora */
+  var r=document.getElementById('vendas'),pct=2;
+  function calc(){var v=+r.value,m=v*pct/100;
+    document.getElementById('vendasTxt').textContent=brl(v);
+    document.getElementById('porMes').textContent=brl(m)+' por mês';
+    var vezes=Math.floor(m/29.99);
+    document.getElementById('porAno').textContent=brl(m*12)+' por ano.'+(vezes>=2?' Paga o plano Essencial '+vezes+' vezes.':' O plano Essencial custa R$ 29,99 por mês.');}
+  r.addEventListener('input',calc);
+  var calcUsada=false;r.addEventListener('change',function(){if(!calcUsada){calcUsada=true;track('UsouCalculadora');}});
+  document.querySelectorAll('.chips button').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.chips button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true');pct=parseFloat(b.getAttribute('data-p'));calc();});});
+  calc();
+
+  /* cards que giram (toque no celular) */
+  document.querySelectorAll('.vira').forEach(function(c){c.addEventListener('click',function(){
+    var v=c.classList.toggle('virado');c.setAttribute('aria-pressed',v?'true':'false');});});
+
+  /* mensal × anual e links da Hotmart */
+  var ciclo='mes';
+  function planos(){
+    document.querySelectorAll('.plano[data-p]').forEach(function(p){
+      var id=p.getAttribute('data-p'),pr=p.querySelector('.preco'),eq=p.querySelector('.eq'),a=p.querySelector('.btn');
+      pr.innerHTML=pr.getAttribute('data-'+ciclo)+' <small>/'+(ciclo==='mes'?'mês':'ano')+'</small>';
+      eq.textContent=ciclo==='ano'?eq.getAttribute('data-ano'):'';
+      var link=HOTMART[id]&&HOTMART[id][ciclo];
+      if(link){a.href=link;a.textContent='Assinar o '+p.querySelector('h3').textContent;a.removeAttribute('data-plano');a.setAttribute('data-hotmart',id);}
+    });
+  }
+  document.querySelectorAll('.toggle button').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.toggle button').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true');ciclo=b.getAttribute('data-ciclo');planos();});});
+  planos();
+
+  /* barra fixa no celular */
+  var fixa=document.getElementById('fixa'),conf=document.getElementById('conferencia'),hero=document.querySelector('.hero');
+  function barra(){var y=window.scrollY,h=hero.offsetHeight,c=conf.getBoundingClientRect();
+    fixa.classList.toggle('mostra',y>h*0.8&&!(c.top<window.innerHeight&&c.bottom>0));}
+  window.addEventListener('scroll',barra,{passive:true});barra();
+
+  /* formulário */
   var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse",
       E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015",origem:"entry.1160383430"};
-  var plano='';
-  try{var qp=new URLSearchParams(location.search).get('plano');if(qp&&/^[\wÀ-ú ]{3,30}$/.test(qp))plano=qp;}catch(e){}
-  document.querySelectorAll('[data-plano]').forEach(function(a){a.addEventListener('click',function(){plano=a.getAttribute('data-plano');});});
+  var plano='',cta='';
+  var aviso=document.getElementById('planoEscolhido');
+  function mostrarPlano(){if(plano){aviso.textContent='Plano escolhido: '+plano+'. Começamos pela conferência grátis e você garante o preço de fundador.';aviso.style.display='block';}}
+  try{var qp=new URLSearchParams(location.search).get('plano');if(qp&&/^[\wÀ-ú ]{3,30}$/.test(qp)){plano=qp;mostrarPlano();}}catch(e){}
+  document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a');if(!a)return;
+    if(a.hasAttribute('data-plano')){plano=a.getAttribute('data-plano');mostrarPlano();track('EscolheuPlano',{plano:plano});}
+    if(a.hasAttribute('data-cta'))cta=a.getAttribute('data-cta');
+    if(a.hasAttribute('data-hotmart')){try{fbq('track','InitiateCheckout',{content_name:a.getAttribute('data-hotmart')});}catch(e){}}});
   var f=document.getElementById('form-conf'),erro=document.getElementById('erro');
   f.addEventListener('submit',function(ev){
     ev.preventDefault();erro.style.display='none';
@@ -434,7 +663,7 @@ footer a{color:#CDE9E5}
     var dig=zap.replace(/\D/g,'');
     var msg=!nome?'Digite seu nome.':(dig.length<10||dig.length>13)?'Confira o WhatsApp com DDD.':!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)?'Confira o e-mail.':!tipo?'Escolha o tipo de negócio.':'';
     if(msg){erro.textContent=msg;erro.style.display='block';return;}
-    var origem='SITE conferencia'+(plano?' | plano '+plano:'')+(faixa?' | faixa '+faixa:'');
+    var origem='SITE conferencia'+(plano?' | plano '+plano:'')+(faixa?' | faixa '+faixa:'')+(cta?' | botao '+cta:'');
     try{origem+=' | '+(window.MNC_ORIGEM?MNC_ORIGEM():'desconhecida');}catch(e){}
     var d=new URLSearchParams();d.append(E.nome,nome);d.append(E.email,email);d.append(E.whatsapp,zap);d.append(E.tipo,tipo);d.append(E.origem,origem);
     try{var m=new URLSearchParams();m.append('fields[email]',email);m.append('fields[name]',nome);m.append('ml-submit','1');m.append('anticsrf','true');fetch('https://assets.mailerlite.com/jsonp/2741459/forms/202329636930062083/subscribe',{method:'POST',mode:'no-cors',body:m});}catch(e){}
