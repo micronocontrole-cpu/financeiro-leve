@@ -1024,7 +1024,7 @@
       it('/ferramentas/imposto-simples-nacional/', '📑', 'Imposto do Simples Nacional', 'Para quem já passou do MEI') +
       it('/ferramentas/lucro-e-ponto-de-equilibrio/', '📈', 'Lucro e ponto de equilíbrio', 'Quanto precisa vender por mês') +
       it('/diagnostico/', '🩺', 'Diagnóstico do caixa', '8 perguntas e uma nota de 0 a 100') + '</div>' +
-      '<h2>Sem tempo para fazer sozinho?</h2><div class="lista">' + it('/resolve/?src=app-biblioteca', '🤝', 'Micro no Controle Resolve', 'A gente organiza o seu financeiro pelo WhatsApp') + '</div></main>';
+      '<h2>Sem tempo para fazer sozinho?</h2><div class="lista">' + it('#/plano', '⭐', 'Planos pagos', 'Fechamento do mês, artes de promoção e acompanhamento') + '</div></main>';
     return { html: html };
   };
 
@@ -1035,7 +1035,7 @@
       ['Banco e conferências', [['#/conferencia', '📑', 'Relatório da conferência', 'Onde está a diferença e o que fazer'], ['#/extrato', '🏦', 'Extrato do banco', 'Separe pessoal × negócio e confira'], ['#/maquininha', '💳', 'Conferir maquininha', 'Acha taxa cobrada a mais'], ['#/ifood', '🛵', 'Conferir iFood', 'Comissão, taxas e mensalidade']]],
       ['Mercadoria e notas', [['#/estoque', '📦', 'Estoque', 'Produtos, custo e margem'], ['#/contagem', '🔢', 'Contagem', 'Conte e veja o que faltou'], ['#/devolucao', '↩️', 'Devolução de nota', 'Calcule a partir do XML']]],
       ['MEI e relatórios', [['#/mei', '🏛️', 'MEI: limite e DAS', 'Limite, DAS e relatório mensal'], ['#/lancamentos', '📋', 'Lançamentos', 'Tudo do mês, para editar']]],
-      ['Ajuda', [['#/biblioteca', '📚', 'Biblioteca', 'Planilhas e calculadoras grátis'], ['/resolve/?src=app', '🤝', 'Fazemos por você', 'A gente organiza seu financeiro'], ['#/backup', '💾', 'Backup', 'Salve no WhatsApp ou Drive'], ['#/ajustes', '⚙️', 'Ajustes', 'Negócio, Pix, taxas'], ['#/sobre', '💬', 'Ajuda e privacidade', 'Como o app cuida dos seus dados']]]
+      ['Ajuda', [['#/biblioteca', '📚', 'Biblioteca', 'Planilhas e calculadoras grátis'], ['#/plano', '⭐', 'Meu plano', 'Planos, preço de fundador e código de ativação'], ['#/backup', '💾', 'Backup', 'Salve no WhatsApp ou Drive'], ['#/ajustes', '⚙️', 'Ajustes', 'Negócio, Pix, taxas'], ['#/sobre', '💬', 'Ajuda e privacidade', 'Como o app cuida dos seus dados']]]
     ];
     var html = topo('Tudo do seu negócio', E().neg.nome) + '<main>' + g.map(function (s) {
       return '<h2>' + s[0] + '</h2><div class="grade">' + s[1].map(function (x) { return '<a class="ferr" href="' + x[0] + '"><span class="i">' + x[1] + '</span><b>' + x[2] + '</b><span>' + x[3] + '</span></a>'; }).join('') + '</div>';
