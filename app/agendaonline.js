@@ -354,7 +354,7 @@
         sincronizar().then(function () {
           if (!cache.neg) { var c = cfg(); c.negocio = ''; c.slug = ''; salvar(); }
           cache.carregado = cache.carregado || Date.now(); ouvir(); rotear();
-        }).catch(function (e) { $('#lErro', el).innerHTML = '<div class="aviso">' + esc(erroTxt(e)) + '</div><button class="btn linha cheio" style="margin-top:10px" onclick="location.reload()">Tentar de novo</button>'; });
+        }).catch(function (e) { $('#lErro', el).innerHTML = '<div class="aviso">' + esc(erroTxt(e)) + '</div><button class="btn linha cheio" style="margin-top:10px" id="lRecarregar">Tentar de novo</button>'; var br = $('#lRecarregar', el); if (br) br.onclick = function () { location.reload(); }; });
       } };
     }
     return { html: telaPainel(), montar: function (el) {

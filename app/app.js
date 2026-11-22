@@ -594,6 +594,7 @@
       '<div class="kpis"><div><b>' + brl(t.despesas) + '</b><span>Despesas</span></div><div><b>' + brl(t.vendas - t.despesas) + '</b><span>Sobrou</span></div><div><b>' + brl(t.retiradas) + '</b><span>Pra casa</span></div></div>' +
       '<p style="margin-top:12px;font-size:14px;color:#BFE3DE">Hoje: <b style="color:#fff">' + brl(t.hoje) + '</b> em vendas' + (totDev ? ' · Na rua (fiado): <b style="color:#fff">' + brl(totDev) + '</b>' : '') + '</p></div>' +
       '<div class="linhaBtns"><button class="btn mint" id="iVenda">+ Venda</button><button class="btn claro" id="iDesp">+ Despesa</button></div>' +
+      '<button class="btn linha cheio" id="iFalar" style="margin-top:10px">🎤 Falar ou escrever o que aconteceu</button>' +
       alertas.slice(0, 5).map(function (a) { return '<a class="alerta ' + a.c + '" href="' + a.h + '" style="text-decoration:none;color:inherit"><span class="ic">' + a.i + '</span><span class="tx"><b>' + esc(a.b) + '</b><span>' + esc(a.s) + '</span></span><span>›</span></a>'; }).join('') +
       '<h2>Últimos lançamentos</h2>' + listaMov(ult, 'Nada lançado ainda. Toque em <b>+</b> para lançar sua primeira venda.') +
       (E.mov.length > 6 ? '<a class="btn linha cheio" style="margin-top:10px" href="#/lancamentos">Ver todos</a>' : '') +
@@ -602,6 +603,7 @@
       if ($('#iSairEx', el)) $('#iSairEx', el).onclick = sairDoExemplo;
       $('#iVenda', el).onclick = function () { abrirLancar({ tipo: 'venda' }); };
       $('#iDesp', el).onclick = function () { abrirLancar({ tipo: 'despesa' }); };
+      var bf = $('#iFalar', el); if (window.MNCX && MNCX.falar) bf.onclick = function () { MNCX.falar.abrir(); }; else bf.remove();
       ligarMov(el);
     } };
   };
@@ -721,6 +723,7 @@
     var html = topo('Agenda', 'Seus horários e lembretes') + '<main>' +
       '<button class="btn mint cheio" id="agNovo">+ Marcar horário</button>' +
       '<a class="item" href="#/agendaonline" style="margin-top:10px;border:1px solid var(--line);border-radius:14px;background:var(--paper);text-decoration:none;color:inherit"><span class="av">🔗</span><span class="meio"><b>Link para o cliente marcar sozinho</b><span>' + (E.nuvem && E.nuvem.pend ? E.nuvem.pend + ' pedido(s) esperando você' : 'Ele escolhe um horário livre e você aceita') + '</span></span><span>›</span></a>' +
+      (window.MNCX && MNCX.atraso && MNCX.atraso.quantos() ? '<button class="btn linha cheio" style="margin-top:10px" id="agAtraso">⏰ Estou atrasado · avisar os próximos</button>' : '') +
       (pend.length ? '<h2>Ficou em aberto</h2>' + pend.map(cartao).join('') : '') +
       (futuros.length ? Object.keys(grupos).map(function (d) { return '<h2 style="text-transform:capitalize">' + diaRel(d) + '</h2>' + grupos[d].map(cartao).join(''); }).join('') :
         '<div class="lista" style="margin-top:14px"><div class="vazio"><span class="ic">📅</span>Nenhum horário marcado.<br>Marque e mande o lembrete no WhatsApp com 1 toque — menos gente falta.</div></div>') +
@@ -728,6 +731,7 @@
       '</main>';
     return { html: html, montar: function (el) {
       $('#agNovo', el).onclick = function () { abrirHorario(); };
+      var bat = $('#agAtraso', el); if (bat) bat.onclick = function () { MNCX.atraso.abrir(); };
       function ach(id) { return E.ag.filter(function (x) { return x.id === id; })[0]; }
       $$('[data-lem]', el).forEach(function (b) { b.onclick = function () {
         var a = ach(b.dataset.lem);
@@ -943,7 +947,7 @@
     if (window.XLSX) return Promise.resolve();
     if (xlsxCarregando) return xlsxCarregando;
     xlsxCarregando = new Promise(function (ok, erro) {
-      var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      var s = document.createElement('script'); s.src = '/app/vendor/xlsx-0.18.5.full.min.js';
       s.onload = function () { ok(); }; s.onerror = function () { xlsxCarregando = null; erro(new Error('Sem internet para abrir Excel. Tente de novo ou exporte em CSV.')); };
       document.head.appendChild(s);
     });
@@ -1222,11 +1226,12 @@
 
   ROTAS.sobre = function () {
     var html = topo('Ajuda e privacidade', '', '#/mais') + '<main><div class="card">' +
-      '<h2 style="margin-top:0">Seus dados são seus</h2><p>Tudo o que você lança fica guardado <b>só neste aparelho</b>. Não temos servidor com os seus dados, não vemos suas vendas e nem seus clientes. Os extratos que você confere são lidos no próprio celular e não são enviados para ninguém.</p>' +
+      '<h2 style="margin-top:0">Seus dados são seus</h2><p>Vendas, despesas, clientes, fiado e agenda ficam guardados <b>só neste aparelho</b>. Não vemos suas vendas nem seus clientes. Os extratos e relatórios que você abre são lidos aqui mesmo, sem sair do celular.</p>' +
+      '<p style="margin-top:10px">Só o <b>link de agendamento</b> e o <b>Acompanhe seu pedido</b> usam nosso servidor, e só quando você ativa: eles guardam o necessário para o cliente marcar o horário ou ver a etapa do pedido. Cada negócio só acessa os próprios dados.</p>' +
       '<p style="margin-top:10px">O app não mexe no seu dinheiro: o Pix vai direto para a sua conta.</p>' +
       '<h2>Como instalar na tela inicial</h2><p><b>Android (Chrome):</b> menu ⋮ › "Adicionar à tela inicial" ou "Instalar app".<br><b>iPhone (Safari):</b> botão compartilhar › "Adicionar à Tela de Início".</p>' +
       '<h2>Dúvidas ou ideias</h2><p>Escreva para <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a>.</p>' +
-      '<p class="peq muted" style="margin-top:14px">O app ajuda a organizar e conferir, mas não é contador nem consultoria financeira. <a href="/privacidade/">Política de privacidade</a>.</p></div></main>';
+      '<p class="peq muted" style="margin-top:14px">O app ajuda a organizar e conferir, mas não é contador nem consultoria financeira. <a href="/privacidade/">Política de privacidade</a> · <a href="/termos/">Termos de uso</a>.</p></div></main>';
     return { html: html };
   };
 

@@ -6,7 +6,7 @@
   'use strict';
   var URL = 'https://vuwxwcuafazwnslbxaqk.supabase.co';
   var CHAVE = 'sb_publishable_4DKK36JnNpm9hWtZ1tLfuQ_6zE8jXpn';
-  var LIB = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js';
+  var LIB = '/app/vendor/supabase-2.117.3.js'; // cópia própria: não depende de CDN de terceiros
   var clientes = {}, lib = null;
   function carregarLib() {
     if (window.supabase && window.supabase.createClient) return Promise.resolve();
