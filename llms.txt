@@ -1,0 +1,29 @@
+# Micro no Controle
+
+> Ferramenta de gestão do caixa para MEI e pequenos negócios no Brasil (lanchonetes, deliveries, salões, barbearias, comércios e serviços). Confere maquininha de cartão, iFood e extrato do banco, mostra o dinheiro que ficou para trás e entrega um relatório simples todo mês. Não substitui o contador: cuida do caixa do dia a dia, não de impostos oficiais e declarações.
+
+## O que faz
+- Conferência mensal de repasses da maquininha, do iFood e do banco, com o valor que ficou para trás e como cobrar.
+- Auditoria da taxa da maquininha (grátis).
+- App grátis no celular, sem cadastro: vendas, despesas, fiado com cobrança por Pix no WhatsApp, contas a pagar, previsão de caixa, agenda com link de agendamento, orçamentos, estoque e limite do MEI/DAS.
+- Promoções, artes e cardápios feitos com os números de vendas do próprio negócio, e respostas a avaliações do Google (plano Divulgação).
+
+## Planos
+- Grátis: R$ 0.
+- Essencial: R$ 29,99/mês (fechamento automático do mês e conferências).
+- Divulgação: R$ 49,90/mês (tudo do Essencial + artes, cardápio e Google em dia).
+- Com acompanhamento: R$ 99/mês (relatório revisado por uma pessoa e atendimento pelo WhatsApp).
+- Anual: paga 10 meses e usa 12. Pagamento pela Hotmart (Pix, cartão ou boleto). Cancela quando quiser; 7 dias para desistir.
+
+## Links
+- [Página inicial e conferência grátis](https://micronocontrole.com/)
+- [App grátis](https://micronocontrole.com/app/)
+- [Auditoria da maquininha](https://micronocontrole.com/auditoria-maquininha/)
+- [Calculadora de taxa da maquininha](https://micronocontrole.com/ferramentas/taxa-da-maquininha/)
+- [DAS do MEI](https://micronocontrole.com/ferramentas/das-mei/)
+- [Kit grátis de planilhas](https://micronocontrole.com/planilha-gratis/)
+- [Política de privacidade](https://micronocontrole.com/privacidade/)
+- [Termos de uso](https://micronocontrole.com/termos/)
+
+## Contato
+contato@micronocontrole.com
