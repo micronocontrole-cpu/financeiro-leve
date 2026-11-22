@@ -425,6 +425,7 @@ footer a{color:#CDE9E5}
   var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse",
       E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015",origem:"entry.1160383430"};
   var plano='';
+  try{var qp=new URLSearchParams(location.search).get('plano');if(qp&&/^[\wÀ-ú ]{3,30}$/.test(qp))plano=qp;}catch(e){}
   document.querySelectorAll('[data-plano]').forEach(function(a){a.addEventListener('click',function(){plano=a.getAttribute('data-plano');});});
   var f=document.getElementById('form-conf'),erro=document.getElementById('erro');
   f.addEventListener('submit',function(ev){
