@@ -406,7 +406,7 @@
       $('#eArq', el).onchange = function (e) {
         var file = e.target.files[0]; if (!file) return;
         $('#eMsg', el).innerHTML = '<p class="muted" style="margin-top:10px">Lendo o extrato…</p>';
-        importarExtrato(file).then(aposImportar).catch(function (err) { $('#eMsg', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Se continuar, mande o arquivo (sem dados sensíveis) para micronocontrole@gmail.com que a gente ajusta o leitor.</div>'; });
+        importarExtrato(file).then(aposImportar).catch(function (err) { $('#eMsg', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Se continuar, mande o arquivo (sem dados sensíveis) para contato@micronocontrole.com que a gente ajusta o leitor.</div>'; });
         e.target.value = '';
       };
       if ($('#eEx', el)) $('#eEx', el).onclick = function () { aposImportar(exemploExtrato().map(function (t) { t.ex = true; return t; })); };
@@ -996,7 +996,7 @@
         $('#cfImp', c).onclick = function () { imprimir(impressaoRelatorio(r, E().neg.nome)); };
         $('#cfWa', c).onclick = function () { window.open(K.linkWa('', textoResumo(r, E().neg.nome)), '_blank'); };
       }
-      function erro(err) { $('#cfRes', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Confira se é o relatório de <b>vendas</b> (com valor bruto e taxa ou valor líquido). Se continuar, mande o arquivo (sem dados sensíveis) para micronocontrole@gmail.com que a gente ajusta o leitor.</div>'; }
+      function erro(err) { $('#cfRes', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Confira se é o relatório de <b>vendas</b> (com valor bruto e taxa ou valor líquido). Se continuar, mande o arquivo (sem dados sensíveis) para contato@micronocontrole.com que a gente ajusta o leitor.</div>'; }
       $('#cfEx', el).onclick = function () { var ex = exemploConferencia(); try { rodar(ex.rows, Motor.detectar(ex.rows), ex); } catch (e) { erro(e); } };
       $('#cfArq', el).onchange = function (e) {
         var file = e.target.files[0]; if (!file) return;
@@ -1014,9 +1014,8 @@
     var it = function (h, i, t, s, ext) { return '<a class="item" href="' + h + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + ' style="text-decoration:none;color:inherit"><span class="av" style="background:#fff;border:1px solid var(--line)">' + i + '</span><span class="meio"><b>' + t + '</b><span>' + s + '</span></span><span>›</span></a>'; };
     var html = topo('Biblioteca', 'Materiais e ferramentas grátis', '#/mais') + '<main>' +
       '<h2 style="margin-top:4px">Para baixar</h2><div class="lista">' +
-      it('/planilha-gratis/arquivo/kit-lite-gratis-micro-no-controle.zip', '📦', 'Kit Lite grátis', 'Fechamento de caixa, conferência de cartões, retirada e recibo (.zip)') +
-      it('/planilha-gratis/arquivo/planilha-fechamento-de-caixa-gratis.xlsx', '📊', 'Planilha de fechamento de caixa', 'Excel, 30 dias') +
-      it('https://pay.hotmart.com/K108084778Q?src=app-biblioteca', '⭐', 'Pacote Completo do Pequeno Negócio', '9 planilhas, modelos, Planner 2027 e guias', true) + '</div>' +
+      it('/planilhas/arquivo/kit-planilhas-premium-micro-no-controle.zip', '📦', 'Kit de planilhas premium', 'As 7 planilhas de uma vez (.zip)') +
+      it('/planilhas/', '📊', 'Ver cada planilha', 'Gestão do mês, recebimentos, preço, contas, estoque, MEI e caixa') + '</div>' +
       '<h2>Para o seu balcão</h2><div class="lista">' + it('#/plaquinha', '🪧', 'Plaquinha de avaliação e Pix', 'Imagem pronta para imprimir e pôr no acrílico') + '</div>' +
       '<h2>Calculadoras no site</h2><div class="lista">' +
       it('/ferramentas/taxa-da-maquininha/', '💳', 'Taxa da maquininha', 'Quanto você paga de verdade') +
@@ -1031,7 +1030,7 @@
 
   R.mais = function () {
     var g = [
-      ['Vender e receber', [['#/agendaonline', '🔗', 'Link de agendamento', 'Cliente marca sozinho, você aceita'], ['#/acompanhar', '📍', 'Acompanhe seu pedido', 'Cliente vê cada etapa pelo link'], ['#/fiado', '📒', 'Quem me deve', 'Fiado e cobrança no Pix'], ['#/agenda', '📅', 'Agenda', 'Horários, lembrete e sinal'], ['#/orcamentos', '📝', 'Orçamentos', 'Bonito no WhatsApp, com sinal'], ['#/calculadora', '🧮', 'Quanto cobrar', 'Preço certo no cartão e no iFood']]],
+      ['Vender e receber', [['#/agendaonline', '🔗', 'Link de agendamento', 'Cliente marca sozinho, você aceita'], ['#/fiado', '📒', 'Quem me deve', 'Fiado e cobrança no Pix'], ['#/agenda', '📅', 'Agenda', 'Horários, lembrete e sinal'], ['#/orcamentos', '📝', 'Orçamentos', 'Bonito no WhatsApp, com sinal'], ['#/calculadora', '🧮', 'Quanto cobrar', 'Preço certo no cartão e no iFood']]],
       ['Pagar e planejar', [['#/contas', '🗓️', 'Contas a pagar', 'Vencimentos e contas fixas'], ['#/caixa', '🔮', 'Vai faltar dinheiro?', 'O dia do aperto, antes de chegar']]],
       ['Banco e conferências', [['#/conferencia', '📑', 'Relatório da conferência', 'Onde está a diferença e o que fazer'], ['#/extrato', '🏦', 'Extrato do banco', 'Separe pessoal × negócio e confira'], ['#/maquininha', '💳', 'Conferir maquininha', 'Acha taxa cobrada a mais'], ['#/ifood', '🛵', 'Conferir iFood', 'Comissão, taxas e mensalidade']]],
       ['Mercadoria e notas', [['#/estoque', '📦', 'Estoque', 'Produtos, custo e margem'], ['#/contagem', '🔢', 'Contagem', 'Conte e veja o que faltou'], ['#/devolucao', '↩️', 'Devolução de nota', 'Calcule a partir do XML']]],

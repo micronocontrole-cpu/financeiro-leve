@@ -152,7 +152,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
   <!-- PASSO 3 -->
   <section class="card" id="passo3" hidden>
     <div class="step"><b>3</b><h2>Qual é a taxa do seu contrato?</h2></div>
-    <p style="font-size:15.5px;color:#34474A">Ao lado está a taxa que a maquininha <b>cobrou de verdade</b>. Se você sabe a taxa combinada, coloque. Se não souber, deixe em branco: usamos a <b>menor taxa que se repete no seu extrato</b> como referência.</p>
+    <p style="font-size:15.5px;color:#34474A">Ao lado está a taxa que a maquininha <b>cobrou de verdade</b>. Coloque a <b>taxa do seu contrato</b> (está no app ou no contrato da maquininha). Só com ela o resultado vale como cobrança. Se deixar em branco, usamos a menor taxa que se repete no extrato e o resultado aparece como <b>estimativa</b>: ela pode não ser a taxa combinada.</p>
     <div class="scroll"><table class="tbl" id="tabTaxas"><thead><tr><th>Modalidade</th><th class="n">Vendas</th><th class="n">Taxa cobrada (média)</th><th class="n">Taxa do contrato</th></tr></thead><tbody></tbody></table></div>
     <div id="avisos"></div>
     <button class="btn wide" type="button" id="auditar" style="margin-top:18px">Fazer a auditoria</button>
@@ -162,7 +162,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
   <section class="card" id="resultado" hidden aria-live="polite">
     <div class="printhead"><h2>Relatório de auditoria das taxas do cartão</h2><p id="phData"></p></div>
     <div class="big">
-      <small>Cobrado acima da taxa de referência</small>
+      <small id="rRotulo">Cobrado acima da taxa do contrato</small>
       <strong id="rTotal">R$ 0,00</strong>
       <p id="rSub"></p>
     </div>
@@ -187,21 +187,19 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
     <p class="fine">Esta auditoria compara o que foi cobrado com a taxa de referência informada. Ela não substitui o seu contrato nem o seu contador. Para pedir a correção, fale com a sua maquininha com este relatório em mãos.</p>
 
     <form class="lead" id="lead" novalidate>
-      <h3>Quer que a gente confira isso todo mês para você?</h3>
-      <p>É o que fazemos no <a href="/resolve/"><b>Micro no Controle Resolve</b></a>: você manda os extratos pelo WhatsApp e a gente confere a maquininha e o iFood, organiza contas e fiado e te mostra todo mês quanto sobrou. A partir de R$ 297/mês, sem fidelidade. Deixe seu contato para um diagnóstico grátis e receba o Kit Lite agora.</p>
+      <h3>Agora conferir o iFood e o banco</h3>
+      <p>A auditoria olha a taxa. A conferência grátis vai além: compara as vendas da maquininha e do iFood com o que caiu no banco e mostra repasse que não caiu, com data e valor. A primeira é grátis e sem senha.</p>
       <div class="g">
         <div><label for="f-nome">Seu nome</label><input type="text" id="f-nome" autocomplete="name" required></div>
-        <div><label for="f-email">Seu e-mail</label><input type="email" id="f-email" inputmode="email" autocomplete="email" required></div>
-        <div><label for="f-zap">WhatsApp (opcional)</label><input type="tel" id="f-zap" inputmode="tel" autocomplete="tel"></div>
-        <div><label for="f-tipo">Tipo de negócio</label><select id="f-tipo" required><option value="">Escolha</option><option>Restaurante</option><option>Bar ou lanchonete</option><option>Padaria ou café</option><option>Salão ou barbearia</option><option>Loja de roupas</option><option>Comércio ou loja</option><option>Serviços</option><option>Outro</option></select></div>
+        <div><label for="f-zap">WhatsApp com DDD</label><input type="tel" id="f-zap" inputmode="tel" autocomplete="tel" required></div>
       </div>
       <div id="msgLead"></div>
-      <button class="btn wide" type="submit" style="margin-top:14px">Quero o diagnóstico grátis + o Kit Lite</button>
-      <p class="fine">Você vai receber por e-mail o Kit Lite e algumas dicas e ofertas da Micro no Controle. Para sair, é só clicar no link no fim de qualquer e-mail. Os dados do extrato não são enviados. Veja a <a href="/privacidade/">Política de Privacidade</a>.</p>
+      <button class="btn wide" type="submit" style="margin-top:14px">Quero a conferência grátis</button>
+      <p class="fine">A gente te chama no WhatsApp com o passo a passo. Os dados do extrato que você auditou aqui não são enviados. Veja a <a href="/privacidade/">Política de Privacidade</a>.</p>
     </form>
     <div id="obrigado" class="ok" hidden>
-      <b>Pronto, você está na lista!</b> O Kit Lite já está a caminho do seu e-mail.
-      <div class="row"><a class="btn" href="../planilha-gratis/arquivo/kit-lite-gratis-micro-no-controle.zip" download>Baixar o Kit Lite agora (.zip)</a></div>
+      <b>Recebido!</b> Vamos te chamar no WhatsApp em até 1 dia útil.
+      <div class="row"><a class="btn" href="/planilhas/">Enquanto isso, baixe as planilhas premium grátis</a></div>
     </div>
   </section>
 </main>
@@ -344,8 +342,10 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
     $('rTotal').textContent=brl(a.totalAcima);
     $('rTotal').className=a.totalAcima>0?'':'zero';
     var per=a.inicio?(' entre '+dt(a.inicio)+' e '+dt(a.fim)):'';
+    var estimado=a.grupos.some(function(g){return g.mod!=='outro'&&g.qtd&&g.fonte!=='contrato'});
+    $('rRotulo').textContent=estimado?'Estimativa: acima da menor taxa do seu extrato':'Cobrado acima da taxa do contrato';
     $('rSub').innerHTML=a.totalAcima>0
-      ? a.acima.length+' venda(s) cobrada(s) acima'+per+'.'+(a.anualAcima?' No ritmo deste extrato, isso dá cerca de <b>'+brl(a.anualAcima)+' por ano</b>.':'')
+      ? a.acima.length+' venda(s) cobrada(s) acima'+per+'.'+(estimado?' <b>É uma estimativa:</b> sem a taxa do contrato, comparamos com a menor taxa que se repete no extrato. Coloque a taxa do contrato no passo 3 para confirmar antes de cobrar.':(a.anualAcima?' No ritmo deste extrato, isso dá cerca de <b>'+brl(a.anualAcima)+' por ano</b>.':''))
       : 'Nenhuma venda foi cobrada acima da referência'+per+'. Boa notícia!';
     $('kQtd').textContent=a.qtd;$('kBruto').textContent=brl(a.bruto);$('kTaxas').textContent=brl(a.desconto);$('kMedia').textContent=pct(a.taxaMedia);
     var h='';
@@ -359,7 +359,9 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
     $('tabVendas').querySelector('tbody').innerHTML=hv;
     $('blocoVendas').hidden=!a.acima.length;
     $('notaVendas').textContent=a.acima.length>60?'Mostrando as 60 maiores de '+a.acima.length+' vendas.':'Em ordem da maior diferença para a menor.';
-    var prox=a.totalAcima>0
+    var prox=a.totalAcima>0&&estimado
+      ? '<div class="warn"><b>Antes de cobrar:</b> confira a taxa no seu contrato ou no app da maquininha e coloque no passo 3. Se a menor taxa do extrato era promocional, a diferença pode ser só o fim da promoção.</div>'
+      : a.totalAcima>0
       ? '<div class="warn"><b>O que fazer agora:</b> salve este relatório em PDF, confira a taxa no seu contrato ou no app da maquininha e peça a correção no atendimento. Pergunte também se a sua taxa promocional acabou e se dá para renegociar.</div>'
       : '<div class="ok"><b>Dica:</b> sua taxa média é '+pct(a.taxaMedia)+'. Mesmo sem cobrança errada, vale comparar com outras maquininhas e pedir uma taxa menor na renovação.</div>';
     $('proximos').innerHTML=prox;
@@ -387,14 +389,13 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
   var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse",E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015",origem:"entry.1160383430"};
   $('lead').addEventListener('submit',function(e){
     e.preventDefault();
-    var nome=$('f-nome').value.trim(),email=$('f-email').value.trim(),zap=$('f-zap').value.trim(),tipo=$('f-tipo').value;
-    if(!nome||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||!tipo){msg('msgLead','err','Preencha nome, um e-mail válido e o tipo de negócio.');return}
+    var nome=$('f-nome').value.trim(),zap=$('f-zap').value.trim(),dig=zap.replace(/\D/g,'');
+    if(!nome||dig.length<10||dig.length>13){msg('msgLead','err','Preencha o nome e o WhatsApp com DDD.');return}
     msg('msgLead');
     var a=estado.aud||{};
-    var origem='auditoria-maquininha | achado '+brl(a.totalAcima||0)+' | taxa media '+pct(a.taxaMedia)+' | vendido '+brl(a.bruto||0);
+    var origem='auditoria-maquininha conferencia | achado '+brl(a.totalAcima||0)+' | taxa media '+pct(a.taxaMedia)+' | vendido '+brl(a.bruto||0);
     try{var o=window.MNC_ORIGEM&&window.MNC_ORIGEM();if(o)origem+=' | '+o}catch(x){}
-    var d=new FormData();d.append(E.nome,nome);d.append(E.email,email);d.append(E.whatsapp,zap);d.append(E.tipo,tipo);d.append(E.origem,origem);
-    try{var m=new URLSearchParams();m.append('fields[email]',email);m.append('fields[name]',nome);m.append('ml-submit','1');m.append('anticsrf','true');fetch('https://assets.mailerlite.com/jsonp/2741459/forms/202329636930062083/subscribe',{method:'POST',mode:'no-cors',body:m})}catch(x){}
+    var d=new FormData();d.append(E.nome,nome);d.append(E.email,'naoinformado@micronocontrole.com');d.append(E.whatsapp,zap);d.append(E.tipo,'Outro');d.append(E.origem,origem);
     var pronto=function(){try{fbq('track','Lead',{content_name:'Auditoria da maquininha',value:0,currency:'BRL'})}catch(x){}$('lead').hidden=true;$('obrigado').hidden=false};
     try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto)}catch(x){pronto()}
   });

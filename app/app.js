@@ -581,7 +581,8 @@
     var hojeAg = E.ag.filter(function (a) { return a.data === hoje() && a.status === 'marcado'; });
     if (hojeAg.length) alertas.push({ c: 'mt', i: '📅', b: hojeAg.length + (hojeAg.length > 1 ? ' horários hoje' : ' horário hoje'), s: 'Primeiro às ' + hojeAg.sort(function (a, b) { return a.hora < b.hora ? -1 : 1; })[0].hora + ' · lembrar no WhatsApp', h: '#/agenda' });
     var ultBk = E.cfg.ultimoBackup;
-    if (E.mov.length >= 10 && (!ultBk || somaDias(ultBk, 7) <= hoje())) alertas.push({ c: 'am', i: '💾', b: 'Faça o backup da semana', s: 'Se o celular quebrar, você não perde nada.', h: '#/backup' });
+    if (E.mov.length >= 3 && !ultBk) alertas.push({ c: 'am', i: '💾', b: 'Faça o seu primeiro backup', s: 'Seus dados ficam só neste celular. Leva 10 segundos e vai para o WhatsApp ou Drive.', h: '#/backup' });
+    else if (E.mov.length >= 10 && ultBk && somaDias(ultBk, 7) <= hoje()) alertas.push({ c: 'am', i: '💾', b: 'Backup desatualizado', s: 'O último foi em ' + dma(ultBk) + '. Se o celular quebrar, você perde o que veio depois.', h: '#/backup' });
     var confMes = function (tipo) { return E.conf.some(function (x) { return x.tipo === tipo && ymDe(x.data) === ym; }); };
     if ((E.neg.usaIfood || E.neg.setor === 'alimentacao') && !confMes('ifood')) alertas.push({ c: 'mt', i: '🛵', b: 'O iFood te cobrou certo?', s: 'Suba o relatório e o app confere pedido a pedido.', h: '#/ifood' });
     else if (/roupas|beleza|alimentacao/.test(E.neg.setor) && !confMes('maquininha')) alertas.push({ c: 'mt', i: '💳', b: 'A maquininha cobrou a taxa certa?', s: 'Confira o extrato do mês em 1 minuto.', h: '#/maquininha' });
@@ -1019,7 +1020,7 @@
         var file = e.target.files[0]; if (!file) return;
         $('#mqRes', el).innerHTML = '<p class="muted" style="margin-top:14px">Lendo o arquivo…</p>';
         lerArquivo(file, Motor.detectar).then(function (r) { rodar(r.rows, r.det, false); }).catch(function (err) {
-          $('#mqRes', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Confira se é o extrato de <b>vendas</b> (com valor bruto e taxa ou valor líquido). Se continuar, mande o arquivo para micronocontrole@gmail.com que a gente ajusta o leitor.</div>';
+          $('#mqRes', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Confira se é o extrato de <b>vendas</b> (com valor bruto e taxa ou valor líquido). Se continuar, mande o arquivo para contato@micronocontrole.com que a gente ajusta o leitor.</div>';
         });
         e.target.value = '';
       };
@@ -1072,7 +1073,7 @@
         var file = e.target.files[0]; if (!file) return;
         $('#ifRes', el).innerHTML = '<p class="muted" style="margin-top:14px">Lendo o relatório…</p>';
         lerArquivo(file, IFood.detectar).then(function (r) { rodar(r.rows, r.det, false); }).catch(function (err) {
-          $('#ifRes', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Use o relatório financeiro (conciliação ou extrato) do Portal do Parceiro. Se não funcionar, mande para micronocontrole@gmail.com <b>apagando dados de clientes</b>, que a gente ajusta o leitor.</div>';
+          $('#ifRes', el).innerHTML = '<div class="aviso">' + esc(err.message) + ' Use o relatório financeiro (conciliação ou extrato) do Portal do Parceiro. Se não funcionar, mande para contato@micronocontrole.com <b>apagando dados de clientes</b>, que a gente ajusta o leitor.</div>';
         });
         e.target.value = '';
       };
@@ -1227,10 +1228,10 @@
   ROTAS.sobre = function () {
     var html = topo('Ajuda e privacidade', '', '#/mais') + '<main><div class="card">' +
       '<h2 style="margin-top:0">Seus dados são seus</h2><p>Vendas, despesas, clientes, fiado e agenda ficam guardados <b>só neste aparelho</b>. Não vemos suas vendas nem seus clientes. Os extratos e relatórios que você abre são lidos aqui mesmo, sem sair do celular.</p>' +
-      '<p style="margin-top:10px">Só o <b>link de agendamento</b> e o <b>Acompanhe seu pedido</b> usam nosso servidor, e só quando você ativa: eles guardam o necessário para o cliente marcar o horário ou ver a etapa do pedido. Cada negócio só acessa os próprios dados.</p>' +
+      '<p style="margin-top:10px">Só o <b>link de agendamento</b> usa nosso servidor, e só quando você ativa: ele guarda o necessário para o cliente marcar o horário. Cada negócio só acessa os próprios dados.</p>' +
       '<p style="margin-top:10px">O app não mexe no seu dinheiro: o Pix vai direto para a sua conta.</p>' +
       '<h2>Como instalar na tela inicial</h2><p><b>Android (Chrome):</b> menu ⋮ › "Adicionar à tela inicial" ou "Instalar app".<br><b>iPhone (Safari):</b> botão compartilhar › "Adicionar à Tela de Início".</p>' +
-      '<h2>Dúvidas ou ideias</h2><p>Escreva para <a href="mailto:micronocontrole@gmail.com">micronocontrole@gmail.com</a>.</p>' +
+      '<h2>Dúvidas ou ideias</h2><p>Escreva para <a href="mailto:contato@micronocontrole.com">contato@micronocontrole.com</a>.</p>' +
       '<p class="peq muted" style="margin-top:14px">O app ajuda a organizar e conferir, mas não é contador nem consultoria financeira. <a href="/privacidade/">Política de privacidade</a> · <a href="/termos/">Termos de uso</a>.</p></div></main>';
     return { html: html };
   };

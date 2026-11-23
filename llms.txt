@@ -4,15 +4,16 @@
 
 ## O que faz
 - Conferência mensal de repasses da maquininha, do iFood e do banco, com o valor que ficou para trás e como cobrar.
-- Auditoria da taxa da maquininha (grátis).
+- Auditoria da taxa da maquininha (grátis). Sem a taxa do contrato, o resultado aparece como estimativa.
+- Planilhas premium grátis: gestão do mês com painel, conferência de recebimentos, preço e margem, contas e fiado, estoque, MEI em dia e fechamento de caixa.
 - App grátis no celular, sem cadastro: vendas, despesas, fiado com cobrança por Pix no WhatsApp, contas a pagar, previsão de caixa, agenda com link de agendamento, orçamentos, estoque e limite do MEI/DAS.
 - Promoções, artes e cardápios feitos com os números de vendas do próprio negócio, e respostas a avaliações do Google (plano Completo).
 
 ## Planos
-- Grátis: R$ 0.
+- Grátis: R$ 0 (app, ferramentas, planilhas e a primeira conferência).
 - Essencial: R$ 29,99/mês (fechamento automático do mês e conferências).
 - Completo com acompanhamento: R$ 49,90/mês (tudo do Essencial + relatório revisado por uma pessoa, atendimento pelo WhatsApp, artes, cardápio e Google em dia).
-- Anual: paga 10 meses e usa 12. Pagamento pela Hotmart (Pix, cartão ou boleto). Cancela quando quiser; 7 dias para desistir.
+- Anual: paga 10 meses e usa 12. Pagamento pela Hotmart (Pix, cartão ou boleto). Cancela quando quiser; 7 dias para desistir. Preço de fundador para as 30 primeiras assinaturas, até 31/12/2026.
 
 ## Links
 - [Página inicial e conferência grátis](https://micronocontrole.com/)
@@ -20,9 +21,14 @@
 - [Auditoria da maquininha](https://micronocontrole.com/auditoria-maquininha/)
 - [Calculadora de taxa da maquininha](https://micronocontrole.com/ferramentas/taxa-da-maquininha/)
 - [DAS do MEI](https://micronocontrole.com/ferramentas/das-mei/)
-- [Kit grátis de planilhas](https://micronocontrole.com/planilha-gratis/)
+- [Planilhas premium grátis](https://micronocontrole.com/planilhas/)
 - [Política de privacidade](https://micronocontrole.com/privacidade/)
 - [Termos de uso](https://micronocontrole.com/termos/)
+
+## O que não fazemos
+- Não substituímos o contador, não emitimos nota fiscal nem guias oficiais (use o app MEI do governo para o DAS).
+- Não pedimos senha de banco, maquininha ou iFood.
+- Não garantimos que o valor volte: apontamos a diferença, e quem cobra é o próprio negócio.
 
 ## Contato
 - E-mail: contato@micronocontrole.com

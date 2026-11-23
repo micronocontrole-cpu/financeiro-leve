@@ -1,0 +1,12 @@
+# Páginas antigas, unificadas em 23/11/2026
+/resolve            /#planos      301
+/resolve/           /#planos      301
+/kit                /planilhas/   301
+/kit/               /planilhas/   301
+/afiliados          /             301
+/afiliados/         /             301
+/planilha-gratis    /planilhas/   301
+/planilha-gratis/   /planilhas/   301
+/planilha-gratis/arquivo/*  /planilhas/arquivo/kit-planilhas-premium-micro-no-controle.zip  302
+/acompanhar         /             302
+/acompanhar/        /             302

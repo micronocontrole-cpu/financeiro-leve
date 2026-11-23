@@ -94,7 +94,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
     <form id="captura" hidden novalidate>
       <div class="score">
         <div class="ring" id="ring1"><b id="nota1">0</b></div>
-        <div><h2 id="nivel1"></h2><p>Sua nota está pronta. Deixe seu contato para ver os pontos onde o dinheiro está escapando e baixar as planilhas grátis.</p></div>
+        <div><h2 id="nivel1"></h2><p>Sua nota está pronta. Deixe seu contato para ver os pontos onde o dinheiro está escapando e baixar as planilhas premium grátis.</p></div>
       </div>
       <label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required>
       <label for="f-email">Seu melhor e-mail</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required>
@@ -103,7 +103,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
       <select id="f-tipo" name="tipo" required><option value="">Escolha</option><option>Restaurante</option><option>Bar ou lanchonete</option><option>Padaria ou café</option><option>Comércio ou loja</option><option>MEI de serviços</option><option>Outro</option></select>
       <p class="err" id="erro" role="alert"></p>
       <button class="btn" type="submit" style="margin-top:20px">Ver meu resultado completo</button>
-      <p class="fine">Você vai receber por e-mail o resultado, o Kit Lite e algumas dicas e ofertas da Micro no Controle. Para sair, é só clicar no link no fim de qualquer e-mail.</p>
+      <p class="fine">Você vai receber por e-mail o resultado, as planilhas premium grátis e algumas dicas da Micro no Controle. Para sair, é só clicar no link no fim de qualquer e-mail.</p>
     </form>
 
     <div id="resultado" hidden>
@@ -115,18 +115,13 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
       <div id="pontos"></div>
       <div class="box">
         <h3>Comece hoje, grátis</h3>
-        <p style="font-size:16.5px;color:#34474A;margin-bottom:14px">O Kit Lite tem a planilha de fechamento de caixa de 30 dias, a conferência de cartões da maquininha, a folha de retirada e o modelo de recibo.</p>
-        <a class="btn" id="baixar" href="../planilha-gratis/arquivo/kit-lite-gratis-micro-no-controle.zip" download>Baixar o Kit Lite grátis (.zip)</a>
+        <p style="font-size:16.5px;color:#34474A;margin-bottom:14px">As planilhas premium do Micro no Controle: gestão do mês com painel, conferência de recebimentos, preço e margem, contas e fiado, estoque, MEI em dia e fechamento de caixa. Excel e Google Planilhas.</p>
+        <a class="btn" id="baixar" href="../planilhas/arquivo/kit-planilhas-premium-micro-no-controle.zip" download>Baixar as planilhas premium (.zip)</a>
       </div>
       <div class="offer">
-        <h3>Quer resolver tudo de uma vez?</h3>
-        <p>O Pacote Completo do Pequeno Negócio tem as 9 planilhas (caixa, cartões, precificação, contas a pagar, impostos do Simples e MEI, resultado do mês e mais), 14 modelos em Word, 7 imprimíveis com o Planner 2027 e 3 guias. R$ 97, ou R$ 67 com o cupom <code>MEI</code> até 30/11/2026. Garantia de 7 dias.</p>
-        <a class="btn" href="https://pay.hotmart.com/K108084778Q?src=diagnostico">Quero o Pacote Completo</a>
-      </div>
-      <div class="offer" id="ofertaResolve" style="background:#14504F">
-        <h3>Sem tempo para arrumar isso sozinho?</h3>
-        <p>No <b>Micro no Controle Resolve</b>, você manda os comprovantes pelo WhatsApp e a gente organiza: confere a maquininha e o iFood, cuida das contas e do fiado e te mostra todo mês quanto sobrou. A partir de R$ 297/mês, sem fidelidade, começando por um diagnóstico grátis.</p>
-        <a class="btn" href="/resolve/?src=diagnostico#diagnostico">Quero que façam por mim</a>
+        <h3>Quer saber se a maquininha e o iFood pagaram certo?</h3>
+        <p>Mande 3 arquivos que você baixa no celular e, em até 2 dias úteis, mostramos o que bateu, o que faltou e o texto pronto para cobrar. A primeira conferência é grátis e sem senha.</p>
+        <a class="btn" href="/?src=diagnostico#conferencia">Quero a conferência grátis</a>
       </div>
       <p class="fine" style="text-align:center">O diagnóstico é uma orientação geral, não substitui o seu contador.</p>
     </div>
@@ -137,14 +132,14 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
 <script>
 (function(){
   var Q=[
-    {t:'Você fecha o caixa todo dia, contando a gaveta e comparando com o que deveria ter?', a:'Caixa sem fechamento diário', d:'Sem fechar o caixa no dia, uma falta pequena (troco errado, retirada sem registro) só aparece no fim do mês, quando já não dá para saber o que houve.', f:'Fechamento de Caixa (Kit Lite grátis)'},
-    {t:'Você confere se a maquininha pagou o valor certo de cada venda no cartão?', a:'Maquininha sem conferência', d:'Taxa cobrada acima do contrato e parcela que não caiu são comuns. Numa venda de R$ 1.000, R$ 12 a menos parece pouco, mas se repete todo dia.', f:'Conferência de Cartões (Kit Lite grátis)'},
-    {t:'Você sabe quanto custa fazer o seu produto mais vendido, e quanto sobra de margem?', a:'Preço sem conta de custo', d:'Sem a ficha de custo, é fácil vender muito e lucrar pouco, principalmente quando os insumos sobem e o preço fica parado.', f:'Precificação e Ficha Técnica (Pacote Completo)'},
-    {t:'A conta da empresa é separada da sua conta pessoal?', a:'Dinheiro da empresa misturado com o pessoal', d:'Segundo o Sebrae, 61% dos donos de pequenos negócios pagam contas da empresa com a conta pessoal. Misturado, ninguém sabe se o negócio dá lucro.', f:'Resultado do Mês (Pacote Completo)'},
-    {t:'Você tira um valor fixo por mês para você, em vez de pegar dinheiro do caixa quando precisa?', a:'Retiradas sem valor fixo', d:'Pegar do caixa conforme a necessidade esconde o lucro real e deixa o negócio sem reserva para os meses fracos.', f:'Resultado do Mês (Pacote Completo)'},
-    {t:'Você sabe quanto já faturou neste ano?', a:'Faturamento do ano sem acompanhamento', d:'O limite do MEI é de R$ 81 mil em 2026 e sobe para R$ 110 mil em 2027 (lei sancionada em 21/10/2026). Quem não acompanha o faturamento pode passar do limite sem perceber e pagar mais imposto.', f:'Controle do MEI e Impostos (Pacote Completo)'},
-    {t:'Você sabe quanto precisa vender por mês, no mínimo, para não ter prejuízo?', a:'Sem meta mínima de vendas', d:'Sem o ponto de equilíbrio, você só descobre que o mês deu prejuízo depois que ele acabou.', f:'Resultado do Mês e Ponto de Equilíbrio (Pacote Completo)'},
-    {t:'As contas a pagar estão anotadas em um só lugar, com a data de vencimento?', a:'Contas a pagar espalhadas', d:'Conta esquecida vira juros e multa. Ter tudo em uma lista com vencimento evita surpresa no fim do mês.', f:'Contas a Pagar (Pacote Completo)'}
+    {t:'Você fecha o caixa todo dia, contando a gaveta e comparando com o que deveria ter?', a:'Caixa sem fechamento diário', d:'Sem fechar o caixa no dia, uma falta pequena (troco errado, retirada sem registro) só aparece no fim do mês, quando já não dá para saber o que houve.', f:'planilha Fechamento de Caixa (grátis)'},
+    {t:'Você confere se a maquininha pagou o valor certo de cada venda no cartão?', a:'Maquininha sem conferência', d:'Taxa cobrada acima do contrato e parcela que não caiu são comuns. Numa venda de R$ 1.000, R$ 12 a menos parece pouco, mas se repete todo dia.', f:'planilha Conferência de Recebimentos (grátis) ou a conferência grátis'},
+    {t:'Você sabe quanto custa fazer o seu produto mais vendido, e quanto sobra de margem?', a:'Preço sem conta de custo', d:'Sem a ficha de custo, é fácil vender muito e lucrar pouco, principalmente quando os insumos sobem e o preço fica parado.', f:'planilha Preço e Margem (grátis)'},
+    {t:'A conta da empresa é separada da sua conta pessoal?', a:'Dinheiro da empresa misturado com o pessoal', d:'Segundo o Sebrae, 61% dos donos de pequenos negócios pagam contas da empresa com a conta pessoal. Misturado, ninguém sabe se o negócio dá lucro.', f:'planilha Gestão do Mês (grátis)'},
+    {t:'Você tira um valor fixo por mês para você, em vez de pegar dinheiro do caixa quando precisa?', a:'Retiradas sem valor fixo', d:'Pegar do caixa conforme a necessidade esconde o lucro real e deixa o negócio sem reserva para os meses fracos.', f:'planilha Gestão do Mês (grátis)'},
+    {t:'Você sabe quanto já faturou neste ano?', a:'Faturamento do ano sem acompanhamento', d:'O limite do MEI é de R$ 81 mil em 2026 e sobe para R$ 110 mil em 2027 (lei sancionada em 21/10/2026). Quem não acompanha o faturamento pode passar do limite sem perceber e pagar mais imposto.', f:'planilha MEI em Dia (grátis)'},
+    {t:'Você sabe quanto precisa vender por mês, no mínimo, para não ter prejuízo?', a:'Sem meta mínima de vendas', d:'Sem o ponto de equilíbrio, você só descobre que o mês deu prejuízo depois que ele acabou.', f:'planilha Gestão do Mês, com ponto de equilíbrio (grátis)'},
+    {t:'As contas a pagar estão anotadas em um só lugar, com a data de vencimento?', a:'Contas a pagar espalhadas', d:'Conta esquecida vira juros e multa. Ter tudo em uma lista com vencimento evita surpresa no fim do mês.', f:'planilha Contas e Fiado (grátis)'}
   ];
   var OP=[['Sim, sempre',2],['Às vezes',1],['Não',0]];
   var r=[], i=0, $=function(id){return document.getElementById(id)};
@@ -171,8 +166,8 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
     $('nota2').textContent=n;$('nivel2').textContent=nv[0];$('texto').textContent=nv[1];ring('ring2',n,nv[2]);
     var p=$('pontos'),tem=false;
     Q.forEach(function(q,k){if(r[k]<2){tem=true;var d=document.createElement('div');d.className='issue'+(r[k]===1?' mid':'');
-      d.innerHTML='<h3></h3><p></p><span class="tool"></span>';d.querySelector('h3').textContent=q.a;d.querySelector('p').textContent=q.d;d.querySelector('.tool').textContent='Resolve: '+q.f;p.appendChild(d)}});
-    if(!tem){var d=document.createElement('div');d.className='ok';d.textContent='Você respondeu "sim, sempre" em tudo. Parabéns! O Planner 2027 do Pacote Completo ajuda a manter essa rotina no ano que vem.';p.appendChild(d)}
+      d.innerHTML='<h3></h3><p></p><span class="tool"></span>';d.querySelector('h3').textContent=q.a;d.querySelector('p').textContent=q.d;d.querySelector('.tool').textContent='Como resolver: '+q.f;p.appendChild(d)}});
+    if(!tem){var d=document.createElement('div');d.className='ok';d.textContent='Você respondeu "sim, sempre" em tudo. Parabéns! As planilhas premium ajudam a manter essa rotina no ano que vem.';p.appendChild(d)}
     $('resultado').scrollIntoView({behavior:'smooth',block:'start'});
     try{$('baixar').click();}catch(e){}
   }

@@ -99,21 +99,26 @@ section{scroll-margin-top:70px}
 .faixa .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-top:16px;padding-bottom:16px;font-weight:700;font-size:16px}
 .faixa span{display:flex;align-items:center;gap:8px}
 
-/* calculadora */
-.calc{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px;align-items:stretch}
-.calc>*{min-width:0}
-.calc .caixa{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:28px}
-.calc label{display:block;font-weight:700;font-size:17px;margin-bottom:10px}
-.calc output{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,40px);color:var(--deep);margin-bottom:6px}
-.calc input[type=range]{width:100%;accent-color:var(--mint-ink);height:32px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.chips button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:15px;cursor:pointer}
-.chips button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
-.result{background:var(--tomate);color:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;justify-content:center}
-.result .grande{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,64px);line-height:1;margin:6px 0 10px}
-.result p{color:#FFE3DC;font-size:17px}
-.result .btn{margin-top:20px;align-self:flex-start}
-@media (max-width:860px){.calc{grid-template-columns:1fr}}
+/* o que a conferência entrega */
+.promessa{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--sol);border-radius:18px;padding:22px 24px;font-size:clamp(18px,2.2vw,21px);line-height:1.5;color:#22393B;max-width:820px}
+.niveis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.niveis>div{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+.niveis b{display:inline-block;font-size:14px;font-weight:800;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+.niveis .n1 b{background:#DDF5EF;color:#0B5D55}.niveis .n2 b{background:#FFF1C9;color:#6B4D00}.niveis .n3 b{background:#EEF2F2;color:#3B4B4D}
+.niveis p{font-size:16px;color:#3A4B4D}
+@media (max-width:820px){.niveis{grid-template-columns:1fr}}
+.arquivos{list-style:none;margin-top:22px;display:grid;gap:12px;counter-reset:a}
+.arquivos li{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px 14px;color:#DDF1EE;font-size:16px;counter-increment:a;display:grid;grid-template-columns:30px 1fr;gap:4px 10px}
+.arquivos li::before{content:counter(a);grid-row:span 2;width:28px;height:28px;border-radius:50%;background:var(--sol);color:#2A1F00;font-weight:800;display:grid;place-items:center}
+.arquivos li b{color:#fff}
+.arquivos li small{color:#A8CFCA;font-size:14.5px}
+.app-link{margin-top:16px;color:#CDE9E5;font-size:15.5px}
+.app-link a{color:#fff;font-weight:700}
+form.f fieldset{border:0;display:grid;gap:8px}
+form.f legend{font-weight:600;font-size:15.5px;margin-bottom:6px}
+form.f .opc{display:flex;gap:10px;flex-wrap:wrap}
+form.f .opc label{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:600;cursor:pointer}
+form.f .opc input{width:auto;accent-color:var(--mint-ink)}
 
 /* cards que giram */
 .giram{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
@@ -283,7 +288,7 @@ footer{background:#082829;color:#9CC4BF;padding:34px 0;font-size:14.5px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
 footer a{color:#CDE9E5}
 </style>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "Micro no Controle", "url": "https://micronocontrole.com/", "logo": "https://micronocontrole.com/img/favicon.svg", "email": "contato@micronocontrole.com", "telephone": "+55-61-98225-4407", "sameAs": ["https://www.instagram.com/solucoesmicronocontrole/"]}, {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Micro no Controle", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Android, iOS", "url": "https://micronocontrole.com/app/", "description": "Gestão do caixa para MEI e pequeno negócio: conferência de maquininha, iFood e banco, fiado com Pix, contas a pagar, agenda e promoções com os números do negócio.", "offers": [{"@type": "Offer", "name": "Grátis", "price": "0", "priceCurrency": "BRL"}, {"@type": "Offer", "name": "Essencial", "price": "29.99", "priceCurrency": "BRL"}, {"@type": "Offer", "name": "Completo com acompanhamento", "price": "49.90", "priceCurrency": "BRL"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Vocês substituem o meu contador?", "acceptedAnswer": {"@type": "Answer", "text": "Não. O contador cuida do governo: impostos oficiais, declarações e folha. A gente cuida do caixa do dia a dia: o que entrou, o que ficou para trás e o que vence. Os valores de imposto que mostramos são estimativas: confirme sempre com o seu contador."}}, {"@type": "Question", "name": "Preciso passar a senha do banco?", "acceptedAnswer": {"@type": "Answer", "text": "Nunca. Você baixa os arquivos no celular e manda para a gente. Não pedimos senha de banco, de maquininha nem do iFood."}}, {"@type": "Question", "name": "Como eu pago?", "acceptedAnswer": {"@type": "Answer", "text": "Pela Hotmart, no Pix, cartão ou boleto, todo mês ou uma vez por ano. A Hotmart é uma das maiores plataformas de pagamento digital do Brasil, e a gente não vê os dados do seu cartão."}}, {"@type": "Question", "name": "Posso cancelar quando quiser?", "acceptedAnswer": {"@type": "Answer", "text": "Sim, sem multa. O plano continua até o fim do período pago. E se desistir nos primeiros 7 dias, devolvemos o valor."}}, {"@type": "Question", "name": "E se a conferência não achar nada?", "acceptedAnswer": {"@type": "Answer", "text": "Ótimo: seu caixa está em dia. A primeira conferência é grátis e você não precisa assinar nada."}}, {"@type": "Question", "name": "Meus dados ficam seguros?", "acceptedAnswer": {"@type": "Answer", "text": "Usamos seus dados só para o seu relatório, seguindo a LGPD. Não vendemos seus dados. As poucas ferramentas que usamos (formulário, e-mail e medição de anúncios) estão listadas na política. Se você cancelar, apagamos os arquivos. Detalhes na política de privacidade."}}, {"@type": "Question", "name": "Vocês usam inteligência artificial?", "acceptedAnswer": {"@type": "Answer", "text": "Sim, para classificar despesas e escrever textos e promoções. As contas de dinheiro são feitas por regras fixas e conferidas, e nada é publicado ou enviado sem a sua aprovação."}}, {"@type": "Question", "name": "Vocês emitem nota fiscal por mim?", "acceptedAnswer": {"@type": "Answer", "text": "Ainda não. Em regra, o MEI não precisa emitir nota para consumidor pessoa física, só para empresas. Confirme com o seu contador."}}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "Micro no Controle", "url": "https://micronocontrole.com/", "logo": "https://micronocontrole.com/img/favicon.svg", "email": "contato@micronocontrole.com", "telephone": "+55-61-98225-4407", "sameAs": ["https://www.instagram.com/solucoesmicronocontrole/"]}, {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Micro no Controle", "applicationCategory": "BusinessApplication", "operatingSystem": "Web, Android, iOS", "url": "https://micronocontrole.com/app/", "description": "Gestão do caixa para MEI e pequeno negócio: conferência de maquininha, iFood e banco, fiado com Pix, contas a pagar, agenda e promoções com os números do negócio.", "offers": [{"@type": "Offer", "name": "Grátis", "price": "0", "priceCurrency": "BRL"}, {"@type": "Offer", "name": "Essencial", "price": "29.99", "priceCurrency": "BRL"}, {"@type": "Offer", "name": "Completo com acompanhamento", "price": "49.90", "priceCurrency": "BRL"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Vocês substituem o meu contador?", "acceptedAnswer": {"@type": "Answer", "text": "Não. O contador cuida do governo: impostos oficiais, declarações e folha. A gente cuida do caixa do dia a dia: o que entrou, o que ficou para trás e o que vence. Os valores de imposto que mostramos são estimativas: confirme sempre com o seu contador."}}, {"@type": "Question", "name": "Preciso passar a senha do banco?", "acceptedAnswer": {"@type": "Answer", "text": "Nunca. Você baixa os arquivos no celular e manda para a gente. Não pedimos senha de banco, de maquininha nem do iFood."}}, {"@type": "Question", "name": "Como eu pago?", "acceptedAnswer": {"@type": "Answer", "text": "Pela Hotmart, no Pix, cartão ou boleto, todo mês ou uma vez por ano. A Hotmart é uma das maiores plataformas de pagamento digital do Brasil, e a gente não vê os dados do seu cartão."}}, {"@type": "Question", "name": "Posso cancelar quando quiser?", "acceptedAnswer": {"@type": "Answer", "text": "Sim, sem multa. O plano continua até o fim do período pago. E se desistir nos primeiros 7 dias, devolvemos o valor."}}, {"@type": "Question", "name": "E se a conferência não achar nada?", "acceptedAnswer": {"@type": "Answer", "text": "Ótimo: seu caixa está em dia. A primeira conferência é grátis e você não precisa assinar nada."}}, {"@type": "Question", "name": "Meus dados ficam seguros?", "acceptedAnswer": {"@type": "Answer", "text": "Usamos seus arquivos só para fazer a conferência e o relatório, seguindo a LGPD. Não vendemos seus dados. Para funcionar, usamos alguns serviços (WhatsApp, Google, Hotmart e banco de dados), todos listados na política. Na conferência grátis, apagamos os arquivos em até 30 dias depois do relatório. De quem assina, guardamos enquanto for cliente e apagamos em até 30 dias depois do cancelamento."}}, {"@type": "Question", "name": "Vocês usam inteligência artificial?", "acceptedAnswer": {"@type": "Answer", "text": "Sim, para classificar despesas e escrever textos e promoções. As contas de dinheiro são feitas por regras fixas e conferidas, e nada é publicado ou enviado sem a sua aprovação."}}, {"@type": "Question", "name": "Vocês emitem nota fiscal por mim?", "acceptedAnswer": {"@type": "Answer", "text": "Ainda não. Em regra, o MEI não precisa emitir nota para consumidor pessoa física, só para empresas. Confirme com o seu contador."}}]}]</script>
 <script src="assets/pixel.js"></script>
 <script src="assets/origem.js"></script>
 </head>
@@ -313,16 +318,15 @@ footer a{color:#CDE9E5}
       <span class="selo">Para MEI e pequeno negócio</span>
       <h1>Sua maquininha e o iFood pagaram tudo? A gente confere grátis.</h1>
       <span class="giro" aria-live="off">Todo mês: <b id="giro">repasse da maquininha que não caiu</b></span>
-      <p class="lead">Conferimos a maquininha, o iFood e o banco, mostramos quanto ficou para trás e como cobrar cada centavo. E ainda criamos promoções e respostas às avaliações do Google com os números do seu negócio.</p>
+      <p class="lead">Você manda 3 arquivos que baixa no celular. Em até 2 dias úteis, mostramos o que bateu, o que faltou e o texto pronto para cobrar.</p>
       <div class="ctas">
         <a class="btn" href="#conferencia" data-cta="hero">Quero a conferência grátis</a>
-        <a class="btn linha" href="app/">Usar o app grátis</a>
       </div>
-      <ul class="garantias"><li>Sem cartão</li><li>Nunca pedimos senha</li><li>Relatório em até 2 dias úteis</li></ul>
+      <ul class="garantias"><li>Sem senha</li><li>Sem cartão</li><li>Relatório em até 2 dias úteis</li></ul>
     </div>
-    <div class="slot" aria-label="Exemplo de conferência do mês">
+    <div class="slot" aria-label="Exemplo fictício de conferência do mês">
       <div class="receipt">
-        <div class="c"><b>CONFERÊNCIA DE OUTUBRO</b><br>Lanchonete (exemplo)</div>
+        <div class="c"><b>EXEMPLO DE CONFERÊNCIA</b><br>Lanchonete fictícia · outubro</div>
         <hr>
         <div class="row"><span>Vendas no cartão e Pix</span><span>30.258,32</span></div>
         <div class="row"><span>Vendas no iFood</span><span>15.575,26</span></div>
@@ -332,9 +336,9 @@ footer a{color:#CDE9E5}
         <div class="row"><span>iFood pagou a menos</span><span class="neg">−86,40</span></div>
         <div class="row"><span>Taxa acima do contrato</span><span class="neg">−43,14</span></div>
         <div class="tot"><span>Ficou para trás</span><span>R$ 2.132,67</span></div>
-        <div class="note">Exemplo com dados fictícios, gerado pelo nosso fechamento automático.</div>
+        <div class="note">Dados fictícios, só para mostrar como o relatório chega. Cada diferença vem com data, arquivo de origem e grau de certeza.</div>
       </div>
-      <div class="carimbo">Achado em 2 dias, sem senha</div>
+      <div class="carimbo">Exemplo fictício</div>
     </div>
   </div>
 </section>
@@ -342,36 +346,22 @@ footer a{color:#CDE9E5}
 <div class="faixa">
   <div class="wrap">
     <span>🔒 Nunca pedimos senha de banco</span>
-    <span>📱 App grátis, sem cadastro</span>
-    <span>↩️ 7 dias para desistir</span>
-    <span>💳 Pagamento pela Hotmart</span>
+    <span>🧾 Primeira conferência grátis</span>
+    <span>📱 App grátis no celular</span>
+    <span>📊 Planilhas premium grátis</span>
   </div>
 </div>
 
 <section class="sec" id="quanto">
   <div class="wrap">
-    <h2>Quanto pode estar ficando para trás no seu caixa?</h2>
-    <p class="sub">Arraste e veja. No exemplo acima, foram 4,6% das vendas do mês.</p>
-    <div class="calc">
-      <div class="caixa">
-        <label for="vendas">Quanto você vende por mês no cartão, Pix e iFood?</label>
-        <output id="vendasTxt" for="vendas">R$ 15.000</output>
-        <input type="range" id="vendas" min="2000" max="100000" step="1000" value="15000">
-        <p class="fine" style="margin-top:16px">Quanto fica para trás, em média?</p>
-        <div class="chips" role="group" aria-label="Porcentagem que fica para trás">
-          <button type="button" data-p="1" aria-pressed="false">1%</button>
-          <button type="button" data-p="2" aria-pressed="true">2%</button>
-          <button type="button" data-p="4.6" aria-pressed="false">4,6% (o exemplo)</button>
-        </div>
-      </div>
-      <div class="result" aria-live="polite">
-        <span style="font-weight:700">Isso pode ser</span>
-        <div class="grande" id="porMes">R$ 300 por mês</div>
-        <p id="porAno">R$ 3.600 por ano. O plano Essencial custa R$ 29,99 por mês.</p>
-        <a class="btn" href="#conferencia" data-cta="calculadora">Descobrir o meu valor grátis</a>
-      </div>
+    <h2>O que você recebe na conferência grátis</h2>
+    <p class="promessa">A primeira conferência é grátis. Você manda os arquivos e a gente mostra o que faltou. Se estiver tudo certo, ótimo. Se não estiver, você sai com a data, o valor e o texto para cobrar.</p>
+    <div class="niveis">
+      <div class="n1"><b>Confirmada</b><p>A venda está no relatório da maquininha e o repasse não aparece no extrato depois do prazo. Mostramos a venda, o prazo e o valor.</p></div>
+      <div class="n2"><b>Provável</b><p>Parece diferença, mas pode ser parcelado, antecipação ou estorno. Dizemos o que conferir antes de cobrar.</p></div>
+      <div class="n3"><b>Estimativa</b><p>Taxa acima do combinado só vira cobrança quando você informa a taxa do contrato. Sem ela, mostramos como estimativa.</p></div>
     </div>
-    <p class="fine" style="margin-top:14px">Conta simples, só para ter uma ideia. O valor de verdade sai da conferência com os seus arquivos.</p>
+    <p class="fine" style="margin-top:16px">Quem cobra a maquininha, o iFood ou o banco é você. A gente aponta a diferença e entrega o texto pronto. Não garantimos que o valor volte.</p>
   </div>
 </section>
 
@@ -418,7 +408,7 @@ footer a{color:#CDE9E5}
       </span></button>
     </div>
     <div class="mais-func" aria-label="Também no app">
-      <span>📝 Orçamento bonito no WhatsApp</span><span>📍 Acompanhe seu pedido por link</span><span>🏦 Extrato: pessoal × negócio</span><span>📦 Estoque e margem</span><span>🔢 Contagem de estoque</span><span>↩️ Devolução de nota pelo XML</span><span>🧮 Quanto cobrar no cartão e no iFood</span><span>📚 Planilhas atualizadas</span><span>💾 Backup no WhatsApp ou Drive</span>
+      <span>📝 Orçamento no WhatsApp</span><span>🏦 Extrato: pessoal × negócio</span><span>📦 Estoque e margem</span><span>🧮 Quanto cobrar no cartão e no iFood</span><span>🪧 Plaquinha de avaliação e Pix</span><span>💾 Backup no WhatsApp ou Drive</span>
     </div>
   </div>
 </section>
@@ -459,21 +449,22 @@ footer a{color:#CDE9E5}
 
 <section class="sec" style="padding-top:12px">
   <div class="wrap">
-    <h2>Por que não só uma planilha, uma IA ou o contador?</h2>
-    <p class="sub">Cada um tem o seu papel. O Micro cuida da parte que ninguém confere.</p>
+    <h2>Use o app do governo. E deixe a conferência com a gente.</h2>
+    <p class="sub">Cada ferramenta tem o seu papel. O Micro cuida da parte que ninguém confere.</p>
     <div class="tab-wrap">
       <table class="cmp">
-        <thead><tr><th scope="col">O que você precisa</th><th scope="col">Caderno ou planilha</th><th scope="col">IA genérica</th><th scope="col">Contador</th><th scope="col" class="nos">Micro no Controle</th></tr></thead>
+        <thead><tr><th scope="col">O que você precisa</th><th scope="col">App MEI do governo</th><th scope="col">Apps de gestão e PDV</th><th scope="col">Contador</th><th scope="col" class="nos">Micro no Controle</th></tr></thead>
         <tbody>
-          <tr><td>Conferir maquininha e iFood todo mês</td><td class="nao">Se você tiver tempo</td><td class="nao">Não</td><td class="nao">Em geral, não</td><td class="nos sim">Sim, todo mês</td></tr>
-          <tr><td>Achar o dinheiro que ficou para trás</td><td class="nao">Difícil</td><td class="nao">Não</td><td class="nao">Raramente</td><td class="nos sim">Sim, com o passo a passo</td></tr>
-          <tr><td>Promoção feita com as suas vendas</td><td class="nao">Não</td><td class="nao">Genérica</td><td class="nao">Não</td><td class="nos sim">Sim</td></tr>
-          <tr><td>Agenda, fiado e contas num lugar só</td><td class="nao">Espalhado</td><td class="nao">Não</td><td class="nao">Não</td><td class="nos sim">Sim, no app</td></tr>
-          <tr><td>Impostos oficiais e declarações</td><td class="nao">Não</td><td class="nao">Não</td><td class="sim">Sim</td><td class="nos nao">Não: isso é do contador</td></tr>
-          <tr><td>Quanto custa</td><td>Seu tempo</td><td>Seu tempo</td><td>Varia</td><td class="nos"><b>A partir de R$ 0</b></td></tr>
+          <tr><td>DAS e declaração anual do MEI</td><td class="sim">Sim, grátis</td><td class="nao">Varia</td><td class="sim">Sim</td><td class="nos nao">Não: use o app oficial. A gente avisa o vencimento</td></tr>
+          <tr><td>Conferir se maquininha e iFood pagaram certo</td><td class="nao">Não</td><td class="nao">Em geral, não</td><td class="nao">Em geral, não</td><td class="nos sim">Sim, todo mês</td></tr>
+          <tr><td>Texto pronto para cobrar o que faltou</td><td class="nao">Não</td><td class="nao">Não</td><td class="nao">Raramente</td><td class="nos sim">Sim</td></tr>
+          <tr><td>Fiado com Pix, agenda e contas a pagar</td><td class="nao">Não</td><td class="nao">Parte, conforme o plano</td><td class="nao">Não</td><td class="nos sim">Sim, no app grátis</td></tr>
+          <tr><td>Promoção feita com as suas vendas</td><td class="nao">Não</td><td class="nao">Não</td><td class="nao">Não</td><td class="nos sim">Sim, no Completo</td></tr>
+          <tr><td>Quanto custa</td><td>Grátis</td><td>De grátis limitado a mais de R$ 170/mês</td><td>Varia</td><td class="nos"><b>A partir de R$ 0</b></td></tr>
         </tbody>
       </table>
     </div>
+    <p class="fine" style="margin-top:12px">Apps de gestão e PDV: por exemplo, Kyte e Conta Azul. Preços conferidos nos sites oficiais em novembro de 2026 e podem mudar.</p>
   </div>
 </section>
 
@@ -489,13 +480,13 @@ footer a{color:#CDE9E5}
       <div class="plano">
         <h3>Grátis</h3><p class="para">Para organizar o dia a dia</p>
         <div class="preco">R$ 0</div><div class="eq"></div>
-        <ul><li>App no celular, sem cadastro</li><li>Vendas, despesas e fiado com Pix</li><li>Contas a pagar e previsão</li><li>Agenda com link para marcar</li><li>Auditoria da taxa da maquininha</li><li>Calculadoras e planilhas grátis</li></ul>
+        <ul><li>App no celular, sem cadastro</li><li>Vendas, despesas e fiado com Pix</li><li>Contas a pagar e previsão</li><li>Agenda com link para marcar</li><li>Auditoria da taxa da maquininha</li><li>Calculadoras e planilhas premium</li></ul>
         <a class="btn escuro" href="app/">Abrir o app</a>
       </div>
       <div class="plano" data-p="essencial">
         <h3>Essencial</h3><p class="para">Para o MEI que quer o caixa conferido</p>
         <div class="preco" data-mes="R$ 29,99" data-ano="R$ 299,90">R$ 29,99 <small>/mês</small></div><div class="eq" data-ano="Sai por R$ 24,99 por mês"></div>
-        <ul><li>Tudo do Grátis</li><li>Fechamento automático do mês com relatório</li><li>Dinheiro que ficou para trás e o passo a passo para cobrar</li><li>Conferência de maquininha, iFood e banco</li><li>Alertas de vencimento, limite do MEI e DAS</li><li>Backup na nuvem e acervo de planilhas</li></ul>
+        <ul><li>Tudo do Grátis</li><li>Fechamento automático do mês com relatório</li><li>Dinheiro que ficou para trás e o passo a passo para cobrar</li><li>Conferência de maquininha, iFood e banco</li><li>Alertas de vencimento, limite do MEI e DAS</li><li>Comparação de um mês com o outro</li></ul>
         <a class="btn escuro" href="#conferencia" data-plano="Essencial">Quero o Essencial</a>
       </div>
       <div class="plano top" data-p="divulgacao">
@@ -508,7 +499,7 @@ footer a{color:#CDE9E5}
       </div>
     </div>
     <div class="pagto"><span class="cad" aria-hidden="true">🛡️</span><p><b>Pagamento seguro pela Hotmart</b>, no Pix, cartão ou boleto. Não vemos nem guardamos os dados do seu cartão. Desistiu em até 7 dias? Devolvemos tudo.</p></div>
-    <p class="fundador"><b>Preço de fundador:</b> os planos pagos abrem em dezembro. Quem pedir a conferência até 31/12/2026 fica com esses preços enquanto continuar assinando.</p>
+    <p class="fundador"><b>Preço de fundador para as 30 primeiras assinaturas, até 31/12/2026:</b> quem entra agora mantém esse preço enquanto continuar assinando. Depois, o preço do Completo sobe para novos clientes.</p>
   </div>
 </section>
 
@@ -533,7 +524,7 @@ footer a{color:#CDE9E5}
       <details><summary>Como eu pago?</summary><p>Pela Hotmart, no Pix, cartão ou boleto, todo mês ou uma vez por ano. A Hotmart é uma das maiores plataformas de pagamento digital do Brasil, e a gente não vê os dados do seu cartão.</p></details>
       <details><summary>Posso cancelar quando quiser?</summary><p>Sim, sem multa. O plano continua até o fim do período pago. E se desistir nos primeiros 7 dias, devolvemos o valor.</p></details>
       <details><summary>E se a conferência não achar nada?</summary><p>Ótimo: seu caixa está em dia. A primeira conferência é grátis e você não precisa assinar nada.</p></details>
-      <details><summary>Meus dados ficam seguros?</summary><p>Usamos seus dados só para o seu relatório, seguindo a LGPD. Não vendemos nem compartilhamos com ninguém. Se você cancelar, apagamos os arquivos. Detalhes na <a href="privacidade/">política de privacidade</a>.</p></details>
+      <details><summary>Meus dados ficam seguros?</summary><p>Usamos seus arquivos só para fazer a conferência e o relatório, seguindo a LGPD. Não vendemos seus dados. Para funcionar, usamos alguns serviços (WhatsApp, Google, Hotmart e banco de dados), todos listados na política. Na conferência grátis, apagamos os arquivos em até 30 dias depois do relatório. De quem assina, guardamos enquanto for cliente e apagamos em até 30 dias depois do cancelamento. Detalhes na <a href="privacidade/">política de privacidade</a>.</p></details>
       <details><summary>Vocês usam inteligência artificial?</summary><p>Sim, para classificar despesas e escrever textos e promoções. As contas de dinheiro são feitas por regras fixas e conferidas, e nada é publicado ou enviado sem a sua aprovação.</p></details>
       <details><summary>Vocês emitem nota fiscal por mim?</summary><p>Ainda não. Em regra, o MEI não precisa emitir nota para consumidor pessoa física, só para empresas. Confirme com o seu contador.</p></details>
     </div>
@@ -545,8 +536,13 @@ footer a{color:#CDE9E5}
     <div>
       <span class="selo">Grátis, sem compromisso</span>
       <h2>Descubra quanto ficou para trás no último mês</h2>
-      <p class="sub">Deixe seu contato. A gente te chama no WhatsApp com o passo a passo para baixar os 3 arquivos e devolve o relatório em até 2 dias úteis.</p>
-      <ul><li>Sem cartão e sem compromisso</li><li>Nunca pedimos senha</li><li>Pedindo até 31/12, você trava o preço de fundador</li></ul>
+      <p class="sub">Estes são os arquivos que você vai mandar. A gente te chama no WhatsApp com o passo a passo da sua maquininha e devolve o relatório em até 2 dias úteis.</p>
+      <ol class="arquivos">
+        <li><b>Vendas da maquininha do mês</b><small>No app da maquininha: Relatórios › Vendas › exportar em Excel ou CSV.</small></li>
+        <li><b>Relatório financeiro do iFood</b><small>No Portal do Parceiro: Financeiro › Relatórios. Não usa iFood? Marque “não tenho” e siga.</small></li>
+        <li><b>Extrato do banco do mês</b><small>No app do banco: Extrato › exportar em Excel, CSV ou OFX. PDF também serve.</small></li>
+      </ol>
+      <ul><li>Sem cartão e sem compromisso</li><li>Nunca pedimos senha</li></ul>
       <a class="zaplink" href="https://wa.me/5561982254407?text=Oi!%20Vim%20pelo%20site%20do%20Micro%20no%20Controle%20e%20quero%20saber%20mais." target="_blank" rel="noopener" data-cta="zap-form">Prefere falar agora? Chame no WhatsApp</a>
     </div>
     <div>
@@ -554,21 +550,24 @@ footer a{color:#CDE9E5}
         <div class="plano-escolhido" id="planoEscolhido"></div>
         <label>Seu nome<input name="nome" autocomplete="name" required></label>
         <label>WhatsApp com DDD<input name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="(61) 9 0000-0000" required></label>
-        <label>E-mail (opcional)<input name="email" type="email" autocomplete="email"></label>
+        <label>Qual a sua maquininha?
+          <select name="maq"><option value="">Escolha (opcional)</option><option>Stone ou Ton</option><option>Cielo</option><option>PagBank</option><option>Mercado Pago</option><option>InfinitePay</option><option>Rede</option><option>Getnet</option><option>SumUp</option><option>Sicredi ou Sicoob</option><option>Mais de uma</option><option>Outra</option></select>
+        </label>
+        <fieldset><legend>Vende pelo iFood?</legend>
+          <div class="opc"><label><input type="radio" name="ifood" value="sim" checked> Sim</label><label><input type="radio" name="ifood" value="nao"> Não tenho</label></div>
+        </fieldset>
         <label>Tipo de negócio
           <select name="tipo"><option value="">Escolha (opcional)</option><option>Lanchonete, restaurante ou delivery</option><option>Salão, barbearia ou manicure</option><option>Comércio ou loja</option><option>Serviços</option><option>Outro</option></select>
         </label>
-        <label>Quanto o negócio vende por mês, mais ou menos?
-          <select name="faixa"><option value="">Prefiro não dizer</option><option>Até R$ 6.750 (MEI)</option><option>De R$ 6.750 a R$ 20 mil</option><option>De R$ 20 mil a R$ 80 mil</option><option>Mais de R$ 80 mil</option></select>
-        </label>
         <div class="erro" id="erro" role="alert"></div>
         <button class="btn" type="submit">Quero minha conferência pelo WhatsApp</button>
-        <p class="fine" style="margin-top:-4px">Só nome e WhatsApp. Os arquivos vêm depois, pelo WhatsApp.</p>
-        <p class="fine">Ao enviar, você concorda em ser contatado pelo Micro no Controle. Veja a <a href="privacidade/">privacidade</a>.</p>
+        <p class="fine" style="margin-top:-4px">Só nome e WhatsApp são obrigatórios. Os arquivos vêm depois, pelo WhatsApp.</p>
+        <p class="fine">Os extratos chegam pelo WhatsApp e são usados só para a conferência. Ao enviar, você concorda em ser contatado pelo Micro no Controle. Veja a <a href="privacidade/">privacidade</a>.</p>
       </form>
       <div class="ok" id="ok" hidden>
         <h3>Recebido!</h3>
-        <p>Vamos te chamar no WhatsApp em até 1 dia útil com o passo a passo. Enquanto isso, instale o app grátis no celular: abra <a href="app/">micronocontrole.com/app</a> e toque em <b>Adicionar à tela inicial</b>.</p>
+        <p>Vamos te chamar no WhatsApp em até 1 dia útil com o passo a passo da sua maquininha. Enquanto isso, já pode baixar o relatório de vendas do mês passado.</p>
+        <p style="margin-top:10px">Quer começar agora? Baixe as <a href="planilhas/">planilhas premium grátis</a> ou abra o <a href="app/">app grátis</a> no celular.</p>
       </div>
     </div>
   </div>
@@ -585,9 +584,8 @@ footer a{color:#CDE9E5}
       <a href="ferramentas/fechamento-de-caixa/"><b>Fechamento de caixa</b><span>Feche o dia sem errar</span></a>
       <a href="ferramentas/lucro-e-ponto-de-equilibrio/"><b>Lucro e ponto de equilíbrio</b><span>Quanto precisa vender para pagar tudo</span></a>
       <a href="ferramentas/imposto-simples-nacional/"><b>Imposto no Simples</b><span>Estimativa para quem não é mais MEI</span></a>
-      <a href="planilha-gratis/"><b>Kit Lite de planilhas</b><span>Fechamento de caixa e conferência de cartões</span></a>
+      <a href="planilhas/"><b>Planilhas premium grátis</b><span>Gestão do mês, conferência de recebimentos, preço, estoque e MEI</span></a>
     </div>
-    <p class="fine" style="margin-top:18px">Prefere tudo em planilha? Conheça o <a class="js-checkout" href="https://pay.hotmart.com/K108084778Q">Pacote Completo do Pequeno Negócio</a>.</p>
   </div>
 </section>
 <section class="sec" id="contato" style="padding-top:12px">
@@ -608,8 +606,8 @@ footer a{color:#CDE9E5}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Micro no Controle. Ferramenta de gestão: não substitui contador nem advogado. Usamos o pixel da Meta para medir visitas e anúncios.</span>
-    <span><a href="privacidade/">Privacidade</a> · <a href="termos/">Termos</a> · <a href="afiliados/">Seja afiliado</a> · <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a> · <a href="mailto:contato@micronocontrole.com">contato@micronocontrole.com</a> · <a href="https://wa.me/5561982254407?text=Oi!%20Vim%20pelo%20site%20do%20Micro%20no%20Controle%20e%20quero%20saber%20mais." target="_blank" rel="noopener">WhatsApp (61) 98225-4407</a></span>
+    <span>© 2026 Micro no Controle. Ferramenta de gestão: não substitui contador nem advogado. Com a sua permissão, usamos o pixel da Meta para medir visitas e anúncios.</span>
+    <span><a href="privacidade/">Privacidade</a> · <a href="termos/">Termos</a> · <a href="https://www.instagram.com/solucoesmicronocontrole/" rel="noopener">Instagram</a> · <a href="mailto:contato@micronocontrole.com">contato@micronocontrole.com</a> · <a href="https://wa.me/5561982254407?text=Oi!%20Vim%20pelo%20site%20do%20Micro%20no%20Controle%20e%20quero%20saber%20mais." target="_blank" rel="noopener">WhatsApp (61) 98225-4407</a></span>
   </div>
 </footer>
 
@@ -628,20 +626,6 @@ footer a{color:#CDE9E5}
   var frases=['repasse da maquininha que não caiu','taxa acima do contrato','iFood pagando a menos','fiado esquecido no caderno','cliente que faltou sem avisar','boleto que vence amanhã'];
   var g=document.getElementById('giro'),i=0;
   if(g&&!reduz){setInterval(function(){i=(i+1)%frases.length;var b=document.createElement('b');b.id='giro';b.textContent=frases[i];g.replaceWith(b);g=b;},2600);}
-
-  /* calculadora */
-  var r=document.getElementById('vendas'),pct=2;
-  function calc(){var v=+r.value,m=v*pct/100;
-    document.getElementById('vendasTxt').textContent=brl(v);
-    document.getElementById('porMes').textContent=brl(m)+' por mês';
-    var vezes=Math.floor(m/29.99);
-    document.getElementById('porAno').textContent=brl(m*12)+' por ano.'+(vezes>=2?' Paga o plano Essencial '+vezes+' vezes.':' O plano Essencial custa R$ 29,99 por mês.');}
-  r.addEventListener('input',calc);
-  var calcUsada=false;r.addEventListener('change',function(){if(!calcUsada){calcUsada=true;track('UsouCalculadora');}});
-  document.querySelectorAll('.chips button').forEach(function(b){b.addEventListener('click',function(){
-    document.querySelectorAll('.chips button').forEach(function(x){x.setAttribute('aria-pressed','false');});
-    b.setAttribute('aria-pressed','true');pct=parseFloat(b.getAttribute('data-p'));calc();});});
-  calc();
 
   /* cards que giram (toque no celular) */
   document.querySelectorAll('.vira').forEach(function(c){c.addEventListener('click',function(){
@@ -683,14 +667,13 @@ footer a{color:#CDE9E5}
   var f=document.getElementById('form-conf'),erro=document.getElementById('erro');
   f.addEventListener('submit',function(ev){
     ev.preventDefault();erro.style.display='none';
-    var nome=f.nome.value.trim(),email=f.email.value.trim(),zap=f.whatsapp.value.trim(),tipo=f.tipo.value,faixa=f.faixa.value;
+    var nome=f.nome.value.trim(),zap=f.whatsapp.value.trim(),tipo=f.tipo.value,maq=f.maq.value,ifood=(f.querySelector('input[name=ifood]:checked')||{}).value||'sim';
     var dig=zap.replace(/\D/g,'');
-    var msg=!nome?'Digite seu nome.':(dig.length<10||dig.length>13)?'Confira o WhatsApp com DDD.':(email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))?'Confira o e-mail.':'';
+    var msg=!nome?'Digite seu nome.':(dig.length<10||dig.length>13)?'Confira o WhatsApp com DDD.':'';
     if(msg){erro.textContent=msg;erro.style.display='block';return;}
-    var origem='SITE conferencia'+(plano?' | plano '+plano:'')+(faixa?' | faixa '+faixa:'')+(cta?' | botao '+cta:'');
+    var origem='SITE conferencia'+(plano?' | plano '+plano:'')+(maq?' | maquininha '+maq:'')+' | ifood '+ifood+(cta?' | botao '+cta:'');
     try{origem+=' | '+(window.MNC_ORIGEM?MNC_ORIGEM():'desconhecida');}catch(e){}
-    var d=new URLSearchParams();d.append(E.nome,nome);d.append(E.email,email||'naoinformado@micronocontrole.com');d.append(E.whatsapp,zap);d.append(E.tipo,tipo||'Outro');d.append(E.origem,origem);
-    if(email)try{var m=new URLSearchParams();m.append('fields[email]',email);m.append('fields[name]',nome);m.append('ml-submit','1');m.append('anticsrf','true');fetch('https://assets.mailerlite.com/jsonp/2741459/forms/202329636930062083/subscribe',{method:'POST',mode:'no-cors',body:m});}catch(e){}
+    var d=new URLSearchParams();d.append(E.nome,nome);d.append(E.email,'naoinformado@micronocontrole.com');d.append(E.whatsapp,zap);d.append(E.tipo,tipo||'Outro');d.append(E.origem,origem);
     var pronto=function(){try{fbq('track','Lead',{content_name:'Conferência grátis',content_category:plano||'sem plano'});}catch(e){}
       f.hidden=true;var ok=document.getElementById('ok');ok.hidden=false;ok.scrollIntoView({behavior:'smooth',block:'center'});};
     try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto);}catch(e){pronto();}
