@@ -1,6 +1,6 @@
 /* Service worker do app Micro no Controle: funciona sem internet.
    Rede primeiro (para pegar atualizações), cópia guardada quando estiver offline. */
-var CACHE = 'mnc-app-v11';
+var CACHE = 'mnc-app-v12';
 var ARQUIVOS = ['./', './index.html', './app.js', './plataforma.js', './nuvem.js', './agendaonline.js', './falar.js', './atraso.js', './acompanhar.js', './plano.js', './plaquinha.js', './pix.js', './ifood.js', './vendor/qrcode.js', '../auditoria-maquininha/motor.js', './manifest.webmanifest', './icone-192.png', './icone-512.png', '../img/favicon.svg'];
 
 self.addEventListener('install', function (e) {

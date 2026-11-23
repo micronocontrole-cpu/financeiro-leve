@@ -76,7 +76,7 @@
       '<p class="sub" style="margin:4px 0 8px">' + esc(pl.para) + '</p><ul style="margin:0 0 10px 18px;font-size:14.5px">' +
       pl.tem.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
       (pl.id === 'gratis' ? (eh ? '<p class="sub">Você está neste plano.</p>' : '') :
-        (eh ? '<p class="sub">✅ Você está neste plano.</p>' : '<a class="btn mint" style="width:100%" href="/?plano=' + encodeURIComponent(pl.nome) + '#conferencia">Quero o ' + esc(pl.nome) + '</a>')) +
+        (eh ? '<p class="sub">✅ Você está neste plano.</p>' : (pl.id === 'essencial' ? '<a class="btn mint" style="width:100%" href="https://pay.hotmart.com/B108619350I" target="_blank" rel="noopener">Assinar o Essencial</a>' : '<a class="btn mint" style="width:100%" href="/?plano=' + encodeURIComponent(pl.nome) + '#conferencia">Quero o ' + esc(pl.nome) + '</a>'))) +
       '</div>';
   }
   R.plano = function () {
