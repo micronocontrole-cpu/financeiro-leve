@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bem-vindo ao Micro no Controle</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0E3B3C">
+<style>
+:root{--deep:#0E3B3C;--mint:#22C3A6;--sol:#FFCF3A;--bg:#F2F7F6;--ink:#152224;--muted:#526568;--line:#D3DFDD}
+*{box-sizing:border-box;margin:0}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:17px}
+header{background:var(--deep);color:#fff;padding:40px 20px 34px;text-align:center}
+header h1{font-size:clamp(28px,6vw,40px);line-height:1.1;margin-top:8px}header p{color:#C3DEDA;margin:12px auto 0;max-width:34em}
+main{max-width:720px;margin:0 auto;padding:24px 16px 60px;display:grid;gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
+.card h2{font-size:21px;color:var(--deep);margin-bottom:10px}
+ol{padding-left:22px;display:grid;gap:6px}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;background:var(--sol);color:#2A1F00;font-weight:800;font-size:18px;padding:16px;border-radius:14px;text-decoration:none;border:0;cursor:pointer;box-shadow:0 4px 0 #C99A00}
+.btn.verde{background:#25D366;color:#04332C;box-shadow:0 4px 0 #11806C}
+.fine{font-size:14.5px;color:var(--muted);margin-top:10px}
+:focus-visible{outline:3px solid var(--sol);outline-offset:3px}
+</style>
+</head>
+<body>
+<header><div style="font-size:40px" aria-hidden="true">🎉</div><h1>Pagamento recebido. Bem-vindo!</h1><p>Agora são só dois passos: instalar o app no celular e mandar o primeiro "oi" no WhatsApp.</p></header>
+<main>
+  <section class="card">
+    <h2>1. Instale o app no seu celular</h2>
+    <button class="btn" id="instalar" hidden>Instalar o app agora</button>
+    <div id="manual">
+      <p><b>Android (Chrome):</b></p>
+      <ol><li>Abra <b>micronocontrole.com/app</b> no Chrome.</li><li>Toque nos <b>três pontinhos</b> no canto de cima.</li><li>Toque em <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.</li></ol>
+      <p style="margin-top:12px"><b>iPhone (Safari):</b></p>
+      <ol><li>Abra <b>micronocontrole.com/app</b> no Safari.</li><li>Toque no botão <b>Compartilhar</b> (quadrado com seta).</li><li>Toque em <b>Adicionar à Tela de Início</b>.</li></ol>
+    </div>
+    <a class="btn" style="margin-top:16px;background:var(--deep);color:#fff;box-shadow:0 4px 0 #061E1F" href="/app/">Abrir o app</a>
+    <p class="fine">O app fica com ícone na tela, abre sem internet e não ocupa quase nada de espaço.</p>
+  </section>
+  <section class="card">
+    <h2>2. Ative o seu plano</h2>
+    <ol><li>Chame a gente no WhatsApp com o e-mail usado na compra.</li><li>Você recebe um <b>código de ativação</b> (MNC-XXXX-XXXX-XXXX).</li><li>No app: <b>Mais › Meu plano</b>, cole o código e toque em Ativar.</li></ol>
+    <a class="btn verde" style="margin-top:16px" href="https://wa.me/5561982254407?text=Oi!%20Acabei%20de%20assinar%20o%20Micro%20no%20Controle%20e%20quero%20ativar%20meu%20plano." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    <p class="fine">Atendimento em dias úteis, das 9h às 18h. Dúvidas: contato@micronocontrole.com</p>
+  </section>
+</main>
+<script src="/assets/pixel.js"></script>
+<script>
+(function(){var ev=null,b=document.getElementById('instalar');
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();ev=e;b.hidden=false;});
+b.addEventListener('click',function(){if(!ev)return;ev.prompt();ev.userChoice.then(function(){b.hidden=true;});});
+try{fbq&&fbq('track','Purchase');}catch(e){}})();
+</script>
+</body>
+</html>

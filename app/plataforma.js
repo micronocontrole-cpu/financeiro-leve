@@ -1017,6 +1017,7 @@
       it('/planilha-gratis/arquivo/kit-lite-gratis-micro-no-controle.zip', '📦', 'Kit Lite grátis', 'Fechamento de caixa, conferência de cartões, retirada e recibo (.zip)') +
       it('/planilha-gratis/arquivo/planilha-fechamento-de-caixa-gratis.xlsx', '📊', 'Planilha de fechamento de caixa', 'Excel, 30 dias') +
       it('https://pay.hotmart.com/K108084778Q?src=app-biblioteca', '⭐', 'Pacote Completo do Pequeno Negócio', '9 planilhas, modelos, Planner 2027 e guias', true) + '</div>' +
+      '<h2>Para o seu balcão</h2><div class="lista">' + it('#/plaquinha', '🪧', 'Plaquinha de avaliação e Pix', 'Imagem pronta para imprimir e pôr no acrílico') + '</div>' +
       '<h2>Calculadoras no site</h2><div class="lista">' +
       it('/ferramentas/taxa-da-maquininha/', '💳', 'Taxa da maquininha', 'Quanto você paga de verdade') +
       it('/ferramentas/fechamento-de-caixa/', '🧮', 'Fechamento de caixa', 'Bateu ou faltou?') +
