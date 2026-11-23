@@ -9,12 +9,10 @@
       tem: ['App no celular, sem cadastro', 'Vendas, despesas e fiado com Pix', 'Contas a pagar e agenda', 'Conferência manual da maquininha'] },
     { id: 'essencial', nome: 'Essencial', preco: 'R$ 29,99/mês', para: 'Para o MEI que quer o caixa conferido',
       tem: ['Fechamento do mês com relatório', 'Dinheiro que ficou para trás e como cobrar', 'Alertas de vencimento, limite do MEI e DAS', 'Acervo de planilhas'] },
-    { id: 'divulgacao', nome: 'Divulgação', preco: 'R$ 49,90/mês', para: 'Para vender mais com os seus números',
-      tem: ['Tudo do Essencial', 'Artes de promoção feitas com as suas vendas', 'Cardápio pronto', 'Google em dia: respostas e postagens'] },
-    { id: 'acompanhamento', nome: 'Com acompanhamento', preco: 'R$ 99/mês', para: 'Para quem fatura acima de R$ 20 mil por mês',
-      tem: ['Tudo do Divulgação', 'Relatório revisado por uma pessoa', 'Atendimento pelo WhatsApp', 'Vagas limitadas'] }
+    { id: 'divulgacao', nome: 'Completo com acompanhamento', preco: 'R$ 49,90/mês', para: 'Caixa conferido, divulgação pronta e uma pessoa do seu lado',
+      tem: ['Tudo do Essencial', 'Relatório revisado por uma pessoa', 'Atendimento pelo WhatsApp', 'Artes de promoção e cardápio', 'Google em dia: respostas e postagens'] }
   ];
-  var NOME = {}; PLANOS.forEach(function (p) { NOME[p.id] = p.nome; });
+  var NOME = { acompanhamento: 'Completo com acompanhamento' }; PLANOS.forEach(function (p) { NOME[p.id] = p.nome; });
   var MOTIVO = {
     formato: 'O código tem este formato: MNC-XXXX-XXXX-XXXX.',
     invalido: 'Código não encontrado. Confira as letras e os números.',
@@ -89,7 +87,7 @@
       '<label class="campo"><span>Código</span><input class="inp" id="plCod" autocomplete="off" autocapitalize="characters" placeholder="MNC-XXXX-XXXX-XXXX"></label>' +
       '<button class="btn" style="width:100%;margin-top:8px" id="plAtivar">Ativar</button></div>' +
       '<h2 style="margin:18px 0 8px;font-size:18px">Planos</h2><div id="plLista">' + PLANOS.map(function (p) { return cartao(p, (c && c.plano) || 'gratis'); }).join('') + '</div>' +
-      '<p class="sub" style="margin-top:12px">Pagamento por Pix. Cancele quando quiser. Desistiu em até 7 dias? Devolvemos o valor. Veja os <a href="/termos/">termos</a>.</p>' +
+      '<p class="sub" style="margin-top:12px">Pagamento pela Hotmart (Pix, cartão ou boleto). Cancele quando quiser. Desistiu em até 7 dias? Devolvemos o valor. Veja os <a href="/termos/">termos</a>.</p>' +
       '<p class="rodape">Micro no Controle · soluções com sabedoria</p></main>';
     return {
       html: html,

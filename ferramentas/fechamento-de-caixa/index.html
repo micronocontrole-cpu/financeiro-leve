@@ -2,9 +2,9 @@
 <html lang="pt-BR"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calculadora de fechamento de caixa — quanto deveria ter na gaveta</title>
-<meta name="description" content="Some fundo de troco e vendas em dinheiro, tire sangrias e despesas e descubra na hora se o caixa fechou, faltou ou sobrou.">
+<meta name="description" content="Some fundo de troco e vendas em dinheiro, tire retiradas e despesas e descubra na hora se o caixa fechou, faltou ou sobrou.">
 <link rel="canonical" href="https://micronocontrole.com/ferramentas/fechamento-de-caixa/">
-<meta property="og:title" content="Calculadora de fechamento de caixa — quanto deveria ter na gaveta"><meta property="og:description" content="Some fundo de troco e vendas em dinheiro, tire sangrias e despesas e descubra na hora se o caixa fechou, faltou ou sobrou.">
+<meta property="og:title" content="Calculadora de fechamento de caixa — quanto deveria ter na gaveta"><meta property="og:description" content="Some fundo de troco e vendas em dinheiro, tire retiradas e despesas e descubra na hora se o caixa fechou, faltou ou sobrou.">
 <meta property="og:url" content="https://micronocontrole.com/ferramentas/fechamento-de-caixa/"><meta property="og:type" content="website">
 <meta property="og:image" content="https://micronocontrole.com/img/og.png"><meta name="theme-color" content="#0F3D3E">
 <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
@@ -31,8 +31,8 @@
   <form class="painel" id="f" onsubmit="return false"><h2>Movimento do dia</h2><p class='dica'>Use só o que passou em dinheiro. Cartão e Pix ficam de fora desta conta.</p><div class='campos'><div class="campo"><label for="fundo">Fundo de troco<span class="ajuda">Dinheiro que ficou na gaveta para abrir o dia</span></label>
 <div class="entrada"><span>R$</span><input id="fundo" name="fundo" type="text" inputmode="decimal" value="200,00" autocomplete="off"></div></div><div class="campo"><label for="vendas">Vendas em dinheiro</label>
 <div class="entrada"><span>R$</span><input id="vendas" name="vendas" type="text" inputmode="decimal" value="1.250,00" autocomplete="off"></div></div><div class="campo"><label for="outros">Outras entradas em dinheiro<span class="ajuda">Ex.: reforço de troco, pagamento de fiado</span></label>
-<div class="entrada"><span>R$</span><input id="outros" name="outros" type="text" inputmode="decimal" value="0,00" autocomplete="off"></div></div><div class="campo"><label for="sangria">Sangrias<span class="ajuda">Dinheiro retirado para o cofre ou banco</span></label>
-<div class="entrada"><span>R$</span><input id="sangria" name="sangria" type="text" inputmode="decimal" value="800,00" autocomplete="off"></div></div><div class="campo"><label for="despesas">Despesas pagas com o caixa<span class="ajuda">Ex.: gás, entregador, compra rápida</span></label>
+<div class="entrada"><span>R$</span><input id="outros" name="outros" type="text" inputmode="decimal" value="0,00" autocomplete="off"></div></div><div class="campo"><label for="retirada">Retiradas do caixa<span class="ajuda">Dinheiro retirado para o cofre ou banco</span></label>
+<div class="entrada"><span>R$</span><input id="retirada" name="retirada" type="text" inputmode="decimal" value="800,00" autocomplete="off"></div></div><div class="campo"><label for="despesas">Despesas pagas com o caixa<span class="ajuda">Ex.: gás, entregador, compra rápida</span></label>
 <div class="entrada"><span>R$</span><input id="despesas" name="despesas" type="text" inputmode="decimal" value="60,00" autocomplete="off"></div></div><div class="campo"><label for="contado">Valor contado na gaveta</label>
 <div class="entrada"><span>R$</span><input id="contado" name="contado" type="text" inputmode="decimal" value="552,50" autocomplete="off"></div></div><div class="campo"><label for="dias">Dias abertos no mês<span class="ajuda">Para projetar a diferença no mês</span></label>
 <div class="entrada"><input id="dias" name="dias" type="text" inputmode="decimal" value="26" autocomplete="off"><span style="padding:0 14px 0 0">dias</span></div></div></div></form>
@@ -40,7 +40,7 @@
 <div class="l"><span>Fundo de troco</span><span id="r_fundo"></span></div>
 <div class="l"><span>+ Vendas dinheiro</span><span id="r_vendas"></span></div>
 <div class="l"><span>+ Outras entradas</span><span id="r_outros"></span></div>
-<div class="l"><span>− Sangrias</span><span id="r_sangria"></span></div>
+<div class="l"><span>− Retiradas do caixa</span><span id="r_retirada"></span></div>
 <div class="l"><span>− Despesas</span><span id="r_desp"></span></div><hr>
 <div class="l"><b>ESPERADO</b><b id="r_esp"></b></div>
 <div class="l"><span>Contado</span><span id="r_cont"></span></div>
@@ -48,11 +48,11 @@
 <p id="r_mes" style="text-align:center;max-width:36ch"></p></div>
  </div>
  <article class="texto"><h2>Como a conta é feita</h2>
-<div class="formula">esperado = fundo + vendas em dinheiro + outras entradas − sangrias − despesas<br>diferença = contado − esperado</div>
+<div class="formula">esperado = fundo + vendas em dinheiro + outras entradas − retiradas − despesas<br>diferença = contado − esperado</div>
 <p>Se a diferença for negativa, faltou dinheiro. Se for positiva, sobrou, o que também merece atenção: sobra costuma ser troco errado ou venda lançada a menos.</p>
 <h2>Por que conferir todo dia</h2>
 <p>Uma falta de R$ 30 descoberta no mesmo dia tem dono: você sabe quem estava no caixa e o que aconteceu. Descoberta no fim do mês, vira só um buraco no resultado. Quem confere todo dia também desestimula o erro, porque a equipe sabe que alguém está olhando.</p>
-<ul><li>Conte o caixa com duas pessoas e anote quem conferiu.</li><li>Registre toda sangria com hora e valor.</li><li>Guarde o comprovante de cada despesa paga com dinheiro do caixa.</li></ul>
+<ul><li>Conte o caixa com duas pessoas e anote quem conferiu.</li><li>Registre toda retirada do caixa com hora e valor.</li><li>Guarde o comprovante de cada despesa paga com dinheiro do caixa.</li></ul>
   <h2>Perguntas frequentes</h2><details><summary>Pix e cartão entram no fechamento de caixa?</summary><p>Não nesta conta. O fechamento da gaveta confere só o dinheiro físico. Pix e cartão são conferidos com o extrato do banco e da maquininha, que é outra conta.</p></details>
 <details><summary>O que é fundo de troco?</summary><p>É o dinheiro que fica na gaveta no começo do dia para dar troco. Ele entra na conta no início e deve ficar separado no fim, para abrir o dia seguinte.</p></details>
 <details><summary>Qual diferença é aceitável?</summary><p>O ideal é zero. Muitos negócios aceitam até alguns reais por arredondamento de troco, mas qualquer falta que se repete precisa ser investigada.</p></details>
@@ -86,9 +86,9 @@
 const $=id=>document.getElementById(id);
 $('hoje').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
 MNC.ao(document.getElementById('f'),c=>{
- const esp=c.fundo+c.vendas+c.outros-c.sangria-c.despesas, dif=+(c.contado-esp).toFixed(2);
+ const esp=c.fundo+c.vendas+c.outros-c.retirada-c.despesas, dif=+(c.contado-esp).toFixed(2);
  $('r_fundo').textContent=MNC.num(c.fundo);$('r_vendas').textContent=MNC.num(c.vendas);$('r_outros').textContent=MNC.num(c.outros);
- $('r_sangria').textContent=MNC.num(c.sangria);$('r_desp').textContent=MNC.num(c.despesas);$('r_esp').textContent=MNC.num(esp);$('r_cont').textContent=MNC.num(c.contado);
+ $('r_retirada').textContent=MNC.num(c.retirada);$('r_desp').textContent=MNC.num(c.despesas);$('r_esp').textContent=MNC.num(esp);$('r_cont').textContent=MNC.num(c.contado);
  const box=$('r_dif'); box.className='l '+(dif<0?'falta':dif>0?'sobra':'certo');
  $('r_dif_t').textContent=dif<0?'FALTA':dif>0?'SOBRA':'FECHOU CERTO'; $('r_dif_v').textContent=dif===0?'0,00':(dif>0?'+':'−')+MNC.num(Math.abs(dif));
  const d=c.dias||26;

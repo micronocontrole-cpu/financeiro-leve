@@ -1014,7 +1014,7 @@
     var it = function (h, i, t, s, ext) { return '<a class="item" href="' + h + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + ' style="text-decoration:none;color:inherit"><span class="av" style="background:#fff;border:1px solid var(--line)">' + i + '</span><span class="meio"><b>' + t + '</b><span>' + s + '</span></span><span>›</span></a>'; };
     var html = topo('Biblioteca', 'Materiais e ferramentas grátis', '#/mais') + '<main>' +
       '<h2 style="margin-top:4px">Para baixar</h2><div class="lista">' +
-      it('/planilha-gratis/arquivo/kit-lite-gratis-micro-no-controle.zip', '📦', 'Kit Lite grátis', 'Fechamento de caixa, conferência de cartões, sangria e recibo (.zip)') +
+      it('/planilha-gratis/arquivo/kit-lite-gratis-micro-no-controle.zip', '📦', 'Kit Lite grátis', 'Fechamento de caixa, conferência de cartões, retirada e recibo (.zip)') +
       it('/planilha-gratis/arquivo/planilha-fechamento-de-caixa-gratis.xlsx', '📊', 'Planilha de fechamento de caixa', 'Excel, 30 dias') +
       it('https://pay.hotmart.com/K108084778Q?src=app-biblioteca', '⭐', 'Pacote Completo do Pequeno Negócio', '9 planilhas, modelos, Planner 2027 e guias', true) + '</div>' +
       '<h2>Calculadoras no site</h2><div class="lista">' +
