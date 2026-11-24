@@ -11,9 +11,7 @@
 <link rel="canonical" href="https://micronocontrole.com/diagnostico/">
 <meta name="theme-color" content="#0F3D3E">
 <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fontes.css">
 <style>
 :root{--deep:#0F3D3E;--teal:#1B7F79;--mint:#2EC4B6;--mint-ink:#0B6F68;--mint-soft:#E2F5F2;--bg:#F3F7F6;--paper:#fff;--ink:#1A2628;--muted:#58686B;--line:#D6E0DF;--yellow:#F5B942;--red:#C0392B;--red-soft:#FBE7E5;
 --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif}
@@ -65,8 +63,8 @@ input:focus,select:focus{outline:none;border-color:var(--mint);box-shadow:0 0 0 
 footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40px}
 @media (max-width:560px){.card{padding:22px}.score{flex-direction:column;align-items:flex-start}}
 </style>
-<script src="../assets/pixel.js"></script>
 <script src="../assets/origem.js"></script>
+<script src="/assets/lead.js"></script>
 </head>
 <body>
 <header class="bar"><div class="wrap">
@@ -98,7 +96,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
       </div>
       <label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required>
       <label for="f-email">Seu melhor e-mail</label><input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required>
-      <label for="f-zap">WhatsApp <span>opcional, com DDD</span></label><input id="f-zap" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel">
+      <label for="f-zap">WhatsApp <span>opcional, com DDD</span></label><input id="f-zap" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" data-zap><input type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
       <label for="f-tipo">Tipo de negócio</label>
       <select id="f-tipo" name="tipo" required><option value="">Escolha</option><option>Restaurante</option><option>Bar ou lanchonete</option><option>Padaria ou café</option><option>Comércio ou loja</option><option>MEI de serviços</option><option>Outro</option></select>
       <p class="err" id="erro" role="alert"></p>
@@ -127,7 +125,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
     </div>
   </div>
 </main>
-<footer>© 2026 Micro no Controle · soluções com sabedoria · <a href="/">micronocontrole.com</a> · Usamos o pixel da Meta para medir visitas e anúncios. · <a href="/privacidade/">Política de Privacidade</a></footer>
+<footer>© 2026 Micro no Controle · soluções com sabedoria · <a href="/">micronocontrole.com</a> · Sem pixel de anúncios nem cookies de rastreamento. · <a href="/privacidade/">Política de Privacidade</a></footer>
 
 <script>
 (function(){
@@ -171,17 +169,17 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 20px 40p
     $('resultado').scrollIntoView({behavior:'smooth',block:'start'});
     try{$('baixar').click();}catch(e){}
   }
-  var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse",E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015",origem:"entry.1160383430"};
   $('captura').addEventListener('submit',function(ev){
-    ev.preventDefault();var f=ev.target,erro=$('erro');erro.style.display='none';
+    ev.preventDefault();var f=ev.target,erro=$('erro'),bt=f.querySelector('button[type=submit]');erro.style.display='none';
     var nome=f.nome.value.trim(),email=f.email.value.trim(),zap=f.whatsapp.value.trim(),tipo=f.tipo.value;
     var msg=!nome?'Digite seu nome.':!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)?'Confira o e-mail.':!tipo?'Escolha o tipo de negócio.':'';
     if(msg){erro.textContent=msg;erro.style.display='block';return;}
-    var n=nota(),d=new URLSearchParams();d.append(E.nome,nome);d.append(E.email,email);d.append(E.whatsapp,zap);d.append(E.tipo,tipo);
-    try{d.append(E.origem,'diagnostico nota '+n+' | '+(window.MNC_ORIGEM?MNC_ORIGEM():'desconhecida'));}catch(e){}
-    try{var m=new URLSearchParams();m.append('fields[email]',email);m.append('fields[name]',nome);m.append('ml-submit','1');m.append('anticsrf','true');fetch('https://assets.mailerlite.com/jsonp/2741459/forms/202329636930062083/subscribe',{method:'POST',mode:'no-cors',body:m});}catch(e){}
-    var pronto=function(){try{fbq('track','Lead',{content_name:'Diagnóstico do caixa',value:0,currency:'BRL'});}catch(e){}resultado();};
-    try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto);}catch(e){pronto();}
+    var n=nota(),txt=bt.textContent;bt.disabled=true;bt.textContent='Enviando...';
+    MNCLead.enviar({nome:nome,email:email,whatsapp:zap,tipo:tipo,origem:'diagnostico nota '+n,site:(f.site||{}).value||''}).then(function(r){
+      bt.disabled=false;bt.textContent=txt;
+      if(r.ok){resultado();return;}
+      erro.innerHTML=(r.erro&&r.status===400?r.erro:'Não conseguimos registrar agora. Tente de novo em instantes.');erro.style.display='block';
+    });
   });
   mostra();
 })();

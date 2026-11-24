@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://connect.facebook.net; connect-src 'self' https://vuwxwcuafazwnslbxaqk.supabase.co wss://vuwxwcuafazwnslbxaqk.supabase.co https://www.facebook.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://www.facebook.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self' https://vuwxwcuafazwnslbxaqk.supabase.co wss://vuwxwcuafazwnslbxaqk.supabase.co; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Micro no Controle — o app do MEI</title>
 <meta name="description" content="Caixa, fiado com cobrança por Pix no WhatsApp, agenda, orçamento, conferência da maquininha e do iFood e limite do MEI. Grátis, no seu celular.">
@@ -12,9 +12,7 @@
 <link rel="apple-touch-icon" href="icone-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Micro no Controle">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fontes.css">
 <style>
 :root{
   --deep:#0F3D3E;--deep2:#164f50;--mint:#2EC4B6;--mint-soft:#E3F6F3;--bg:#F3F7F6;--paper:#fff;--ink:#1A2628;--muted:#5A6A6D;
@@ -168,7 +166,7 @@ details.como ol,details.como ul{padding-left:20px;margin-top:8px}
 <nav class="barra" id="barra" hidden></nav>
 <div id="impressao"></div>
 <noscript><p style="padding:20px">Ative o JavaScript para usar o app.</p></noscript>
-<script src="../assets/pixel.js" defer></script>
+
 <script src="../auditoria-maquininha/motor.js"></script>
 <script src="pix.js"></script>
 <script src="ifood.js"></script>

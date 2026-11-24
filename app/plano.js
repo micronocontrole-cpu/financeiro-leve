@@ -8,11 +8,11 @@
     { id: 'gratis', nome: 'Grátis', preco: 'R$ 0', para: 'Para organizar o dia a dia',
       tem: ['App no celular, sem cadastro', 'Vendas, despesas e fiado com Pix', 'Contas a pagar e agenda', 'Conferência manual da maquininha'] },
     { id: 'essencial', nome: 'Essencial', preco: 'R$ 29,99/mês', para: 'Para o MEI que quer o caixa conferido',
-      tem: ['Fechamento do mês com relatório', 'Dinheiro que ficou para trás e como cobrar', 'Alertas de vencimento, limite do MEI e DAS', 'Acervo de planilhas'] },
-    { id: 'divulgacao', nome: 'Completo com acompanhamento', preco: 'R$ 49,90/mês', para: 'Caixa conferido, divulgação pronta e uma pessoa do seu lado',
-      tem: ['Tudo do Essencial', 'Relatório revisado por uma pessoa', 'Atendimento pelo WhatsApp', 'Artes de promoção e cardápio', 'Google em dia: respostas e postagens'] }
+      tem: ['Fechamento do mês com relatório', 'Dinheiro que ficou para trás e como cobrar', 'Alertas de vencimento, limite do MEI e DAS', 'Conferência de maquininha, iFood e banco'] },
+    { id: 'divulgacao', nome: 'Completo', preco: 'R$ 49,90/mês', para: 'Caixa conferido todo mês, revisado por uma pessoa e com ajuda para cobrar',
+      tem: ['Tudo do Essencial', 'Relatório revisado por uma pessoa', 'Atendimento e ajuda para cobrar no WhatsApp', '1 arte de promoção por mês com as suas vendas', 'Respostas prontas para as avaliações do Google'] }
   ];
-  var NOME = { acompanhamento: 'Completo com acompanhamento' }; PLANOS.forEach(function (p) { NOME[p.id] = p.nome; });
+  var NOME = { acompanhamento: 'Completo' }; PLANOS.forEach(function (p) { NOME[p.id] = p.nome; });
   var MOTIVO = {
     formato: 'O código tem este formato: MNC-XXXX-XXXX-XXXX.',
     invalido: 'Código não encontrado. Confira as letras e os números.',

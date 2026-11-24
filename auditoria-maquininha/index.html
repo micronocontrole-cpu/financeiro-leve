@@ -11,9 +11,7 @@
 <link rel="canonical" href="https://micronocontrole.com/auditoria-maquininha/">
 <meta name="theme-color" content="#0F3D3E">
 <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fontes.css">
 <style>
 :root{--deep:#0F3D3E;--teal:#1B7F79;--mint:#2EC4B6;--mint-ink:#0B6F68;--mint-soft:#E2F5F2;--bg:#F3F7F6;--paper:#fff;--ink:#1A2628;--muted:#58686B;--line:#D6E0DF;--yellow:#F5B942;--red:#B4332A;--red-soft:#FBE7E5;--green:#1E7D50;--green-soft:#E3F5EC;
 --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
@@ -97,8 +95,8 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
   .tbl{font-size:11px}.tbl tr{page-break-inside:avoid}
 }
 </style>
-<script src="../assets/pixel.js"></script>
 <script src="../assets/origem.js"></script>
+<script src="/assets/lead.js"></script>
 </head>
 <body>
 <header class="bar"><div class="wrap">
@@ -191,7 +189,8 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
       <p>A auditoria olha a taxa. A conferência grátis vai além: compara as vendas da maquininha e do iFood com o que caiu no banco e mostra repasse que não caiu, com data e valor. A primeira é grátis e sem senha.</p>
       <div class="g">
         <div><label for="f-nome">Seu nome</label><input type="text" id="f-nome" autocomplete="name" required></div>
-        <div><label for="f-zap">WhatsApp com DDD</label><input type="tel" id="f-zap" inputmode="tel" autocomplete="tel" required></div>
+        <div><label for="f-zap">WhatsApp com DDD</label><input type="tel" id="f-zap" inputmode="tel" autocomplete="tel" placeholder="(61) 90000-0000" data-zap required></div>
+        <input type="text" id="f-site" name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
       </div>
       <div id="msgLead"></div>
       <button class="btn wide" type="submit" style="margin-top:14px">Quero a conferência grátis</button>
@@ -203,7 +202,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
     </div>
   </section>
 </main>
-<footer>© 2026 Micro no Controle · soluções com sabedoria · <a href="/">micronocontrole.com</a> · Usamos o pixel da Meta para medir visitas e anúncios. · <a href="/privacidade/">Política de Privacidade</a></footer>
+<footer>© 2026 Micro no Controle · soluções com sabedoria · <a href="/">micronocontrole.com</a> · Sem pixel de anúncios nem cookies de rastreamento. · <a href="/privacidade/">Política de Privacidade</a></footer>
 
 <script src="motor.js"></script>
 <script>
@@ -385,19 +384,20 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:10px 16px 40p
     window.scrollTo({top:0,behavior:'smooth'});
   });
 
-  // --- captura (mesmo destino do site: Google Form + MailerLite) ---
-  var FORM="https://docs.google.com/forms/d/e/1FAIpQLScRL147-f6i2sMMDthBvpYteGqikdibLo4RLEtBQlon4VTEeA/formResponse",E={nome:"entry.904971888",email:"entry.772389020",whatsapp:"entry.712925562",tipo:"entry.1443340015",origem:"entry.1160383430"};
+  // --- pedido de conferência (gravado pelo servidor, com confirmação) ---
   $('lead').addEventListener('submit',function(e){
     e.preventDefault();
-    var nome=$('f-nome').value.trim(),zap=$('f-zap').value.trim(),dig=zap.replace(/\D/g,'');
+    var nome=$('f-nome').value.trim(),zap=$('f-zap').value.trim(),dig=zap.replace(/\D/g,''),bt=$('lead').querySelector('button[type=submit]');
     if(!nome||dig.length<10||dig.length>13){msg('msgLead','err','Preencha o nome e o WhatsApp com DDD.');return}
     msg('msgLead');
     var a=estado.aud||{};
     var origem='auditoria-maquininha conferencia | achado '+brl(a.totalAcima||0)+' | taxa media '+pct(a.taxaMedia)+' | vendido '+brl(a.bruto||0);
-    try{var o=window.MNC_ORIGEM&&window.MNC_ORIGEM();if(o)origem+=' | '+o}catch(x){}
-    var d=new FormData();d.append(E.nome,nome);d.append(E.email,'naoinformado@micronocontrole.com');d.append(E.whatsapp,zap);d.append(E.tipo,'Outro');d.append(E.origem,origem);
-    var pronto=function(){try{fbq('track','Lead',{content_name:'Auditoria da maquininha',value:0,currency:'BRL'})}catch(x){}$('lead').hidden=true;$('obrigado').hidden=false};
-    try{fetch(FORM,{method:'POST',mode:'no-cors',body:d}).then(pronto,pronto)}catch(x){pronto()}
+    bt.disabled=true;bt.textContent='Enviando...';
+    MNCLead.enviar({nome:nome,whatsapp:zap,tipo:'Outro',origem:origem,site:($('f-site')||{}).value||''}).then(function(r){
+      bt.disabled=false;bt.textContent='Quero a conferência grátis';
+      if(r.ok){$('lead').hidden=true;$('obrigado').hidden=false;return}
+      msg('msgLead','err',(r.erro&&r.status===400?r.erro+' ':'Não conseguimos registrar agora. ')+'Se preferir, chame no WhatsApp: <a href="'+MNCLead.linkZap(nome)+'" target="_blank" rel="noopener">abrir conversa</a>.');
+    });
   });
 })();
 </script>

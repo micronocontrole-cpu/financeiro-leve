@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conferir a maquininha no navegador — Micro no Controle</title>
+<meta name="description" content="Suba as vendas da maquininha e o extrato do banco e veja na hora qual repasse não caiu ou caiu a menos. Grátis, sem cadastro, e o arquivo não sai do seu celular.">
+<link rel="canonical" href="https://micronocontrole.com/conferir/">
+<meta property="og:title" content="A maquininha pagou tudo? Confira sozinho, sem enviar nada">
+<meta property="og:description" content="Vendas da maquininha × extrato do banco, conferidos no seu navegador. Grátis e sem cadastro.">
+<meta property="og:image" content="https://micronocontrole.com/img/og.png">
+<meta name="theme-color" content="#0E3B3C">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fontes.css">
+<style>
+:root{--deep:#0E3B3C;--mint:#22C3A6;--mint-ink:#0A6B5E;--mint-soft:#DDF5EF;--sol:#FFCF3A;--sol-soft:#FFF4CC;--tomate:#E5482F;--tomate-soft:#FDE6E1;
+--bg:#F2F7F6;--paper:#fff;--ink:#152224;--muted:#4D6063;--line:#D3DFDD;--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.02em;font-weight:800}
+:focus-visible{outline:3px solid var(--sol);outline-offset:3px}
+.bar{background:var(--deep)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-family:var(--display);font-weight:800;font-size:18px;white-space:nowrap}
+.bar a.l{color:#CDE9E5;font-weight:600;font-size:15px;text-decoration:none}
+.topo{background:var(--deep);color:#EAF6F4;padding:28px 0 64px}
+.topo h1{font-size:clamp(30px,5vw,48px);color:#fff;max-width:19ch}
+.topo p{color:#D2E8E5;margin-top:12px;max-width:60ch;font-size:18px}
+.selo{display:inline-flex;gap:8px;align-items:center;margin-top:16px;background:rgba(34,195,166,.16);color:#BFF1E6;font-weight:700;font-size:15px;padding:7px 14px;border-radius:999px}
+main .wrap{margin-top:-40px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;margin-bottom:18px}
+.passo{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:16px 0;border-bottom:1px dashed var(--line)}
+.passo:last-of-type{border-bottom:0}
+.num{width:34px;height:34px;border-radius:10px;background:var(--mint);color:#04332C;font:800 17px/34px var(--display);text-align:center}
+.passo h2{font-size:20px;color:var(--deep)}
+.passo p,.passo small{color:var(--muted);font-size:15.5px;display:block;margin-top:4px}
+select,input[type=file]{font:inherit;font-size:16px;margin-top:10px;width:100%;max-width:440px;padding:11px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+input[type=file]{padding:9px}
+.opc{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.opc label{display:flex;gap:8px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:9px 14px;font-weight:600;cursor:pointer}
+.opc input{accent-color:var(--mint-ink)}
+details.ajuda{margin-top:8px;font-size:15px}
+details.ajuda summary{cursor:pointer;color:var(--mint-ink);font-weight:700}
+details.ajuda ul{margin:8px 0 0 18px;color:#34474A}
+.lido{margin-top:8px;font-size:14.5px;font-weight:600}
+.lido.ok{color:var(--mint-ink)}.lido.err{color:#B5301B}
+.acoes{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--sol);color:#2A1F00;font-family:var(--display);font-weight:800;font-size:17px;padding:15px 24px;border-radius:14px;text-decoration:none;border:0;cursor:pointer;box-shadow:0 4px 0 #C99A00}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn.sec{background:transparent;color:var(--deep);box-shadow:inset 0 0 0 2px var(--line)}
+.priv{font-size:14.5px;color:var(--muted);margin-top:14px}
+#resultado h2{font-size:clamp(24px,3.6vw,32px);color:var(--deep)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.kpi{border-radius:16px;padding:14px;background:#F4F8F7}
+.kpi small{display:block;font-weight:700;font-size:13.5px;color:var(--muted)}
+.kpi b{display:block;font-family:var(--display);font-size:clamp(17px,4.6vw,26px);margin-top:4px;white-space:nowrap}
+.kpi.r{background:var(--tomate-soft)}.kpi.r b{color:#B5301B}
+.kpi.a{background:var(--sol-soft)}.kpi.a b{color:#6B4E00}
+@media (max-width:720px){.kpis{grid-template-columns:1fr 1fr}}
+.aviso{margin-top:14px;background:var(--sol-soft);border:1px solid #F1DC8F;border-radius:14px;padding:12px 14px;font-size:15.5px}
+.dif{border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+.dif .cab{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;justify-content:space-between}
+.dif .cab b{font-family:var(--display);font-size:19px}
+.dif .val{font-family:var(--display);font-weight:800;font-size:21px;color:#B5301B}
+.chip{display:inline-block;font-size:13px;font-weight:800;padding:3px 10px;border-radius:999px}
+.c-conf{background:#FCE3DE;color:#B5301B}.c-prov{background:#FFF1C9;color:#6B4D00}.c-ok{background:#DDF5EF;color:#0B5D55}.c-ag{background:#EEF2F2;color:#3B4B4D}
+.dif p{font-size:15.5px;color:#34474A;margin-top:8px}
+.dif .txt{background:#F4F8F7;border-radius:12px;padding:12px;font-size:15px;margin-top:10px}
+.copiar{margin-top:10px;font-weight:700;font-size:15px;border:0;background:var(--deep);color:#fff;border-radius:10px;padding:9px 14px;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px}
+th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tab{overflow-x:auto}
+.cta{background:var(--deep);color:#EAF6F4;border-radius:22px;padding:24px;margin-top:18px}
+.cta h3{color:#fff;font-size:24px}
+.cta p{color:#CFE6E2;margin:8px 0 16px}
+footer{color:var(--muted);font-size:14.5px;padding:26px 0 40px}
+footer a{color:var(--mint-ink)}
+</style>
+<script src="../assets/origem.js"></script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="logo" href="/" aria-label="Micro no Controle, início"><svg width="24" height="24" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10.5" fill="none" stroke="#22C3A6" stroke-width="3"/><circle cx="13" cy="13" r="4" fill="#FFCF3A"/></svg>Micro no Controle</a>
+  <a class="l" href="/#conferencia">Conferência grátis</a>
+</div></header>
+
+<section class="topo"><div class="wrap">
+  <h1>A maquininha pagou tudo? Confira aqui, sozinho.</h1>
+  <p>Suba as vendas da maquininha e o extrato do banco. Em segundos, você vê qual repasse não caiu e qual caiu a menos, com o texto pronto para cobrar.</p>
+  <span class="selo">🔒 Os arquivos não saem do seu aparelho: a conta é feita aqui no navegador</span>
+</div></section>
+
+<main><div class="wrap">
+  <div class="card" id="entrada">
+    <div class="passo"><span class="num">1</span><div>
+      <h2>Qual é a sua maquininha?</h2>
+      <select id="maq"><option value="">Escolha (opcional)</option><option value="Stone">Stone ou Ton</option><option>Cielo</option><option>PagBank</option><option>Mercado Pago</option><option>InfinitePay</option><option>Rede</option><option>Getnet</option><option>SumUp</option><option>Sicredi</option><option>Sicoob</option><option value="">Outra</option></select>
+      <p style="margin-top:12px">Você antecipa as vendas no crédito (recebe no dia seguinte)?</p>
+      <div class="opc"><label><input type="radio" name="antecipa" value="nao" checked> Não</label><label><input type="radio" name="antecipa" value="sim"> Sim</label><label><input type="radio" name="antecipa" value="sei"> Não sei</label></div>
+    </div></div>
+    <div class="passo"><span class="num">2</span><div>
+      <h2>Vendas do mês da maquininha</h2>
+      <small>Excel ou CSV, com o valor bruto e o líquido de cada venda.</small>
+      <input type="file" id="fVendas" accept=".csv,.txt,.xlsx,.xls" aria-label="Arquivo de vendas da maquininha">
+      <div class="lido" id="lVendas" aria-live="polite"></div>
+      <details class="ajuda"><summary>Onde baixo esse arquivo?</summary><ul>
+        <li>No app ou site da maquininha, procure <b>Vendas</b>, <b>Extrato de vendas</b> ou <b>Relatórios</b>.</li>
+        <li>Escolha o mês inteiro e <b>exporte em Excel ou CSV</b>. PDF não serve aqui.</li>
+        <li>Se o arquivo tiver a coluna de <b>data prevista de pagamento</b>, melhor: usamos ela.</li>
+      </ul></details>
+    </div></div>
+    <div class="passo"><span class="num">3</span><div>
+      <h2>Extrato do banco onde a maquininha deposita</h2>
+      <small>De preferência OFX. Pegue o mês das vendas <b>e os 30 dias seguintes</b>, porque o crédito à vista cai em cerca de 30 dias.</small>
+      <input type="file" id="fExtrato" accept=".ofx,.csv,.txt,.xlsx,.xls" aria-label="Arquivo do extrato do banco">
+      <div class="lido" id="lExtrato" aria-live="polite"></div>
+      <details class="ajuda"><summary>Onde baixo esse arquivo?</summary><ul>
+        <li>No app do banco, abra o <b>Extrato</b> e procure <b>Exportar</b> ou <b>Compartilhar</b>.</li>
+        <li>Escolha <b>OFX</b> (às vezes aparece como "Money" ou "arquivo para sistemas"). Se não tiver, use Excel ou CSV.</li>
+      </ul></details>
+    </div></div>
+    <div class="acoes">
+      <button class="btn" id="conferir" type="button" disabled>Conferir agora</button>
+      <button class="btn sec" id="exemplo" type="button">Ver com um exemplo</button>
+    </div>
+    <p class="priv">Nenhum arquivo é enviado para a internet. Ao fechar esta página, tudo some. Grátis durante a fase de testes.</p>
+  </div>
+
+  <div class="card" id="resultado" hidden tabindex="-1"></div>
+
+  <div class="cta">
+    <h3>Quer a conferência completa?</h3>
+    <p>Na conferência grátis, a gente também confere o iFood, revisa cada diferença e te ajuda a cobrar. Primeira vez é grátis, sem senha.</p>
+    <a class="btn" href="/?src=conferir#conferencia">Quero a conferência grátis</a>
+  </div>
+</div></main>
+
+<footer><div class="wrap">Micro no Controle · As contas seguem regras fixas e servem para conferir; confirme cada diferença no app da maquininha antes de cobrar. · <a href="/privacidade/">Privacidade</a> · <a href="/ferramentas/">Outras ferramentas grátis</a></div></footer>
+
+<script src="../auditoria-maquininha/motor.js"></script>
+<script src="conciliador.js"></script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var estado={vendas:null,extrato:null,res:null};
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function brl(n){return Conciliador.brl(n)}
+  function aviso(el,ok,txt){el.className='lido '+(ok?'ok':'err');el.textContent=txt}
+  function pronto(){$('conferir').disabled=!(estado.vendas&&estado.extrato)}
+
+  function xlsx(){return new Promise(function(ok,erro){if(window.XLSX)return ok();var s=document.createElement('script');s.src='/app/vendor/xlsx-0.18.5.full.min.js';s.onload=ok;s.onerror=function(){erro(new Error('xlsx'))};document.head.appendChild(s)})}
+  function ler(arq){
+    var nome=arq.name.toLowerCase();
+    if(/\.xlsx?$/.test(nome)) return xlsx().then(function(){return arq.arrayBuffer()}).then(function(b){
+      var wb=XLSX.read(b,{type:'array',cellDates:true}),ws=wb.Sheets[wb.SheetNames[0]];
+      return XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''});
+    });
+    return arq.arrayBuffer().then(function(b){
+      var t=new TextDecoder('utf-8').decode(b);
+      if(t.indexOf('�')>=0) t=new TextDecoder('iso-8859-1').decode(b);
+      return t;
+    });
+  }
+  $('fVendas').addEventListener('change',function(){
+    var a=this.files[0];estado.vendas=null;pronto();if(!a)return;
+    aviso($('lVendas'),true,'Lendo...');
+    ler(a).then(function(c){
+      var r=Conciliador.lerVendas(typeof c==='string'?Motor.lerCSV(c):c);
+      if(!r.ok){aviso($('lVendas'),false,r.erro);return}
+      estado.vendas=r;aviso($('lVendas'),true,'✓ '+r.vendas.length+' vendas lidas'+(r.temPrevisao?', com a data prevista de pagamento':'')+(r.ignoradas?' ('+r.ignoradas+' linhas ignoradas: canceladas ou sem valor)':'')+'.');pronto();
+    }).catch(function(){aviso($('lVendas'),false,'Não consegui abrir este arquivo. Tente exportar em CSV.')});
+  });
+  $('fExtrato').addEventListener('change',function(){
+    var a=this.files[0];estado.extrato=null;pronto();if(!a)return;
+    aviso($('lExtrato'),true,'Lendo...');
+    ler(a).then(function(c){
+      var r=Conciliador.lerExtrato(c);
+      if(!r.ok){aviso($('lExtrato'),false,r.erro);return}
+      estado.extrato=r;aviso($('lExtrato'),true,'✓ '+r.creditos.length+' entradas de dinheiro, de '+Conciliador.dma(r.inicio)+' a '+Conciliador.dma(r.fim)+'.');pronto();
+    }).catch(function(){aviso($('lExtrato'),false,'Não consegui abrir este arquivo. Tente exportar em OFX ou CSV.')});
+  });
+  $('exemplo').addEventListener('click',function(){
+    var ex=Conciliador.exemplo();
+    estado.vendas=Conciliador.lerVendas(ex.vendas);estado.extrato=Conciliador.lerExtrato(ex.extrato);
+    $('maq').value='Stone';
+    aviso($('lVendas'),true,'✓ Exemplo fictício: '+estado.vendas.vendas.length+' vendas de outubro de uma lanchonete.');
+    aviso($('lExtrato'),true,'✓ Exemplo fictício: extrato de outubro e novembro.');
+    pronto();conferir(true);
+  });
+  $('conferir').addEventListener('click',function(){conferir(false)});
+
+  function conferir(ex){
+    var antecipa=(document.querySelector('input[name=antecipa]:checked')||{}).value==='sim';
+    var maq=$('maq').value;
+    var prev=Conciliador.previstos(estado.vendas.vendas,{antecipa:antecipa});
+    var r=Conciliador.conciliar(prev,estado.extrato,{palavra:maq?maq.toLowerCase().replace(/\s+/g,' ?'):''});
+    estado.res=r;mostrar(r,maq,ex,antecipa);
+  }
+
+  function chip(g){
+    if(g.status==='ok')return '<span class="chip c-ok">Caiu</span>';
+    if(g.status==='aguardando')return '<span class="chip c-ag">Ainda no prazo</span>';
+    return g.certeza==='confirmada'?'<span class="chip c-conf">Confirmada</span>':'<span class="chip c-prov">Provável: confira</span>';
+  }
+  function mostrar(r,maq,ex,antecipa){
+    var dif=r.grupos.filter(function(g){return g.status==='naocaiu'||g.status==='menos'});
+    var h='<h2>'+(dif.length?'Achamos '+dif.length+' repasse'+(dif.length>1?'s':'')+' para conferir':'Tudo o que devia cair, caiu')+'</h2>';
+    if(ex)h+='<p class="aviso">Este é um <b>exemplo fictício</b>. Suba os seus arquivos nos passos 2 e 3 para ver o seu caso.</p>';
+    h+='<div class="kpis">'+
+      '<div class="kpi"><small>Devia cair no período</small><b>'+brl(r.devia)+'</b></div>'+
+      '<div class="kpi"><small>Caiu no banco</small><b>'+brl(r.caiu)+'</b></div>'+
+      '<div class="kpi r"><small>Não caiu (confirmado)</small><b>'+brl(r.confirmado)+'</b></div>'+
+      '<div class="kpi a"><small>Para conferir antes de cobrar</small><b>'+brl(r.provavel)+'</b></div></div>';
+    if(r.aguardando>0)h+='<p class="aviso">'+brl(r.aguardando)+' ainda estão dentro do prazo ou depois do fim do extrato. Para conferir, use um extrato que vá até 30 dias depois das vendas.</p>';
+    if(!r.filtrouAdquirente)h+='<p class="aviso">Não achei no extrato o nome da maquininha nos créditos, então comparei com todas as entradas de dinheiro. O resultado pode ficar menos preciso.</p>';
+    if(!estado.vendas.temPrevisao&&!ex)h+='<p class="aviso">O seu arquivo não tem a data prevista de pagamento. Usamos os prazos padrão'+(antecipa?' com antecipação (crédito no dia útil seguinte)':': débito no dia útil seguinte, crédito em 30 dias e Pix no mesmo dia')+'. Se o seu contrato for diferente, algumas diferenças podem ser só de data.</p>';
+    dif.forEach(function(g,i){
+      var txt=Conciliador.textoCobranca(g,maq);
+      h+='<div class="dif"><div class="cab"><span><b>Repasse de '+Conciliador.dma(g.data)+'</b> '+chip(g)+'</span><span class="val">−'+brl(g.diferenca)+'</span></div>'+
+        '<p>Devia cair '+brl(g.valor)+(g.status==='menos'?', caiu '+brl(g.caiu):', não caiu nada')+'. '+esc(g.motivo||'')+'</p>'+
+        '<div class="txt" id="t'+i+'">'+esc(txt)+'</div><button class="copiar" type="button" data-t="t'+i+'">Copiar texto para cobrar</button></div>';
+    });
+    h+='<details style="margin-top:16px"><summary style="cursor:pointer;font-weight:700;color:var(--mint-ink)">Ver todos os dias de repasse ('+r.grupos.length+')</summary><div class="tab"><table><thead><tr><th>Dia previsto</th><th class="n">Devia cair</th><th class="n">Caiu</th><th>Situação</th></tr></thead><tbody>'+
+      r.grupos.map(function(g){return '<tr><td>'+Conciliador.dma(g.data)+'</td><td class="n">'+brl(g.valor)+'</td><td class="n">'+(g.status==='aguardando'?'—':brl(g.caiu||0))+'</td><td>'+chip(g)+(g.junto?' <small>(pago junto)</small>':'')+'</td></tr>'}).join('')+
+      '</tbody></table></div></details>';
+    h+='<div class="acoes"><button class="btn sec" type="button" id="baixar">Baixar o resultado (CSV)</button></div>';
+    var el=$('resultado');el.innerHTML=h;el.hidden=false;el.focus();el.scrollIntoView({behavior:'smooth',block:'start'});
+    el.querySelectorAll('.copiar').forEach(function(b){b.addEventListener('click',function(){
+      var t=$(b.getAttribute('data-t')).textContent;
+      (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Copiado ✓'},function(){b.textContent='Selecione o texto e copie'});
+    })});
+    $('baixar').addEventListener('click',function(){
+      var L=[['Dia previsto','Devia cair','Caiu','Diferença','Situação','Certeza']].concat(r.grupos.map(function(g){
+        return [Conciliador.dma(g.data),Motor.fmtBR(g.valor),Motor.fmtBR(g.caiu||0),Motor.fmtBR(g.diferenca||0),{ok:'Caiu',menos:'Caiu a menos',naocaiu:'Não caiu',aguardando:'Ainda no prazo'}[g.status],g.certeza||'']}));
+      var blob=new Blob(['﻿'+Motor.linhasParaCSV(L)],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);a.download='conferencia-maquininha-micro-no-controle.csv';a.click();
+    });
+  }
+})();
+</script>
+</body>
+</html>

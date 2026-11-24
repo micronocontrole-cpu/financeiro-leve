@@ -1,22 +1,25 @@
 # Micro no Controle
 
-> Ferramenta de gestão do caixa para MEI e pequenos negócios no Brasil (lanchonetes, deliveries, salões, barbearias, comércios e serviços). Confere maquininha de cartão, iFood e extrato do banco, mostra o dinheiro que ficou para trás e entrega um relatório simples todo mês. Não substitui o contador: cuida do caixa do dia a dia, não de impostos oficiais e declarações.
+> Conferência de recebimentos para lanchonetes, restaurantes, deliveries e outros pequenos negócios no Brasil. Confere maquininha de cartão, iFood e extrato do banco, mostra o dinheiro que ficou para trás e entrega um relatório simples todo mês. Não substitui o contador: cuida do caixa do dia a dia, não de impostos oficiais e declarações.
 
 ## O que faz
 - Conferência mensal de repasses da maquininha, do iFood e do banco, com o valor que ficou para trás e como cobrar.
 - Auditoria da taxa da maquininha (grátis). Sem a taxa do contrato, o resultado aparece como estimativa.
 - Planilhas premium grátis: gestão do mês com painel, conferência de recebimentos, preço e margem, contas e fiado, estoque, MEI em dia e fechamento de caixa.
 - App grátis no celular, sem cadastro: vendas, despesas, fiado com cobrança por Pix no WhatsApp, contas a pagar, previsão de caixa, agenda com link de agendamento, orçamentos, estoque e limite do MEI/DAS.
-- Promoções, artes e cardápios feitos com os números de vendas do próprio negócio, e respostas a avaliações do Google (plano Completo).
+- Conferidor no navegador (grátis): cruza as vendas da maquininha com o extrato do banco (OFX, CSV ou Excel) sem enviar os arquivos.
+- Plano Completo: 1 arte de promoção por mês feita com as vendas do negócio e respostas prontas para avaliações do Google.
 
 ## Planos
 - Grátis: R$ 0 (app, ferramentas, planilhas e a primeira conferência).
 - Essencial: R$ 29,99/mês (fechamento automático do mês e conferências).
-- Completo com acompanhamento: R$ 49,90/mês (tudo do Essencial + relatório revisado por uma pessoa, atendimento pelo WhatsApp, artes, cardápio e Google em dia).
+- Completo: R$ 49,90/mês (tudo do Essencial + relatório revisado por uma pessoa, atendimento e ajuda para cobrar no WhatsApp, 1 arte de promoção por mês e respostas prontas para avaliações do Google).
 - Anual: paga 10 meses e usa 12. Pagamento pela Hotmart (Pix, cartão ou boleto). Cancela quando quiser; 7 dias para desistir. Preço de fundador para as 30 primeiras assinaturas, até 31/12/2026.
 
 ## Links
 - [Página inicial e conferência grátis](https://micronocontrole.com/)
+- [Conferir a maquininha no navegador](https://micronocontrole.com/conferir/)
+- [Todas as ferramentas grátis](https://micronocontrole.com/ferramentas/)
 - [App grátis](https://micronocontrole.com/app/)
 - [Auditoria da maquininha](https://micronocontrole.com/auditoria-maquininha/)
 - [Calculadora de taxa da maquininha](https://micronocontrole.com/ferramentas/taxa-da-maquininha/)
